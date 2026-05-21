@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 extension View {
   public func debugTextOverlay(

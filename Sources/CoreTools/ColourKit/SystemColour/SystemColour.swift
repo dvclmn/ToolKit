@@ -46,14 +46,6 @@ extension SystemColour {
     }
   }
 
-  public func withMix(_ colour: Self, _ amount: Double) -> Color {
-    return self.toColour.mixCompatible(
-      with: colour.toColour,
-      by: amount,
-      in: .perceptual,
-    )
-  }
-
   public var toPrimitiveColour: PrimitiveColour? {
     PrimitiveColour(rawValue: self.rawValue)
   }

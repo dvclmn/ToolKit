@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 public struct EmojiCompositionView: View {
   @Environment(\.isDebugMode) private var isDebugMode

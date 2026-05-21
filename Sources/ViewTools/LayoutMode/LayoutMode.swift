@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 public enum LayoutMode: String, CaseCyclable, CaseTogglable, Codable, Sendable {
   public static var defaultCase: LayoutMode { .list }

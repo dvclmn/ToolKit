@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 15/12/2025.
 //
 
-import Foundation
+@preconcurrency import Foundation
 import Quartz
 
 @MainActor

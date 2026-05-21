@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 public struct IconView: View {
   @Environment(\.labelDisplay) private var labelDisplay

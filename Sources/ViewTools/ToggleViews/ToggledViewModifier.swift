@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import CoreTools
 
 /// Type-safe with derived title from key
 /// ```

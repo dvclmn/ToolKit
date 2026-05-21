@@ -7,6 +7,7 @@
 
 import SwiftUI
 
+
 struct ToggledViewCommon<Content: View>: View {
   @Environment(\.layoutSpacing) private var layoutSpacing
 

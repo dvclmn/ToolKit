@@ -74,3 +74,24 @@ public enum HSVComponent: String, ColourComponent, Sendable {
   }
 
 }
+
+extension LinearGradient {
+  public static func rainbow(
+    start: UnitPoint = .leading,
+    end: UnitPoint = .trailing,
+  ) -> LinearGradient {
+    LinearGradient(
+      colors: .rainbow,
+      startPoint: start,
+      endPoint: end,
+    )
+  }
+
+}
+
+extension Array where Element == Color {
+  public static let rainbow: [Color] = [
+    .red, .orange, .yellow, .green, .blue, .indigo, .purple, .pink, .red,
+  ]
+  
+}

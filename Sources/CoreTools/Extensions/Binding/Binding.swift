@@ -59,14 +59,7 @@ extension Binding where Value: BinaryFloatingPoint & Sendable {
   }
 
 }
-extension Binding where Value == ClosedRange<Int> {
-  public func toBindingBinaryFloatingPoint<T: BinaryFloatingPoint & Sendable>() -> Binding<ClosedRange<T>> {
-    Binding<ClosedRange<T>>(
-      get: { wrappedValue.toBinaryFloatingPointRange() },
-      set: { wrappedValue = $0.toIntRange }
-    )
-  }
-}
+
 extension Binding where Value == Bool {
   public var reversed: Binding<Bool> {
     return .init(

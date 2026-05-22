@@ -33,7 +33,7 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case moon = "moon"
   case up = "chevron.up"
   case down = "chevron.down"
-  
+
   case sort = "arrow.up.arrow.down"
   case debug = "ladybug"
   case filter = "line.horizontal.3.decrease"
@@ -65,9 +65,9 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case options = "slider.horizontal.3"
   case gear = "gearshape"
   case glasses = "eyeglasses"
-  case bookmark = "bookmark" // 􀉞
-  case rays = "rays" // 􀇯
-  case rotate = "arrow.counterclockwise" // 􀅉
+  case bookmark = "bookmark"  // 􀉞
+  case rays = "rays"  // 􀇯
+  case rotate = "arrow.counterclockwise"  // 􀅉
   case window = "macwindow"  // app, viewport
   case pause = "pause"
   case stop = "stop"
@@ -137,10 +137,10 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case sport = "figure.basketball"
   case paperclip = "paperclip"
   case pentagon = "pentagon"
-  case bitmap = "stairs" // raster, pixels
+  case bitmap = "stairs"  // raster, pixels
   case theatre = "theatermasks"
   case boat = "ferry"
-  case star = "star" // 􀋂
+  case star = "star"  // 􀋂
   case ellipsis = "ellipsis"
   case highlighter = "highlighter"
   case key = "key"
@@ -163,15 +163,13 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
   case arrowDown = "arrow.down"
   case next = "arrow.right"
   case previous = "arrow.left"
-
-  // Tags
   case tag = "tag"
   case rpg = "text.book.closed"
   case survival = "backpack"
   case multiplayer = "person.3"
   case racing = "flag.checkered"
   case action = "burst"
-  
+
   // Convenient aliases
   public static let zoom = Self.search
 
@@ -183,10 +181,6 @@ public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
 
   public var reference: String {
     return self.rawValue
-  }
-
-  public static var getRandomIcon: String {
-    return Icons.allCases.randomElement()?.icon ?? Icons.action.icon
   }
 
   public static var getRandom: Self {

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 17/6/2025.
 //
 
-
 #if canImport(AppKit)
 import AppKit
 public struct OpenInFinder {

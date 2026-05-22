@@ -6,10 +6,8 @@
 //
 
 import Foundation
-//import SampleBuilder
 
-//// TODO: This is not working i think at the moment, whilst I figure out dependancy graph woes
-//@SampleBuilder(numberOfItems: 3, dataGeneratorType: .random)
+// TODO: Not currently working, need to find fix
 public enum CustomSymbol: String, Sendable, Codable {
   case artboard
   case zoom  // search, magnifying glass

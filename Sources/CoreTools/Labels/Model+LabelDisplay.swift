@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-//@CaseDetection
 public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendable {
 
   case iconOnly

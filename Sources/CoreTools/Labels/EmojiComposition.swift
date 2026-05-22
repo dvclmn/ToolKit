@@ -19,7 +19,7 @@ public struct Emoji: Identifiable, Equatable, Sendable, Hashable, Codable {
     emoji: Character,
     offset: CGSize = .zero,
     rotation: Angle = .zero,
-    scale: CGFloat = 1.0
+    scale: CGFloat = 1.0,
   ) {
     self.id = id
     self.emoji = emoji
@@ -35,7 +35,7 @@ public struct EmojiComposition: Sendable, Equatable, Codable, Hashable {
 
   public init(
     emoji: [Emoji],
-    scale: CGFloat = 1.0
+    scale: CGFloat = 1.0,
   ) {
     self.emoji = emoji
     self.scale = scale
@@ -49,15 +49,15 @@ extension EmojiComposition {
         emoji: "📎",
         offset: CGSize(width: -30, height: 14),
         rotation: .degrees(4),
-        scale: 0.8
+        scale: 0.8,
       ),
       Emoji(
         emoji: "✂️",
         offset: CGSize(width: 26, height: -14),
         rotation: .degrees(16),
-        scale: 1.0
+        scale: 1.0,
       ),
     ],
-    scale: 2.8
+    scale: 2.8,
   )
 }

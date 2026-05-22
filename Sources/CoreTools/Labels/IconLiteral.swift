@@ -23,15 +23,6 @@ extension IconLiteral: ExpressibleByStringLiteral {
 }
 
 extension IconLiteral {
-  public init(from labelIcon: LabelIcon) {
-    switch labelIcon {
-      case .symbol(let string): self = .symbol(string)
-      case .emoji(let string): self = .emoji(string)
-    }
-  }
-}
-
-extension IconLiteral {
   public static func preset(_ iconPreset: Icons) -> Self {
     self.init(stringLiteral: iconPreset.icon)
   }

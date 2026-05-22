@@ -21,7 +21,7 @@ public struct ImportStringModifier: ViewModifier {
           let string = try ImportHandler.loadString(
             named: name,
             withExtension: fileExtension,
-            bundle: bundle
+            bundle: bundle,
           )
           stringDidLoad(string)
 
@@ -36,14 +36,14 @@ extension View {
     named: String,
     fileExtension: String,
     bundle: Bundle = .main,
-    _ stringDidLoad: @escaping (String) -> Void
+    _ stringDidLoad: @escaping (String) -> Void,
   ) -> some View {
     self.modifier(
       ImportStringModifier(
         name: named,
         fileExtension: fileExtension,
         bundle: bundle,
-        stringDidLoad: stringDidLoad
+        stringDidLoad: stringDidLoad,
       )
     )
   }

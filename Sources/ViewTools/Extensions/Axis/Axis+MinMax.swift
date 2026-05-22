@@ -1,34 +1,14 @@
 //
-//  Axis.swift
-//  Collection
+//  Axis+MinMax.swift
+//  ToolKit
 //
-//  Created by Dave Coleman on 30/10/2024.
+//  Created by Dave Coleman on 22/5/2026.
 //
 
 import SwiftUI
+import CoreTools
 
 extension Axis {
-  public var toAxisSet: Axis.Set {
-    switch self {
-      case .horizontal: [.horizontal]
-      case .vertical: [.vertical]
-    }
-  }
-  public var toEdgeSet: Edge.Set {
-    switch self {
-      case .horizontal: .horizontal
-      case .vertical: .vertical
-    }
-  }
-
-  public var isHorizontal: Bool {
-    self == .horizontal
-  }
-
-  public var isVertical: Bool {
-    self == .vertical
-  }
-
   public func getMinMax(
     _ axis: Axis.MinMax,
     mapping: AxisMapping = .default,

@@ -9,10 +9,9 @@ import SwiftUI
 
 extension AxisMapping {
 
-  /// Converts a physical axis (SwiftUI.Axis) into your logical GeometryAxis.
+  /// Converts a physical axis (SwiftUI.Axis) into logical GeometryAxis.
   public func map(_ swiftUIAxis: Axis) -> GeometryAxis {
     let axis = swiftUIAxis.toGeometryAxis
     return map(axis)
   }
 }
-

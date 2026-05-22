@@ -76,20 +76,6 @@ extension GeometryAxis {
     }
   }
 
-  public var locationKeyPath: WritableKeyPath<CGPoint, CGFloat> {
-    switch self {
-      case .horizontal: \.x
-      case .vertical: \.y
-    }
-  }
-
-  public var sizeKeyPath: KeyPath<CGSize, CGFloat> {
-    switch self {
-      case .horizontal: \.width
-      case .vertical: \.height
-    }
-  }
-
   public var isHorizontal: Bool { self == .horizontal }
   public var isVertical: Bool { self == .vertical }
 

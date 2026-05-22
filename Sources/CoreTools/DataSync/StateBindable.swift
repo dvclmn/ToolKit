@@ -7,11 +7,12 @@
 
 import SwiftUI
 
-/// Note: This is directly taken from Point-Free's implementation in
-/// https://github.com/pointfreeco/swift-composable-architecture
-/// https://github.com/pointfreeco/swift-composable-architecture/blob/20089ee985b04b1ae82e9742aa9d9c8f044700c5/Examples/CaseStudies/SwiftUICaseStudies/01-GettingStarted-FocusState.swift#L71
-///
-/// I make no claim over the logic behind this solution.
+// Note: This is directly taken from Point-Free's implementation in
+// https://github.com/pointfreeco/swift-composable-architecture
+// https://github.com/pointfreeco/swift-composable-architecture/blob/20089ee985b04b1ae82e9742aa9d9c8f044700c5/Examples/CaseStudies/SwiftUICaseStudies/01-GettingStarted-FocusState.swift#L71
+//
+// Full credit to Point-Free, I make no claim over the logic behind this solution.
+// I am made modifications to the original, but the guts is not mine.
 
 public protocol _Bindable {
   associatedtype Value
@@ -107,7 +108,7 @@ extension View {
     debounce: DebounceMode,
     _ handlerValue: HandlerValue,
     to viewValue: ViewValue?,
-    perform action: @escaping @MainActor (HandlerValue.Value) -> Void = { _ in }
+    perform action: @escaping @MainActor (HandlerValue.Value) -> Void = { _ in },
   ) -> some View
   where HandlerValue.Value == ViewValue.Value, HandlerValue.Value: Equatable {
     self.modifier(

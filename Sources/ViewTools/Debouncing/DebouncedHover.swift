@@ -14,11 +14,6 @@ public struct DebouncedHoverViewModifier: ViewModifier {
 
   let onHoverChange: (Bool) -> Void
 
-  //  public init(interval: TimeInterval, onHoverChange: @escaping (Bool) -> Void) {
-  //    self.interval = interval
-  //    self.onHoverChange = onHoverChange
-  //  }
-
   public func body(content: Content) -> some View {
     content
       .onHover { hovering in

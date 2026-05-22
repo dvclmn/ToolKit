@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+
 extension NavigationSplitViewVisibility {
   public var isSidebarVisible: Bool {
     self != .detailOnly && self != .doubleColumn

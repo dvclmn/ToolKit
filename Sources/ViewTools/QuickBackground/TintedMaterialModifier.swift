@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 1/10/2025.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public struct TintedMaterialModifier: ViewModifier {
   @Environment(\.backgroundMaterial) private var backgroundMaterial
@@ -66,7 +66,7 @@ extension View {
     imageIntensity: CGFloat = 0.6,
     tint: Color? = nil,
     colourIntensity: CGFloat = 0.7,
-    dimming: CGFloat = 0.55
+    dimming: CGFloat = 0.55,
   ) -> some View {
     self.modifier(
       TintedMaterialModifier(
@@ -74,7 +74,7 @@ extension View {
         imageIntensity: imageIntensity,
         colour: tint,
         colourIntensity: colourIntensity,
-        dimming: dimming
+        dimming: dimming,
       )
     )
   }

@@ -30,7 +30,7 @@ public enum StrokeCapStyle {
   /// Aka square
   case butt
   case round
-  
+
   public var value: CGLineCap {
     switch self {
       case .butt: .butt
@@ -56,7 +56,7 @@ extension StrokeStyle {
       lineWidth: strokeWidth,
       lineCap: caps.value,
       lineJoin: .round,
-      dash: [style.dashLength, strokeWidth * gap]
+      dash: [style.dashLength, strokeWidth * gap],
     )
   }
 }
@@ -112,7 +112,7 @@ extension StrokeStyle {
       throw DecodingError.dataCorrupted(
         DecodingError.Context(
           codingPath: decoder.codingPath + [CodingKeys.lineCap],
-          debugDescription: "Invalid CGLineCap raw value: \(lineCapRawValue)"
+          debugDescription: "Invalid CGLineCap raw value: \(lineCapRawValue)",
         )
       )
     }
@@ -121,7 +121,7 @@ extension StrokeStyle {
       throw DecodingError.dataCorrupted(
         DecodingError.Context(
           codingPath: decoder.codingPath + [CodingKeys.lineJoin],
-          debugDescription: "Invalid CGLineJoin raw value: \(lineJoinRawValue)"
+          debugDescription: "Invalid CGLineJoin raw value: \(lineJoinRawValue)",
         )
       )
     }
@@ -132,7 +132,7 @@ extension StrokeStyle {
       lineJoin: lineJoin,
       miterLimit: miterLimit,
       dash: dash,
-      dashPhase: dashPhase
+      dashPhase: dashPhase,
     )
   }
 

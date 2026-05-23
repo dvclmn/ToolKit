@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 22/2/2026.
 //
 
-import SwiftUI
-
 /// Useful for e.g. `Edge` and `Alignment`, which don't store values,
 /// but rather represent directions.
 public protocol AxisOrientable {

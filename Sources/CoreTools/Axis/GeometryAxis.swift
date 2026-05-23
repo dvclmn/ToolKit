@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 3/7/2025.
 //
 
-import SwiftUI
+import Foundation
 
 /// Note: `GeometryAxis` is about how indices progress across the grid,
 /// not about how the things themselves are shaped.
@@ -86,19 +86,6 @@ extension GeometryAxis {
     }
   }
 
-  public var cellNumberTextAlignment: UnitPoint {
-    switch self {
-      case .horizontal: .center
-      case .vertical: .trailing
-    }
-  }
-
-  public var numberingShapeAlignment: Alignment {
-    switch self {
-      case .horizontal: .top
-      case .vertical: .leading
-    }
-  }
 
   public func axisOffset(
     frameInViewport frame: CGRect
@@ -137,7 +124,7 @@ extension GeometryAxis {
   }
 }
 
-/// Metadata
+// MARK: - Metadata
 extension GeometryAxis {
 
   public var name: String {
@@ -169,20 +156,3 @@ extension GeometryAxis {
 
 }
 
-extension GeometryAxis {
-  public var toSwiftUIAxis: Axis {
-    switch self {
-      case .horizontal: .horizontal
-      case .vertical: .vertical
-    }
-  }
-}
-
-extension Axis {
-  public var toGeometryAxis: GeometryAxis {
-    switch self {
-      case .horizontal: .horizontal
-      case .vertical: .vertical
-    }
-  }
-}

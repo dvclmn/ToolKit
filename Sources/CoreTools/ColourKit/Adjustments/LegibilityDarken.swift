@@ -9,73 +9,21 @@ import SwiftUI
 
 struct LegibilityDarkenAdjuster {
   static func adjust(
-    //    current hsv: HSVColour,
     hue h: CGFloat = 0.0,
     saturation s: CGFloat = 1.0,
     brightness v: CGFloat = 0.0,
     strength: CGFloat,
     hueShift: CGFloat
-      //  ) -> HSVAdjustment {
-      //    let h = hsv.hue
-      //    let s = hsv.saturation
-      //    let v = hsv.brightness
   ) -> (h: CGFloat, s: CGFloat, v: CGFloat) {
     let newSaturation: CGFloat = (s * (1.0 + 0.2 * strength)).clamped(to: 0...1)
     let newBrightness: CGFloat = (v + -0.1 * strength).clamped(to: 0...1)
     let newHue: CGFloat = (h + (hueShift / 360)).truncatingRemainder(dividingBy: 1)
-    //    return HSVAdjustment(h: newHue, s: newSaturation, v: newBrightness)
     return (newHue, newSaturation, newBrightness)
   }
 }
 
 // MARK: - View Modifier
-public struct LegibilityDarkenModifier: ViewModifier {
-  let base: Color
-  let strength: CGFloat
-  let hueShift: CGFloat
 
-  public func body(content: Content) -> some View {
-    ZStack {
-      base
-      content
-    }
-    .saturation(
-      LegibilityDarkenAdjuster.adjust(
-        strength: strength,
-        hueShift: hueShift
-      ).s
-    )
-    .brightness(
-      LegibilityDarkenAdjuster.adjust(
-        strength: strength,
-        hueShift: hueShift
-      ).v
-    )
-    .hueRotation(
-      .degrees(
-        LegibilityDarkenAdjuster.adjust(
-          strength: strength,
-          hueShift: hueShift
-        ).h * 360))
-
-  }
-}
-extension View {
-  public func legibilityDarken(
-    base: Color,
-    tint: Color = Color.blue.opacity(0.4),
-    strength: CGFloat = 0.5,
-    hueShift: CGFloat = 0
-  ) -> some View {
-    self.modifier(
-      LegibilityDarkenModifier(
-        base: base,
-        strength: strength,
-        hueShift: hueShift
-      )
-    )
-  }
-}
 
 //// MARK: - Shape Style
 //public struct LegibilityDarkenStyle: ShapeStyle {

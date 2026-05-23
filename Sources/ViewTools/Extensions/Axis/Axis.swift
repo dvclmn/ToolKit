@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 30/10/2024.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 extension Axis {
   public var toAxisSet: Axis.Set {
@@ -29,12 +29,22 @@ extension Axis {
   public var isVertical: Bool {
     self == .vertical
   }
-  
+
   public var toGeometryAxis: GeometryAxis {
     switch self {
       case .horizontal: .horizontal
       case .vertical: .vertical
     }
+  }
+
+  /// Returns the start and end UnitPoints for a gradient, given how
+  /// “primary/secondary storage” maps onto horizontal/vertical.
+  public func toGradientSpan(mapping: AxisMapping = .identity) -> UnitSpan {
+    mapping.select(
+      primary: UnitSpan(start: .leading, end: .trailing),  // “primary is horizontal”
+      secondary: UnitSpan(start: .top, end: .bottom),  // “secondary is vertical”
+      for: self.toGeometryAxis,
+    )
   }
 
 }
@@ -49,14 +59,14 @@ extension AxisMapping {
 }
 
 extension GeometryAxis {
-  
+
   public var cellNumberTextAlignment: UnitPoint {
     switch self {
       case .horizontal: .center
       case .vertical: .trailing
     }
   }
-  
+
   public var numberingShapeAlignment: Alignment {
     switch self {
       case .horizontal: .top

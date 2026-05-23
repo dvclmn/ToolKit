@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 9/12/2024.
 //
 
-// import SwiftUI
+import Foundation
 
 extension CGRect {
 
@@ -36,48 +36,11 @@ extension CGRect {
       && width >= 0 && height >= 0
   }
 
-  public var path: Path { Path(self) }
 
-  public func edgePoints(for edge: Edge) -> (start: CGPoint, end: CGPoint) {
-    switch edge {
-      case .top: (CGPoint(x: minX, y: minY), CGPoint(x: maxX, y: minY))
-      case .bottom: (CGPoint(x: minX, y: maxY), CGPoint(x: maxX, y: maxY))
-      case .leading: (CGPoint(x: minX, y: minY), CGPoint(x: minX, y: maxY))
-      case .trailing: (CGPoint(x: maxX, y: minY), CGPoint(x: maxX, y: maxY))
-    }
-  }
 
-  /// Returns the centre point of this rectangle
-  public var midpoint: CGPoint { center }
+  
+  
 
-  /// Produces a CGRect positioned inside the container, aligned
-  /// according to the given UnitPoint.
-  ///
-  /// Note: This mirrors how alignment guides work in SwiftUI — the origin of the
-  /// rect shifts so that the point described by anchor within the container aligns
-  /// to the same point in the rect.
-  public func aligned(
-    in container: CGSize,
-    to anchor: UnitPoint = .center,
-  ) -> CGRect {
-    let origin = CGPoint(
-      x: (container.width - width) * anchor.x,
-      y: (container.height - height) * anchor.y,
-    )
-    return CGRect(origin: origin, size: size)
-  }
-
-  public func aligned(
-    in container: CGRect,
-    to anchor: UnitPoint = .center,
-  ) -> CGRect {
-    let baseOrigin = aligned(in: container.size, to: anchor).origin
-    let origin = CGPoint(
-      x: container.minX + baseOrigin.x,
-      y: container.minY + baseOrigin.y,
-    )
-    return CGRect(origin: origin, size: size)
-  }
 
   /// Returns a rectangle that encompasses both this rectangle and the provided rectangle
   public func expanded(toInclude rect: CGRect) -> CGRect {
@@ -101,8 +64,19 @@ extension CGRect {
   }
 
   public static let exampleZeroOrigin100x100 = CGRect(
-    origin: .zero, size: CGSize(100, 100),
+    origin: .zero, size: CGSize(width: 100, height: 100),
   )
+
+  // Edges
+  public var leadingEdge: CGFloat { minX }
+  public var trailingEdge: CGFloat { maxX }
+  public var topEdge: CGFloat { minY }
+  public var bottomEdge: CGFloat { maxY }
+
+  // Dimensions
+  // TODO: These need to be passed through the AxisMapping pipeline, to be safer
+  public var horizontal: ClosedRange<CGFloat> { minX...maxX }
+  public var vertical: ClosedRange<CGFloat> { minY...maxY }
 
 }
 

@@ -5,7 +5,8 @@
 //  Created by Dave Coleman on 24/1/2026.
 //
 
-// import SwiftUI
+import CoreTools
+import SwiftUI
 
 // MARK: - Binding CGRect
 extension Binding where Value == CGRect {

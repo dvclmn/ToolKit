@@ -5,8 +5,7 @@
 //  Created by Dave Coleman on 14/1/2026.
 //
 
-// import SwiftUI
-import Foundation
+import SwiftUI
 
 /// ```
 /// ● = origin
@@ -55,6 +54,8 @@ extension CGRect {
       y: height > 0 ? (point.y - minY) / height : 0,
     )
   }
+  
+  
 
   /// Get a CGPoint at the specified UnitPoint within this rect
   /// The inverse of ``unitPoint(for:)``
@@ -113,15 +114,6 @@ extension CGRect {
   /// Bottom-right corner (maxX, maxY)
   public var bottomTrailing: CGPoint { point(at: .bottomTrailing) }
 
-  // Edges
-  public var leadingEdge: CGFloat { minX }
-  public var trailingEdge: CGFloat { maxX }
-  public var topEdge: CGFloat { minY }
-  public var bottomEdge: CGFloat { maxY }
-
-  // Dimensions
-  // TODO: These need to be passed through the AxisMapping pipeline, to be safer
-  public var horizontal: ClosedRange<CGFloat> { minX...maxX }
-  public var vertical: ClosedRange<CGFloat> { minY...maxY }
-
+  /// Returns the centre point of this rectangle
+  public var midpoint: CGPoint { center }
 }

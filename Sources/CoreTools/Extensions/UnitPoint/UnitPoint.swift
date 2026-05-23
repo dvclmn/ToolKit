@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 30/10/2024.
 //
 
-import SwiftUI
+// import SwiftUI
 
 /// `UnitPoint` is named after the mathematical concept of the *unit interval*,
 /// and more broadly, the unit square/unit space.

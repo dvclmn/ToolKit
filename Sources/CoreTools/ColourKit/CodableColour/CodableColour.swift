@@ -11,7 +11,7 @@
 // Credit to Natalia Panferova and Matthaus Woolard of
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
 
-import SwiftUI
+//import SwiftUI
 
 public typealias Colour = CodableColour
 

@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 22/2/2026.
 //
 
-import SwiftUI
+// import SwiftUI
 
 public struct Emoji: Identifiable, Equatable, Sendable, Hashable, Codable {
   public let id: UUID

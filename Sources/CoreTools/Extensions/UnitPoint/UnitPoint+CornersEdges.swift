@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 31/7/2025.
 //
 
-import SwiftUI
+// import SwiftUI
 
 /// For `UnitPoint` corner cases (e.g. `topLeading`, `bottomTrailing`)
 public enum CornerResolutionStrategy {

@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 29/6/2025.
 //
 
-import SwiftUI
+import Foundation
 
 /// Represents a *delta* adjustment in HSV space
 /// Does not set hsv values to these, but adds to them

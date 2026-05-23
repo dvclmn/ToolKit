@@ -7,7 +7,7 @@
 
 #if canImport(AppKit)
 import AppKit
-import SwiftUI
+// import SwiftUI
 
 extension Font {
   public init(_ nsFont: NSFont) {

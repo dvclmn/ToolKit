@@ -7,7 +7,7 @@
 
 // swift-format-ignore-file
 
-import SwiftUI
+// import SwiftUI
 
 /// Note: These aren't dynamic system colours like SwiftUI's
 /// These come from standard CSS named colours

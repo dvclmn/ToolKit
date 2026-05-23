@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 10/1/2026.
 //
 
-import SwiftUI
+// import SwiftUI
 
 // MARK: - Stretch out an Axis
 public struct StretchOptions: OptionSet, Sendable {

@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 4/7/2025.
 //
 
-import SwiftUI
+// import SwiftUI
 
 //public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
 public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {

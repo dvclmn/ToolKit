@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 /// Notes:
 /// In HSV, brightness (value) is the *maximum* of the RGB channels.
@@ -52,14 +53,6 @@ public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashabl
 
 extension HSVColour {
 
-  public var toColour: Color {
-    Color(
-      hue: hue,
-      saturation: saturation,
-      brightness: brightness,
-      opacity: alpha
-    )
-  }
 
   /// Hue is only meaningful when there is chroma and not pure black.
   /// (You can decide whether `brightness == 0` should count as undefined even if saturation > 0;

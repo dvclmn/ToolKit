@@ -22,8 +22,6 @@ public struct ColourMix: Sendable, Codable, Equatable, Hashable {
     self.mix = mix
     self.mixAmount = mixAmount
   }
-
-  public var colour: Color { base.withMix(mix, mixAmount) }
 }
 extension ColourMix {
 

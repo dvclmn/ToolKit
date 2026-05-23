@@ -27,16 +27,6 @@ public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendabl
     }
   }
 
-  @MainActor
-  public func toNative() -> (any LabelStyle)? {
-    switch self {
-      case .iconOnly: .iconOnly
-      case .titleOnly: .titleOnly
-      case .titleAndIcon, .stacked: .titleAndIcon
-      case .hidden: nil
-    }
-  }
-
   public var isStacked: Bool {
     switch self {
       case .stacked: true

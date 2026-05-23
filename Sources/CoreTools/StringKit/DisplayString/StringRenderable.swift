@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 public protocol StringRenderable: Sendable {
   var toString: String { get }
@@ -57,6 +58,4 @@ extension Array: StringRenderable where Element: StringRenderable {
 }
 
 // MARK: - Other
-extension Alignment: StringRenderable {
-  public var toString: String { self.displayName.standard }
-}
+

@@ -6,19 +6,23 @@
 //
 
 // import SwiftUI
+import Foundation
+import CoreGraphics
 
 public struct Emoji: Identifiable, Equatable, Sendable, Hashable, Codable {
   public let id: UUID
   public let emoji: Character
   public let offset: CGSize
-  public let rotation: Angle
+  public let rotation: Double
+//  public let rotation: Angle
   public let scale: CGFloat
 
   public init(
     id: UUID = UUID(),
     emoji: Character,
     offset: CGSize = .zero,
-    rotation: Angle = .zero,
+    rotation: Double = .zero,
+//    rotation: Angle = .zero,
     scale: CGFloat = 1.0,
   ) {
     self.id = id
@@ -48,13 +52,15 @@ extension EmojiComposition {
       Emoji(
         emoji: "📎",
         offset: CGSize(width: -30, height: 14),
-        rotation: .degrees(4),
+        rotation: 4,
+//        rotation: .degrees(4),
         scale: 0.8,
       ),
       Emoji(
         emoji: "✂️",
         offset: CGSize(width: 26, height: -14),
-        rotation: .degrees(16),
+        rotation: 16,
+//        rotation: .degrees(16),
         scale: 1.0,
       ),
     ],

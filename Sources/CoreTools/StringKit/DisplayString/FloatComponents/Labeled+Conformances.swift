@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 extension CGPoint: FloatComponentsLabeled {
   public var components: [Labeled] {
@@ -33,15 +34,6 @@ extension CGSize: FloatComponentsLabeled {
 
 extension NSRect: FloatComponentsLabeled {
   public var components: [Labeled] { origin.components + size.components }
-}
-
-extension UnitPoint: FloatComponentsLabeled {
-  public var components: [Labeled] {
-    [
-      .init("X", value: x),
-      .init("Y", value: y),
-    ]
-  }
 }
 
 extension CGVector: FloatComponentsLabeled {

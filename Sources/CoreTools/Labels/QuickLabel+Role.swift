@@ -14,7 +14,8 @@ public enum ActionRole: Equatable, Sendable, Codable, Hashable {
   case warning
   case neutral
 
-  public var colour: Color? {
+  public var colour: RGBColour? {
+//  public var colour: Color? {
     switch self {
       case .success: .green
       case .destructive: .red

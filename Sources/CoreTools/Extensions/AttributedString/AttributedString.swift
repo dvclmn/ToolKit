@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 extension AttributedString {
 //  public var toString: String { String(self.characters) }
@@ -17,11 +18,7 @@ extension AttributedString {
     return index(startIndex, offsetByCharacters: offset)
   }
   
-  public func monospaced(_ font: Font? = nil) -> AttributedString {
-    self.transformingAttributes(\.font) { attr in
-      attr.value = font?.monospaced() ?? Font.body.monospaced()
-    }
-  }
+
 
   ///
   /// ```

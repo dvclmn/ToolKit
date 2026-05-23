@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 //public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
 public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {

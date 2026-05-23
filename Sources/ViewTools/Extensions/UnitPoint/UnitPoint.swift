@@ -5,7 +5,8 @@
 //  Created by Dave Coleman on 30/10/2024.
 //
 
-// import SwiftUI
+import CoreTools
+import SwiftUI
 
 /// `UnitPoint` is named after the mathematical concept of the *unit interval*,
 /// and more broadly, the unit square/unit space.
@@ -22,7 +23,14 @@ extension UnitPoint: AxisKeyPathWritable {
   public static var secondaryWritableKey: WritableKeyPath<Self, CGFloat> { \.y }
 }
 
-
+extension UnitPoint: FloatComponentsLabeled {
+  public var components: [Labeled] {
+    [
+      .init("X", value: x),
+      .init("Y", value: y),
+    ]
+  }
+}
 
 extension UnitPoint {
 
@@ -114,8 +122,6 @@ extension UnitPoint {
       default: Color.gray
     }
   }
-  
-  
 
   /// Corner intermediates (positioned between corners and edge centers)
   public static let topLeadingMid = UnitPoint(x: 0.25, y: 0.25)

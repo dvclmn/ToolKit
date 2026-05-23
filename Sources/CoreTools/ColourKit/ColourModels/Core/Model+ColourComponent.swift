@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 14/6/2025.
 //
 
- import SwiftUI
-
 /// Important note: At one point, I tried pivoting from using an
 /// enum (e.g. `HSVComponent`), to seperate per-component
 /// structs (e.g. `RedComponent`, `HueComponent`).
@@ -36,8 +34,6 @@ nonisolated public protocol ColourComponent: Identifiable, CaseIterable, RawRepr
   /// ```
   var get: (_ model: Model) -> Double { get }
   var set: (_ model: inout Model, _ newValue: Double) -> Void { get }
-  
-  func sliderTrackGradient(colour: Model) -> LinearGradient
 }
 
 extension ColourComponent {

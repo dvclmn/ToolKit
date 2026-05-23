@@ -7,13 +7,11 @@
 
 // swift-format-ignore-file
 
-// import SwiftUI
-
-/// Note: These aren't dynamic system colours like SwiftUI's
+/// Note: These aren't dynamic environment-resolved system colours.
 /// These come from standard CSS named colours
 extension RGBColour {
   
-  // MARK: - SwiftUI System Colours (dark-mode approximations)
+  // MARK: - Platform System Colours (dark-mode approximations)
   public static let red: RGBColour       = #colorLiteral(red: 1.0,   green: 0.271, blue: 0.227, alpha: 1.0)
   public static let orange: RGBColour    = #colorLiteral(red: 1.0,   green: 0.624, blue: 0.039, alpha: 1.0)
   public static let yellow: RGBColour    = #colorLiteral(red: 1.0,   green: 0.839, blue: 0.039, alpha: 1.0)
@@ -27,12 +25,6 @@ extension RGBColour {
   public static let pink: RGBColour      = #colorLiteral(red: 1.0,   green: 0.216, blue: 0.373, alpha: 1.0)
   public static let brown: RGBColour     = #colorLiteral(red: 0.635, green: 0.518, blue: 0.369, alpha: 1.0)
 
-  public static func system(
-    _ colour: SystemColour,
-    in env: EnvironmentValues
-  ) -> RGBColour {
-    RGBColour(fromSystem: colour, env: env)
-  }
   // MARK: - Basic 16 (CSS Level 1 & 2)
   public static let black: RGBColour =                  #colorLiteral(red: 0.0, green: 0.0, blue: 0.0, alpha: 1.0)
   public static let white: RGBColour =                  #colorLiteral(red: 1.0, green: 1.0, blue: 1.0, alpha: 1.0)

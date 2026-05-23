@@ -5,13 +5,10 @@
 //  Created by Dave Coleman on 3/9/2025.
 //
 
-/// `Color` can *take in* HSV values
-/// `Color.Resolved` can *give* only RGB
+/// Renderers can often take HSV values directly, but resolved output usually gives RGB.
 
 // Credit to Natalia Panferova and Matthaus Woolard of
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
-
-//import SwiftUI
 
 public typealias Colour = CodableColour
 

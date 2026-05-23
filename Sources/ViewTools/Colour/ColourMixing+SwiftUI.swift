@@ -1,11 +1,12 @@
 //
-//  Compat+MixColour.swift
-//  BaseHelpers
+//  ColourMixing+SwiftUI.swift
+//  ToolKit
 //
-//  Created by Dave Coleman on 20/9/2025.
+//  Created by Dave Coleman on 23/5/2026.
 //
 
-// import SwiftUI
+import SwiftUI
+import CoreTools
 
 extension Color {
   public func mixCompatible(
@@ -39,7 +40,7 @@ extension Array where Element == Color {
 
 extension SystemColour {
   public func withMix(_ colour: Self, _ amount: Double) -> Color {
-    return self.toColour.mixCompatible(
+    self.toColour.mixCompatible(
       with: colour.toColour,
       by: amount,
       in: .perceptual,

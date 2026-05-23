@@ -1,11 +1,13 @@
 //
-//  System+Ext.swift
-//  BaseHelpers
+//  SystemColour+SwiftUI.swift
+//  ToolKit
 //
-//  Created by Dave Coleman on 20/11/2025.
+//  Created by Dave Coleman on 23/5/2026.
 //
 
-// import SwiftUI
+import AppKit
+import SwiftUI
+import CoreTools
 
 extension SystemColour {
 
@@ -17,11 +19,6 @@ extension SystemColour {
     }
     self = match
   }
-
-//  public func resolve(in env: EnvironmentValues) -> Color {
-//    let colour = self.toColour
-//    return colour.resolve(in: env)
-//  }
 
   public var toColour: Color {
     switch self {
@@ -51,4 +48,16 @@ extension SystemColour {
     }
   }
 
+  public func rgbColour(in env: EnvironmentValues) -> RGBColour? {
+    .init(fromSystem: self, env: env)
+  }
+}
+
+extension RGBColour {
+  public static func system(
+    _ colour: SystemColour,
+    in env: EnvironmentValues
+  ) -> RGBColour {
+    RGBColour(fromSystem: colour, env: env)
+  }
 }

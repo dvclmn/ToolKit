@@ -5,10 +5,10 @@
 //  Created by Dave Coleman on 12/5/2025.
 //
 
-// import SwiftUI
+import Foundation
 
 public struct RGBColour: Identifiable, Equatable, Hashable, Sendable, Codable,
-  ColourModel
+  ColourModel, RGBColourSpaceRepresentable
 {
   public let id: UUID
   public var red: Double
@@ -57,19 +57,10 @@ extension RGBColour: _ExpressibleByColorLiteral {
     )
   }
 
-  public var toColour: Color {
-    Color(
-      colourSpace,
-      red: red,
-      green: green,
-      blue: blue,
-      opacity: alpha
-    )
-  }
 }
 
 extension RGBColour {
-  // To suit Color literals
+  // To suit colour literals
   // #colorLiteral(red: 1, green: 0.5273173451, blue: 1, alpha: 1)
   //  public init?(
   //    _ cgColor: CGColor,
@@ -145,16 +136,6 @@ extension RGBColour {
     self.init(red: r, green: g, blue: b, alpha: a, name: name)
   }
 
-  public init(
-    fromSystem system: SystemColour,
-    env: EnvironmentValues
-  ) {
-    self.init(
-      colour: system.toColour,
-      environment: env,
-      name: system.name
-    )
-  }
 }
 
 extension RGBColour {

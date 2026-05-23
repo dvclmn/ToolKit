@@ -5,23 +5,45 @@
 //  Created by Dave Coleman on 12/5/2025.
 //
 
-import SwiftUI
+import Foundation
 
-public protocol ColourModel: Codable, Equatable, Identifiable {
-  var colourSpace: Color.RGBColorSpace { get }
+public protocol ColourModelIdentity: Identifiable where ID == UUID {
   var id: UUID { get }
   var name: String? { get }
+}
+
+public protocol ColourOpacityModel {
   var alpha: Double { get set }
-  var toColour: Color { get }
   var toOpaque: Self { get }
   mutating func opacity(_ opacity: Double)
+}
+
+public protocol GrayscaleColourModel {
   static func gray(_ brightness: Double, alpha: Double) -> Self
 }
 
-extension ColourModel {
+public protocol ColourModel: Codable, Equatable, ColourModelIdentity, ColourOpacityModel,
+  GrayscaleColourModel
+{}
+
+extension ColourOpacityModel {
   public mutating func opacity(_ opacity: Double) { alpha = opacity }
-  public var colourSpace: Color.RGBColorSpace { .sRGB }
-  public var nsColourSpace: NSColorSpace { .deviceRGB }
+}
+
+public enum RGBColourSpace: String, Codable, Hashable, Sendable, CaseIterable, Identifiable {
+  case sRGB
+  case sRGBLinear
+  case displayP3
+
+  public var id: String { rawValue }
+}
+
+public protocol RGBColourSpaceRepresentable {
+  var colourSpace: RGBColourSpace { get }
+}
+
+extension RGBColourSpaceRepresentable {
+  public var colourSpace: RGBColourSpace { .sRGB }
 }
 
 public enum ColourModelKind: String, Hashable, Codable, Sendable, CaseIterable, CaseCyclable, Identifiable {

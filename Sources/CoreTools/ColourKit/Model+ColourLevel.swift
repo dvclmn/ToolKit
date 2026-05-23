@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 29/6/2025.
 //
 
-// import SwiftUI
-
 /// I don't at all understand the relationship between
 /// `HierarchicalColour` and `ColourLevel`
 public enum HierarchicalColour: String, Sendable, CaseCyclable, CaseIterable, NamedItem, Identifiable,
@@ -51,35 +49,6 @@ public enum ColourLevel: String, Sendable, CaseCyclable, CaseIterable, NamedItem
 
   public var isForeground: Bool { self == .foreground }
   public var isBackground: Bool { self == .background }
-}
-
-extension Binding where Value == RGBColour {
-
-  public static func dualColourBinding(
-    _ primary: Binding<RGBColour>,
-    _ secondary: Binding<RGBColour?>,
-    level: ColourLevel,
-  ) -> Binding<RGBColour> {
-    Binding<RGBColour> {
-
-      if level.isForeground {
-        return primary.wrappedValue
-      }
-
-      guard let secondary = secondary.wrappedValue else {
-        return primary.wrappedValue
-      }
-
-      return secondary
-
-    } set: {
-      if level.isForeground {
-        primary.wrappedValue = $0
-      } else {
-        secondary.wrappedValue = $0
-      }
-    }
-  }
 }
 
 extension ColourLevel: CustomStringConvertible {

@@ -8,8 +8,8 @@
 import SwiftUI
 import CoreTools
 
-extension HSVColour {
-  
+extension HSVColour: SwiftUIColourConvertible {
+
   public var toColour: Color {
     Color(
       hue: hue,

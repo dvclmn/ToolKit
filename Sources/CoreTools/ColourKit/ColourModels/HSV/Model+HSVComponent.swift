@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 12/5/2025.
 //
 
-// import SwiftUI
-
 /// Notes on differences in modelling RGB vs HSV
 ///
 /// For HSV, these aren't "channels" in the same sense as
@@ -53,45 +51,4 @@ public enum HSVComponent: String, ColourComponent, Sendable {
     }
   }
 
-  public func gradientColours(_ colour: Model) -> [Color] {
-    switch self {
-      case .hue: Array<Color>.rainbow
-      case .saturation:
-        [.gray, colour.toColour]
-      case .brightness:
-        [.black, .white]
-      case .alpha:
-        [.clear, colour.toColour]
-    }
-  }
-
-  public func sliderTrackGradient(colour: HSVColour) -> LinearGradient {
-    return LinearGradient(
-      colors: self.gradientColours(colour),
-      startPoint: .leading,
-      endPoint: .trailing
-    )
-  }
-
-}
-
-extension LinearGradient {
-  public static func rainbow(
-    start: UnitPoint = .leading,
-    end: UnitPoint = .trailing,
-  ) -> LinearGradient {
-    LinearGradient(
-      colors: .rainbow,
-      startPoint: start,
-      endPoint: end,
-    )
-  }
-
-}
-
-extension Array where Element == Color {
-  public static let rainbow: [Color] = [
-    .red, .orange, .yellow, .green, .blue, .indigo, .purple, .pink, .red,
-  ]
-  
 }

@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 31/8/2025.
 //
 
-// import SwiftUI
-
 /// This is referring to basic colours like "red" and "green",
 /// as opposed to fancy shades like "peach" or "teal"
 public enum PrimitiveColour: String, Identifiable, CaseIterable, Sendable {
@@ -36,33 +34,12 @@ public enum PrimitiveColour: String, Identifiable, CaseIterable, Sendable {
 
   public var id: String { rawValue }
 
-  public var toColour: Color {
-    switch self {
-      case .red: Color.red
-      case .orange: Color.orange
-      case .yellow: Color.yellow
-      case .green: Color.green
-      case .blue: Color.blue
-      case .purple: Color.purple
-      case .pink: Color.pink
-      case .brown: Color.brown
-      case .grey: Color.gray
-      case .black: Color.black
-      case .white: Color.white
-      case .none: Color.clear
-    }
-  }
-
-//  public func codableColour(_ env: EnvironmentValues?) -> CodableColour {
-//    return swiftUIColour.toCodable(env)
-//  }
-
   public var toSystemColour: SystemColour? {
     SystemColour(rawValue: self.rawValue)
   }
 }
 
-/// This drives SwiftUI Table sorting
+/// This drives table sorting in UI layers.
 extension PrimitiveColour: Comparable {
 
   public var sortIndex: Int {

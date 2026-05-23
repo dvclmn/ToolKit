@@ -1,16 +1,15 @@
 //
-//  Color+Hex.swift
+//  RGBAConvertible+Hex.swift
 //  BaseHelpers
 //
 //  Created by Dave Coleman on 31/8/2025.
 //
 
-// import SwiftUI
 import Foundation
 
 extension RGBAConvertible {
 
-  /// Create a `Color` instance from a hex string in SwiftUI.
+  /// Create an RGBA-compatible colour value from a hex string.
   /// Supports the following formats:
 
   /// 1. 3-digit hex (RGB)
@@ -18,13 +17,13 @@ extension RGBAConvertible {
   /// 3. 8-digit hex (ARGB)
   ///
   /// 6-digit hex (RGB)
-  /// `let redColor = Color(hex: "FE6057")`
+  /// `let red = RGBColour(hex: "FE6057")`
   ///
   /// 3-digit hex (RGB)
-  /// `let blueColor = Color(hex: "00F")`
+  /// `let blue = RGBColour(hex: "00F")`
   ///
   /// 8-digit hex (ARGB)
-  /// `let transparentGreen = Color(hex: "8000FF00")`
+  /// `let transparentGreen = RGBColour(hex: "8000FF00")`
   public init?(hex: String, name: String? = nil) {
 
     /// Clean up the hex string (removing `#` if present etc)
@@ -69,4 +68,3 @@ extension String {
     return hexSanitized
   }
 }
-

@@ -49,21 +49,6 @@ extension HSVAdjustment {
     self.init(h: hsv.hue, s: hsv.saturation, v: hsv.brightness)
   }
 
-  /// Removed `to​Colour` because a delta cannot be turned into a concrete Color without a base color.
-  //  public var toColour: Color? {
-  //    guard let hue, let saturation, let brightness else { return nil }
-  //    let nsColour = NSColor(hue: hue, saturation: saturation, brightness: brightness, alpha: 1.0)
-  //    return Color(nsColor: nsColour)
-  //  }
-
-  //  @available(
-  //    *, deprecated, renamed: "toColour",
-  //    message: "Prefer property version of this, rather than the method `toColour()`"
-  //  )
-  //  public func toColour() -> Color? {
-  //    toColour
-  //  }
-
   public static func adjustments(
     from modifiers: [any HSVModifier]
   ) -> [Self] {

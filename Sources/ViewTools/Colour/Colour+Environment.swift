@@ -1,11 +1,12 @@
 //
-//  EnvironmentValues.swift
-//  BaseHelpers
+//  Colour+Environment.swift
+//  ToolKit
 //
-//  Created by Dave Coleman on 23/1/2026.
+//  Created by Dave Coleman on 23/5/2026.
 //
 
-// import SwiftUI
+import SwiftUI
+import CoreTools
 
 extension EnvironmentValues {
   @Entry public var rgbComponent: RGBComponent?
@@ -18,7 +19,6 @@ extension EnvironmentValues {
   @Entry public var colourChroma: ColourChroma?
 
   @Entry public var activeColourHierarchy: Binding<HierarchicalColour> = .constant(.primary)
-  //  @Entry public var activeColour: Binding<ColourLevel> = .constant(.foreground)
   @Entry public var activeColourModel: Binding<ColourModelKind> = .constant(.rgb)
   @Entry public var hsvPrimaryRepresentation: Binding<HSVColour>? = nil
 }

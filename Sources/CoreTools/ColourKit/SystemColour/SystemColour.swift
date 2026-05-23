@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 1/9/2025.
 //
 
-// import SwiftUI
-
 public enum SystemColour: String, CaseIterable, Sendable, Codable,
   Equatable, Hashable, Identifiable
 {
@@ -50,10 +48,6 @@ extension SystemColour {
     PrimitiveColour(rawValue: self.rawValue)
   }
 
-  public func rgbColour(in env: EnvironmentValues) -> RGBColour? {
-    .init(fromSystem: self, env: env)
-  }
-
 }
 
 extension SystemColour {
@@ -64,14 +58,5 @@ extension SystemColour {
     let val = nsColour.brightnessComponent
     return HSVAdjustment(h: hue, s: sat, v: val)
   }
-
-  /// This unable to work, as HSVAdjustable only works in deltas
-  //  public func hsvAdjusted(by adjustment: HSVAdjustment) -> Color? {
-  //    guard let baseAdjustment = hsvAdjustment else { return nil }
-  //    let adjusted: HSVAdjustment = baseAdjustment.interpolated(
-  //      towards: adjustment
-  //    )
-  //    return adjusted.toColour()
-  //  }
 
 }

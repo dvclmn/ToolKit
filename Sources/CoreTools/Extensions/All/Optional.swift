@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 extension Optional where Wrapped: BinaryFloatingPoint {
   public var toCGFloatIfPresent: CGFloat? {

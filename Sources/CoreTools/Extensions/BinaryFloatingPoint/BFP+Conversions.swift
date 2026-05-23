@@ -6,10 +6,9 @@
 //
 
 // import SwiftUI
+import Foundation
 
 extension BinaryFloatingPoint {
-
-  public var toAngle: Angle { .degrees(Double(self)) }
 
   public var toDurationInSeconds: Duration { Duration.seconds(Double(self)) }
 

@@ -96,5 +96,11 @@ extension CGPoint {
       by: { relative.distanceSquared(to: $0) < relative.distanceSquared(to: $1) }
     ) ?? .center
   }
+  
+  
+  public static func angle(from p1: CGPoint, to p2: CGPoint) -> Angle {
+    Angle(radians: angleInRadians(from: p1, to: p2))
+  }
+  
 
 }

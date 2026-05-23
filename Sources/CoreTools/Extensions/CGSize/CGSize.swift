@@ -6,6 +6,8 @@
 //
 
 // import SwiftUI
+import Foundation
+import CoreGraphics
 
 extension CGSize: @retroactive Hashable {
   public func hash(into hasher: inout Hasher) {
@@ -71,16 +73,6 @@ extension CGSize {
       width: max(0, width - (inset * 2)),
       height: max(0, height - (inset * 2)),
     )
-  }
-
-  /// Returns a new size reduced by the specified edge insets,
-  /// and clamped to a minimum value of `0` for each dimension.
-  /// - Parameter insets: The per-edge insets to apply. Width is reduced by `left + right`, height by `top + bottom`.
-  /// - Returns: A new CGSize with the insets applied
-  public func inset(by insets: EdgeInsets) -> CGSize {
-    let newWidth = max(0, width - (insets.leading + insets.trailing))
-    let newHeight = max(0, height - (insets.top + insets.bottom))
-    return CGSize(width: newWidth, height: newHeight)
   }
 
   public var diagonalLength: CGFloat {

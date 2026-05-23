@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 extension String {
 
@@ -17,9 +18,6 @@ extension String {
     return AttributedString(self)
   }
 
-  public var toMarkdownCompatible: LocalizedStringKey {
-    LocalizedStringKey(self)
-  }
 
   public var toDescribing: String {
     return String(describing: self)

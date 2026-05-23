@@ -35,10 +35,7 @@ extension AttributedString {
   /// return output
   /// ```
 
-  public mutating func quickHighlight() {
-    let highlightContainer: AttributeContainer = .colours(.black, on: .green)
-    self.setAttributes(highlightContainer)
-  }
+
 
   public func lines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [Substring] {
     toString.lines(omissionStrategy: omissionStrategy)

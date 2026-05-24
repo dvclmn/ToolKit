@@ -5,19 +5,20 @@
 //  Created by Dave Coleman on 5/3/2026.
 //
 
-// import SwiftUI
+import SwiftUI
+import CoreTools
 
 extension Binding where Value: Equatable {
   /// Steps the wrapped value within `allowed`.
   public func step(
     in allowed: [Value],
     direction: StepDirection = .up,
-    wrapping: Bool = false
+    wrapping: Bool = false,
   ) {
     if let next = wrappedValue.stepped(
       in: allowed,
       direction: direction,
-      wrapping: wrapping
+      wrapping: wrapping,
     ) {
       wrappedValue = next
     }
@@ -30,18 +31,17 @@ extension Binding where Value: Comparable {
   public func stepLoosely(
     in allowed: [Value],
     direction: StepDirection = .up,
-    wrapping: Bool = false
+    wrapping: Bool = false,
   ) {
     if let next = wrappedValue.steppedLoosely(
       in: allowed,
       direction: direction,
-      wrapping: wrapping
+      wrapping: wrapping,
     ) {
       wrappedValue = next
     }
   }
 }
-
 
 extension Equatable {
   /// Returns a value stepped by one position within `allowed`.

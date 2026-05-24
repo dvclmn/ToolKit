@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 public func twoPi<T: BinaryFloatingPoint>() -> T { T.pi * 2 }
 

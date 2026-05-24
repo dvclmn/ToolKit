@@ -6,6 +6,7 @@
 //
 
 // import SwiftUI
+import Foundation
 
 // MARK: - Stretch out an Axis
 public struct StretchOptions: OptionSet, Sendable {
@@ -27,10 +28,10 @@ extension CGPoint {
   /// range, across the surface of the view. This maps an axis of a CGPoint to be wider
   /// (or narrower) than the original.
   public func stretchedPosition(
-    _ axis: Axis,
+    _ axis: GeometryAxis,
     in size: CGSize,
     stretchFactor: CGFloat,
-    options: StretchOptions = []
+    options: StretchOptions = [],
   ) -> CGFloat {
 
     let rawLocation: CGFloat =
@@ -71,7 +72,7 @@ extension CGPoint {
   public func mapped(to destination: CGRect) -> CGPoint {
     let result = CGPoint(
       x: destination.origin.x + (self.x * destination.width),
-      y: destination.origin.y + (self.y * destination.height)
+      y: destination.origin.y + (self.y * destination.height),
     )
     return result
   }

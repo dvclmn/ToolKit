@@ -5,9 +5,9 @@
 //  Created by Dave Coleman on 11/10/2025.
 //
 
-#if canImport(AppKit)
-import AppKit
-// import SwiftUI
+//#if canImport(AppKit)
+//import AppKit
+ import SwiftUI
 
 extension Font {
   public init(_ nsFont: NSFont) {
@@ -90,4 +90,4 @@ extension NSFont {
   }
 
 }
-#endif
+//#endif

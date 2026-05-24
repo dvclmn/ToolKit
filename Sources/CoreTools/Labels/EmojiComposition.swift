@@ -13,7 +13,7 @@ public struct Emoji: Identifiable, Equatable, Sendable, Hashable, Codable {
   public let id: UUID
   public let emoji: Character
   public let offset: CGSize
-  public let rotation: Double
+  public let rotation: Double // degrees
 //  public let rotation: Angle
   public let scale: CGFloat
 

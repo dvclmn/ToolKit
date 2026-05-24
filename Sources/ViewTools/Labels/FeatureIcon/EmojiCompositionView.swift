@@ -23,7 +23,7 @@ public struct EmojiCompositionView: View {
       ForEach(composition.emoji) { comp in
         Text(comp.emoji.toString)
           .offset(comp.offset)
-          .rotationEffect(comp.rotation)
+          .rotationEffect(.degrees(comp.rotation))
           .scaleEffect(comp.scale)
       }
       .font(.system(size: controlSize.scale(fontSize)))

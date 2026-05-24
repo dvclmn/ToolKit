@@ -5,20 +5,15 @@
 //  Created by Dave Coleman on 16/11/2024.
 //
 
-// import SwiftUI
 import Foundation
 
 extension CGPoint {
-
-
 
   public func distance(to other: CGPoint) -> CGFloat {
     let dx = CGFloat(x - other.x)
     let dy = CGFloat(y - other.y)
     return sqrt((dx * dx) + (dy * dy))
   }
-
-
 
   public init(_ x: CGFloat, _ y: CGFloat) {
     self.init(x: x, y: y)

@@ -5,11 +5,10 @@
 //  Created by Dave Coleman on 31/8/2024.
 //
 
-// import SwiftUI
 import Foundation
 
 extension AttributedString {
-//  public var toString: String { String(self.characters) }
+  //  public var toString: String { String(self.characters) }
 
   public func index(at offset: Int) -> AttributedString.Index? {
     guard offset >= 0 && offset <= characters.count else {
@@ -17,8 +16,6 @@ extension AttributedString {
     }
     return index(startIndex, offsetByCharacters: offset)
   }
-  
-
 
   ///
   /// ```
@@ -35,8 +32,6 @@ extension AttributedString {
   /// return output
   /// ```
 
-
-
   public func lines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [Substring] {
     toString.lines(omissionStrategy: omissionStrategy)
   }
@@ -47,14 +42,14 @@ extension AttributedString {
 
   public mutating func append(
     _ string: String,
-    addsLineBreak: Bool
+    addsLineBreak: Bool,
   ) {
     self.characters.append(contentsOf: addsLineBreak ? "\(string)\n" : "\(string)")
   }
 
   public mutating func append(
     _ character: Character,
-    addsLineBreak: Bool
+    addsLineBreak: Bool,
   ) {
     self.characters.append(contentsOf: addsLineBreak ? "\(character)\n" : "\(character)")
   }

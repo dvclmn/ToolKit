@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 21/9/2025.
 //
 
-// import SwiftUI
 import Foundation
 
 extension BinaryFloatingPoint {
@@ -23,6 +22,5 @@ extension BinaryFloatingPoint {
   public var toDouble: Double { Double(self) }
   public var toFloat: Float { Float(self) }
   public var toCGFloat: CGFloat { CGFloat(self) }
-
 
 }

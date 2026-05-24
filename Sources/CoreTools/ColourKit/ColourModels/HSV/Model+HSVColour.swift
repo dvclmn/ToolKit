@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 12/5/2025.
 //
 
-// import SwiftUI
 import Foundation
 
 /// Notes:
@@ -31,7 +30,7 @@ public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashabl
     saturation: Double,
     brightness: Double,
     alpha: Double = 1.0,
-    name: String? = nil
+    name: String? = nil,
   ) {
     self.id = UUID()
     self.hue = hue
@@ -45,14 +44,13 @@ public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashabl
     s: Double,
     v: Double,
     alpha: Double = 1.0,
-    name: String? = nil
+    name: String? = nil,
   ) {
     self.init(hue: h, saturation: s, brightness: v, alpha: alpha, name: name)
   }
 }
 
 extension HSVColour {
-
 
   /// Hue is only meaningful when there is chroma and not pure black.
   /// (You can decide whether `brightness == 0` should count as undefined even if saturation > 0;
@@ -62,8 +60,6 @@ extension HSVColour {
     /// still not observable), change to saturation > 0.
     saturation > 0 && brightness > 0
   }
-  
-  
 
   /// Returns `incoming`, but if its hue is undefined (grey/black), preserves `self.hue`.
   public func mergingPreservingHue(_ incoming: HSVColour) -> HSVColour {
@@ -91,7 +87,7 @@ extension HSVColour {
       alpha: 1.0,
     )
   }
-  
+
   public var toOpaque: HSVColour {
     HSVColour(h: hue, s: saturation, v: brightness, alpha: 1.0, name: name)
   }
@@ -117,7 +113,7 @@ extension HSVColour {
       saturation: 0,
       brightness: brightness,
       alpha: alpha,
-      name: "Gray"
+      name: "Gray",
     )
   }
 

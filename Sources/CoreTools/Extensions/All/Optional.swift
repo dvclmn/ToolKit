@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 31/8/2024.
 //
 
-// import SwiftUI
 import Foundation
 
 extension Optional where Wrapped: BinaryFloatingPoint {
@@ -22,7 +21,7 @@ extension Optional where Wrapped == Bool {
     get { self }
     set { self = newValue }
   }
-  
+
   public func boundBool(_ fallback: Bool = false) -> Bool {
     _boundBool ?? fallback
   }

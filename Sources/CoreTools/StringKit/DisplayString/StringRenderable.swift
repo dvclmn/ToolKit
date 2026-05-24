@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 6/10/2025.
 //
 
-// import SwiftUI
 import Foundation
 
 public protocol StringRenderable: Sendable {
@@ -58,4 +57,3 @@ extension Array: StringRenderable where Element: StringRenderable {
 }
 
 // MARK: - Other
-

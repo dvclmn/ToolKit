@@ -1,6 +1,6 @@
 //
 //  StringRenderable.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 6/10/2025.
 //

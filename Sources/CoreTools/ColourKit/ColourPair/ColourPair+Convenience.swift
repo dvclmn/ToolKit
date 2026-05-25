@@ -1,6 +1,6 @@
 //
 //  ColourPair+Convenience.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 18/11/2025.
 //

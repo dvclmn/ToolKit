@@ -1,6 +1,6 @@
 //
 //  ModifierKeySync.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/3/2026.
 //

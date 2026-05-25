@@ -1,6 +1,6 @@
 //
 //  HSV+Luminance.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 17/2/2026.
 //

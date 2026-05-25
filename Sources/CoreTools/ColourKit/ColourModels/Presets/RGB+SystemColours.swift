@@ -1,6 +1,6 @@
 //
 //  RGB+SystemColours.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 23/1/2026.
 //

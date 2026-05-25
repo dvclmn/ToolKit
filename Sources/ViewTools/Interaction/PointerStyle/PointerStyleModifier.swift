@@ -1,6 +1,6 @@
 //
 //  PointerStyleModifier.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 15/6/2025.
 //

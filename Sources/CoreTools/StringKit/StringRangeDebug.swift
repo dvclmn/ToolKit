@@ -1,6 +1,6 @@
 //
 //  StringRangeDebug.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 23/12/2025.
 //

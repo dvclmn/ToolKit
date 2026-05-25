@@ -1,6 +1,6 @@
 //
 //  ViewSizeModifier.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 8/5/2025.
 //

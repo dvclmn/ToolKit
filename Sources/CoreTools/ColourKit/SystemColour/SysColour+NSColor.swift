@@ -1,6 +1,6 @@
 //
 //  SysColour+NSColor.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 20/11/2025.
 //

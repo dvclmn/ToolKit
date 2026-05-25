@@ -1,6 +1,6 @@
 //
 //  ShiftPoint.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 8/10/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  Int+Conversions.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 25/1/2026.
 //

@@ -1,6 +1,6 @@
 //
 //  KeyEquivalent.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 19/7/2025.
 //

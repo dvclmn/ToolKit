@@ -1,6 +1,6 @@
 //
 //  Compat+SplitViews.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 22/9/2025.
 //

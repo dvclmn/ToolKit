@@ -1,6 +1,6 @@
 //
 //  FrameRate.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/1/2026.
 //

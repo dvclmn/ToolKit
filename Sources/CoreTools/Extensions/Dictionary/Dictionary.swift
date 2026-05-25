@@ -1,6 +1,6 @@
 //
 //  Dictionary.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 30/6/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  CGPoint+Zoom.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 7/3/2026.
 //

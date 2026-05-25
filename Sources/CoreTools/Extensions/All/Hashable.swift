@@ -1,6 +1,6 @@
 //
 //  Hashable.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 7/9/2025.
 //

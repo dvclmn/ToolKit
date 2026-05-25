@@ -1,6 +1,6 @@
 //
 //  SignDisplay.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 14/2/2026.
 //

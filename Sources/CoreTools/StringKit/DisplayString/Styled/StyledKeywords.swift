@@ -1,6 +1,6 @@
 //
 //  Model+Styled.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 3/10/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  NSTextContentManager.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/12/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  Compat+SafeAreaBar.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/2/2026.
 //

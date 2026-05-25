@@ -1,6 +1,6 @@
 //
 //  String+Slice.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 1/1/2026.
 //

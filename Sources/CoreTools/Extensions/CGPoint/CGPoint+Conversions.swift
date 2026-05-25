@@ -1,6 +1,6 @@
 //
 //  CGPoint+Conversions.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 30/1/2026.
 //

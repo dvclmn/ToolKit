@@ -1,6 +1,6 @@
 //
 //  PrimitiveColour.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 31/8/2025.
 //

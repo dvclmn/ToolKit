@@ -1,6 +1,6 @@
 //
 //  LabeledComponent.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 12/10/2025.
 //

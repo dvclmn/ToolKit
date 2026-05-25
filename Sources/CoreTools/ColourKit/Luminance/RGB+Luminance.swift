@@ -1,6 +1,6 @@
 //
 //  Model+RGBLuminance.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 25/8/2025.
 //

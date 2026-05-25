@@ -1,6 +1,6 @@
 //
 //  AlignedAxis.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 22/2/2026.
 //

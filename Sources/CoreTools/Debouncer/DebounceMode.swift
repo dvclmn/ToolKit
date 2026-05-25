@@ -1,6 +1,6 @@
 //
 //  ShouldDebounce.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 15/7/2025.
 //

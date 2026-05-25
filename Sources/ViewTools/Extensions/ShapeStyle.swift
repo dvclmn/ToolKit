@@ -1,6 +1,6 @@
 //
 //  ShapeStyle.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 30/8/2025.
 //

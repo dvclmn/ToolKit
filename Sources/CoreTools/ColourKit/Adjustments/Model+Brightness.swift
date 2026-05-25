@@ -1,6 +1,6 @@
 //
 //  Model+Brightness.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 2/9/2025.
 //

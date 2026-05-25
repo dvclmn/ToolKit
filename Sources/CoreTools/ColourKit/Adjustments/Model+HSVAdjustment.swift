@@ -1,6 +1,6 @@
 //
 //  Model+HSVAdjustment.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 29/6/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  Codable+NSColor.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 16/11/2025.
 //

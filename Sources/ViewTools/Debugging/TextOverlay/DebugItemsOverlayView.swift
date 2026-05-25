@@ -1,6 +1,6 @@
 //
 //  DebugTextSimpleModifier.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 13/3/2026.
 //

@@ -1,6 +1,6 @@
 //
 //  CGSizeComparisons.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 22/7/2025.
 //

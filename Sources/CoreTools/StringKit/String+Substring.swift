@@ -1,6 +1,6 @@
 //
 //  String+Substring.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 20/12/2025.
 //

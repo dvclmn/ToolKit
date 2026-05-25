@@ -1,6 +1,6 @@
 //
 //  NamedItem.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 22/1/2026.
 //

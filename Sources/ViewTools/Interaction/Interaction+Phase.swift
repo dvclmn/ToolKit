@@ -1,6 +1,6 @@
 //
 //  GesturePhase.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 9/1/2026.
 //

@@ -1,6 +1,6 @@
 //
 //  Compat+FillStroke.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 14/12/2025.
 //

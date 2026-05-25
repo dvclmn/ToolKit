@@ -1,6 +1,6 @@
 //
 //  QuickLabel.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 26/5/2025.
 //

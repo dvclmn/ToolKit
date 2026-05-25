@@ -1,6 +1,6 @@
 //
 //  Array.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 5/5/2025.
 //

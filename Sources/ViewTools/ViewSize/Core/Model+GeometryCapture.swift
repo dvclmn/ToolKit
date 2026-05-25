@@ -1,6 +1,6 @@
 //
 //  Model+GeometryCapture.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 9/9/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  FloatDisplayFormat.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 12/1/2026.
 //

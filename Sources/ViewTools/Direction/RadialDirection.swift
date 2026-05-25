@@ -1,6 +1,6 @@
 //
 //  RadialDirection.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 10/1/2026.
 //

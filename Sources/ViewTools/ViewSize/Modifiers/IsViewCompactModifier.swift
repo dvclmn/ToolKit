@@ -1,6 +1,6 @@
 //
 //  IsViewCompactModifier.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 19/5/2025.
 //

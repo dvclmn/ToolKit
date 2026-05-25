@@ -1,6 +1,6 @@
 //
 //  Compat+GlassEffect.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 20/9/2025.
 //

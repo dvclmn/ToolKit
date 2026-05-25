@@ -1,6 +1,6 @@
 //
 //  SizeAndSafeInsets.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 25/2/2026.
 //

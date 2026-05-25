@@ -1,6 +1,6 @@
 //
 //  Sequence+Dict.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 12/11/2025.
 //

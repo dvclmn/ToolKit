@@ -1,6 +1,6 @@
 //
 //  ToggleBool.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 28/9/2025.
 //

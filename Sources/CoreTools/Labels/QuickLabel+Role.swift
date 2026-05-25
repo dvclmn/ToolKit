@@ -1,6 +1,6 @@
 //
 //  QuickLabel+Role.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 5/2/2026.
 //

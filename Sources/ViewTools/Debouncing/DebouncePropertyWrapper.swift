@@ -1,6 +1,6 @@
 //
 //  DebouncePropertyWrapper.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 1/2/2026.
 //

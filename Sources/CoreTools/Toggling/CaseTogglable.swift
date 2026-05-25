@@ -1,6 +1,6 @@
 //
 //  Togglable.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 29/9/2025.
 //

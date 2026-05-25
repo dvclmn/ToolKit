@@ -9,4 +9,6 @@ import SwiftUI
 
 extension EnvironmentValues {
   @Entry public var modifierKeys: Modifiers = []
+  
+  public var modifierKeysNative: EventModifiers { modifierKeys.eventModifiers }
 }

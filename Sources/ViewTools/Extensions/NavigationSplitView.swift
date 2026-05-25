@@ -1,6 +1,6 @@
 //
 //  NavSplitViewColumns.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 30/9/2025.
 //

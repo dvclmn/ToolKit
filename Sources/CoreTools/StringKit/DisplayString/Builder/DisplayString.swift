@@ -1,6 +1,6 @@
 //
 //  Model+DisplayString.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 2/10/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  Compat+SliderTick.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 5/3/2026.
 //

@@ -1,6 +1,6 @@
 //
 //  SafeIndexAccess.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 31/12/2025.
 //

@@ -1,6 +1,6 @@
 //
 //  String+LinesCols.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/11/2025.
 //

@@ -29,7 +29,8 @@ public struct ModifierKeysModifier: ViewModifier {
   @State private var modifierKeys: Modifiers = []
 
   let keysToWatch: EventModifiers
-  let onChange: ((Modifiers) -> Void)?
+  let onModifiersChange: ((Modifiers) -> Void)?
+  let onEventModifiersChange: ((EventModifiers) -> Void)?
 
   public func body(content: Content) -> some View {
 
@@ -42,7 +43,8 @@ public struct ModifierKeysModifier: ViewModifier {
 
           let modifiers = Modifiers(from: new)
           self.modifierKeys = modifiers
-          onChange?(modifiers)
+          onModifiersChange?(modifiers)
+          onEventModifiersChange?(new)
         }
         .environment(\.modifierKeys, modifierKeys)
 
@@ -51,9 +53,11 @@ public struct ModifierKeysModifier: ViewModifier {
       content
         .onAppear {
           NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-            let modifiers = Modifiers(from: event)
+            let modifiers = Modifiers(from: event.modifierFlags)
+            let eventModifiers = EventModifiers(from: event.modifierFlags)
             self.modifierKeys = modifiers
-            onChange?(modifiers)
+            onModifiersChange?(modifiers)
+            onEventModifiersChange?(eventModifiers)
 
             return event
           }
@@ -71,7 +75,8 @@ extension View {
     self.modifier(
       ModifierKeysModifier(
         keysToWatch: modifiersToWatch,
-        onChange: nil,
+        onModifiersChange: nil,
+        onEventModifiersChange: nil,
       )
     )
   }
@@ -84,7 +89,21 @@ extension View {
     self.modifier(
       ModifierKeysModifier(
         keysToWatch: modifiersToWatch,
-        onChange: perform,
+        onModifiersChange: perform,
+        onEventModifiersChange: nil,
+      )
+    )
+  }
+
+  public func modifierKeys(
+    _ modifiersToWatch: EventModifiers = .all,
+    onChange perform: @escaping (EventModifiers) -> Void,
+  ) -> some View {
+    self.modifier(
+      ModifierKeysModifier(
+        keysToWatch: modifiersToWatch,
+        onModifiersChange: nil,
+        onEventModifiersChange: perform,
       )
     )
   }

@@ -7,23 +7,13 @@
 
 import Foundation
 
-/// Note: `GeometryAxis` is about how indices progress across the grid,
-/// not about how the things themselves are shaped.
+/// A logical axis for addressing two-dimensional geometry.
 ///
-/// Even though a column is (in my brain) usually a 'vertical thing', in
-/// terms of indices, it is horizontal.
+/// Use ``horizontal`` for x-axis or column progression, and ``vertical`` for
+/// y-axis or row progression. The axis describes the direction in which values
+/// change, not the visual shape of the row or column being addressed.
 ///
-/// ```
-///    x →  0   1   2
-///  y    ┌───┬───┬───┐
-///  ↓    │   │   │   │   row 0
-///       ├───┼───┼───┤
-///       │   │   │   │   row 1
-///       ├───┼───┼───┤
-///       │   │   │   │   row 2
-///
-/// ```
-//@CasePathable
+/// For the broader convention used by CoreTools, see <doc:Axis>.
 public enum GeometryAxis: String, Sendable, Codable, Equatable, Hashable, CaseIterable, Identifiable {
   case horizontal  // Column
   case vertical  // Row
@@ -98,7 +88,6 @@ extension GeometryAxis {
         )
       case .vertical:
         CGSize(
-          /// Width is zero as I don't want to decouple
           width: 0,
           height: frame.origin.y,
         )
@@ -155,4 +144,3 @@ extension GeometryAxis {
   }
 
 }
-

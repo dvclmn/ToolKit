@@ -7,24 +7,25 @@
 
 import Foundation
 
+/// A type whose two stored components can be read by logical axis.
 public protocol AxisKeyPathReadable {
   associatedtype Component
 
-  /// Path to the first storage slot (e.g., .width, .x, .column)
+  /// Path to the first storage slot, such as `width`, `x`, or `column`.
   static var primaryKey: KeyPath<Self, Component> { get }
 
-  /// Path to the second storage slot (e.g., .height, .y, .row)
+  /// Path to the second storage slot, such as `height`, `y`, or `row`.
   static var secondaryKey: KeyPath<Self, Component> { get }
 
 }
 extension AxisKeyPathReadable {
 
+  /// Returns the component along `axis`, resolved through `mapping`.
   public func value(
     along axis: GeometryAxis,
     mapping: AxisMapping = .default,
   ) -> Component {
     
-    /// Resolve which KeyPath to use based on the axis and the mapping
     let keyPath = mapping.select(
       primary: Self.primaryKey,
       secondary: Self.secondaryKey,

@@ -19,18 +19,13 @@
 /// correct even when coordinate systems are flipped.
 public enum AxisMapping: Sendable {
 
-  /// # Primary is Horizontal
-  /// Normal: Width/Column is Horizontal, Height/Row is Vertical.
-  /// Previously: `primaryIsHorizontal` / `widthIsHorizontal`
+  /// Primary storage maps to the horizontal axis and secondary storage maps to
+  /// the vertical axis.
   case identity
 
-  /// # Primary is Vertical
-  /// Flipped: Width/Column is Vertical, Height/Row is Horizontal.
-  /// Previously: `primaryIsVertical` / `heightIsHorizontal`
+  /// Primary storage maps to the vertical axis and secondary storage maps to
+  /// the horizontal axis.
   case transposed
-
-  /// Note: A third possible Axis could be 3D (Z-axis), this pattern could
-  /// work by just adding a .depth case to the enums.
 
   /// The default mapping for typical Cartesian layouts (horizontal ↔ primary, vertical ↔ secondary).
   public static let `default`: Self = .identity

@@ -7,14 +7,17 @@
 
 import Foundation
 
-/// Note: this requires that conforming types have mutable (var) properties
+/// A type whose two stored components can be written by logical axis.
+///
+/// Conforming types need writable stored components or computed properties for
+/// both primary and secondary storage slots.
 public protocol AxisKeyPathWritable: AxisKeyPathReadable {
-    associatedtype Component
+  associatedtype Component
 
-  /// Path to the first storage slot (e.g. `width`, `x`, `column`)
+  /// Path to the first storage slot, such as `width`, `x`, or `column`.
   static var primaryWritableKey: WritableKeyPath<Self, Component> { get }
 
-  /// Path to the second storage slot (e.g. `height`, `y`, `row`)
+  /// Path to the second storage slot, such as `height`, `y`, or `row`.
   static var secondaryWritableKey: WritableKeyPath<Self, Component> { get }
 }
 
@@ -22,6 +25,7 @@ extension AxisKeyPathWritable {
   public static var primaryKey: KeyPath<Self, Component> { primaryWritableKey }
   public static var secondaryKey: KeyPath<Self, Component> { secondaryWritableKey }
 
+  /// Returns a copy with the component along `axis` replaced by `newValue`.
   public func setting(
     _ newValue: Component,
     along axis: GeometryAxis,

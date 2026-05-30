@@ -14,8 +14,7 @@ import SwiftUI
 
 // MARK: - Visuals
 extension EnvironmentValues {
-  
-  
+
   /// This is primarily expected to represent the whole window of an app,
   /// minus any base UI components like Toolbar or Inspector.
   ///
@@ -23,12 +22,12 @@ extension EnvironmentValues {
   /// `viewportCapture(mode:showsIndicator:didUpdateSize)`
   /// is placed on the view the caller regards as the viewport area
   @Entry public var viewportRect: CGRect?
-  
-  /// I think this should be removed, and callers just access `viewportRect`
-  /// directly and get the size from there
+
   @available(*, deprecated, message: "Use `viewportRect.size` instead")
   public var viewportSize: CGSize? { viewportRect?.size }
 
+  /// Intended as a synced counterpart to CanvasKit's `zoomLevel`
+  @Entry public var viewScale: CGFloat = 1.0
 
   /// Strokes
   @Entry public var strokeColour: AnyShapeStyle?

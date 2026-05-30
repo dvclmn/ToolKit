@@ -20,6 +20,7 @@ extension GraphicsContext {
   public func drawDebugText(
     _ text: String,
     at point: CGPoint,
+    zoomStrategy: ZoomStrategy = .none,
     zoom: Double = 1.0,
     positioned debugTextPosition: DebugTextPosition = .aboveOrigin,
     colour: Color = .primary,
@@ -28,10 +29,10 @@ extension GraphicsContext {
     //    pointDisplay: DebugPoint = .default,
   ) {
 
-    //    let zoom = environment.zoomLevel
+    let zoom = zoomStrategy.zoom(with: environment)
     let fontSizeUnZoomed = fontSize.removingZoomPercent(zoom)
 
-    /// Calculate size, for drawing Label background
+    // Calculate size, for drawing Label background
     let labelWidthUnZoomed: CGFloat = {
       let approximateCharacterWidth: CGFloat = fontSize * 0.7
       let labelCharacterWidth = CGFloat(text.firstLine.count) * approximateCharacterWidth
@@ -41,7 +42,7 @@ extension GraphicsContext {
     let labelHeightUnZoomed: CGFloat = fontSizeUnZoomed * 1.5
     let labelSize = CGSize(width: labelWidthUnZoomed, height: labelHeightUnZoomed)
 
-    /// Set up Text, with basic styles
+    // Set up Text, with basic styles
     let text = Text(text)
       .font(.system(size: fontSizeUnZoomed, weight: .semibold))
       .foregroundStyle(colour)
@@ -51,10 +52,10 @@ extension GraphicsContext {
         dx: 0, dy: (labelHeightUnZoomed * 1.2) * debugTextPosition.multiplierForYPosition, ),
       size: labelSize,
     )
-    //    self.fill(labelRect.path, with: .color(Color.gray))
+    
     self.draw(text, at: labelRect.midpoint)
 
-    /// Draw dot at provided point, if needed
+    // Draw dot at provided point, if needed
     if let pointColour {
       self.drawCircleCentred(at: point, colour: pointColour)
     }

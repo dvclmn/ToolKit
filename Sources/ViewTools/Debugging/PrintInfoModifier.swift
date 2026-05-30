@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 23/7/2024.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public enum LocationInfo {
   case userDefaults
@@ -33,7 +33,7 @@ public struct PrintInfoModifier: ViewModifier {
 
           case .applicationSupport:
             if let path = FileManager.default.urls(
-              for: .applicationSupportDirectory, in: .userDomainMask
+              for: .applicationSupportDirectory, in: .userDomainMask,
             ).first?.path {
               print("Application Support file path: \(path)")
             }

@@ -5,8 +5,6 @@
 //  Created by Dave Coleman on 25/6/2025.
 //
 
-//#if DEBUG
-
 import SwiftUI
 
 public struct DebugFrameModifier: ViewModifier {
@@ -38,16 +36,15 @@ extension View {
     _ text: String,
     _ colour: Color,
     labelOpacity: CGFloat = 0.85,
-    isEnabled: Bool = true
+    isEnabled: Bool = true,
   ) -> some View {
     self.modifier(
       DebugFrameModifier(
         label: text,
         labelOpacity: labelOpacity,
         colour: colour,
-        isEnabled: isEnabled
+        isEnabled: isEnabled,
       )
     )
   }
 }
-//#endif

@@ -20,7 +20,7 @@ extension GraphicsContext {
   public func drawDebugText(
     _ text: String,
     at point: CGPoint,
-    zoomStrategy: ZoomStrategy = .none,
+    zoomStrategy: ZoomStrategy = .ignore,
     zoom: Double = 1.0,
     positioned debugTextPosition: DebugTextPosition = .aboveOrigin,
     colour: Color = .primary,
@@ -67,7 +67,6 @@ extension GraphicsContext {
     size: CGFloat = 6,
     colour: Color = .blue,
   ) {
-    //    let circleOrigin = origin.aligned(to: .center, in: CGSize(fromLength: size))
     let circleOrigin = origin.shifted(by: -(size / 2))
     let circleRect = CGRect(origin: circleOrigin, size: CGSize(fromLength: size))
     self.fill(.init(ellipseIn: circleRect), with: .color(colour))

@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 10/1/2026.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public struct Direction2D: Sendable, Hashable {
   public let x: CGFloat
@@ -30,19 +30,19 @@ extension Direction2D {
 extension Direction2D {
   public func offset(
     distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGSize {
     let multiplier: CGFloat = (radialDirection == .outward) ? 1 : -1
     return CGSize(
       width: x * distance * multiplier,
-      height: y * distance * multiplier
+      height: y * distance * multiplier,
     )
   }
 
   public func offset(
     axis: GeometryAxis,
     distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGFloat {
     let offset = offset(distance: distance, radial: radialDirection)
     return axis.isHorizontal ? offset.width : offset.height
@@ -54,12 +54,12 @@ extension Direction2D {
     from origin: CGPoint,
     alignment: Alignment,
     distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGPoint {
     let delta = alignment.offset(distance: distance, radial: radialDirection)
     return CGPoint(
       x: origin.x + delta.width,
-      y: origin.y + delta.height
+      y: origin.y + delta.height,
     )
   }
 }
@@ -83,7 +83,7 @@ extension Alignment {
 
   public func offset(
     distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGSize {
     direction.offset(distance: distance, radial: radialDirection)
   }
@@ -91,7 +91,7 @@ extension Alignment {
   public func offset(
     axis: GeometryAxis,
     distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGFloat {
     direction.offset(axis: axis, distance: distance, radial: radialDirection)
   }
@@ -103,7 +103,7 @@ extension ViewDimensions {
     for alignment: Alignment,
     axis: GeometryAxis,
     magnitude: CGFloat,  // As a factor, e.g. 0.2
-    radial radialDirection: RadialDirection = .outward
+    radial radialDirection: RadialDirection = .outward,
   ) -> CGFloat {
 
     let viewLength = axis.isHorizontal ? self.width : self.height
@@ -112,7 +112,7 @@ extension ViewDimensions {
     let offset = targetAlignment.offset(
       axis: axis,
       distance: offsetAmount,
-      radial: radialDirection
+      radial: radialDirection,
     )
     return axis.isHorizontal
       ? self[targetAlignment.horizontal] + offset
@@ -121,7 +121,7 @@ extension ViewDimensions {
   }
 
   private func getAlignment(
-    _ alignment: Alignment,
+    _ alignment: Alignment
   ) -> Alignment {
     //    let excluded: [Alignment] = [.center]
     let toFlip: [Alignment] = [.leading, .trailing, .top, .bottom]

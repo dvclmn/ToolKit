@@ -18,19 +18,3 @@ public enum DebugTextPosition {
     }
   }
 }
-
-
-//public enum DebugPoint: Sendable {
-//  case none
-//  case point(Color)
-//
-//  public static let `default`: Self = .point(.orange)
-//
-//  public var colourForPoint: Color? {
-//    switch self {
-//      case .point(let colour): colour
-//      case .none: nil
-//    }
-//  }
-//}
-//

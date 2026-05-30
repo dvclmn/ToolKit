@@ -10,7 +10,7 @@ import SwiftUI
 public enum ZoomStrategy {
   case environment
   case custom(CGFloat)
-  case none  // Ignore zoom entirely
+  case ignore
 }
 
 extension ZoomStrategy {
@@ -18,7 +18,7 @@ extension ZoomStrategy {
     switch self {
       case .environment: return environment.viewScale
       case .custom(let zoom): return zoom
-      case .none: return 1
+      case .ignore: return 1
     }
   }
 }

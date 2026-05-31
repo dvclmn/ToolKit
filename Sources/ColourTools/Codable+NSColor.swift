@@ -7,6 +7,8 @@
 
 #if canImport(AppKit)
 import AppKit
+import CoreTools
+import ColourToolsCore
 
 extension CodableColour {
   public func nsColor(fallback: NSColor) -> NSColor {

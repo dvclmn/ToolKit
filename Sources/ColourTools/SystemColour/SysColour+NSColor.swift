@@ -6,6 +6,7 @@
 //
 
 import AppKit
+import ColourToolsCore
 
 extension SystemColour {
 

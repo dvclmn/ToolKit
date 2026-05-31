@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import ColourToolsCore
 
 extension RGBColour {
   public enum Xcode {

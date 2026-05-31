@@ -7,6 +7,8 @@
 
 import AppKit
 import Foundation
+import CoreTools
+import ColourToolsCore
 
 extension HSVColour: HSVAdjustable {
   

@@ -5,9 +5,6 @@
 //  Created by Dave Coleman on 26/5/2025.
 //
 
-
-
-
 // TODO: I should consider retiring this, and trying a more SwiftUI shape?
 // E.g. accept a String/LocalisedStringKey as a dead-simple text title
 // (no Label, icon etc). And then have an overload for a Label
@@ -25,7 +22,7 @@ extension QuickLabel {
   public init(
     _ text: String,
     icon: IconLiteral? = nil,
-    role: ActionRole? = nil
+    role: ActionRole? = nil,
   ) {
     self.text = text
     self.icon = icon
@@ -37,12 +34,12 @@ extension QuickLabel {
   public init(
     _ text: String,
     symbol symbolString: String?,
-    role: ActionRole? = nil
+    role: ActionRole? = nil,
   ) {
     self.init(
       text,
       icon: symbolString.map { IconLiteral.symbol($0) },
-      role: role
+      role: role,
     )
   }
 }

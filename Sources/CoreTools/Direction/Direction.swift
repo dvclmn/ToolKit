@@ -96,14 +96,7 @@ extension Direction {
     return y + scalar * delta
   }
 
-  public var keyEquivalent: KeyEquivalent {
-    switch self {
-      case .up: .upArrow
-      case .down: .downArrow
-      case .left: .leftArrow
-      case .right: .rightArrow
-    }
-  }
+
 }
 
 extension Direction {

@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreTools
 
 public protocol ColourModelIdentity: Identifiable where ID == UUID {
   var id: UUID { get }

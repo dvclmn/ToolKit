@@ -17,13 +17,26 @@ let package = Package(
     ),
     .library(name: "ViewTools", targets: ["ViewTools"]),
 
+    .library(
+      name: "ColourTools",
+      targets: [
+        "ColourTools",
+        "ColourToolsCore",
+      ],
+    ),
+
   ],
   dependencies: [
     .package(url: "https://github.com/apple/swift-docc-plugin", from: "1.0.0")
   ],
   targets: [
     .target(name: "CoreTools"),
+
+    .target(name: "ColourToolsCore", dependencies: ["CoreTools"]),
+    .target(name: "ColourTools", dependencies: ["ColourToolsCore", "CoreTools"]),
+
     .target(name: "StringTools", dependencies: ["CoreTools"]),
-    .target(name: "ViewTools", dependencies: ["CoreTools", "StringTools"]),
+
+    .target(name: "ViewTools", dependencies: ["CoreTools", "StringTools", "ColourTools"]),
   ],
 )

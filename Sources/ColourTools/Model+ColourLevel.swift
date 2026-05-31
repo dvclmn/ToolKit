@@ -5,6 +5,8 @@
 //  Created by Dave Coleman on 29/6/2025.
 //
 
+import CoreTools
+
 /// I don't at all understand the relationship between
 /// `HierarchicalColour` and `ColourLevel`
 public enum HierarchicalColour: String, Sendable, CaseCyclable, CaseIterable, NamedItem, Identifiable,

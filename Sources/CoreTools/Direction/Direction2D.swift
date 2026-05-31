@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 10/1/2026.
 //
 
-import CoreTools
 import SwiftUI
 
 public struct Direction2D: Sendable, Hashable {
@@ -48,83 +47,5 @@ extension Direction2D {
     return axis.isHorizontal ? offset.width : offset.height
   }
 
-  /// Consider similarities (possibly merging etc), based on extension
-  /// `CGPoint/repositioned(to:in:)`
-  public func positioned(
-    from origin: CGPoint,
-    alignment: Alignment,
-    distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward,
-  ) -> CGPoint {
-    let delta = alignment.offset(distance: distance, radial: radialDirection)
-    return CGPoint(
-      x: origin.x + delta.width,
-      y: origin.y + delta.height,
-    )
-  }
 }
 
-extension Alignment {
-
-  public var direction: Direction2D {
-    switch self {
-      case .top: .up
-      case .bottom: .down
-      case .leading: .leading
-      case .trailing: .trailing
-      case .topLeading: .topLeading
-      case .topTrailing: .topTrailing
-      case .bottomLeading: .bottomLeading
-      case .bottomTrailing: .bottomTrailing
-      case .center: .centre
-      default: .centre
-    }
-  }
-
-  public func offset(
-    distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward,
-  ) -> CGSize {
-    direction.offset(distance: distance, radial: radialDirection)
-  }
-
-  public func offset(
-    axis: GeometryAxis,
-    distance: CGFloat,
-    radial radialDirection: RadialDirection = .outward,
-  ) -> CGFloat {
-    direction.offset(axis: axis, distance: distance, radial: radialDirection)
-  }
-
-}
-
-extension ViewDimensions {
-  public func offset(
-    for alignment: Alignment,
-    axis: GeometryAxis,
-    magnitude: CGFloat,  // As a factor, e.g. 0.2
-    radial radialDirection: RadialDirection = .outward,
-  ) -> CGFloat {
-
-    let viewLength = axis.isHorizontal ? self.width : self.height
-    let offsetAmount: CGFloat = viewLength * magnitude
-    let targetAlignment = getAlignment(alignment)
-    let offset = targetAlignment.offset(
-      axis: axis,
-      distance: offsetAmount,
-      radial: radialDirection,
-    )
-    return axis.isHorizontal
-      ? self[targetAlignment.horizontal] + offset
-      : self[targetAlignment.vertical] + offset
-
-  }
-
-  private func getAlignment(
-    _ alignment: Alignment
-  ) -> Alignment {
-    //    let excluded: [Alignment] = [.center]
-    let toFlip: [Alignment] = [.leading, .trailing, .top, .bottom]
-    return toFlip.contains(alignment) ? alignment.toOpposing : alignment
-  }
-}

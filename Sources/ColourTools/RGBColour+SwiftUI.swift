@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 23/5/2026.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 extension RGBColour: SwiftUIColourConvertible {
   public var toColour: Color {
@@ -15,18 +15,18 @@ extension RGBColour: SwiftUIColourConvertible {
       red: red,
       green: green,
       blue: blue,
-      opacity: alpha
+      opacity: alpha,
     )
   }
 
   public init(
     fromSystem system: SystemColour,
-    env: EnvironmentValues
+    env: EnvironmentValues,
   ) {
     self.init(
       colour: system.toColour,
       environment: env,
-      name: system.name
+      name: system.name,
     )
   }
 }

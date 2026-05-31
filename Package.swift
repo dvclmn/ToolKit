@@ -7,9 +7,14 @@ let package = Package(
   platforms: [
     .macOS("14.0")
   ],
-
   products: [
-    .library(name: "CoreTools", targets: ["CoreTools"]),
+    .library(
+      name: "CoreTools",
+      targets: [
+        "CoreTools",
+        "StringTools",
+      ],
+    ),
     .library(name: "ViewTools", targets: ["ViewTools"]),
 
   ],
@@ -18,9 +23,7 @@ let package = Package(
   ],
   targets: [
     .target(name: "CoreTools"),
-    .target(
-      name: "ViewTools",
-      dependencies: ["CoreTools"],
-    ),
+    .target(name: "StringTools", dependencies: ["CoreTools"]),
+    .target(name: "ViewTools", dependencies: ["CoreTools", "StringTools"]),
   ],
 )

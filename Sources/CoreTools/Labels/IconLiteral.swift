@@ -30,7 +30,9 @@ extension IconLiteral {
   public var toString: String {
     switch self {
       case .emoji(let string): string
-      case .emojiComposition(let comp): comp.emoji.map(\.emoji.toString).joined("")
+      case .emojiComposition(let comp):
+        comp.emoji.map { String($0.emoji) }.joined(separator: "")
+      //      case .emojiComposition(let comp): comp.emoji.map(\.emoji.toString).joined("")
       case .symbol(let string): string
       case .customSymbol(let symbol): symbol.reference
     }

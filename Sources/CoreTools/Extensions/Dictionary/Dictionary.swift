@@ -18,7 +18,7 @@ extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConv
       .joined(separator: pairSeparator)
   }
 
-  public func prettyPrinted(aligned: Bool = true) -> String {
+  package func prettyPrinted(aligned: Bool = true) -> String {
     guard !isEmpty else { return "[:]" }
 
     let pairs = map {

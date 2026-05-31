@@ -7,7 +7,7 @@
 
 import Foundation
 
-public extension TimeInterval {
+extension TimeInterval {
   init(hours: Double) {
     self.init(hours * 3600) // Convert hours to seconds
   }

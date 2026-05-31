@@ -8,7 +8,7 @@
 import Foundation
 
 extension Dictionary: PrettyPrintable where Key: PrettyPrintable, Value: PrettyPrintable {
-  public func pretty(
+  package func pretty(
     _ config: PrettyPrintConfig,
     depth: Int
   ) -> String {
@@ -49,4 +49,3 @@ extension Dictionary: PrettyPrintable where Key: PrettyPrintable, Value: PrettyP
       """
   }
 }
-

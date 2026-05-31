@@ -6,12 +6,13 @@
 //
 
 import Foundation
+@_spi(Internal) import CoreTools
 
-public func DebugString(
+package func DebugString(
   _ title: String? = nil,
   indented: Bool = false,
   timestamped: Bool = false,
-  @DisplayStringBuilder _ content: () -> [DisplayBlock]
+  @DisplayStringBuilder _ content: () -> [DisplayBlock],
 ) {
   print(
     DisplayString {
@@ -25,3 +26,5 @@ public func DebugString(
     }.text
   )
 }
+
+

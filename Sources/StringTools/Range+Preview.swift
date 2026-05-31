@@ -10,7 +10,7 @@ import Foundation
 typealias StringRange = Range<String.Index>
 
 extension Range where Bound == String.Index {
-  public func debugPreview(
+  package func debugPreview(
     in text: String,
     captureName: String? = nil,
     maxRangePreviewLength: Int? = nil,

@@ -17,5 +17,8 @@ public protocol LabeledItem: Identifiable {
 /// No guarantee that the string will be correctly formatted though, in terms of casing.
 extension LabeledItem where Self: RawRepresentable, Self.RawValue == String {
   public var id: String { rawValue }
-  public var label: QuickLabel { .init(rawValue.capitalizedFirstLetter) }
+  public var label: QuickLabel {
+    let result = rawValue.prefix(1).uppercased() + rawValue.dropFirst()
+    return .init(result)
+  }
 }

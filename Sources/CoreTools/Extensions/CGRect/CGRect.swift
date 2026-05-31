@@ -63,7 +63,7 @@ extension CGRect {
     return CGRect(origin: start, size: size).standardized
   }
 
-  public static let exampleZeroOrigin100x100 = CGRect(
+  package static let exampleZeroOrigin100x100 = CGRect(
     origin: .zero, size: CGSize(width: 100, height: 100),
   )
 

@@ -23,9 +23,9 @@ extension CGPoint {
 
 extension CGPoint {
 
-  public static let quickPreset01 = CGPoint(x: 100, y: 50)
-  public static let quickPreset02 = CGPoint(x: 80, y: 120)
-  public static let quickPreset03 = CGPoint(x: 20, y: 220)
+  package static let quickPreset01 = CGPoint(x: 100, y: 50)
+  package static let quickPreset02 = CGPoint(x: 80, y: 120)
+  package static let quickPreset03 = CGPoint(x: 20, y: 220)
 
   public func centredIn(size: CGSize) -> CGPoint {
     let centred: CGSize = size / 2

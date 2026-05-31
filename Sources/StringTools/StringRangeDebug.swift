@@ -9,14 +9,14 @@ import Foundation
 
 extension String {
 
-  public struct RangeDebugOptions {
+  package struct RangeDebugOptions {
     var context: Int  // characters either side
     var markStart: String
     var markEnd: String
     var showLineNumbers: Bool
     var label: String?
     
-    public init(
+    package init(
       context: Int = 40,
       markStart: String = "⟦",
       markEnd: String = "⟧",
@@ -31,7 +31,7 @@ extension String {
     }
   }
 
-  public func debugContext(
+  package func debugContext(
     around range: Range<Index>,
     options: RangeDebugOptions = .init()
   ) -> String {

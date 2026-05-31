@@ -10,7 +10,7 @@ import Foundation
 // MARK: - Collections
 
 extension Array: PrettyPrintable where Element: PrettyPrintable {
-  public func pretty(
+  package func pretty(
     _ config: PrettyPrintConfig,
     depth: Int
   ) -> String {

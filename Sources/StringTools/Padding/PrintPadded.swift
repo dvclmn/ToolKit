@@ -7,7 +7,7 @@
 
 import Foundation
 
-public func printPadded(
+package func printPadded(
   _ items: Any...,
   separator: String = " ",
   withTimestamp: Bool = true

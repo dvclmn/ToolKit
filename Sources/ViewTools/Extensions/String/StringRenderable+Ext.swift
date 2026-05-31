@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import CoreTools
+import StringTools
 
 extension Alignment: StringRenderable {
   public var toString: String { self.displayName.standard }

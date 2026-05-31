@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import CoreTools
+//import CoreTools
+import StringTools
 
 struct WidthCounterView: View {
   

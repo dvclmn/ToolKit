@@ -6,6 +6,7 @@
 //
 
 import CoreTools
+import StringTools
 import SwiftUI
 
 // MARK: - Environment values

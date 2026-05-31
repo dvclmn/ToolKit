@@ -47,7 +47,7 @@ public struct EmojiComposition: Sendable, Equatable, Codable, Hashable {
 }
 
 extension EmojiComposition {
-  public static let example: Self = .init(
+  package static let example: Self = .init(
     emoji: [
       Emoji(
         emoji: "📎",

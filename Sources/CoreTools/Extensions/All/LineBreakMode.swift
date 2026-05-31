@@ -9,9 +9,9 @@
 
 import AppKit
 
-public extension NSLineBreakMode {
+extension NSLineBreakMode {
   
-  var displayName: String {
+  package var displayName: String {
     switch self {
       case .byTruncatingTail: return "Tail Truncation"
       case .byTruncatingMiddle: return "Middle Truncation"

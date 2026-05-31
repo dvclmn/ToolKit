@@ -10,7 +10,7 @@ import Foundation
 extension Character {
 
   /// Returns latin alphabet letter, starting from 'a'
-  public static func letter(for index: Int) -> Character? {
+  package static func letter(for index: Int) -> Character? {
     let isInBounds = (0..<26).contains(index)
     let startChar = Character("a").unicodeScalars.first
     let nextScalar = startChar?.value.advanced(by: index)
@@ -25,11 +25,11 @@ extension Character {
 
   /// Deprecated: Use `displayName` instead.
   @available(*, deprecated, renamed: "displayName")
-  public var descriptiveName: String {
+  package var descriptiveName: String {
     displayName
   }
 
-  public var displayName: String {
+  package var displayName: String {
     switch self {
       case " ": "Space"
       case "\n": "New Line"
@@ -83,7 +83,7 @@ extension Character: @retroactive Codable {
 }
 
 extension Array where Element == Character {
-  public static func padded(
+  package static func padded(
     with char: Character,
     count: Int
   ) -> [Character] {
@@ -91,4 +91,3 @@ extension Array where Element == Character {
     return Array(repeating: char, count: count)
   }
 }
-

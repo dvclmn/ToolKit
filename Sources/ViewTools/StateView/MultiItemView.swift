@@ -6,7 +6,8 @@
 //
 
 import SwiftUI
-import CoreTools
+//import CoreTools
+import StringTools
 
 public struct MultiItemView<
   DataContent: View, Additional: View, Data: Collection & ExpressibleByArrayLiteral

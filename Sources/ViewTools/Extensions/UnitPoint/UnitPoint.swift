@@ -6,6 +6,7 @@
 //
 
 import CoreTools
+import StringTools
 import SwiftUI
 
 /// `UnitPoint` is named after the mathematical concept of the *unit interval*,

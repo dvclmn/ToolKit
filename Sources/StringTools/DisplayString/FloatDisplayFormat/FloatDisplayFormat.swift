@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreTools
 
 /// Describes how a single floating-point value is formatted.
 /// Deliberately limited to numeric concerns only — no separator,

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 15/11/2025.
 //
 
-
 import Foundation
 
 extension String {
@@ -17,7 +16,6 @@ extension String {
   public var toAttributed: AttributedString {
     return AttributedString(self)
   }
-
 
   public var toDescribing: String {
     return String(describing: self)
@@ -37,17 +35,18 @@ extension String {
     }
     return result
   }
-  
+
   public var camelCaseToWords: String {
     /// Handle both upper camel case (PatternType) and lower camel case (patternType)
     let pattern = "(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])"
     let regex = try? NSRegularExpression(pattern: pattern, options: [])
     let range = NSRange(location: 0, length: self.count)
-    
-    let spaced = regex?
+
+    let spaced =
+      regex?
       .stringByReplacingMatches(in: self, options: [], range: range, withTemplate: " ")
       .capitalized ?? self
-    
+
     return spaced
   }
 

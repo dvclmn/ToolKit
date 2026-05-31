@@ -8,7 +8,7 @@
 import Foundation
 @_spi(Internal) import CoreTools
 
-package func DebugString(
+@_spi(Internal) public func DebugString(
   _ title: String? = nil,
   indented: Bool = false,
   timestamped: Bool = false,

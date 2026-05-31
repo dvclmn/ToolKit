@@ -22,19 +22,19 @@ import Foundation
 /// ```
 /// `unitSize` missing, needed by `GridLineContext`
 /// ```
-package func printMissing(_ value: String, for consumer: String) {
+@_spi(Internal) public func printMissing(_ value: String, for consumer: String) {
   print("`\(value)` missing, needed by `\(consumer)`")
   //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
 }
 
-package func printTimestamped(_ message: String) {
+@_spi(Internal) public func printTimestamped(_ message: String) {
   let value = message + " at \(Date.debug)"
   print(value)
 //  print("`\(value)` missing, needed by `\(consumer)`")
   //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
 }
 
-package func printDidNotSatisfy(
+@_spi(Internal) public func printDidNotSatisfy(
   _ value: String,
   expectation: String,
   for consumer: String,

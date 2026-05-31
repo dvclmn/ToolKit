@@ -5,7 +5,9 @@
 //  Created by Dave Coleman on 3/7/2025.
 //
 
-import SwiftUI
+import Foundation
+
+//import SwiftUI
 
 /// This type assumes a top-left origin
 public enum Direction: String, CaseIterable, Identifiable {
@@ -54,7 +56,7 @@ extension Direction {
     value + T(scalar) * delta
   }
 
-  public var toAxis: Axis {
+  public var toAxis: GeometryAxis {
     isVertical ? .vertical : .horizontal
   }
 
@@ -72,7 +74,7 @@ extension Direction {
   public func offset(
     x: CGFloat,
     y: CGFloat,
-    by delta: CGFloat = 1
+    by delta: CGFloat = 1,
   ) -> (x: CGFloat, y: CGFloat) {
     switch toAxis {
       case .vertical:

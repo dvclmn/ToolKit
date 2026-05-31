@@ -87,12 +87,12 @@ extension Labeled {
   /// Have removed the option to pass in a label style for this,
   /// as these methods are for a display context, not for use
   /// as the building block for `FloatComponentsLabeled`
-  private func labelPart() -> String? {
+  @_spi(Internal) public func labelPart() -> String? {
     key.labelText(with: .standard)
   }
 
   /// Renders the value only.
-  private static func valuePart(
+  @_spi(Internal) public static func valuePart(
     for label: Self,
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,

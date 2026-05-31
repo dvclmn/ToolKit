@@ -17,11 +17,6 @@ extension Date {
     )
   }
 
-  package func dayOfTheMonthIcon(day: Int? = nil) -> String {
-    let today: Int = day ?? Calendar.current.component(.day, from: self)
-    return "\(today).calendar"
-  }
-
   // MARK: - (x) Ago
 
   package func secondsAgo(_ seconds: TimeInterval) -> Date {

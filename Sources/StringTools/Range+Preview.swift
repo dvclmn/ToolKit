@@ -7,7 +7,7 @@
 
 import Foundation
 
-typealias StringRange = Range<String.Index>
+//typealias StringRange = Range<String.Index>
 
 extension Range where Bound == String.Index {
   package func debugPreview(

@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-//import CoreTools
-import ColourToolsCore
 
 extension HSVColour: SwiftUIColourConvertible {
 
@@ -16,7 +14,7 @@ extension HSVColour: SwiftUIColourConvertible {
       hue: hue,
       saturation: saturation,
       brightness: brightness,
-      opacity: alpha
+      opacity: alpha,
     )
   }
 }

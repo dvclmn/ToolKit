@@ -21,7 +21,7 @@ let package = Package(
       name: "ColourTools",
       targets: [
         "ColourTools",
-        "ColourToolsCore",
+//        "ColourToolsCore",
       ],
     ),
 
@@ -32,8 +32,8 @@ let package = Package(
   targets: [
     .target(name: "CoreTools"),
 
-    .target(name: "ColourTools", dependencies: ["ColourToolsCore", "CoreTools"]),
-    .target(name: "ColourToolsCore", dependencies: ["CoreTools"]),
+    .target(name: "ColourTools", dependencies: ["CoreTools"]),
+//    .target(name: "ColourToolsCore", dependencies: ["CoreTools"]),
 
     .target(name: "StringTools", dependencies: ["CoreTools"]),
 

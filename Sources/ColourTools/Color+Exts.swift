@@ -7,6 +7,7 @@
 
 import SwiftUI
 import CoreTools
+import ColourTools
 
 extension Color {
   public init(hex: String) {

@@ -18,8 +18,7 @@ extension CGRect {
       case .trailing: (CGPoint(x: maxX, y: minY), CGPoint(x: maxX, y: maxY))
     }
   }
-  
-  
+
   /// Produces a CGRect positioned inside the container, aligned
   /// according to the given UnitPoint.
   ///
@@ -36,7 +35,7 @@ extension CGRect {
     )
     return CGRect(origin: origin, size: size)
   }
-  
+
   public func aligned(
     in container: CGRect,
     to anchor: UnitPoint = .center,

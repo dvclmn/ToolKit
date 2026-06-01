@@ -7,8 +7,6 @@
 
 import Foundation
 
-//import SwiftUI
-
 /// This type assumes a top-left origin
 public enum Direction: String, CaseIterable, Identifiable {
   case up
@@ -95,7 +93,6 @@ extension Direction {
     guard toAxis == .vertical else { return y }
     return y + scalar * delta
   }
-
 
 }
 

@@ -9,25 +9,7 @@ import Foundation
 
 extension CGRect {
 
-  public var isZero: Bool { width == 0 && height == 0 }
-
-  public init(x: Float, y: Float, width: Float, height: Float) {
-    self.init(x: Double(x), y: Double(y), width: Double(width), height: Double(height))
-  }
-
-  public init?<T: BinaryFloatingPoint>(fromArray array: [T]) {
-    guard let x = array[safe: 0],
-      let y = array[safe: 1],
-      let width = array[safe: 2],
-      let height = array[safe: 3]
-    else { return nil }
-    self.init(
-      x: CGFloat(x),
-      y: CGFloat(y),
-      width: CGFloat(width),
-      height: CGFloat(height),
-    )
-  }
+  public var isSizeZero: Bool { width == 0 && height == 0 }
 
   public var isStandardized: Bool {
     return !isNull && !isInfinite
@@ -36,16 +18,9 @@ extension CGRect {
       && width >= 0 && height >= 0
   }
 
-
-
-  
-  
-
-
   /// Returns a rectangle that encompasses both this rectangle and the provided rectangle
   public func expanded(toInclude rect: CGRect) -> CGRect {
-    /// Using built-in union method
-    return union(rect)
+    union(rect)
   }
 
   /// Creates a rectangle from two points, ensuring positive width and height

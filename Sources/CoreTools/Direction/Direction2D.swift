@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 10/1/2026.
 //
 
-import SwiftUI
+import Foundation
 
 public struct Direction2D: Sendable, Hashable {
   public let x: CGFloat

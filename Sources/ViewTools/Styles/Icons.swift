@@ -9,7 +9,7 @@ import Foundation
 
 // MARK: - Icons
 // swift-format-ignore
-public enum Icons: String, Codable, Equatable, Sendable, CaseIterable {
+public enum Icons: String, Codable, Equatable, Sendable, CaseIterable, Identifiable {
   case stats = "chart.dots.scatter"                                 // 􁣃
   case statsAlt = "chart.pie"                                       // 􀑀
   case refresh = "arrow.triangle.2.circlepath"                      // 􀊯

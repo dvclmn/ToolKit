@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 28/9/2025.
 //
 
-import SwiftUI
+import Foundation
 
 public enum MoveDirection: String, LabeledItem, Sendable {
   case next

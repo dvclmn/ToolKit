@@ -9,7 +9,7 @@ import Foundation
 
 extension BinaryFloatingPoint {
 
-  /// Wrap into [0, 1)
+  /// Wrap into `[0, 1)`
   @inlinable public func wrappedUnit() -> Self {
     let r = self.truncatingRemainder(dividingBy: 1)
     return r >= 0 ? r : (r + 1)

@@ -18,14 +18,9 @@ extension CGPoint {
   public init(_ x: CGFloat, _ y: CGFloat) {
     self.init(x: x, y: y)
   }
-
 }
 
 extension CGPoint {
-
-  package static let quickPreset01 = CGPoint(x: 100, y: 50)
-  package static let quickPreset02 = CGPoint(x: 80, y: 120)
-  package static let quickPreset03 = CGPoint(x: 20, y: 220)
 
   public func centredIn(size: CGSize) -> CGPoint {
     let centred: CGSize = size / 2

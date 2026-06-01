@@ -21,20 +21,13 @@ extension CGPoint {
     self.init(x: length, y: length)
   }
 
-  public var toCGSize: CGSize {
-    return CGSize(width: self.x, height: self.y)
-  }
+  public var toCGSize: CGSize { CGSize(width: self.x, height: self.y) }
 }
 
 extension CGPoint {
   
-  public var invertedY: CGPoint {
-    CGPoint(x: x, y: -y)
-  }
-  
-  public var invertedX: CGPoint {
-    CGPoint(x: -x, y: y)
-  }
+  public var invertedY: CGPoint { CGPoint(x: x, y: -y) }
+  public var invertedX: CGPoint { CGPoint(x: -x, y: y) }
   
   public static func angleInRadians(
     from p1: CGPoint,
@@ -42,5 +35,4 @@ extension CGPoint {
   ) -> CGFloat {
     atan2(p2.y - p1.y, p2.x - p1.x)
   }
-
 }

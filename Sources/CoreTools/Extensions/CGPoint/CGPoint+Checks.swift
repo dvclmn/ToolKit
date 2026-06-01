@@ -29,11 +29,8 @@ extension CGPoint {
   }
 
   public var isZero: Bool { x.isZero && y.isZero }
-
   public var isFinite: Bool { x.isFinite && y.isFinite }
-
   public var isValid: Bool { !isNan && isFinite }
-
   public var isNan: Bool { x.isNaN || y.isNaN }
 
 }

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 27/2/2025.
 //
 
-
 import Foundation
 
 /// Returns `2π` as the requested floating-point type.
@@ -16,7 +15,7 @@ extension BinaryFloatingPoint {
   /// Returns this value increased by `amount`, optionally clamped to `range`.
   public func incrementing(
     by amount: Self,
-    in range: ClosedRange<Self>? = nil
+    in range: ClosedRange<Self>? = nil,
   ) -> Self {
     var result = self + amount
     if let range {
@@ -29,7 +28,7 @@ extension BinaryFloatingPoint {
   public mutating func increment(by amount: Self, in range: ClosedRange<Self>? = nil) {
     self = incrementing(by: amount, in: range)
   }
-  
+
   /// Decreases this value by `amount`, optionally clamping the result to `range`.
   public mutating func decrement(by amount: Self, in range: ClosedRange<Self>? = nil) {
     self = incrementing(by: -amount, in: range)

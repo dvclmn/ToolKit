@@ -7,14 +7,9 @@
 
 import Foundation
 
-protocol IconGalleryViewable: Identifiable, RawRepresentable, CaseIterable where Self.RawValue == String {
-  var id: String { get }
-  var reference: String { get }
-}
-
 // MARK: - Icons
 // swift-format-ignore
-public enum Icons: String, IconGalleryViewable, Codable, Equatable, Sendable {
+public enum Icons: String, Codable, Equatable, Sendable, CaseIterable {
   case stats = "chart.dots.scatter"                                 // 􁣃
   case statsAlt = "chart.pie"                                       // 􀑀
   case refresh = "arrow.triangle.2.circlepath"                      // 􀊯

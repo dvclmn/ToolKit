@@ -8,7 +8,7 @@
  import SwiftUI
 
 extension Font.TextStyle {
-  package var toNSTextStyle: NSFont.TextStyle {
+  public var toNSTextStyle: NSFont.TextStyle {
     switch self {
       case .largeTitle: .largeTitle
       case .title: .title1

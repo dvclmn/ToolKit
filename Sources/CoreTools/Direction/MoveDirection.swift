@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import CoreTools
 
 public enum MoveDirection: String, LabeledItem, Sendable {
   case next
@@ -23,8 +22,8 @@ public enum MoveDirection: String, LabeledItem, Sendable {
   
   public var icon: String {
     switch self {
-      case .next: Icons.next.icon
-      case .previous: Icons.previous.icon
+      case .next: "arrow.right"
+      case .previous: "arrow.left"
     }
   }
 

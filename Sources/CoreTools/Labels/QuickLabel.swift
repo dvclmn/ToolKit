@@ -5,15 +5,15 @@
 //  Created by Dave Coleman on 26/5/2025.
 //
 
-// TODO: I should consider retiring this, and trying a more SwiftUI shape?
-// E.g. accept a String/LocalisedStringKey as a dead-simple text title
-// (no Label, icon etc). And then have an overload for a Label
-// (which is richer — progressive disclosure). Which could then
-// lean into IconLiteral, EmojiComposition etc
-
+/// A lightweight, serialisable label model for non-SwiftUI code.
 public struct QuickLabel: Sendable, Codable, Equatable, Hashable {
+  /// The visible text for the label.
   public var text: String
+
+  /// An optional icon associated with the label.
   public let icon: IconLiteral?
+
+  /// An optional semantic role for styling or ordering.
   public let role: ActionRole?
 }
 
@@ -29,8 +29,10 @@ extension QuickLabel {
     self.role = role
   }
 
-  /// This doesn't have a default of `nil` for `symbol`,
-  /// to disambiguate from ``QuickLabel/init(_:icon:role:)``
+  /// Creates a label whose icon is an SF Symbol name.
+  ///
+  /// The `symbol` argument is not defaulted so this initializer remains
+  /// distinct from ``QuickLabel/init(_:icon:role:)``.
   public init(
     _ text: String,
     symbol symbolString: String?,

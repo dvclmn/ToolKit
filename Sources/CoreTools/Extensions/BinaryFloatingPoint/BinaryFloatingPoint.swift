@@ -8,11 +8,12 @@
 
 import Foundation
 
+/// Returns `2π` as the requested floating-point type.
 public func twoPi<T: BinaryFloatingPoint>() -> T { T.pi * 2 }
 
-/// Looking for `clamp` methods? See `Extensions/Comparable`
 extension BinaryFloatingPoint {
 
+  /// Returns this value increased by `amount`, optionally clamped to `range`.
   public func incrementing(
     by amount: Self,
     in range: ClosedRange<Self>? = nil
@@ -24,46 +25,49 @@ extension BinaryFloatingPoint {
     return result
   }
 
+  /// Increases this value by `amount`, optionally clamping the result to `range`.
   public mutating func increment(by amount: Self, in range: ClosedRange<Self>? = nil) {
     self = incrementing(by: amount, in: range)
   }
   
+  /// Decreases this value by `amount`, optionally clamping the result to `range`.
   public mutating func decrement(by amount: Self, in range: ClosedRange<Self>? = nil) {
     self = incrementing(by: -amount, in: range)
   }
 
-  /// Map distance to a scaled distance using atan
+  /// Maps a raw distance through an arctangent falloff curve.
   public func scaledDistance(
     radius: Self,
     tension: Self,
   ) -> Self {
-    let tensionVaue = Double(self / tension)
+    let tensionValue = Double(self / tension)
     let halfPi = Double.pi / 2
-    return radius * Self(atan(tensionVaue / halfPi))
+    return radius * Self(atan(tensionValue / halfPi))
   }
 
-  /// E.g. converting `0.8` to `0.2`
+  /// Returns the complement of this value after clamping it to `0...1`.
   public var inversePercentage: Self {
-    /// Ensure falloff is between 0.0 and 1.0
+    // Ensure the input is between 0.0 and 1.0.
     let bounded = min(max(self, 0.0), 1.0)
     return 1.0 - bounded
   }
 
+  /// Wraps a phase angle into the `0..<2π` interval.
   public func wrapPhase(_ phase: CGFloat) -> CGFloat {
     var r = phase.truncatingRemainder(dividingBy: twoPi())
     if r < 0 { r += twoPi() }  // keep in [0, 2π)
     return r
   }
 
+  /// Returns a larger value using the golden ratio as a gentle growth step.
   public var bump: Self {
     let nextFib = self * 1.618
-    /// Approximate next Fibonacci number
     return (self + nextFib) / 2  // Midpoint between current and next
   }
 
+  /// Returns a smaller value using the inverse golden ratio as a gentle reduction step.
   public var bumpDown: Self {
     let prevFib = self * 0.618
-    /// Approximate previous Fibonacci number using the inverse of the golden ratio
     return (self + prevFib) / 2  // Midpoint between current and previous
   }
 
@@ -78,11 +82,11 @@ extension BinaryFloatingPoint {
     return self / aspectRatio
   }
 
-  /// Returns the shortest angular distance between two angles
+  /// Returns the shortest angular distance between two angles.
   public static func angleDelta(_ angle1: Self, _ angle2: Self) -> Self {
     var delta = angle1 - angle2
 
-    /// Normalise to [-π, π] range
+    // Normalise to the `-π...π` range.
     while delta > .pi { delta -= 2 * .pi }
     while delta < -.pi { delta += 2 * .pi }
 

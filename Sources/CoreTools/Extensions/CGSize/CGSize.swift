@@ -23,24 +23,29 @@ extension CGSize {
 
 extension CGSize {
 
-  /// Euclidean magnitude of the vector?
   @available(
     *, deprecated, renamed: "magnitude",
-    message: "Renamed to avoid confusion with Axis mapping methods, please use 'magnitude'"
+    message: "Renamed to avoid confusion with Axis mapping methods, use 'magnitude'"
   )
   public var length: CGFloat { sqrt(width * width + height * height) }
+
+  /// The Euclidean magnitude of the size when treated as a vector.
   public var magnitude: CGFloat { sqrt(width * width + height * height) }
 
   @available(
     *, deprecated, renamed: "normalisedMagnitude",
-    message: "Renamed to avoid confusion with Axis mapping methods, please use 'normalisedMagnitude'"
+    message: "Renamed to avoid confusion with Axis mapping methods, use 'normalisedMagnitude'"
   )
   public var normalisedLength: CGSize { length > 0 ? self / length : .zero }
+
+  /// A unit-length size in the same direction, or `.zero` for a zero magnitude.
   public var normalisedMagnitude: CGSize { magnitude > 0 ? self / magnitude : .zero }
 
-  // MARK: - General
 
+  /// The greater of `width` and `height`.
   public var longestDimension: CGFloat { max(width, height) }
+
+  /// The lesser of `width` and `height`.
   public var shortestDimension: CGFloat { min(width, height) }
 
   /// Returns the offset needed to centre a child of the given size within this container.

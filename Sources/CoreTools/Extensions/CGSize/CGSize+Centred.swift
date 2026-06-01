@@ -9,11 +9,12 @@ import Foundation
 
 extension CGSize {
 
-  /// Creates a CGRect for this size positioned within the given container size
+  /// Creates a rectangle for this size positioned within a container.
+  ///
   /// - Parameters:
-  ///   - containerSize: The size of the container view
-  ///   - strategy: How to handle cases where this size is larger than the container
-  /// - Returns: A CGRect positioned according to the strategy, or nil if strategy is failIfOversized and view is too large
+  ///   - containerSize: The size of the container.
+  ///   - strategy: How to position or scale this size inside the container.
+  /// - Returns: A rectangle positioned according to `strategy`.
   public func toCGRect(
     in containerSize: CGSize,
     strategy: PlacementStrategy = .centerWithOverflow,
@@ -90,27 +91,27 @@ extension CGSize {
 
 extension CGSize {
 
-  /// Strategy for handling views that are larger than their container
+  /// Strategy for positioning a size within a container.
   public enum PlacementStrategy {
-    /// Center the view within the container, allowing overflow
+    /// Centre the size within the container, allowing overflow.
     case centerWithOverflow
 
-    /// Scale the view proportionally to fit within the container
+    /// Scale proportionally to fit inside the container.
     case scaleToFit
 
-    /// Scale the view to fill the container, potentially cropping content
+    /// Scale proportionally to fill the container, potentially cropping content.
     case scaleToFill
 
-    /// Align to top-left corner, allowing overflow
+    /// Align to the top-left corner, allowing overflow.
     case topLeft
 
-    /// Align to top-right corner, allowing overflow
+    /// Align to the top-right corner, allowing overflow.
     case topRight
 
-    /// Align to bottom-left corner, allowing overflow
+    /// Align to the bottom-left corner, allowing overflow.
     case bottomLeft
 
-    /// Align to bottom-right corner, allowing overflow
+    /// Align to the bottom-right corner, allowing overflow.
     case bottomRight
   }
 }

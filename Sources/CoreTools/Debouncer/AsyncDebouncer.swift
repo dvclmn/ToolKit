@@ -7,18 +7,20 @@
 
 import Foundation
 
-/// Important: Use with `@State` like this:
-/// `@State private var debouncer = AsyncDebouncer()`
+/// Debounces asynchronous work by cancelling pending trailing-edge execution when
+/// a newer request arrives.
 ///
-/// Not like this ~~`let debouncer = AsyncDebouncer()`~~
+/// Store the debouncer for at least as long as the work it coordinates. In
+/// SwiftUI views, prefer `@State private var debouncer = AsyncDebouncer()` so
+/// the instance survives body recomputation.
 ///
-/// Also: Don't use the one debouncer instance for
-/// two separate tasks, or one may cancel the other. Use seperate instances.
+/// Use a separate instance for each independent task stream; calls made through
+/// one debouncer share cancellation state.
 @Observable
 public final class AsyncDebouncer {
   private var task: Task<Void, Error>?
 
-  /// Used for leading-edge (immediate) execution to enforce a cooldown window
+  // Tracks the cooldown window used by leading-edge execution.
   private var cooldownTask: Task<Void, Error>?
 
   private let interval: Duration
@@ -34,15 +36,16 @@ public final class AsyncDebouncer {
 
 extension AsyncDebouncer {
 
+  /// Executes `action` after the debounce interval, cancelling any pending action.
   @MainActor
   public func execute(
     action: @escaping @MainActor @Sendable () async -> Void
   ) {
-    /// Cancel any previous task
+    // Cancel any previous task.
     task?.cancel()
 
     task = Task {
-      /// try await natively throws a CancellationError if cancelled
+      // `Task.sleep` throws `CancellationError` when the task is cancelled.
       try await Task.sleep(for: interval)
       await action()
     }
@@ -67,6 +70,7 @@ extension AsyncDebouncer {
       cooldownTask = nil
     }
   }
+
   /// Executes the action either immediately (skipping the debounce delay)
   /// or with the standard trailing-edge debounce.
   /// - Parameters:

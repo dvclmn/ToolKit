@@ -8,9 +8,8 @@
 #if canImport(AppKit)
 import AppKit
 
-/// From forum post:
-/// https://developer.apple.com/forums/thread/693905?answerId=784645022#784645022
 extension NSTextContentManager {
+  /// Converts a TextKit 2 text range into an `NSRange`.
   public func range(for textRange: NSTextRange) -> NSRange? {
     let location = offset(from: documentRange.location, to: textRange.location)
     let length = offset(from: textRange.location, to: textRange.endLocation)
@@ -18,6 +17,7 @@ extension NSTextContentManager {
     return NSRange(location: location, length: length)
   }
 
+  /// Converts an `NSRange` into a TextKit 2 text range.
   public func textRange(for range: NSRange) -> NSTextRange? {
     guard
       let textRangeLocation = location(documentRange.location, offsetBy: range.location),

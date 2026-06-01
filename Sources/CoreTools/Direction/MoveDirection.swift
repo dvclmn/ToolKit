@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Relative movement through an ordered collection.
 public enum MoveDirection: String, LabeledItem, Sendable {
   case next
   case previous
@@ -27,6 +28,7 @@ public enum MoveDirection: String, LabeledItem, Sendable {
     }
   }
 
+  /// Returns the neighbouring element in `collection` relative to `current`.
   public func goTo<T>(
     current: T.Element,
     collection: T,
@@ -45,10 +47,4 @@ public enum MoveDirection: String, LabeledItem, Sendable {
         )
     }
   }
-  //  var shortcut: KeyboardShortcut? {
-  //    switch self {
-  //      case .next:
-  //      case .previous:
-  //    }
-  //  }
 }

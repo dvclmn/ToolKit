@@ -7,9 +7,9 @@
 
 import Foundation
 
-/// 🔔 Remember: Types like Array, Set and Dictionary conform to Sequence
 extension Sequence where Element: Identifiable {
 
+  /// Returns the element with the greatest value at `dateKeyPath`.
   public func mostRecent<T: Comparable>(
     by dateKeyPath: KeyPath<Element, T>
   ) -> Element? {
@@ -25,9 +25,8 @@ extension Sequence where Element: Hashable {
   }
 }
 
-/// Example usage:
-/// `let uniqueSyntaxes = runs.map(\.syntax).uniquedPreservingOrder()`
 extension Sequence where Element: Equatable {
+  /// Returns the sequence's unique elements while preserving first-seen order.
   public func uniquedPreservingOrder() -> [Element] {
     var seen: [Element] = []
     for element in self where !seen.contains(element) {
@@ -39,6 +38,7 @@ extension Sequence where Element: Equatable {
 
 extension Sequence {
 
+  /// Builds a delimited summary by sorting elements and reading a key path from each one.
   public func summarise<T: Comparable>(
     key: PartialKeyPath<Element>,
     sortedBy keyPath: KeyPath<Element, T>,
@@ -60,7 +60,7 @@ extension Sequence {
       }
   }
 
-  /// Non-native key path based sorting
+  /// Sorts the sequence by the value at `keyPath`.
   public func sorted<T: Comparable>(
     by keyPath: KeyPath<Element, T>,
     using comparator: (T, T) -> Bool = (<),

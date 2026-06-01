@@ -7,33 +7,18 @@
 
 import Foundation
 
-/// ```
-/// private func missingValue(_ key: String, for consumer: String) -> String {
-///   "EnvironmentValue `\(key)` missing, needed by \(consumer)"
-/// }
-/// ```
-
-// appendInterpolation<T>(_ value: T?, default: @autoclosure () -> some StringProtocol)
-
-//public func printMissing<T>(_ value: T?, for consumer: String) {
-//public func printMissing(_ value: Any?, for consumer: String) {
-
-/// Example output:
-/// ```
-/// `unitSize` missing, needed by `GridLineContext`
-/// ```
+/// Prints a standard missing-value diagnostic.
 @_spi(Internal) public func printMissing(_ value: String, for consumer: String) {
   print("`\(value)` missing, needed by `\(consumer)`")
-  //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
 }
 
+/// Prints a diagnostic message with the current debug timestamp appended.
 @_spi(Internal) public func printTimestamped(_ message: String) {
   let value = message + " at \(Date.debug)"
   print(value)
-//  print("`\(value)` missing, needed by `\(consumer)`")
-  //  print("`\(String(describing: value))` missing, needed by `\(consumer)`")
 }
 
+/// Prints a standard expectation-failure diagnostic.
 @_spi(Internal) public func printDidNotSatisfy(
   _ value: String,
   expectation: String,

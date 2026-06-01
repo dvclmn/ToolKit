@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 21/2/2026.
 //
 
+/// A value describing a mutation that can be applied to an array.
 public enum ArrayOperation<Element> {
   case append(Element)
   case appendContents(contentsOf: [Element])
@@ -13,6 +14,7 @@ public enum ArrayOperation<Element> {
   case removeAll(where: (Element) -> Bool)
   case set([Element])
 
+  /// Applies this operation to `array`.
   public func apply(to array: inout [Element]) {
     switch self {
       case .append(let element):
@@ -37,6 +39,7 @@ public enum ArrayOperation<Element> {
   }
 }
 
+/// A value describing a mutation that can be applied to a set.
 public enum SetOperation<Element: Hashable> {
   case insert(Element)
   case insertContents(contentsOf: Set<Element>)
@@ -44,6 +47,7 @@ public enum SetOperation<Element: Hashable> {
   case removeAll(where: (Element) -> Bool)
   case set(Set<Element>)
 
+  /// Applies this operation to `set`.
   public func apply(to set: inout Set<Element>) {
     switch self {
       case .insert(let element):
@@ -63,4 +67,3 @@ public enum SetOperation<Element: Hashable> {
     }
   }
 }
-

@@ -9,7 +9,7 @@ import Foundation
 
 extension BinaryFloatingPoint {
   
-  /// Checks that this value is neither infinite, nor Nan
+  /// A Boolean value indicating whether this value is finite and not NaN.
   public var isValid: Bool {
     return self.isFinite && !self.isNaN
   }
@@ -30,6 +30,7 @@ extension BinaryFloatingPoint {
     return self >= lowerBound && self <= upperBound
   }
   
+  /// Returns this value as a percentage of its position within `range`.
   public func toPercent(within range: ClosedRange<Self>) -> Self {
     self.normalised(in: range) * 100
   }

@@ -7,10 +7,12 @@
 
 import Foundation
 
+/// A labeled item that can appear in a picker-style control.
 public protocol Pickable: LabeledItem {
 
   /// A label that describes the purpose of the whole enum.
-  /// E.g. "View Mode", or "Inspector Tab"
+  ///
+  /// For example, "View Mode" or "Inspector Tab".
   static var pickerLabel: QuickLabel { get }
 }
 

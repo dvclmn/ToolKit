@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 12/11/2025.
 //
 
+/// Determines how duplicate keys are resolved when merging dictionaries.
 public enum MergeStrategy<Key, Value> {
   case first
   case last

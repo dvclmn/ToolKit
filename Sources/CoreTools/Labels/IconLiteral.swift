@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A serialisable icon reference that can be rendered by UI-facing modules.
 public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
   case emoji(String)
   case emojiComposition(EmojiComposition)
@@ -15,8 +16,7 @@ public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
 }
 
 extension IconLiteral: ExpressibleByStringLiteral {
-  /// Have chosen `IconLiteral.symbol` as the
-  /// most logical path for a string literal init
+  /// Creates an SF Symbol icon reference from a string literal.
   public init(stringLiteral value: String) {
     self = .symbol(value)
   }
@@ -24,12 +24,12 @@ extension IconLiteral: ExpressibleByStringLiteral {
 
 extension IconLiteral {
 
+  /// A simple string representation suitable for debugging and fallback labels.
   public var toString: String {
     switch self {
       case .emoji(let string): string
       case .emojiComposition(let comp):
         comp.emoji.map { String($0.emoji) }.joined(separator: "")
-      //      case .emojiComposition(let comp): comp.emoji.map(\.emoji.toString).joined("")
       case .symbol(let string): string
       case .customSymbol(let symbol): symbol.reference
     }

@@ -23,11 +23,10 @@ extension CGRect {
     union(rect)
   }
 
-  /// Creates a rectangle from two points, ensuring positive width and height
-  /// Useful for drag operations like marquee selection where the drag direction is unknown
+  /// Creates a standardised rectangle from two points.
   ///
-  /// Note: previous methods `reversible`, `fromPoints(_:_:)`,
-  /// `between(point1:point2:)`
+  /// Useful for drag operations, such as marquee selection, where the drag
+  /// direction is unknown.
   public static func boundingRect(
     from start: CGPoint, to end: CGPoint,
   ) -> CGRect {
@@ -50,19 +49,17 @@ extension CGRect {
 
 extension CGRect {
 
-  /// Creates a rect with an origin of zero, and size from provided `size`
+  /// Creates a rectangle with a zero origin and the provided size.
   public init(fromSize size: CGSize) {
     self.init(origin: .zero, size: size)
   }
 
-  /// Useful for occasions where origin and size properties
-  /// are already defined, just need to be plugged in,
-  /// and an extra-quick init is helpful
+  /// Creates a rectangle from an origin and size without argument labels.
   public init(_ origin: CGPoint, _ size: CGSize) {
     self.init(origin: origin, size: size)
   }
 
-  /// Creates a rectangle with the given size, centered within the container size
+  /// Creates a rectangle with `size` centred in `containerSize`.
   public init(size: CGSize, centeredIn containerSize: CGSize) {
     let origin = CGPoint(
       x: (containerSize.width - size.width) / 2,

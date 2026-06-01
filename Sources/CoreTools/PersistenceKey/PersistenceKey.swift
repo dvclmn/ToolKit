@@ -7,53 +7,19 @@
 
 import Foundation
 
-/// In a View:
-/// ```
-/// struct InspectorView: View {
-///   var body: some View {
-///     Form {
-///       // Type-safe, compile-time checked
-///       ShaderControlsSection()
-///         .togglable(ShaderEnabledKey.self)
+/// A typed declaration for a persisted value.
 ///
-///       AdvancedSection()
-///         .togglable(AdvancedControlsKey.self)
-///     }
-///   }
-/// }
-/// ```
-///
-/// Reference the same persisted state elsewhere:
-/// ```
-/// struct CanvasView: View {
-///   @OptionallyPersisted(ShaderEnabledKey.self) var shadersEnabled: Bool
-///
-///   var body: some View {
-///     Canvas { context, size in
-///       if shadersEnabled {
-///         // Apply shaders
-///       }
-///     }
-///   }
-/// }
-/// ```
-///
-/// Or use AppStorage directly:
-/// ```
-/// struct AnotherView: View {
-///   @AppStorage(ShaderEnabledKey.storageKey)
-///   var shadersEnabled = ShaderEnabledKey.defaultValue
-///
-///   var body: some View {
-///     Text("Shaders: \(shadersEnabled ? "On" : "Off")")
-///   }
-/// }
-/// ```
+/// Use a concrete `PersistenceKey` type to centralise the storage key string and
+/// default value for a piece of persisted state. See <doc:PersistenceKeys> for
+/// usage examples.
 public protocol PersistenceKey: Sendable {
   associatedtype Value: Sendable
 
-  /// Naming guide example: {domain} + {section} + {kind}
-  /// `breathingWaves.shaders.enabled`
+  /// The storage key used by the persistence backend.
+  ///
+  /// Prefer stable, namespaced keys such as `breathingWaves.shaders.enabled`.
   static var storageKey: String { get }
+
+  /// The value to use when no persisted value exists.
   static var defaultValue: Value { get }
 }

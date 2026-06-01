@@ -8,6 +8,8 @@
 import Foundation
 
 extension Array {
+  /// Merges an array of dictionaries into one dictionary.
+  ///
   /// ```
   /// let dicts = [
   ///   ["a": 1, "b": 2],

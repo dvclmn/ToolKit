@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Errors produced while importing files and resources.
 public enum ImportError: Error, CustomStringConvertible {
   case resourceNotFound(String)
   case failedToRead(String)
@@ -15,6 +16,7 @@ public enum ImportError: Error, CustomStringConvertible {
   case failedSecurityScopedAccess(String)
   case fileImporterFailure(Error)
   
+  /// A user-readable description of the import failure.
   public var description: String {
     switch self {
       case .resourceNotFound(let path):

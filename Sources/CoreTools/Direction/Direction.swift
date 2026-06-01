@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// This type assumes a top-left origin
+/// A cardinal direction in a top-left-origin coordinate system.
 public enum Direction: String, CaseIterable, Identifiable {
   case up
   case down
@@ -19,7 +19,7 @@ extension Direction {
 
   public var id: String { rawValue }
 
-  /// +1 or -1 multiplier, for 1D movement
+  /// A `+1` or `-1` multiplier for movement along one axis.
   public var scalar: Int {
     switch self {
       case .up, .left: -1
@@ -41,15 +41,17 @@ extension Direction {
     }
   }
 
+  /// Mutates `value` by moving it along this direction by `delta`.
   public func update<T: BinaryFloatingPoint>(_ value: inout T, by delta: T) {
     value += T(scalar) * delta
   }
 
-  /// A generic method to mutate a scalar
+  /// Returns `value` moved along this direction by `delta`.
   public func apply(to value: Int, by delta: Int = 1) -> Int {
     value + scalar * delta
   }
 
+  /// Returns `value` moved along this direction by `delta`.
   public func apply<T: BinaryFloatingPoint>(to value: T, by delta: T) -> T {
     value + T(scalar) * delta
   }
@@ -58,7 +60,7 @@ extension Direction {
     isVertical ? .vertical : .horizontal
   }
 
-  /// A helper to apply direction to a tuple (for 2D scenarios)
+  /// Returns an integer tuple offset in this direction.
   public func offset(x: Int, y: Int, by delta: Int = 1) -> (x: Int, y: Int) {
     switch toAxis {
       case .vertical:
@@ -68,7 +70,7 @@ extension Direction {
     }
   }
 
-  /// A helper to apply direction to a tuple of CGFloats (for 2D scenarios in layout/geometry)
+  /// Returns a floating-point tuple offset in this direction.
   public func offset(
     x: CGFloat,
     y: CGFloat,
@@ -83,12 +85,16 @@ extension Direction {
   }
 
   /// Advance a single coordinate along this direction's axis by `delta`.
-  /// If the axis doesn't match (e.g., advancing x on a vertical direction), the value is returned unchanged.
+  ///
+  /// If the direction is vertical, `x` is returned unchanged.
   public func advance(x: Int, by delta: Int = 1) -> Int {
     guard toAxis == .horizontal else { return x }
     return x + scalar * delta
   }
 
+  /// Advances a y-coordinate when this direction is vertical.
+  ///
+  /// If the direction is horizontal, `y` is returned unchanged.
   public func advance(y: Int, by delta: Int = 1) -> Int {
     guard toAxis == .vertical else { return y }
     return y + scalar * delta

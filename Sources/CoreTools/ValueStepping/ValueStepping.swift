@@ -11,8 +11,9 @@ import Foundation
 
 extension Collection where Element: Comparable {
   /// Returns the next logical element after `current`.
-  /// If `current` is present, returns the following element (or wraps if requested).
-  /// If `current` is not present, returns the first element that is strictly greater than `current`.
+  ///
+  /// If `current` is not present, this returns the first element that is
+  /// strictly greater than `current`. See <doc:ValueStepping> for examples.
   public func nextValueLoosely(after current: Element, wrapping: Bool = false) -> Element? {
     let array = Array(self)
     if let exact = array.firstIndex(of: current) {
@@ -26,8 +27,9 @@ extension Collection where Element: Comparable {
   }
 
   /// Returns the previous logical element before `current`.
-  /// If `current` is present, returns the preceding element (or wraps if requested).
-  /// If `current` is not present, returns the greatest element that is strictly less than `current`.
+  ///
+  /// If `current` is not present, this returns the greatest element that is
+  /// strictly less than `current`.
   public func previousValueLoosely(before current: Element, wrapping: Bool = false) -> Element? {
     let array = Array(self)
     if let exact = array.firstIndex(of: current) {
@@ -41,7 +43,7 @@ extension Collection where Element: Comparable {
     return wrapping ? sorted.last : nil
   }
 
-  /// Steps by +1/-1 loosely, handling values not exactly present in the collection.
+  /// Steps one position through the collection, accepting values that are not exactly present.
   public func valueLoosely(
     steppingFrom current: Element, direction: StepDirection, wrapping: Bool = false
   ) -> Element? {
@@ -55,8 +57,10 @@ extension Collection where Element: Comparable {
 // MARK: - Value-centric helpers
 
 extension Comparable {
-  /// Returns a value stepped by one position within `allowed`, with a fallback when the current value
-  /// isn't exactly present: choose the next greater (for `.up`) or next lesser (for `.down`) element.
+  /// Steps this value by one position within `allowed`.
+  ///
+  /// If this value is not exactly present in `allowed`, the result falls back to
+  /// the next greater value for `.up`, or the next lesser value for `.down`.
   public func steppedLoosely(
     in allowed: [Self],
     direction: StepDirection = .up,
@@ -68,28 +72,3 @@ extension Comparable {
     }
   }
 }
-
-
-// MARK: - Usage Examples
-
-/*
- Example: stepping interface font size using predefined steps.
-
- let steps = Constants.interfaceFontSizeSteps // [9, 12, 16, 24, 36]
- var size: CGFloat = 18
- // Not exactly in the list; loosely step up picks 24
- if let next = size.steppedLoosely(in: steps, direction: .up) {
-   size = next // 24
- }
-
- // With SwiftUI Binding:
- struct ExampleView: View {
-   @State private var size: CGFloat = 18
-   var body: some View {
-     HStack {
-       Button("-") { $size.stepLoosely(in: steps, direction: .down) }
-       Button("+") { $size.stepLoosely(in: steps, direction: .up) }
-     }
-   }
- }
-*/

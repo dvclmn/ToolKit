@@ -9,9 +9,14 @@
 import Foundation
 
 // MARK: - Stretch out an Axis
+/// Options that control how a point is stretched along an axis.
 public struct StretchOptions: OptionSet, Sendable {
   public let rawValue: Int
+
+  /// Treats positions as unit coordinates before stretching.
   static let normalised = StretchOptions(rawValue: 1 << 0)
+
+  /// Clamps the stretched result.
   public static let clamped = StretchOptions(rawValue: 1 << 0)
 
   public init(rawValue: Int) {
@@ -20,13 +25,10 @@ public struct StretchOptions: OptionSet, Sendable {
 }
 extension CGPoint {
 
-  /// Map cursorX to a stretched range
+  /// Maps one axis of this point into a stretched coordinate range.
   ///
-  /// The utility of this may not be obvious at first glance, so here's a simple example.
-  /// For my `.hover3DEffect()` modifier, I wanted the range of movement
-  /// (along the x axis) for the 'glint' effect, to be *wider* than the pointer's actual
-  /// range, across the surface of the view. This maps an axis of a CGPoint to be wider
-  /// (or narrower) than the original.
+  /// Use this when the response range should be wider or narrower than the
+  /// point's raw movement across a view or geometry space.
   public func stretchedPosition(
     _ axis: GeometryAxis,
     in size: CGSize,

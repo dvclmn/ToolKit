@@ -7,29 +7,31 @@
 
 import Foundation
 
+/// Convenience entry points for writing exported data to disk.
 public struct ExportHandler {
 
+  /// Writes data to the user's Application Support directory.
   public static func saveDataToAppSupport(
     named fileName: String,
     data: Data,
   ) throws {
-    /// 1. Get Application Support directory
+    // Get the Application Support directory.
     let directoryURL = FileManager.default.urls(
       for: .applicationSupportDirectory,
       in: .userDomainMask,
     ).first!
 
-    /// 2. Optionally create the directory if it doesn't exist
+    // Create the directory if it does not exist.
     try FileManager.default.createDirectory(
       at: directoryURL,
       withIntermediateDirectories: true,
       attributes: nil,
     )
 
-    /// 3. Append filename
+    // Append the filename.
     let fileURL = directoryURL.appendingPathComponent(fileName)
 
-    /// 4. Write data
+    // Write the data.
     try data.write(to: fileURL)
   }
 }

@@ -26,13 +26,14 @@ extension NSTextView {
   public var documentRange: NSTextRange? { self.textLayoutManager?.documentRange }
   public var nsString: NSString { string as NSString }
   public var documentLength: Int { nsString.length }
+
+  /// Returns the selected range expanded to the containing paragraph.
   public var safeCurrentParagraphRange: NSRange {
-    /// 1. Get the safe selection first
+    // Get the safe selection first.
     let safeSelection = safeSelectedRange
 
-    /// 2. Expand to paragraph.
-    /// `NSString.paragraphRange` always returns a valid range within string
-    /// bounds if the input is valid, so no secondary clamping required here.
+    // `NSString.paragraphRange` always returns a valid range within string
+    // bounds if the input is valid, so no secondary clamping is required here.
     return nsString.paragraphRange(for: safeSelection)
   }
 
@@ -48,10 +49,10 @@ extension NSTextView {
   public func string(for range: NSRange) -> String? {
     guard textStorage != nil else { return nil }
 
-    /// Reuse the centralised safety check
+    // Reuse the centralised safety check.
     let validRange = getSafeRange(for: range)
 
-    /// Handle empty ranges (like a caret position) gracefully.
+    // Handle empty ranges, such as a caret position, gracefully.
     return nsString.substring(with: validRange)
   }
 
@@ -66,8 +67,7 @@ extension NSTextView {
       actualCharacterRange: nil,
     )
 
-    /// Get the bounding rect for this glyph range
-    /// This tells us where the text physically appears on screen
+    // Get the bounding rect for this glyph range.
     let boundingRect = layoutManager.boundingRect(
       forGlyphRange: glyphRange,
       in: textContainer,
@@ -88,8 +88,8 @@ extension NSTextView {
 
     var unionRect: CGRect = .null
 
-    /// .standard includes the visible glyphs.
-    /// Use `.selection` or `.highlight` to encompass the full line height/advance.
+    // `.standard` includes the visible glyphs. Use `.selection` or
+    // `.highlight` to encompass the full line height/advance.
     textLayoutManager.enumerateTextSegments(
       in: textRange,
       type: .standard,
@@ -97,8 +97,8 @@ extension NSTextView {
     ) {
       segmentRange, rect, baseline, textContainer in
 
-      /// The rect provided is in the TextContainer's coordinate system.
-      /// We must translate it to the Text View's coordinate system.
+      // The rect is provided in the text container's coordinate system.
+      // Translate it to the text view's coordinate system.
       var viewRect = rect
       viewRect.origin.x += self.textContainerOrigin.x
       viewRect.origin.y += self.textContainerOrigin.y

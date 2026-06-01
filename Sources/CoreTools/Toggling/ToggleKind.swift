@@ -7,13 +7,14 @@
 
 import Foundation
 
+/// The semantic kind of boolean value represented by a ``ToggleKey``.
 public enum ToggleKind: String, Sendable {
   case expanded
   case enabled
 }
 
 extension ToggleKind {
-  /// Suffix used for the camelCase style builder (e.g. "Enabled", "Expanded")
+  /// Suffix used when building camel-case storage keys.
   package var camelSuffix: String {
     switch self {
       case .enabled: return "Enabled"

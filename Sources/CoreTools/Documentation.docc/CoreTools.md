@@ -26,6 +26,7 @@ type when that keeps the API usable from non-view code.
 
 ### Value Stepping
 
+- <doc:ValueStepping>
 - ``StepDirection``
 
 ### Labels
@@ -38,6 +39,7 @@ type when that keeps the API usable from non-view code.
 
 ### Persistence
 
+- <doc:PersistenceKeys>
 - ``PersistenceKey``
 - ``PersistenceKeyRegistry``
 
@@ -47,3 +49,7 @@ type when that keeps the API usable from non-view code.
 - ``ToggleKind``
 - ``ToggleKey``
 - ``ToggleStrategy``
+
+### Utilities
+
+- <doc:StridableStepping>

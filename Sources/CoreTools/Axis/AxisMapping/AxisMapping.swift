@@ -65,41 +65,21 @@ extension AxisMapping {
 
   /// Deprecated: Use `AxisMapping.identity`.
   @available(
-    *, deprecated, renamed: "identity", message: "Renamed for clarity, please use `.identity` instead"
+    *, deprecated, renamed: "identity", message: "Renamed for clarity, use `.identity` instead"
   )
   public static let primaryIsHorizontal: Self = .identity
 
   /// Deprecated: Use `AxisMapping.transposed`.
   @available(
-    *, deprecated, renamed: "transposed", message: "Renamed for clarity, please use `.identity` instead"
+    *, deprecated, renamed: "transposed", message: "Renamed for clarity, use `.transposed` instead"
   )
   public static let primaryIsVertical: Self = .transposed
 
 }
 
-/// A mapping between `Dimension` (width / height) and `Axis` (horizontal / vertical).
-///
-/// This aims to answer the question:
-/// “Given this dimension-based structure, which scalar corresponds to which axis?”
-///
-/// In most cases, "width" means "horizontal" and "height" means "vertical".
-/// But occasionally this is not the case (rotated coordinate systems, swapped
-///  axes, certain drawing transforms), so it's risky to assume.
-///
-/// `AxisConvention` makes the convention explicit, so there's less risk of confusion
-///
-/// `.widthIsHorizontal`:
-///    width → horizontal length
-///    height → vertical length
-///
-/// `.heightIsHorizontal`:
-///    height → horizontal length
-///    width → vertical length
-///
-/// Enables deriving correct values from types like
-/// `CGSize`, `CGPoint`, `EdgeInsets` etc
+/// Deprecated spelling for ``AxisMapping``.
 @available(
-  *, deprecated, renamed: "AxisMapping", message: "Renamed for clarity, please use `AxisMapping` instead"
+  *, deprecated, renamed: "AxisMapping", message: "Renamed for clarity, use `AxisMapping` instead"
 )
 public enum AxisConvention: Sendable {
   case widthIsHorizontal

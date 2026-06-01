@@ -7,9 +7,10 @@
 
 import Foundation
 
+/// Convenience entry points for loading strings and decoding JSON resources.
 public struct ImportHandler {
 
-  /// Load a string from a file at a specific URL.
+  /// Loads a string from a file URL.
   public static func loadString(
     from fileURL: URL,
     encoding: String.Encoding = .utf8
@@ -21,7 +22,7 @@ public struct ImportHandler {
     }
   }
 
-  /// Load a file from the main or provided bundle.
+  /// Loads a string resource from a bundle.
   public static func loadString(
     named fileName: String,
     withExtension fileExtension: String,
@@ -41,7 +42,7 @@ public struct ImportHandler {
     return try loadString(from: url)
   }
 
-  /// Load and decode Data from a file URL.
+  /// Loads and decodes JSON data from a file URL.
   public static func loadData<T: Decodable>(
     from url: URL,
     asType type: T.Type,
@@ -57,7 +58,7 @@ public struct ImportHandler {
     }
   }
 
-  /// Load and decode Data from bundle
+  /// Loads and decodes a JSON resource from a bundle.
   public static func loadDataFromBundle<T: Decodable>(
     named name: String,
     withExtension ext: String,
@@ -73,7 +74,7 @@ public struct ImportHandler {
 }
 
 extension ImportHandler {
-  /// Load and decode Data from a file URL.
+  /// Loads and decodes JSON from a security-scoped file-import result.
   public static func loadSecurityScoped<T: Decodable>(
     result: Result<URL, Error>,
     asType type: T.Type,
@@ -84,7 +85,7 @@ extension ImportHandler {
 
         defer { url.stopAccessingSecurityScopedResource() }
 
-        /// Start accessing security-scoped resource
+        // Start accessing the security-scoped resource before reading the file.
         guard url.startAccessingSecurityScopedResource() else {
           throw ImportError.failedSecurityScopedAccess(url.lastPathComponent)
         }

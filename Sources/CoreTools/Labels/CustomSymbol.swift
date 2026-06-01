@@ -7,7 +7,7 @@
 
 import Foundation
 
-// TODO: Not currently working, need to find fix
+/// A custom symbol reference using the `custom.` SF Symbols naming convention.
 public enum CustomSymbol: String, Sendable, Codable {
   case artboard
   case zoom  // search, magnifying glass
@@ -16,6 +16,7 @@ public enum CustomSymbol: String, Sendable, Codable {
 
   public var id: String { rawValue }
 
+  /// The string used to look up the symbol in UI layers.
   public var reference: String {
     let prefix: String = "custom."
     let name: String =

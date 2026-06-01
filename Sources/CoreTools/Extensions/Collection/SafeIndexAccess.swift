@@ -9,6 +9,7 @@ import Foundation
 
 extension MutableCollection {
 
+  /// Safely reads or writes an element when `index` is valid.
   public subscript(safe index: Index) -> Element? {
     get { indices.contains(index) ? self[index] : nil }
     set {
@@ -20,6 +21,7 @@ extension MutableCollection {
 
 extension Collection {
 
+  /// Safely returns a subsequence when `bounds` are fully contained in the collection.
   public subscript(safe bounds: Range<Index>) -> SubSequence? {
     guard
       bounds.lowerBound >= startIndex,
@@ -31,6 +33,7 @@ extension Collection {
     return self[bounds]
   }
 
+  /// Safely returns a subsequence when `bounds` are fully contained in the collection.
   public subscript(safe bounds: ClosedRange<Index>) -> SubSequence? {
     guard
       bounds.lowerBound >= startIndex,
@@ -42,6 +45,7 @@ extension Collection {
     return self[bounds]
   }
 
+  /// Returns whether the collection contains an element at integer `offset`.
   public func hasIndex(_ offset: Int) -> Bool {
     let startIndex = self.startIndex
     let endIndex = self.endIndex

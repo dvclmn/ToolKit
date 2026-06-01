@@ -64,7 +64,7 @@ extension BidirectionalCollection where Element: Equatable {
   }
 }
 extension Collection where Element: Hashable {
-  /// Was called something like `isAtTop`
+  /// Returns `true` when `selection` contains exactly this collection's first element.
   public func isOnlyFirstSelected(
     in selection: Set<Element>
   ) -> Bool {
@@ -72,8 +72,6 @@ extension Collection where Element: Hashable {
       return false
     }
 
-    /// I only want a *single* result selected, and to know
-    /// if it's at the top/start of the list
     guard selection.count == 1,
       let firstSelected = selection.first
     else { return false }

@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Whether an operation should run immediately or after a debounce interval.
 public enum DebounceMode {
   case noDebounce
   case debounce(TimeInterval = 0.2)

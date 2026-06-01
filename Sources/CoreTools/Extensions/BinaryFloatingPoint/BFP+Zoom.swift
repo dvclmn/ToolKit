@@ -9,13 +9,16 @@ import Foundation
 
 extension BinaryFloatingPoint {
 
-  /// Multiplicative zoom factor: 1.0 == no zoom, 2.0 == 200%
+  /// Removes a multiplicative zoom factor from this value.
+  ///
+  /// A factor of `1` leaves the value unchanged; `2` treats the value as being
+  /// drawn at 200% zoom.
   public func removingZoomFactor(_ factor: Self) -> Self {
     guard factor.isFinite, factor != 0 else { return self }
     return self / factor
   }
 
-  /// Normalized zoom in 0...1 mapped to [1, maxFactor]
+  /// Removes a normalised zoom amount by mapping `0...1` into `1...maxFactor`.
   public func removingZoomNormalised(
     _ normalised: Self,
     maxFactor: Self = 2,
@@ -25,7 +28,7 @@ extension BinaryFloatingPoint {
     return self / factor
   }
 
-  /// Only for if `self` is a percent (0–100):
+  /// Removes a zoom amount expressed as a percentage in `0...100`.
   public func removingZoomPercent(_ percent: Self) -> Self {
     precondition(percent >= 0 && percent <= 100, "Expects a 0...100 percent value, received: \(percent)")
 
@@ -59,16 +62,15 @@ extension BinaryFloatingPoint {
     return self / effectiveZoom
   }
 
-  /// This removes a zoom range which has been normalised from 0-1
-
-  /// Applies non-linear zoom scaling to provide better control at different zoom levels
+  /// Applies non-linear zoom scaling to provide better control at different zoom levels.
+  ///
   /// - Parameters:
-  ///   - zoomLevel: The current zoom level (0.1...60)
-  ///   - zoomRange: The valid zoom range
-  ///   - lowSensitivityThreshold: Zoom level below which sensitivity is reduced (default: 1.0)
-  ///   - highSensitivityThreshold: Zoom level above which sensitivity is increased (default: 5.0)
-  ///   - curve: The power curve factor (default: 1.5). Higher values = more dramatic curve
-  /// - Returns: The transformed zoom scale to apply to the view
+  ///   - zoom: The current zoom level.
+  ///   - range: The valid zoom range.
+  ///   - lowSensitivityThreshold: Zoom level below which sensitivity is reduced.
+  ///   - highSensitivityThreshold: Zoom level above which sensitivity is increased.
+  ///   - curve: The power curve factor. Higher values create a stronger curve.
+  /// - Returns: The transformed zoom scale.
   public static func nonLinearZoomScale(
     _ zoom: Double,
     in range: ClosedRange<Double>,
@@ -84,12 +86,10 @@ extension BinaryFloatingPoint {
     let upper = range.upperBound
     let lower = range.lowerBound
 
-    /// Normalise the zoom level to 0...1 range
-    /// This method also clamps to range
+    // Normalise the zoom level to the `0...1` range. This also clamps to `range`.
     let normalised = zoom.normalised(in: range)
 
-    /// Calculate threshold positions in normalised space
-    /// Ensure no unexpected invalid values by clamping
+    // Calculate threshold positions in normalised space, clamping to avoid invalid values.
     let low = lowSensitivityThreshold.clamped(to: range)
     let high = highSensitivityThreshold.clamped(to: range)
 
@@ -99,39 +99,39 @@ extension BinaryFloatingPoint {
     let transformedZoom: Double
 
     if normalised <= lowThresholdNorm {
-      /// Low zoom range: reduce sensitivity (expand the curve - slower response)
+      // Low zoom range: reduce sensitivity for a slower response.
       let localNorm = normalised / lowThresholdNorm
 
-      /// Use curve to slow down response
+      // Use the curve to slow down response.
       let slowed = CGFloat(curve).slowResponse(localNorm)
 
       transformedZoom = slowed * lowThresholdNorm
 
     } else if normalised >= highThresholdNorm {
-      /// High zoom range: increase sensitivity (compress the curve - faster response)
+      // High zoom range: increase sensitivity for a faster response.
       let localNorm = (normalised - highThresholdNorm) / (1.0 - highThresholdNorm)
 
-      /// Inverse curve for faster response
+      // Use the inverse curve for faster response.
       let faster = CGFloat(curve).fastResponse(localNorm)
-      //      let compressed = pow(localNorm, 1.0 / curve)
       transformedZoom = highThresholdNorm + faster * (1.0 - highThresholdNorm)
 
     } else {
-      /// Middle range: linear scaling
+      // Middle range: linear scaling.
       transformedZoom = normalised
     }
 
-    /// Convert back to actual zoom range
+    // Convert back to the actual zoom range.
     return transformedZoom.denormalised(in: range)
-    //    return transformedZoom * (upper - lower) + lower
   }
 
-  /// Simplified non-linear zoom scaling using a single curve parameter
+  /// Applies non-linear zoom scaling using a single curve parameter.
+  ///
   /// - Parameters:
-  ///   - zoom: The current zoom level
-  ///   - range: The valid zoom range
-  ///   - sensitivity: Controls the curve (values < 1.0 = less sensitive at low zoom, values > 1.0 = more sensitive at low zoom)
-  /// - Returns: The transformed zoom scale
+  ///   - zoom: The current zoom level.
+  ///   - range: The valid zoom range.
+  ///   - sensitivity: Controls the curve. Values below `1` reduce low-zoom sensitivity;
+  ///     values above `1` increase it.
+  /// - Returns: The transformed zoom scale.
   public static func simpleNonLinearZoomScale(
     _ zoom: Double,
     range: ClosedRange<Double>,
@@ -143,12 +143,12 @@ extension BinaryFloatingPoint {
     return transformed.denormalised(in: range)
   }
 
-  /// Where self is the curve
+  /// Applies a curve where `self` is the exponent.
   func slowResponse(_ x: Self) -> Self {
     Self(pow(CGFloat(x), CGFloat(self)))
   }
 
-  /// Where self is the curve
+  /// Applies the inverse of a curve where `self` is the exponent.
   func fastResponse(_ x: Self) -> Self {
     Self(pow(CGFloat(x), CGFloat(1 / self)))
   }

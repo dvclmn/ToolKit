@@ -15,7 +15,7 @@ extension Dictionary {
   /// - Parameters:
   ///   - keys:      The subset of keys to affect.
   ///   - keyPath:   The Bool property to mutate inside each Value.
-  ///   - default:   A factory to supply a value when a key is missing.
+  ///   - defaultValue: A factory to supply a value when a key is missing.
   ///   - strategy:  How to decide the on/off behaviour.
   public mutating func toggleValues(
     for keys: Set<Key>,
@@ -23,7 +23,7 @@ extension Dictionary {
     default defaultValue: (Key) -> Value,
     strategy: ToggleStrategy
   ) {
-    /// capture the current states (providing defaults for missing keys)
+    // Capture the current states, providing defaults for missing keys.
     let states: [Bool] = keys.map { self[$0, default: defaultValue($0)][keyPath: keyPath] }
 
     if let target = states.target(for: strategy) {

@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// Convenience for Bool toggles
-/// Note: Will probably need per-AppStorage-supported-types declarations?
+/// A persistence key specialised for boolean toggle state.
 public protocol ToggleKey: PersistenceKey where Value == Bool {
 
   static var displayName: String { get }
@@ -19,7 +18,7 @@ extension ToggleKey {
 
   public static var defaultValue: Bool { true }
 
-  /// "{domain}.{section}{KindSuffix}"
+  /// Builds a storage key in the form `{domain}.{section}{KindSuffix}`.
   public static func key(
     from domain: String,
     _ section: String,
@@ -27,9 +26,10 @@ extension ToggleKey {
     "\(domain).\(section)\(kind.camelSuffix)"
   }
 
-  /// Default displayName derived from storageKey:
-  /// "breathingWaves.lineStyleExpanded" -> "Line Style"
-  /// "actionLines.colourPickerEnabled" -> "Colour Picker"
+  /// A display name derived from ``PersistenceKey/storageKey`` by removing the
+  /// toggle kind suffix and splitting camel case.
+  ///
+  /// For example, `breathingWaves.lineStyleExpanded` becomes `Line Style`.
   public static var displayName: String {
     let last = storageKey.split(separator: ".").last.map(String.init) ?? storageKey
     let section =

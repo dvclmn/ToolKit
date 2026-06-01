@@ -7,16 +7,15 @@
 
 import Foundation
 
-/// Previously conformed to `Equatable` and `Hashable`, have removed
-/// for some flexibility over in DisplayString
+/// A value that can provide a stable identifier and display label.
 public protocol LabeledItem: Identifiable {
   var label: QuickLabel { get }
 }
 
-/// Convenience where if the `LabeledItem` can provide a raw string, then use that
-/// No guarantee that the string will be correctly formatted though, in terms of casing.
 extension LabeledItem where Self: RawRepresentable, Self.RawValue == String {
   public var id: String { rawValue }
+
+  /// A default label derived by capitalising the first character of `rawValue`.
   public var label: QuickLabel {
     let result = rawValue.prefix(1).uppercased() + rawValue.dropFirst()
     return .init(result)

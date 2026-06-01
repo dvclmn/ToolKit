@@ -5,18 +5,15 @@
 //  Created by Dave Coleman on 1/4/2026.
 //
 
-/// A simple registry. Only for catching duplicate keys at runtime (during development)
-/// Call at app launch:
-/// ```
-///  public static func registerAll() {
-///    register(ShaderEnabledKey.self)
-///    register(AdvancedControlsKey.self)
-///  }
-///  ```
+/// A development-time registry for detecting duplicate persistence keys.
+///
+/// Register key types at app launch to assert that no two key declarations use
+/// the same storage string.
 @MainActor
 public enum PersistenceKeyRegistry: Sendable {
   private static var registeredKeys: Set<String> = []
   
+  /// Registers a key type and asserts if its storage key has already been registered.
   public static func register<K: PersistenceKey>(_ keyType: K.Type) {
     let key = K.storageKey
     assert(

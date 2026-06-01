@@ -5,19 +5,9 @@
 //  Created by Dave Coleman on 15/12/2025.
 //
 
-/// A convenience protocol for types that expose two scalar components addressable by axis.
-///
-/// Conforming types (for example `CGPoint` (x/y), `CGSize` (width/height), `UnitPoint`,
-/// and `CGVector`) gain ergonomic helpers for reading and writing values along a
-/// `GeometryAxis` while honoring an `AxisMapping` (identity vs. transposed).
-///
-/// Use these APIs when the usual assumptions (x → horizontal, y → vertical) don't always
-/// hold. By threading an explicit `AxisMapping`, you can write axis-oriented code that
-/// remains correct under rotated/transposed coordinate systems.
-
 // MARK: - Adjustable
 
-/// Cross-value adjustments for `AdjustableByAxis` types.
+/// Cross-value adjustments for axis-addressable types.
 ///
 /// These helpers combine two axis-addressable values using a transform. They read
 /// corresponding axis components from `self` and `other` and compute a new value.

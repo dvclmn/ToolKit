@@ -7,10 +7,13 @@
 
 import Foundation
 
+/// Utilities for downloading remote image data to disk.
 public enum ImageDownload {
   
-  /// Downloads image file from the provided web URL,
-  ///  and returns a file path URL
+  /// Downloads an image from `webURL` into Application Support.
+  ///
+  /// - Returns: The local file URL for the saved image, or `nil` if the URL is
+  ///   missing or the download/write fails.
   @discardableResult
   public static func downloadImageToDisk(from webURL: URL?) async -> URL? {
     guard let url = webURL else {

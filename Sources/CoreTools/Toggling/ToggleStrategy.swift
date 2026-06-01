@@ -7,33 +7,25 @@
 
 import Foundation
 
-/// Determines the target state when toggling a collection of boolean values
+/// Determines how a group of boolean values should be toggled.
 public enum ToggleStrategy {
-  /// If all same state, toggle. If mixed, set all to true
+  /// Toggles a uniform group, or sets a mixed group to `true`.
   case preferTrue
 
-  /// If all same state, toggle. If mixed, set all to false
+  /// Toggles a uniform group, or sets a mixed group to `false`.
   case preferFalse
 
-  /// If all same state, toggle. If mixed, set to majority state
+  /// Toggles a uniform group, or sets a mixed group to the majority value.
   case followMajority
 
-  /// Invert the state of each toggle to its opposite
+  /// Inverts each value independently.
   case invert
 }
 
-/// Usage examples:
-/// ```
-/// extension Collection where Element == Bool {
-///   // Convenience method that combines the logic for easy use
-///   func shouldToggleIndividually(strategy: ToggleStrategy = .preferTrue) -> Bool {
-///     return toggleAction(strategy: strategy) == nil
-///   }
-/// }
-/// ```
 extension Collection where Element == Bool {
   
-  /// Decide a single “target” value if the strategy calls for it.
+  /// Decides a single target value if the strategy calls for one.
+  ///
   /// Returns `nil` when each element must be flipped individually (the `.invert` case).
   package func target(for strategy: ToggleStrategy) -> Bool? {
     guard !isEmpty else { return true }
@@ -57,18 +49,13 @@ extension Collection where Element == Bool {
         return trueCount >= falseCount
         
       case .invert:
-        return nil   // signal: toggle each item individually
+        return nil  // Signal that each item should be toggled individually.
     }
   }
 }
 
-/// Usage example:
-///
-/// ```
-/// var items = [Item(flag: true), Item(flag: false)]
-/// items.toggleAll(at: \.flag, strategy: .invert)
-/// ```
 extension MutableCollection {
+  /// Toggles a boolean property on every element using `strategy`.
   public mutating func toggleAll(
     at keyPath: WritableKeyPath<Element, Bool>,
     strategy: ToggleStrategy
@@ -88,6 +75,7 @@ extension MutableCollection {
 }
 
 extension Collection {
+  /// Returns copies of the elements with a boolean property toggled using `strategy`.
   func toggled(
     at keyPath: WritableKeyPath<Element, Bool>,
     strategy: ToggleStrategy

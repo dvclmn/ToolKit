@@ -7,9 +7,9 @@
 
 import Foundation
 
-// Note to self: Both the optional and non-optional variants of
-// `updateIfChanged` are required for the compiler to be happy.
-
+/// Updates `target` only when it differs from `newValue`.
+///
+/// - Returns: `true` when the value changed.
 @discardableResult
 public func updateIfChanged<T: Equatable>(
   _ target: inout T,
@@ -20,6 +20,9 @@ public func updateIfChanged<T: Equatable>(
   return true
 }
 
+/// Updates an optional `target` only when it differs from `newValue`.
+///
+/// - Returns: `true` when the value changed.
 @discardableResult
 public func updateIfChanged<T: Equatable>(
   _ target: inout T?,
@@ -30,6 +33,9 @@ public func updateIfChanged<T: Equatable>(
   return true
 }
 
+/// Assigns `newValue` only when `target` is currently `nil`.
+///
+/// - Returns: `true` when the value was assigned.
 @discardableResult
 public func updateIfNil<T: Equatable>(
   _ target: inout T?,
@@ -42,17 +48,9 @@ public func updateIfNil<T: Equatable>(
   return false
 }
 
-/// ```
-/// performIfChanged(oldValue, newValue,
-///   perform: didUpdateScrollContext(newValue)
-/// )
-/// ```
-/// Or with an explicit closure
-/// ```
-/// performIfChanged(oldValue, newValue) {
-///   didUpdateScrollContext(newValue)
-/// )
-/// ```
+/// Performs `perform` only when `oldValue` and `newValue` differ.
+///
+/// - Returns: `true` when the action ran.
 @discardableResult
 public func performIfChanged<T: Equatable>(
   _ oldValue: T,
@@ -64,22 +62,9 @@ public func performIfChanged<T: Equatable>(
   return true
 }
 
-//@discardableResult
-//public func performIfNil<T: Equatable>(
-//  _ oldValue: T?,
-//  _ newValue: T,
-//  perform: @autoclosure () -> Void
-//) -> Bool {
-//  if oldValue == nil {
-//    oldValue = newValue
-//    return true
-//  }
-//  return false
-////  guard oldValue != newValue else { return false }
-////  perform()
-////  return true
-//}
-
+/// Updates a writable key-path value only when it differs from `newValue`.
+///
+/// - Returns: `true` when the value changed.
 @discardableResult
 public func updateIfChanged<Root, Value: Equatable>(
   _ object: inout Root,
@@ -91,6 +76,9 @@ public func updateIfChanged<Root, Value: Equatable>(
   return true
 }
 
+/// Updates an optional writable key-path value only when it differs from `newValue`.
+///
+/// - Returns: `true` when the value changed.
 @discardableResult
 public func updateIfChanged<Root, Value: Equatable>(
   _ object: inout Root,
@@ -102,30 +90,9 @@ public func updateIfChanged<Root, Value: Equatable>(
   return true
 }
 
-//@discardableResult
-//public func updateIfChanged<T: Equatable>(_ newValue: T, into target: inout T) -> Bool {
-//  guard target != newValue else { return false }
-//  target = newValue
-//  return true
-//}
-//
-//public func updateOptionalIfChanged<T: Equatable>(_ value: T, into target: inout T?) -> Bool {
-//  guard target != value else { return false }
-//  target = value
-//  return true
-//}
-//
-//@discardableResult
-//public func updateIfChanged<Root, Value: Equatable>(
-//  _ newValue: Value,
-//  on object: inout Root,
-//  keyPath: WritableKeyPath<Root, Value>
-//) -> Bool {
-//  guard object[keyPath: keyPath] != newValue else { return false }
-//  object[keyPath: keyPath] = newValue
-//  return true
-//}
-
+/// Updates a key-path value on an optional root only when it differs from `newValue`.
+///
+/// - Returns: `true` when the value changed.
 @discardableResult
 public func updateIfChangedWithOptionalRoot<Root, Value: Equatable>(
   _ newValue: Value,
@@ -136,19 +103,3 @@ public func updateIfChangedWithOptionalRoot<Root, Value: Equatable>(
   object?[keyPath: keyPath] = newValue
   return true
 }
-
-/// ```
-/// runIfChanged(newZoom, comparedTo: store.canvasState.zoom) {
-///   print("Zoom changed, do something")
-/// }
-/// ```
-//@discardableResult
-//public func runIfChanged<T: Equatable>(
-//  _ newValue: T,
-//  comparedTo currentValue: T,
-//  perform action: () -> Void
-//) -> Bool {
-//  guard newValue != currentValue else { return false }
-//  action()
-//  return true
-//}

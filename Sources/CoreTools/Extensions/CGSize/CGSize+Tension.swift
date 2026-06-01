@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// The boundary used when applying drag tension to a size offset.
 public enum DragTensionArea {
   case shortestDimension(CGFloat)
   case widthAndHeight(CGSize)
@@ -14,9 +15,10 @@ public enum DragTensionArea {
 
 extension CGSize {
 
-  /// Applies a non-linear "elastic" tension, where `self` is a raw drag offset
+  /// Applies a non-linear elastic tension, treating `self` as a raw drag offset.
+  ///
   /// - Parameters:
-  ///   - area: Defines the tension boundary - either uniform based on shortest dimension or independent for width/height
+  ///   - area: Defines either a uniform boundary or independent width/height boundaries.
   ///   - tension: Controls the softness of the pull. Larger = softer.
   /// - Returns: A new offset, scaled to feel like it's tethered by an elastic band.
   public func applyTension(

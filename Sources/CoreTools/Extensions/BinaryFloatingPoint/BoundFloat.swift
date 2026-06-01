@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// A floating-point value paired with bounds and an optional step amount.
 public struct BoundFloat<T: BinaryFloatingPoint> {
   public var value: T
   public let range: ClosedRange<T>
@@ -24,6 +25,7 @@ public struct BoundFloat<T: BinaryFloatingPoint> {
 }
 
 extension BoundFloat {
+  /// The value clamped to ``range``.
   public var clamped: T {
     value.clamped(to: range)
   }

@@ -17,7 +17,7 @@ public struct StretchOptions: OptionSet, Sendable {
   static let normalised = StretchOptions(rawValue: 1 << 0)
 
   /// Clamps the stretched result.
-  public static let clamped = StretchOptions(rawValue: 1 << 0)
+  public static let clamped = StretchOptions(rawValue: 2 << 0)
 
   public init(rawValue: Int) {
     self.rawValue = rawValue

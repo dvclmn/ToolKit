@@ -17,7 +17,6 @@ let package = Package(
       ],
     ),
     .library(name: "ViewTools", targets: ["ViewTools"]),
-
     .library(name: "ColourTools", targets: ["ColourTools"]),
 
   ],

@@ -38,24 +38,16 @@ extension CGRect {
     return CGRect(origin: start, size: size).standardized
   }
 
-  package static let exampleZeroOrigin100x100 = CGRect(
-    origin: .zero, size: CGSize(width: 100, height: 100),
-  )
-
-  // Edges
+  // MARK: Edges
   public var leadingEdge: CGFloat { minX }
   public var trailingEdge: CGFloat { maxX }
   public var topEdge: CGFloat { minY }
   public var bottomEdge: CGFloat { maxY }
 
-  // Dimensions
-  // TODO: These need to be passed through the AxisMapping pipeline, to be safer
-  public var horizontal: ClosedRange<CGFloat> { minX...maxX }
-  public var vertical: ClosedRange<CGFloat> { minY...maxY }
-
 }
 
-// MARK: - Convenience initialisers
+// MARK: - Convenience inits
+
 extension CGRect {
 
   /// Creates a rect with an origin of zero, and size from provided `size`

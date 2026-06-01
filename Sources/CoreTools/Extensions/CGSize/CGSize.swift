@@ -5,9 +5,8 @@
 //  Created by Dave Coleman on 12/11/2024.
 //
 
-
-import Foundation
 import CoreGraphics
+import Foundation
 
 extension CGSize: @retroactive Hashable {
   public func hash(into hasher: inout Hasher) {
@@ -20,11 +19,6 @@ extension CGSize {
   public init<T: BinaryFloatingPoint>(fromLength length: T) {
     self.init(width: CGFloat(length), height: CGFloat(length))
   }
-
-  public init<T: BinaryFloatingPoint>(_ width: T, _ height: T) {
-    self.init(width: CGFloat(width), height: CGFloat(height))
-  }
-
 }
 
 extension CGSize {

@@ -17,7 +17,7 @@ extension Optional where Wrapped: BinaryFloatingPoint {
 }
 
 extension Optional where Wrapped == Bool {
-  public var _boundBool: Bool? {
+  var _boundBool: Bool? {
     get { self }
     set { self = newValue }
   }

@@ -7,4 +7,4 @@
 
 import Foundation
 
-public protocol HashableID: Identifiable, Sendable where Self.ID: Hashable {}
+//public protocol HashableID: Identifiable, Sendable where Self.ID: Hashable {}

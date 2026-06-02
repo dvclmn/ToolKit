@@ -17,31 +17,6 @@ extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConv
       .map { $0.key.description + keyValueSeparator + $0.value.description }
       .joined(separator: pairSeparator)
   }
-
-  package func prettyPrinted(aligned: Bool = true) -> String {
-    guard !isEmpty else { return "[:]" }
-
-    let pairs = map {
-      (key: "\"\($0)\":", value: "\"\($1)\"")
-    }
-    .sorted { $0.key < $1.key }
-
-    let lines: [String]
-
-    if aligned {
-      let maxKeyLength = pairs.map(\.key.count).max() ?? 0
-      lines = pairs.map { key, value in
-        let padding = String(repeating: " ", count: maxKeyLength - key.count + 1)
-        return "    \(key)\(padding)\(value)"
-      }
-    } else {
-      lines = pairs.map { key, value in
-        "    \(key) \(value)"
-      }
-    }
-
-    return "[\n\(lines.joined(separator: "\n"))\n]"
-  }
 }
 
 extension Dictionary {

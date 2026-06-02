@@ -16,11 +16,8 @@ extension CaseCyclable {
   /// Returns the next case, optionally wrapping from the last case to the first.
   public func toNext(wrapping: Bool = true) -> Self {
     guard let currentIndex else { return Self.defaultCase }
-
-    let nextIndex = cases.index(after: currentIndex)
-
-    guard nextIndex != cases.endIndex else {
-      return wrapping ? (cases.first ?? Self.defaultCase) : self
+    guard let nextIndex = cases.nextIndex(after: currentIndex, wrapping: wrapping) else {
+      return self
     }
     return cases[nextIndex]
   }
@@ -28,12 +25,10 @@ extension CaseCyclable {
   /// Returns the previous case, optionally wrapping from the first case to the last.
   public func toPrevious(wrapping: Bool = true) -> Self {
     guard let currentIndex else { return Self.defaultCase }
-
-    guard currentIndex != cases.startIndex else {
-      return wrapping ? (cases.last ?? Self.defaultCase) : self
+    guard let previousIndex = cases.previousIndex(before: currentIndex, wrapping: wrapping) else {
+      return self
     }
-    let prevIndex = cases.index(before: currentIndex)
-    return cases[prevIndex]
+    return cases[previousIndex]
   }
 
   private var currentIndex: Self.AllCases.Index? {

@@ -39,8 +39,8 @@ extension CGPoint {
   /// Aligns with VectorArithmetic's logic.
   public func lerp(to end: CGPoint, t: CGFloat) -> CGPoint {
     CGPoint(
-      x: x.interpolated(towards: end.x, amount: t),
-      y: y.interpolated(towards: end.y, amount: t),
+      x: x + (end.x - x) * t,
+      y: y + (end.y - y) * t,
     )
   }
 

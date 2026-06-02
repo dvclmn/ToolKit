@@ -8,7 +8,6 @@
 import Foundation
 
 extension BinaryFloatingPoint {
-
   /// Wrap into `[0, 1)`
   @inlinable public func wrappedUnit() -> Self {
     let r = self.truncatingRemainder(dividingBy: 1)
@@ -48,11 +47,7 @@ extension Optional where Wrapped: BinaryFloatingPoint {
       case (let a?, nil): return a
       case (nil, let b?): return b
       case (let a?, let b?):
-        let interpolated = Double(a).interpolated(
-          towards: Double(b),
-          amount: Double(amount),
-        )
-        return Wrapped(interpolated)
+        return a + (b - a) * amount
     }
   }
   public func interpolatedHue(

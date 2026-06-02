@@ -10,31 +10,22 @@ import Foundation
 extension Collection where Element: Comparable {
   /// Returns the next logical element after `current`.
   ///
-  /// If `current` is not present, this returns the first element that is
-  /// strictly greater than `current`. See <doc:ValueStepping> for examples.
+  /// Values are compared in sorted order. This means exact and inexact inputs
+  /// behave consistently, regardless of the collection's storage order.
   public func nextValueLoosely(after current: Element, wrapping: Bool = false) -> Element? {
-    let array = Array(self)
-    if let exact = array.firstIndex(of: current) {
-      return array.nextValue(after: array[exact], wrapping: wrapping)
-    }
-    // Fallback: choose the smallest element greater than current
-    if let nextGreater = array.sorted().first(where: { $0 > current }) {
+    let sorted = sorted()
+    if let nextGreater = sorted.first(where: { $0 > current }) {
       return nextGreater
     }
-    return wrapping ? array.sorted().first : nil
+    return wrapping ? sorted.first : nil
   }
 
   /// Returns the previous logical element before `current`.
   ///
-  /// If `current` is not present, this returns the greatest element that is
-  /// strictly less than `current`.
+  /// Values are compared in sorted order. This means exact and inexact inputs
+  /// behave consistently, regardless of the collection's storage order.
   public func previousValueLoosely(before current: Element, wrapping: Bool = false) -> Element? {
-    let array = Array(self)
-    if let exact = array.firstIndex(of: current) {
-      return array.previousValue(before: array[exact], wrapping: wrapping)
-    }
-    // Fallback: choose the greatest element less than current
-    let sorted = array.sorted()
+    let sorted = sorted()
     if let idx = sorted.lastIndex(where: { $0 < current }) {
       return sorted[idx]
     }
@@ -55,13 +46,14 @@ extension Collection where Element: Comparable {
 extension Comparable {
   /// Steps this value by one position within `allowed`.
   ///
-  /// If this value is not exactly present in `allowed`, the result falls back to
-  /// the next greater value for `.up`, or the next lesser value for `.down`.
-  public func steppedLoosely(
-    in allowed: [Self],
+  /// The allowed values are compared in sorted order. If this value is not exactly
+  /// present in `allowed`, the result falls back to the next greater value for `.up`,
+  /// or the next lesser value for `.down`.
+  public func steppedLoosely<C>(
+    in allowed: C,
     direction: StepDirection = .up,
     wrapping: Bool = false
-  ) -> Self? {
+  ) -> Self? where C: Collection, C.Element == Self {
     switch direction {
       case .up: return allowed.nextValueLoosely(after: self, wrapping: wrapping)
       case .down: return allowed.previousValueLoosely(before: self, wrapping: wrapping)

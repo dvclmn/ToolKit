@@ -1,13 +1,14 @@
 # Value Stepping
 
-Step through ordered sets of allowed values, including cases where the current
-value is between two allowed entries.
+Step through exact collection positions or sorted sets of allowed values,
+including cases where the current value is between two allowed entries.
 
 ## Overview
 
-Use the exact stepping helpers when the current value is already in the
-collection. Use the loose helpers when the value may sit between allowed values,
-such as a font size or zoom level controlled by predefined stops.
+Use the exact stepping helpers when the current value is already in the collection
+and the collection's existing order matters. Use the loose helpers when the value
+may sit between allowed values, such as a font size or zoom level controlled by
+predefined stops. Loose helpers compare allowed values in sorted order.
 
 ```swift
 import CoreGraphics
@@ -27,7 +28,7 @@ Collections can perform the same lookup directly:
 ```swift
 let values = [10, 20, 30]
 
-let exactNext = values.nextValue(after: 20)
+let exactNext = values.nextElement(after: 20, wrapping: false)
 let looseNext = values.nextValueLoosely(after: 25)
 ```
 

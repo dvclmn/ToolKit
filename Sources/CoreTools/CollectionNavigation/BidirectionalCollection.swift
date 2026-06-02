@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 17/12/2024.
 //
 
-
 // MARK: - Navigate by Index
 extension BidirectionalCollection {
   public func nextIndex(
@@ -60,4 +59,3 @@ extension BidirectionalCollection where Element: Equatable {
     return self[prev]
   }
 }
-

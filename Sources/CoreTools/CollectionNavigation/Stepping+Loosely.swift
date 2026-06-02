@@ -7,8 +7,6 @@
 
 import Foundation
 
-// MARK: - Collection helpers (Comparable fallback when `current` not found)
-
 extension Collection where Element: Comparable {
   /// Returns the next logical element after `current`.
   ///
@@ -53,8 +51,6 @@ extension Collection where Element: Comparable {
     }
   }
 }
-
-// MARK: - Value-centric helpers
 
 extension Comparable {
   /// Steps this value by one position within `allowed`.

@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 5/3/2026.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 extension Binding where Value: Equatable {
   /// Steps the wrapped value within `allowed`.
@@ -53,21 +53,20 @@ extension Equatable {
   fileprivate func stepped(
     in allowed: [Self],
     direction: StepDirection = .up,
-    wrapping: Bool = false
+    wrapping: Bool = false,
   ) -> Self? {
     switch direction {
       case .up: return allowed.nextValue(after: self, wrapping: wrapping)
       case .down: return allowed.previousValue(before: self, wrapping: wrapping)
     }
   }
-  
+
   /// Mutates `self` to the stepped value within `allowed` if possible.
   fileprivate mutating func stepInPlace(
     in allowed: [Self],
     direction: StepDirection = .up,
-    wrapping: Bool = false
-  )
-  {
+    wrapping: Bool = false,
+  ) {
     if let v = self.stepped(in: allowed, direction: direction, wrapping: wrapping) {
       self = v
     }

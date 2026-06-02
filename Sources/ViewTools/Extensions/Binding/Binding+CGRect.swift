@@ -36,31 +36,6 @@ extension Binding where Value == CGRect {
   }
 }
 
-// MARK: - Binding CGSize
-extension Binding where Value == CGSize {
-  /// This ignores the rect's anchor, so leaves it at `zero`
-  /// Just focuses on the rect's `size`
-  public var toBindingRect: Binding<CGRect> {
-    return Binding<CGRect> {
-      wrappedValue.toCGRectZeroOrigin
-    } set: {
-      wrappedValue = $0.size
-    }
-  }
-}
-
-extension Binding where Value == CGSize? {
-  /// This ignores the rect's anchor, so leaves it at `zero`
-  /// Just focuses on the rect's `size`
-  public var toBindingRect: Binding<CGRect?> {
-    return Binding<CGRect?> {
-      wrappedValue?.toCGRectZeroOrigin
-    } set: {
-      wrappedValue = $0?.size
-    }
-  }
-}
-
 extension Binding where Value == CGFloat? {
   public func toBindingRect(
     along axis: GeometryAxis,

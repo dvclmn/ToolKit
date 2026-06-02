@@ -26,3 +26,17 @@ import Foundation
 ) {
   print("`\(value)` did not match expected result `\(expectation)`, in method `\(consumer)`")
 }
+
+@_spi(Internal) public func printPadded(
+  _ items: Any...,
+  separator: String = " ",
+  withTimestamp: Bool = true,
+) {
+  let adjustedMessage = "\(items)\n\n"
+  guard withTimestamp else {
+    print(adjustedMessage, separator: separator)
+    return
+  }
+  
+  print("(\(Date.debug)) " + adjustedMessage, separator: separator)
+}

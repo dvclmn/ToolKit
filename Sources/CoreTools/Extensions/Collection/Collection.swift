@@ -1,87 +1,12 @@
 //
 //  Collection.swift
-//  Collection
+//  ToolKit
 //
-//  Created by Dave Coleman on 17/12/2024.
+//  Created by Dave Coleman on 2/6/2026.
 //
 
 extension Collection {
   public var toArray: [Element] {
     return Array(self)
-  }
-}
-
-extension BidirectionalCollection {
-  public func nextIndex(
-    after index: Index,
-    wrapping: Bool = true,
-  ) -> Index? {
-    guard !isEmpty else { return nil }
-
-    let next = self.index(after: index)
-    guard next != endIndex else {
-      return wrapping ? startIndex : nil
-    }
-    return next
-  }
-
-  public func previousIndex(
-    before index: Index,
-    wrapping: Bool = true,
-  ) -> Index? {
-    guard !isEmpty else { return nil }
-
-    guard index != startIndex else {
-      return wrapping ? self.index(before: endIndex) : nil
-    }
-    return self.index(before: index)
-  }
-}
-
-extension BidirectionalCollection where Element: Equatable {
-  public func nextElement(
-    after element: Element,
-    wrapping: Bool = true,
-  ) -> Element? {
-    guard
-      let i = firstIndex(of: element),
-      let next = nextIndex(after: i, wrapping: wrapping)
-    else { return nil }
-
-    return self[next]
-  }
-
-  public func previousElement(
-    before element: Element,
-    wrapping: Bool = true,
-  ) -> Element? {
-    guard
-      let i = firstIndex(of: element),
-      let prev = previousIndex(before: i, wrapping: wrapping)
-    else { return nil }
-
-    return self[prev]
-  }
-}
-extension Collection where Element: Hashable {
-  /// Returns `true` when `selection` contains exactly this collection's first element.
-  public func isOnlyFirstSelected(
-    in selection: Set<Element>
-  ) -> Bool {
-    guard let firstResultID = self.first else {
-      return false
-    }
-
-    guard selection.count == 1,
-      let firstSelected = selection.first
-    else { return false }
-    return firstResultID == firstSelected
-  }
-
-  public func isOnlyElementSelected(
-    _ element: Element,
-    in selection: Set<Element>,
-  ) -> Bool {
-    selection.count == 1 && selection.first == element
   }
 }

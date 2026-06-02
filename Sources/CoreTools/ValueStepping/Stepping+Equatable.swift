@@ -7,9 +7,8 @@
 
 import Foundation
 
-
-
 extension Collection where Element: Equatable {
+  
   /// Returns the next element after `current` within this collection, or `nil` if `current` is not found
   /// and no Comparable-based fallback is available.
   /// - Parameters:

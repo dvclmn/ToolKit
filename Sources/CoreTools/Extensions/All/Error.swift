@@ -8,7 +8,7 @@
 import Foundation
 
 extension DecodingError {
-  package var name: String {
+  @_spi(Internal) public var name: String {
     switch self {
       case .typeMismatch(let type, _): "Type Mismatch. Expected Type: `\(type)`"
       case .valueNotFound(let type, _): "Value not Found. Expected Type: `\(type)`"
@@ -20,7 +20,7 @@ extension DecodingError {
 }
 
 extension DecodingError.Context {
-  package var name: String {
+  @_spi(Internal) public var name: String {
     return """
       Decoding Error Context:
       Coding Path: \(self.codingPath)

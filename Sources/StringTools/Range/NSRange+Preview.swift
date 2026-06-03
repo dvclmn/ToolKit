@@ -14,7 +14,7 @@ extension NSRange {
     maxRangePreviewLength: Int? = nil,
     maxContextLength: Int = 30,
     indentCharacter: Character = "│",
-    highlight: (String) -> String = { "░\($0)░" }
+    highlight: (String) -> String = { "░\($0)░" },
   ) -> String {
     guard let stringRange = toStringRange(in: text) else {
       return "Unable to convert NSRange to Range<String.Index>"
@@ -24,11 +24,10 @@ extension NSRange {
       maxRangePreviewLength: maxRangePreviewLength,
       maxContextLength: maxContextLength,
       indentCharacter: indentCharacter,
-      highlight: highlight
+      highlight: highlight,
     )
   }
-  
-  
+
   public func toStringRange(in text: String) -> Range<String.Index>? {
     Range(self, in: text)
   }

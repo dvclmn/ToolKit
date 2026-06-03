@@ -8,8 +8,7 @@
 import Foundation
 
 extension AttributedString {
-  //  public var toString: String { String(self.characters) }
-
+  
   public func index(at offset: Int) -> AttributedString.Index? {
     guard offset >= 0 && offset <= characters.count else {
       return nil

@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 9/10/2024.
 //
 
-
 import Foundation
 
 // Source - https://stackoverflow.com/a
@@ -30,32 +29,14 @@ extension StringProtocol {
 
 extension String {
 
-  //  public func safeIndex(
-  //    _ i: String.Index,
-  //    at offset: Int,
-  //  ) -> String.Index? {
-  //    self.index(<#T##i: Index##Index#>, offsetBy: <#T##Int#>, limitedBy: <#T##Index#>)
-  ////    guard let index = self[saf] else { return nil }
-  ////    self.index(i, offsetBy: <#T##Int#>, limitedBy: <#T##String.Index#>)
-  ////    .index(
-  ////      self[keyPath: part.boundPath],
-  ////      offsetBy: part.calculateOffset(contextLength),
-  ////      limitedBy: text.startIndex
-  ////    )
-  //  }
-
   public var capitalizedFirstLetter: String {
     return prefix(1).uppercased() + dropFirst()
   }
 
-//  public mutating func capitalizeFirstLetter() {
-//    self = self.capitalizingFirstLetter
-//  }
-
   /// Pads the string with spaces on the right to at least the given width.
   public func padded(
     to width: Int,
-    using padString: String = " "
+    using padString: String = " ",
   ) -> String {
     if count >= width { return self }
     return self + String(repeating: padString, count: width - count)
@@ -63,15 +44,10 @@ extension String {
 
   public func combining(
     with other: String,
-    separator: String = ", "
+    separator: String = ", ",
   ) -> String {
     self + separator + other
   }
-
-  //  public func findMatches(for pattern: Regex<Substring>) -> [RegexMatch] {
-  //    let matches = self.matches(of: pattern)
-  //    return matches
-  //  }
 
   public var wordCount: Int {
     let words = self.split { !$0.isLetter }
@@ -108,6 +84,7 @@ extension String {
 }
 
 extension Array where Element == String {
+  
   public func joined(_ separator: String) -> String {
     self.joined(separator: separator)
   }
@@ -145,9 +122,3 @@ extension UUID {
     self.uuidString.truncate(to: maxLength, style: style)
   }
 }
-
-//extension Range where Bound == String.Index {
-//  public func toNSRange(in string: String) -> NSRange? {
-//    return string.nsRange(from: self)
-//  }
-//}

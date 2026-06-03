@@ -8,8 +8,10 @@
 import AppKit
 import Foundation
 
-/// Akin to a document AST node. Each block knows how to render itself
-/// given a float format and a label style.
+/// A top-level node in a display string.
+///
+/// Each block knows how to render itself using a floating-point format and
+/// label style supplied by ``DisplayString``.
 public enum DisplayBlock: Sendable {
   case text(DisplayFragment)
   case labeled(Labeled)
@@ -19,8 +21,7 @@ public enum DisplayBlock: Sendable {
 
 extension DisplayBlock {
 
-  /// `labelStyle` is the layer-4 concern: how a top-level block label is displayed.
-  /// Default is `.standard`; callers (e.g. `DisplayString`) can override.
+  /// Renders the block using the supplied formatting context.
   public func render(
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,
@@ -50,13 +51,3 @@ extension DisplayBlock: ExpressibleByStringLiteral {
     self = .text(.make(from: value))
   }
 }
-
-//extension DisplayBlock {
-//  var indentationDepth: Int {
-//    switch self {
-//      case .indented(let indented):
-//        1 + (indented.content.map(\.indentationDepth).max() ?? 0)
-//      default: 0
-//    }
-//  }
-//}

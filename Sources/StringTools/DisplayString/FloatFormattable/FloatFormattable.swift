@@ -8,19 +8,21 @@
 
 import Foundation
 
-//public protocol FloatFormattable: BinaryFloatingPoint, DisplayPresetRenderable {
+/// A floating-point value that can render itself using ``FloatDisplayFormat``.
 public protocol FloatFormattable: BinaryFloatingPoint, DisplayFragmentRenderable, DisplayPresetRenderable {
   func render(using format: FloatDisplayFormat) -> String
 }
 
+/// Grouping strategy used by floating-point format styles.
 public typealias NumberGrouping = FloatingPointFormatStyle<Double>.Configuration.Grouping
 
 extension FloatFormattable {
+  /// Renders the value using a display preset.
   public func displayString(_ preset: FloatDisplayPreset) -> String {
     render(using: preset.format)
   }
 
-  /// Conformance to `DisplayFragmentRenderable`
+  /// Renders the value as a display fragment.
   public func render(
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,
@@ -29,16 +31,6 @@ extension FloatFormattable {
     render(using: format)
   }
 }
-
-/// This protocol combo is unlikely to exist, but just in case
-//extension FloatFormattable where Self: FloatComponentsLabeled {
-//  public var displayString: String {
-//    renderProperties(using: .default)
-//  }
-//  public func displayString(_ preset: FloatDisplayPreset) -> String {
-//    renderProperties(using: preset.format)
-//  }
-//}
 
 extension Double: FloatFormattable {}
 extension CGFloat: FloatFormattable {}

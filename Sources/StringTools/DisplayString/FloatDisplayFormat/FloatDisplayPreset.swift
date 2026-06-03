@@ -7,12 +7,21 @@
 
 import Foundation
 
+/// Preset floating-point display formats.
 public enum FloatDisplayPreset: String, CaseIterable, Sendable {
+  /// Two decimal places with automatic grouping.
   case standard
+  
+  /// No decimal places.
   case concise
-  case wholeNumber // No decimal places
+  
+  /// No decimal places.
+  case wholeNumber
+  
+  /// Always reserve sign space, replacing visible plus signs with a space.
   case showSign
 
+  /// The concrete format for the preset.
   public var format: FloatDisplayFormat {
     switch self {
       case .standard: .init()

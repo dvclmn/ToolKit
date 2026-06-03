@@ -9,6 +9,7 @@ import Foundation
 
 extension WidthCounter {
 
+  /// Generates a compact ruler line for the configured width.
   public func generateCompactCounter() -> String {
     let startingFrom: Int = 0
 
@@ -19,7 +20,7 @@ extension WidthCounter {
       if i % 10 == 5 {
         compactLine += spaces + "· "
       } else {
-        /// Align two-digit numbers with the first digit over the marker
+        // Align two-digit numbers with the first digit over the marker.
         if i >= 10 {
           compactLine += String(repeating: " ", count: 3) + String(i)
         } else {
@@ -29,14 +30,14 @@ extension WidthCounter {
       i += 5
     }
 
-    /// Handle the final number
+    // Handle the final number.
     if width % 5 != 0 {
       let lastNumberString = String(width)
       let spacesNeeded = width - compactLine.count - lastNumberString.count
       if spacesNeeded > 0 {
         compactLine += String(repeating: " ", count: spacesNeeded) + lastNumberString
       } else {
-        /// If we've overshot, trim the line and add the last number
+        // If we've overshot, trim the line and add the last number.
         compactLine = String(compactLine.prefix(width - lastNumberString.count)) + lastNumberString
       }
     }

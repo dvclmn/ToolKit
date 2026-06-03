@@ -6,9 +6,15 @@
 //
 
 extension AbbreviableLabel {
+  /// Controls which form of an ``AbbreviableLabel`` is rendered.
   public enum Style: Equatable, Sendable {
+    /// Suppress the label.
     case none
+    
+    /// Render the standard label.
     case standard
+    
+    /// Render the abbreviated label when available.
     case abbreviated
   }
 }

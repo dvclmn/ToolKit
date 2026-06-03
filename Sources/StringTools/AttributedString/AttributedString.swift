@@ -1,6 +1,6 @@
 //
 //  AttributedString.swift
-//  TextCore
+//  StringTools
 //
 //  Created by Dave Coleman on 31/8/2024.
 //
@@ -9,6 +9,7 @@ import Foundation
 
 extension AttributedString {
   
+  /// Returns the attributed-string index at a character offset.
   public func index(at offset: Int) -> AttributedString.Index? {
     guard offset >= 0 && offset <= characters.count else {
       return nil
@@ -16,29 +17,17 @@ extension AttributedString {
     return index(startIndex, offsetByCharacters: offset)
   }
 
-  ///
-  /// ```
-  /// var output = attrString
-  ///
-  /// let numberByNumberPattern: Regex.TripleCapture = /([\d\.]+)(x)([\d\.]+)/
-  ///
-  /// if let ranges = getRange(for: numberByNumberPattern, in: output) {
-  ///   output[ranges.0].setAttributes(style(for: part, subPart: .number))
-  ///   output[ranges.1].setAttributes(style(for: part, subPart: .operator))
-  ///   output[ranges.2].setAttributes(style(for: part, subPart: .number))
-  /// }
-  ///
-  /// return output
-  /// ```
-
+  /// Splits the attributed string's characters into line substrings.
   public func lines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [Substring] {
     toString.lines(omissionStrategy: omissionStrategy)
   }
 
+  /// Splits the attributed string's characters into `String` lines.
   public func stringLines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [String] {
     toString.stringLines(omissionStrategy: omissionStrategy)
   }
 
+  /// Appends text, optionally followed by a line break.
   public mutating func append(
     _ string: String,
     addsLineBreak: Bool,
@@ -46,6 +35,7 @@ extension AttributedString {
     self.characters.append(contentsOf: addsLineBreak ? "\(string)\n" : "\(string)")
   }
 
+  /// Appends a character, optionally followed by a line break.
   public mutating func append(
     _ character: Character,
     addsLineBreak: Bool,
@@ -53,6 +43,7 @@ extension AttributedString {
     self.characters.append(contentsOf: addsLineBreak ? "\(character)\n" : "\(character)")
   }
 
+  /// Appends a newline character.
   public mutating func addLineBreak() {
     self.characters.append("\n")
   }
@@ -60,13 +51,14 @@ extension AttributedString {
 }
 
 extension Array where Element == AttributedString {
+  /// Joins attributed strings with an attributed separator.
   public func joined(_ separator: String = "") -> AttributedString {
     guard !isEmpty else { return AttributedString() }
 
-    /// Pre-create separator once to avoid repeated initialisation
+    // Pre-create separator once to avoid repeated initialisation.
     let separatorAttr = AttributedString(separator)
 
-    /// Use reduce(into:) for in-place mutation (no copies)
+    // Use reduce(into:) for in-place mutation.
     return dropFirst().reduce(into: self[0]) { result, element in
       result.append(separatorAttr)
       result.append(element)
@@ -75,26 +67,16 @@ extension Array where Element == AttributedString {
 }
 
 extension AttributedString {
+  /// Returns a copy with `string` appended.
   public func appending(_ string: String) -> AttributedString {
     var copy = self
     copy.append(string.toAttributed)
     return copy
   }
-  //  public static func + (lhs: AttributedString, rhs: String) -> AttributedString {
-  //    var result = lhs
-  //    result.append(AttributedString(rhs))
-  //    return result
-  //  }
-  //
-  //  public static func + (lhs: String, rhs: AttributedString) -> AttributedString {
-  //    var result = AttributedString(lhs)
-  //    result.append(rhs)
-  //    return result
-  //  }
 }
 
 extension String {
-  /// Returns an attributed string
+  /// Returns an attributed string with `attributed` appended after this string.
   public func appending(_ attributed: AttributedString) -> AttributedString {
     var attr = self.toAttributed
     attr.append(attributed)
@@ -102,75 +84,3 @@ extension String {
 
   }
 }
-
-//extension AttributedString {
-//
-//  /// If no value is provided to `matches`, this will fall back by
-//  /// first converting `self` to `String`, then searching for
-//  /// matches in that. String conversion may incur performance cost
-//  public func getRanges(
-//    from matches: [RegexMatch],
-//  ) -> [AttributedRange] {
-//    return matches.compactMap { match in
-//      self.range(of: match.output)
-//    }
-//  }
-//
-//  public func getRanges(
-//    matching pattern: Regex<Substring>
-//  ) -> [AttributedRange] {
-//    let matches = findMatches(for: pattern)
-//    return getRanges(from: matches)
-//  }
-//
-//  /// Use this method if an existing String representation
-//  /// for `self` does not already exist. This will first
-//  /// convert to `String`, then find matches. String
-//  /// conversion may incur performance cost.
-//  private func findMatches(for pattern: Regex<Substring>) -> [RegexMatch] {
-//    let string = String(self.characters)
-//    let matches = string.matches(of: pattern)
-//    return matches
-//  }
-//
-//  public mutating func editAttributes(
-//    for matches: [RegexMatch],
-//    transform: (inout AttributedSubstring) -> Void
-//  ) {
-//    matches.forEach { match in
-//      if let range = self.range(of: match.output) {
-//        transform(&self[range])
-//      }
-//    }
-//  }
-//
-//  public mutating func editAttributes(
-//    matching pattern: Regex<Substring>,
-//    transform: (inout AttributedSubstring) -> Void
-//  ) {
-//    let matches = findMatches(for: pattern)
-//    self.editAttributes(for: matches, transform: transform)
-//  }
-//
-//  // TODO: Find way to write similar code for Single, Double, Triple captures, without redundancy etc
-//  //  public func getRange(for pattern: TripleCapture) -> TripleCaptureRange? {
-//  //
-//  //    let string = String(self.characters)
-//  //
-//  //    let matches = string.matches(of: pattern)
-//  //
-//  //    for match in matches {
-//  //      guard let range01 = self.range(of: match.output.1),
-//  //        let range02 = self.range(of: match.output.2),
-//  //        let range03 = self.range(of: match.output.3)
-//  //      else {
-//  //
-//  //        break
-//  //      }
-//  //
-//  //      return (range01, range02, range03)
-//  //    }
-//  //    return nil
-//  //  }
-//
-//}

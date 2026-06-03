@@ -5,21 +5,21 @@
 //  Created by Dave Coleman on 27/2/2026.
 //
 
-
+/// Describes how empty pieces are handled when splitting text into lines or
+/// components.
 public enum OmissionStrategy {
   
-  /// Removes all empty subsequences
+  /// Removes every empty subsequence from the result.
   case omitAllEmpty
   
-  /// Preserves empty subsequences except for empty last lines
+  /// Preserves empty subsequences, then removes a final empty line if present.
   case omitLastLineIfEmpty
   
-  /// Preserves all empty subsequences
+  /// Preserves all empty subsequences.
   case doNotOmit
 }
 
 extension OmissionStrategy {
-  /// What to pass into `split(..., omittingEmptySubsequences:)`
   fileprivate var omitsEmptySubsequencesDuringSplit: Bool {
     switch self {
       case .omitAllEmpty: true
@@ -27,7 +27,6 @@ extension OmissionStrategy {
     }
   }
   
-  /// Applies any post-processing required by the strategy.
   fileprivate func finalise(_ parts: [Substring]) -> [Substring] {
     switch self {
       case .omitAllEmpty, .doNotOmit:
@@ -39,7 +38,6 @@ extension OmissionStrategy {
     }
   }
   
-  /// One stop shop: do the split using the strategy, then finalise.
   package func split(
     _ string: String,
     maxSplits: Int = .max,
@@ -53,7 +51,6 @@ extension OmissionStrategy {
     return finalise(parts)
   }
   
-  /// Convenience for separator-as-Character call sites.
   package func split(
     _ string: String,
     maxSplits: Int = .max,
@@ -62,24 +59,3 @@ extension OmissionStrategy {
     split(string, maxSplits: maxSplits, whereSeparator: { $0 == separator })
   }
 }
-//extension OmissionStrategy {
-//  public var shouldOmit: Bool {
-//    switch self {
-//      case .omitAllEmpty: true
-//      case .omitLastLineIfEmpty: false
-//      case .doNotOmit: false
-//    }
-//  }
-//  
-//  public func processString(_ string: String) -> String {
-//    switch omissionStrategy {
-//      case .omitAllEmpty, .doNotOmit:
-//        return subsequence
-//        
-//      case .omitLastLineIfEmpty:
-//        guard let lastLine = subsequence.last else { return subsequence }
-//        let result = lastLine.isEmpty ? Array(subsequence.dropLast()) : subsequence
-//        return result
-//    }
-//  }
-//}

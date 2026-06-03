@@ -1,6 +1,6 @@
 //
 //  NSRange+Preview.swift
-//  BaseHelpers
+//  StringTools
 //
 //  Created by Dave Coleman on 10/1/2026.
 //
@@ -9,6 +9,8 @@ import AppKit
 
 extension NSRange {
 
+  /// Builds a debug preview for the range after converting it into a Swift
+  /// string-index range.
   public func debugPreview(
     in text: String,
     maxRangePreviewLength: Int? = nil,
@@ -28,6 +30,7 @@ extension NSRange {
     )
   }
 
+  /// Converts the `NSRange` into a `Range<String.Index>` in the supplied text.
   public func toStringRange(in text: String) -> Range<String.Index>? {
     Range(self, in: text)
   }

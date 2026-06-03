@@ -9,8 +9,9 @@ import Foundation
 
 extension String {
 
-  /// Usage
-  /// `5.leftPadded(to: 4, with: "0") // "0005"`
+  /// Pads the string on the left until it reaches the requested length.
+  ///
+  /// For example, `"5".leftPadded(to: 4, with: "0")` returns `"0005"`.
   public func leftPadded(
     to length: Int,
     with character: Character = " "
@@ -23,6 +24,7 @@ extension String {
 }
 
 extension Int {
+  /// Converts the integer to a string, then left-pads it to the requested length.
   public func leftPadded(
     to length: Int,
     with character: Character = " "

@@ -8,6 +8,7 @@
 import Foundation
 
 extension FloatFormattable {
+  /// Renders the value using a floating-point display format.
   public func render(using format: FloatDisplayFormat = .default) -> String {
 
     let result: String

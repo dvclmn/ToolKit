@@ -6,7 +6,7 @@
 //
 
 
-
+/// A rendered text description built from display blocks.
 public struct DisplayString {
 
   private let components: [DisplayBlock]
@@ -36,6 +36,7 @@ public struct DisplayString {
 
 extension DisplayString {
 
+  /// Creates a display string with a result-builder body.
   public init(
     _ separator: String = "\n",
     format: FloatDisplayFormat = .default,
@@ -50,6 +51,7 @@ extension DisplayString {
 }
 
 extension DisplayString {
+  /// The fully rendered text.
   public var text: String {
     components.output(
       lineSeparator: lineSeparator,
@@ -58,22 +60,27 @@ extension DisplayString {
     )
   }
 
+  /// The rendered top-level blocks, before joining with the line separator.
   public var lines: [String] {
     components.map { $0.render(using: format, with: labelStyle) }
   }
 
+  /// Returns a copy that renders floating-point values with the supplied number
+  /// of decimal places.
   public func decimalPlaces(_ places: Int) -> DisplayString {
     var newFormat = format
     newFormat.decimalPlaces = places
     return DisplayString(components, separator: lineSeparator, format: newFormat, labelStyle: labelStyle)
   }
 
+  /// Returns a copy that renders labels with the supplied style.
   public func labelStyle(_ style: AbbreviableLabel.Style) -> DisplayString {
     DisplayString(components, separator: lineSeparator, format: format, labelStyle: style)
   }
 }
 
 extension Array where Element == DisplayBlock {
+  /// Renders and joins the display blocks.
   public func output(
     lineSeparator: String = "\n",
     labelStyle: AbbreviableLabel.Style = .standard,
@@ -82,6 +89,7 @@ extension Array where Element == DisplayBlock {
     lines(labelStyle: labelStyle, format: format).joined(lineSeparator)
   }
 
+  /// Renders each display block independently.
   public func lines(
     labelStyle: AbbreviableLabel.Style = .standard,
     format: FloatDisplayFormat = .default,

@@ -10,12 +10,12 @@ import Foundation
 /// A type with multiple named float properties.
 /// E.g. `CGPoint` (x, y) or `CGSize` (width, height).
 ///
-/// Responsibility: join its `[Labeled]` components with a `ComponentSeparator`.
-/// It does not own block-level separator logic — that lives at the
-/// `DisplayBlock`/`DisplayString` layer.
+/// The type owns its ordered ``Labeled`` components and the delimiter between
+/// sibling components. Block-level separators remain the responsibility of
+/// ``DisplayBlock`` and ``DisplayString``.
 ///
-/// Conforms to `DisplayFragmentRenderable` to participate in the DisplayString Builder
-//public protocol FloatComponentsLabeled: DisplayPresetRenderable {
+/// Conforms to ``DisplayFragmentRenderable`` so composite values can participate
+/// in the ``DisplayStringBuilder``.
 public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPresetRenderable {
 
   /// The ordered label+value components.
@@ -31,18 +31,13 @@ public protocol FloatComponentsLabeled: DisplayFragmentRenderable, DisplayPreset
 
 extension FloatComponentsLabeled {
 
-  /// Convenience: render with a preset (uses `.standard` label style).
+  /// Renders with a preset and the `.standard` label style.
   public func displayString(_ preset: FloatDisplayPreset) -> String {
     render(
       using: preset.format,
       with: .standard,
     )
   }
-
-  /// `DisplayFragmentRenderable` conformance — renders with default label style.
-//  public func render(using format: FloatDisplayFormat) -> String {
-//    renderComponents(labelStyle: .standard, using: format)
-//  }
 }
 
 extension FloatComponentsLabeled {

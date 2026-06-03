@@ -22,7 +22,7 @@ extension Dictionary: PrettyPrintable where Key: PrettyPrintable, Value: PrettyP
 
     let shouldCompact = config.compactCollections && count <= config.compactThreshold
 
-    /// Sort keys for consistent output (if possible)
+    // Sort keys for consistent output when possible.
     let sortedPairs = sorted { "\($0.key)" < "\($1.key)" }
 
     if shouldCompact {

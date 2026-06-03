@@ -8,6 +8,7 @@
 import Foundation
 
 extension Range where Bound == String.Index {
+  /// Builds a debug preview for the range, including nearby context.
   package func debugPreview(
     in text: String,
     captureName: String? = nil,
@@ -19,7 +20,7 @@ extension Range where Bound == String.Index {
 
     guard !text.isEmpty else { return "Text is empty." }
 
-    // Three main components;
+    // Three main components:
     // - Context (text before the provided range)
     // - Range preview
     // - Context (text after range)
@@ -70,15 +71,13 @@ extension Range where Bound == String.Index {
     let truncLeading: String? = hasLeadingTruncation ? trunc : nil
     let truncTrailing: String? = hasTrailingTruncation ? trunc : nil
 
-    // This is the non-truncated character count.
-    // I may consider adding this note to the output.
     let countLabel = pluralise(
       "character",
       count: rangeCharacterCount,
       countStrategy: .showCount(evenForSingle: true)
     )
 
-    // Adds a new line for pleasing text layout
+    // Adds a new line for pleasing text layout.
     let emptyLine = ""
 
     

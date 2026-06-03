@@ -29,10 +29,10 @@ package struct IndentedLineBuilder {
 
       for (lineIndex, line) in lines.enumerated() {
         if lineIndex == 0 {
-          /// First line of this element: draw a branch (join or corner) followed by a horizontal.
+          // First line: draw a branch followed by a horizontal.
           result.append(prefixForFirstLine(isLastItem: isLastItem) + " " + line)
         } else {
-          /// Continuation lines: keep the column aligned; show a vertical if there are following siblings.
+          // Continuation lines: keep the column aligned.
           result.append(continuationPrefix(isLastItem: isLastItem) + line)
         }
       }

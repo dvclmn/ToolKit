@@ -5,21 +5,18 @@
 //  Created by Dave Coleman on 12/1/2026.
 //
 
-/// This somewhat joins `FloatFormattable`
-/// and `FloatComponentsLabeled` a bit? I think?
+/// A value that can render itself using a ``FloatDisplayPreset``.
 ///
-/// Except it only exposes a `FloatDisplayPreset`,
-/// not the full flexibility of `FloatDisplayFormat`.
-///
-/// This is meant as a more concise API for quick use in UI etc.
-/// Can dip to `FloatFormattable`/`FloatComponentsLabeled`
-/// for more control
+/// Use this for concise call sites where a preset is enough. Types that need
+/// full control can expose ``FloatDisplayFormat`` directly through
+/// ``FloatFormattable`` or ``FloatComponentsLabeled``.
 public protocol DisplayPresetRenderable: Sendable {
   var displayString: String { get }
   func displayString(_ preset: FloatDisplayPreset) -> String
 }
 
 extension DisplayPresetRenderable {
+  /// Renders the value using the `.standard` preset.
   public var displayString: String {
     displayString(.standard)
   }

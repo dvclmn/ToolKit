@@ -7,28 +7,30 @@
 
 import Foundation
 
+/// Where an ellipsis should be inserted when truncating text.
 public enum TruncationStyle {
-  case start  // "...end"
-  case middle  // "begin...end"
-  case end  // "begin..."
+  /// Keep the end of the string and place the ellipsis at the start.
+  case start
+  
+  /// Keep the start and end of the string and place the ellipsis between them.
+  case middle
+  
+  /// Keep the start of the string and place the ellipsis at the end.
+  case end
 }
 
 extension String {
   /// Truncates a string to a maximum length using the specified truncation style.
-  /// The ellipsis ("...") does not count toward the maxLength.
   ///
-  /// Examples:
-  /// - "Hello World".truncate(to: 8, style: .middle) → "Hell...orld"
-  /// - "Hello World".truncate(to: 8, style: .end) → "Hello..."
-  /// - "Hello World".truncate(to: 8, style: .start) → "...World"
-  /// - "Short".truncate(to: 10) → "Short" (unchanged)
-  /// - "".truncate(to: 10) → "(Empty)"
+  /// The ellipsis does not count towards `maxLength`, so the returned string
+  /// may be longer than `maxLength` by the length of the ellipsis.
   ///
   /// - Parameters:
-  ///   - maxLength: Maximum number of content characters to show (ellipsis not counted, minimum 2)
-  ///   - style: The truncation style (.start, .middle, or .end)
-  ///   - emptyPlaceholder: Text to show when the string is empty
-  /// - Returns: Truncated string with ellipsis, or original string if shorter than maxLength
+  ///   - maxLength: Maximum number of content characters to show.
+  ///   - ellipsis: The marker inserted where text has been omitted.
+  ///   - style: Where the ellipsis should be inserted.
+  ///   - emptyPlaceholder: Text to show when the string is empty.
+  /// - Returns: A truncated string, or the original string if no truncation is needed.
   public func truncate(
     to maxLength: Int = 20,
     ellipsis: String = "…",
@@ -36,14 +38,14 @@ extension String {
     emptyPlaceholder: String? = "(Empty)"
   ) -> String {
 
-    /// Handle empty string
+    // Handle empty string.
     guard !self.isEmpty else { return emptyPlaceholder ?? self }
 
-    /// Ensure minimum length for meaningful truncation
+    // Ensure minimum length for meaningful truncation.
     let minLength = 2
     let effectiveMaxLength = max(minLength, maxLength)
 
-    /// If string is short enough, return as-is
+    // If string is short enough, return as-is.
     guard self.count > effectiveMaxLength else { return self }
 
     switch style {
@@ -64,7 +66,7 @@ extension String {
     }
   }
 
-  /// Wraps text in decorative dividers for display purposes
+  /// Wraps text in decorative dividers for display purposes.
   public func wrappedInDividers() -> String {
     return "\n---\n\(self)\n---\n"
   }

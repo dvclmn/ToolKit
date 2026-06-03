@@ -7,12 +7,17 @@
 
 import Foundation
 
+/// A display block that renders nested content with tree-style indentation.
 public struct Indented: Sendable {
+  /// Optional text rendered before the indented content.
   public let title: String?
+  
+  /// The blocks rendered inside the indented section.
   public let content: [DisplayBlock]
 }
 
 extension Indented {
+  /// Creates an indented block from a result-builder body.
   public init(
     _ title: String? = nil,
     @DisplayStringBuilder content: () -> [DisplayBlock],
@@ -48,9 +53,6 @@ extension Indented {
 
     let effectiveTitle = title ?? ""
 
-    //    guard !content.isEmpty else {
-    //      return effectiveTitle + " (no content)"
-    //    }
     return effectiveTitle + result + "\n"
 
   }

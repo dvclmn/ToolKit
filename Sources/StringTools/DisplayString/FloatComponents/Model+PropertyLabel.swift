@@ -11,10 +11,10 @@ import Foundation
 /// Knows nothing about values, separators, or float formatting.
 public struct AbbreviableLabel: Sendable {
 
-  /// The standard / more verbose representation, e.g. `Width`
+  /// The standard representation, e.g. `Width`.
   let label: String
 
-  /// A more concise version, e.g. `W` instead of `Width`
+  /// A more concise representation, e.g. `W` instead of `Width`.
   let abbreviated: String?
 
   public init(
@@ -39,7 +39,7 @@ extension AbbreviableLabel {
     switch style {
       case .none: nil
       case .standard: label
-      /// Falls back to standard if `abbreviated` is `nil`
+      // Fall back to the standard label if no abbreviated label was supplied.
       case .abbreviated: abbreviated ?? label
     }
   }

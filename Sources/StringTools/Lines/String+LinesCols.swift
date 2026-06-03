@@ -11,11 +11,12 @@ import Foundation
 
 extension String {
 
+  /// Counts the one-based line and column at the start of an `NSRange`.
   public func countLinesAndColumns(in range: NSRange) -> (line: Int, column: Int) {
     self.countLinesAndColumns(upTo: range.location)
   }
 
-  /// Counts lines and columns up to a safe target position
+  /// Counts the one-based line and column up to a safe character offset.
   public func countLinesAndColumns(
     upTo targetLocation: Int,
   ) -> (line: Int, column: Int) {
@@ -44,6 +45,7 @@ extension String {
     self.element(at: offset) == "\n"
   }
 
+  /// Counts newline-delimited lines inside an `NSRange`.
   public func countNewlines(in range: NSRange) -> Int {
     self.countNewlines(
       from: range.location,
@@ -51,6 +53,7 @@ extension String {
     )
   }
 
+  /// Counts newline-delimited lines between two character offsets.
   public func countNewlines(
     from start: Int,
     to end: Int

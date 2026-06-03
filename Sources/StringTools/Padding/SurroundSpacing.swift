@@ -7,6 +7,7 @@
 
 import Foundation
 
+/// Describes where extra spacing should be inserted while padding a line.
 public enum SurroundSpaces: Sendable, Hashable {
   /// Never insert extra "bookend" spaces.
   case none

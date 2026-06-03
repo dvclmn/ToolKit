@@ -12,9 +12,16 @@ import CoreTools
 /// Deliberately limited to numeric concerns only — no separator,
 /// label, or grouping/joining logic lives here.
 public struct FloatDisplayFormat: Equatable, Sendable {
+  /// Number of fractional decimal places to render.
   public var decimalPlaces: Int
+  
+  /// Optional minimum number of integer digits to render.
   public var integerLength: Int?
+  
+  /// Grouping strategy for the integer part.
   public var grouping: NumberGrouping
+  
+  /// Sign rendering strategy.
   public var sign: SignDisplay
 
   public init(
@@ -31,10 +38,12 @@ public struct FloatDisplayFormat: Equatable, Sendable {
 }
 
 extension FloatDisplayFormat {
+  /// Returns the format associated with a preset.
   public static func fromPreset(_ preset: FloatDisplayPreset) -> Self {
     preset.format
   }
 
+  /// Returns a copy with an integer-length requirement.
   public func with(integerLength: Int) -> Self {
     var copy = self
     copy.integerLength = integerLength
@@ -45,6 +54,7 @@ extension FloatDisplayFormat {
 }
 
 extension BinaryFloatingPoint {
+  /// Converts the value to a percentage string within a range.
   public func toPercentString(
     within range: ClosedRange<Self>,
     decimalPlaces: Int = 0

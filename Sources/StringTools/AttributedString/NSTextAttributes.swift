@@ -11,6 +11,7 @@ import AppKit
 public typealias NSTextAttributes = [NSAttributedString.Key: Any]
 
 extension NSTextAttributes {
+  /// A line-separated description of each attribute key and value.
   public var names: String {
     let names: String = self.reduce(into: "") { partialResult, entry in
       let key = entry.key
@@ -20,6 +21,7 @@ extension NSTextAttributes {
     return names + "\n"
   }
 
+  /// Applies underline or strikethrough attributes when a decoration is supplied.
   public mutating func setTextDecoration(
     for kind: TextDecoration.Kind,
     _ decoration: TextDecoration?,
@@ -32,10 +34,12 @@ extension NSTextAttributes {
 
 }
 
+/// A text decoration colour and style.
 public struct TextDecoration: Sendable, Hashable {
   let colour: NSColor
   let style: NSUnderlineStyle
 
+  /// The type of decoration to apply.
   public enum Kind {
     case underline
     case strikethrough
@@ -44,6 +48,7 @@ public struct TextDecoration: Sendable, Hashable {
 
 extension TextDecoration {
 
+  /// A red, single-line decoration.
   public static let `default`: TextDecoration = .init(colour: .red, style: .single)
 
   fileprivate func getAttributes(for kind: Kind) -> NSTextAttributes {
@@ -63,6 +68,7 @@ extension TextDecoration {
 }
 
 extension NSAttributedString.Key {
+  /// A compact, stable name for common attributed-string keys.
   public var prettyDescription: String {
     switch self {
       case .font: return "font"

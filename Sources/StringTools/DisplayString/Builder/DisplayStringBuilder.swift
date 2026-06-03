@@ -7,8 +7,7 @@
 
 import Foundation
 
-/// Ideally this should stay simple/dumb, not concerned with formatting strings etc.
-/// Just putting things together
+/// A result builder that assembles ``DisplayBlock`` values.
 @resultBuilder
 public struct DisplayStringBuilder {
 
@@ -31,38 +30,43 @@ public struct DisplayStringBuilder {
 // MARK: - buildExpression overloads
 extension DisplayStringBuilder {
 
-  /// Add support for a single Array...
+  /// Adds support for a pre-built array of blocks.
   public static func buildExpression(_ expression: [DisplayBlock]) -> [DisplayBlock] {
     expression
   }
 
-  /// ... and a single Block
+  /// Adds support for a single block.
   public static func buildExpression(_ expression: DisplayBlock) -> [DisplayBlock] {
     [expression]
   }
 
-  /// Overloads for dedicated Block Types ``Labeled``, ``Indented``, ``Divider`` etc
+  /// Adds support for a ``Labeled`` block.
   public static func buildExpression(_ value: Labeled) -> [DisplayBlock] {
     [.labeled(value)]
   }
 
+  /// Adds support for an ``Indented`` block.
   public static func buildExpression(_ value: Indented) -> [DisplayBlock] {
     [.indented(value)]
   }
 
+  /// Adds support for a ``Divider`` block.
   public static func buildExpression(_ value: Divider) -> [DisplayBlock] {
     [.divider(value)]
   }
 
+  /// Adds support for line-based indented content.
   public static func buildExpression(_ value: IndentedLines) -> [DisplayBlock] {
     guard !value.lines.isEmpty else { return [] }
     return [.indented(Indented(fromLines: value))]
   }
 
+  /// Adds support for values that already provide a description.
   public static func buildExpression(_ value: any CustomStringConvertible) -> [DisplayBlock] {
     [.text(.make(from: value))]
   }
   
+  /// Adds support for optional values that provide a description.
   public static func buildExpression(_ value: (any CustomStringConvertible)?) -> [DisplayBlock] {
     [.text(.make(from: value))]
   }

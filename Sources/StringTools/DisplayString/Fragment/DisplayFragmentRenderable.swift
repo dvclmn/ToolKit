@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 23/2/2026.
 //
 
-/// This exists to
+/// A value that can render itself as a display-string fragment.
 public protocol DisplayFragmentRenderable: Sendable {
   func render(
     using format: FloatDisplayFormat,
@@ -15,12 +15,11 @@ public protocol DisplayFragmentRenderable: Sendable {
 }
 
 extension String: DisplayFragmentRenderable {
-  /// This is a passthrough, does nothing. Could probably be modelled better
+  /// Returns the string unchanged.
   public func render(
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style,
     delimiter: String,
   ) -> String { self }
 }
-
 

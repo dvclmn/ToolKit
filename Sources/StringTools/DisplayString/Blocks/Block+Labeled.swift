@@ -7,8 +7,11 @@
 
 import AppKit
 
-/// A label+value pair. Used both as a standalone `DisplayBlock` (e.g. `"Dimensions: 260 x 410"`)
-/// and as an individual component inside `FloatComponentsLabeled` (e.g. `"W 260"`).
+/// A label-and-value pair.
+///
+/// `Labeled` can be used as a standalone ``DisplayBlock`` such as
+/// `"Dimensions: 260 x 410"`, or as an individual component inside
+/// ``FloatComponentsLabeled`` such as `"W 260"`.
 ///
 /// Separator ownership:
 /// - The separator between this label and its value (`separator`, default `" "`) lives here.
@@ -17,7 +20,10 @@ import AppKit
 /// - The delimiter between sibling components (e.g. `" x "`) lives on `FloatComponentsLabeled`.
 public struct Labeled: Sendable {
 
+  /// The label displayed before the value.
   public let key: AbbreviableLabel
+  
+  /// The optional value displayed after the label.
   public let value: DisplayFragment?
 
   /// Separator between the label text and the value,
@@ -47,7 +53,7 @@ public struct Labeled: Sendable {
 
 extension Labeled {
 
-  /// General-purpose init: key string + any value.
+  /// Creates a labelled value from a key string and optional value.
   public init(
     _ key: String,
     value: Any?,
@@ -61,32 +67,15 @@ extension Labeled {
       formatOverride: format,
     )
   }
-
-  /// Convenience for Collection types
-//  public init<C: Collection>(
-//    _ key: String,
-//    data: C,
-//    maxItems: Int? = nil,
-//    showCount: Bool = true,
-//    separator: String = ": ",
-//  ) {
-//    self.init(
-//      key: AbbreviableLabel(key),
-//      value: .make(from: data),
-//      separator: separator,
-//    )
-//  }
 }
 
 // MARK: - Rendering
 
-/// Allows exposure to BaseHelpers, for InfoBar, without leaking to user-facing API
+/// SPI rendering helpers for consumers that need the individual label/value
+/// pieces without exposing them as ordinary public API.
 extension Labeled {
 
   /// Renders the label text only (no value or separator).
-  /// Have removed the option to pass in a label style for this,
-  /// as these methods are for a display context, not for use
-  /// as the building block for `FloatComponentsLabeled`
   @_spi(Internal) public func labelPart() -> String? {
     key.labelText(with: .standard)
   }

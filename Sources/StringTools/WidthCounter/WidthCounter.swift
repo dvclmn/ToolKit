@@ -1,24 +1,28 @@
 //
 //  WidthCounterStyle.swift
-//  BoxCore
+//  StringTools
 //
 //  Created by Dave Coleman on 29/8/2024.
 //
 
 import Foundation
 
-
+/// Generates textual width guides for fixed-width output.
 public struct WidthCounter {
   let width: Int
+  
+  /// Creates a width counter for a target width.
   public init(width: Int) {
     self.width = width
   }
 
+  /// The style of guide to generate.
   public enum Style: Sendable {
     case ruler
     case digits
   }
 
+  /// Builds the guide as an attributed string.
   public func widthCounter(style: Style) -> AttributedString {
 
     var result = AttributedString()
@@ -30,7 +34,7 @@ public struct WidthCounter {
         let fullOutput = self.generateDigitCounter()
         result.append(fullOutput.tens, addsLineBreak: true)
 
-        /// Specify `false` here so we're not left with a trailing line break
+        // Specify false so the guide has no trailing line break.
         result.append(fullOutput.ones, addsLineBreak: false)
 
       case .ruler:
@@ -58,4 +62,3 @@ public struct WidthCounter {
   }
 
 }
-

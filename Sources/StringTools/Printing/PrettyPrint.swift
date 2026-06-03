@@ -32,7 +32,7 @@ extension PrettyPrintable {
       """
   }
 
-  /// Default empty body (for primitives, or types that don’t have nested properties)
+  /// Default empty body for primitives or types without nested properties.
   package func prettyBody(_ config: PrettyPrintConfig, depth: Int) -> String { "" }
 
   package var pretty: String {

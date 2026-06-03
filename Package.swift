@@ -13,7 +13,6 @@ let package = Package(
       targets: [
         "CoreTools",
         "StringTools",
-        "VectorTools",
       ],
     ),
     .library(name: "ViewTools", targets: ["ViewTools"]),
@@ -27,7 +26,6 @@ let package = Package(
     .target(name: "CoreTools"),
     .target(name: "ColourTools", dependencies: ["CoreTools"]),
     .target(name: "StringTools", dependencies: ["CoreTools"]),
-    .target(name: "VectorTools"),
     .target(name: "ViewTools", dependencies: ["CoreTools", "StringTools", "ColourTools"]),
     .testTarget(name: "CoreToolsTests", dependencies: ["CoreTools"]),
   ],

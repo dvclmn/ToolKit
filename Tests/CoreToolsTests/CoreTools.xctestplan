@@ -1,0 +1,25 @@
+{
+  "configurations" : [
+    {
+      "id" : "04111734-2809-440C-A4B1-5321BFF5D802",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "codeCoverage" : false,
+    "performanceAntipatternCheckerEnabled" : true
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "CoreToolsTests",
+        "name" : "CoreToolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

@@ -59,6 +59,7 @@ behind availability checks where needed.
 - ``SurroundSpaces``
 - ``OddPaddingPolicy``
 - ``TextReflow``
+- ``TextReflow/WordBoundaryStrategy``
 - ``WidthCounter``
 - ``ColumnString``
 

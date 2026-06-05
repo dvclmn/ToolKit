@@ -32,6 +32,10 @@ Truncation keeps the content length separate from the ellipsis length:
 For fixed-width output, use ``LinePadOptions`` when the string needs caps,
 bookend spacing, split gaps, or an explicit odd-padding strategy.
 
+``TextReflow`` treats all whitespace as word boundaries by default. Use
+``TextReflow/WordBoundaryStrategy/literalSpacesPreservingRuns`` for
+preformatted text where repeated spaces carry layout meaning.
+
 ## Topics
 
 ### Splitting
@@ -52,6 +56,8 @@ bookend spacing, split gaps, or an explicit odd-padding strategy.
 - ``TextPadAlignment``
 - ``OddPaddingPolicy``
 - ``SurroundSpaces``
+- ``TextReflow``
+- ``TextReflow/WordBoundaryStrategy``
 
 ### Pluralisation
 

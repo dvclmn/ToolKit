@@ -20,7 +20,6 @@ extension Binding where Value: BinaryFloatingPoint & Sendable {
       set: { wrappedValue = Value($0) },
     )
   }
-
 }
 
 extension Binding where Value == Int {
@@ -44,6 +43,15 @@ extension Binding where Value == Int {
     Binding<T>(
       get: { T(wrappedValue) },
       set: { wrappedValue = Value($0) },
+    )
+  }
+}
+
+extension Binding where Value == ClosedRange<Int> {
+  public func toBindingBinaryFloatingPointRange<T: BinaryFloatingPoint & Sendable>() -> Binding<ClosedRange<T>> {
+    Binding<ClosedRange<T>>(
+      get: { wrappedValue.toBinaryFloatingPointRange() },
+      set: { wrappedValue = $0.toIntRange },
     )
   }
 }

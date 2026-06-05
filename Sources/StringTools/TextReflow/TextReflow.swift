@@ -15,8 +15,20 @@ public enum PaddingBookend {
 
 /// Reflows text into fixed-width lines.
 public struct TextReflow {
+  /// Controls how words are separated before wrapping.
+  public enum WordBoundaryStrategy: Sendable, Hashable {
+    /// Treat any `Character.isWhitespace` value as a word separator and
+    /// normalise separator runs to a single output space.
+    case allWhitespace
+    
+    /// Preserve the previous behaviour: split only on literal spaces and keep
+    /// repeated spaces in the output.
+    case literalSpacesPreservingRuns
+  }
+  
   let text: String
   let shouldHyphenate: Bool
+  let wordBoundaryStrategy: WordBoundaryStrategy
 
   /// Width for text only. Do not include space for padding or surrounding
   /// structure; handle those elsewhere.
@@ -32,9 +44,11 @@ public struct TextReflow {
     width: Int = 20,
     paddingCharacter: Character = " ",
     shouldHyphenate: Bool = true,
+    wordBoundaryStrategy: WordBoundaryStrategy = .allWhitespace,
   ) {
     self.text = text
     self.shouldHyphenate = shouldHyphenate
+    self.wordBoundaryStrategy = wordBoundaryStrategy
     self.width = width
     self.paddingCharacter = paddingCharacter
   }
@@ -63,8 +77,7 @@ extension TextReflow {
       let leadingWhitespace = paragraph.prefix(while: { $0.isWhitespace })
       let trimmedParagraph = paragraph.dropFirst(leadingWhitespace.count)
 
-      // Words are currently split on literal spaces so repeated spacing can be preserved.
-      let words = trimmedParagraph.split(separator: " ", omittingEmptySubsequences: false)
+      let words = words(in: trimmedParagraph)
       var currentLine = String(leadingWhitespace)
 
       for word in words {
@@ -115,6 +128,15 @@ extension TextReflow {
     return reflowedLines
   }
 
+  private func words(in text: Substring) -> [Substring] {
+    switch wordBoundaryStrategy {
+      case .allWhitespace:
+        text.split(omittingEmptySubsequences: true, whereSeparator: \.isWhitespace)
+      case .literalSpacesPreservingRuns:
+        text.split(separator: " ", omittingEmptySubsequences: false)
+    }
+  }
+  
   private func wrapLongWord(
     _ word: String,
     width: Int,

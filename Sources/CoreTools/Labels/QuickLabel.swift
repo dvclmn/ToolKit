@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 26/5/2025.
 //
 
-/// A lightweight, serialisable label model for non-SwiftUI code.
+/// A lightweight label model for non-SwiftUI code.
 public struct QuickLabel: Sendable, Codable, Equatable, Hashable {
   /// The visible text for the label.
   public var text: String

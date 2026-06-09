@@ -5,23 +5,27 @@
 //  Created by Dave Coleman on 7/2/2025.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 struct StateViewExample: View {
 
   @State private var controlSize: ControlSize = .regular
-
+  @State private var showsAddtionalContent: Bool = false
   var body: some View {
 
     ScrollView {
-      ForEach(ControlSize.allCases) { size in
-        StateViewComparison(
-          title: content(size).0,
-          icon: content(size).1,
-          message: content(size).2,
-        )
-        
+
+      VStack(spacing: 60) {
+        ForEach(ControlSize.allCases) { size in
+          StateViewComparison(
+            size: size,
+            title: content(size).0,
+            icon: content(size).1,
+            message: content(size).2,
+            showsAddtionalContent: showsAddtionalContent,
+          )
+        }
       }
       .frame(maxWidth: .infinity, maxHeight: .infinity)
     }
@@ -30,9 +34,22 @@ struct StateViewExample: View {
     .symbolVariant(.fill)
     .symbolRenderingMode(.hierarchical)
 
-//    .padding(40)
+    //    .padding(40)
     .frame(width: 600, height: 700)
     .background(.black.opacity(0.6))
+    .toolbar {
+      ToolbarItem {
+        //        LabeledContent("Show additional content") {
+        Toggle(isOn: $showsAddtionalContent) {
+          Text("Show additional content")
+        }
+        .toggleStyle(.checkbox)
+        .padding(.horizontal)
+        //            .labelsHidden()
+        //        }
+        //          .toggleStyle(.automatic)
+      }
+    }
     //    .safeAreaInset(edge: .bottom) {
     //      Picker("Size", selection: $controlSize) {
     //        ForEach(ControlSize.allCases) { size in

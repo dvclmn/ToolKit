@@ -8,17 +8,37 @@
 import CoreTools
 
 public struct ErrorMessage: Error {
-  public let label: QuickLabel
+
+  public let title: String
+  public let icon: IconLiteral?
   public let message: String
 
-  public init(label: QuickLabel, message: String) {
-    self.label = label
-    self.label.text = message
+  public init(
+    _ title: String,
+    icon: IconLiteral? = nil,
+    message: String,
+  ) {
+    self.title = title
+    self.icon = icon
+    self.message = message
   }
+
 }
 
 extension ErrorMessage {
-  public init(_ title: String, error: Error) {
-    self.init(label: .init(title), message: error.localizedDescription)
+  public init(
+    label: QuickLabel,
+    message: String,
+  ) {
+    self.init(label.text, icon: label.icon, message: message)
   }
+  public init(
+    _ title: String,
+    icon: IconLiteral? = nil,
+    error: Error,
+  ) {
+    self.init(title, icon: icon, message: error.localizedDescription)
+  }
+  
+  public var label: QuickLabel { .init(title, icon: icon) }
 }

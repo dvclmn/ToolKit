@@ -12,9 +12,6 @@ public struct QuickLabel: Sendable, Codable, Equatable, Hashable {
 
   /// An optional icon associated with the label.
   public let icon: IconLiteral?
-
-  /// An optional semantic role for styling or ordering.
-  public let role: ActionRole?
 }
 
 extension QuickLabel {
@@ -22,11 +19,9 @@ extension QuickLabel {
   public init(
     _ text: String,
     icon: IconLiteral? = nil,
-    role: ActionRole? = nil,
   ) {
     self.text = text
     self.icon = icon
-    self.role = role
   }
 
   /// Creates a label whose icon is an SF Symbol name.
@@ -36,12 +31,10 @@ extension QuickLabel {
   public init(
     _ text: String,
     symbol symbolString: String?,
-    role: ActionRole? = nil,
   ) {
     self.init(
       text,
       icon: symbolString.map { IconLiteral.symbol($0) },
-      role: role,
     )
   }
 }

@@ -32,9 +32,12 @@ public struct ErrorView<Content: View>: View {
   }
 
   public var body: some View {
-    StateView(
+    StateView<Content, EmptyView>(
       label: error.label,
       message: error.message,
+      messageContent: {
+        EmptyView()
+      },
       additionalContent: additionalContent,
     )
 

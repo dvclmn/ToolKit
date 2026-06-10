@@ -15,7 +15,7 @@ public struct ErrorView<Content: View>: View {
 
   public init(
     error: ErrorMessage,
-    @ViewBuilder additionalContent: @escaping () -> Content,
+  @ViewBuilder additionalContent: @escaping () -> Content = { EmptyView() },
   ) {
     self.error = error
     self.additionalContent = additionalContent()
@@ -32,12 +32,11 @@ public struct ErrorView<Content: View>: View {
   }
 
   public var body: some View {
-    StateView<Content, EmptyView>(
+    StateView(
+//    StateView<Content, EmptyView>(
       label: error.label,
       message: error.message,
-      messageContent: {
-        EmptyView()
-      },
+      isMessageCopyable: true,
       additionalContent: additionalContent,
     )
 

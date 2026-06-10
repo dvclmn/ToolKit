@@ -8,7 +8,7 @@
 import CoreTools
 import SwiftUI
 
-public struct StateView<Content: View, Message: View>: View {
+public struct StateView<Content: View>: View {
   @Environment(\.layoutType) private var layoutType
   @Environment(\.layoutAlignment) private var layoutAlignment
   @Environment(\.layoutPadding) private var layoutPadding
@@ -18,7 +18,8 @@ public struct StateView<Content: View, Message: View>: View {
 
   let label: QuickLabel
   let message: String?
-  let messageContent: Message
+  let isMessageCopyable: Bool
+//  let messageContent: Message
   let additionalContent: Content
 
   public var body: some View {
@@ -33,8 +34,17 @@ public struct StateView<Content: View, Message: View>: View {
 
     } description: {
       if let message {
-        messageContent
-//        Text(message)
+//        messageContent
+        HStack {
+          Text(message)
+          if isMessageCopyable {
+            Button {
+              
+            } label: {
+              Label("Copy", systemImage: Icons.copy.icon)
+            }
+          }
+        }
           
       }
     } actions: {
@@ -86,13 +96,15 @@ extension StateView {
   public init(
     _ title: String,
     message: String? = nil,
-    @ViewBuilder messageContent: () -> Message = { EmptyView() },
+    isMessageCopyable: Bool = false,
+//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
 //  ) where Message == EmptyView, Content == EmptyView {
     self.label = QuickLabel(title)
     self.message = message
-    self.messageContent = messageContent()
+    self.isMessageCopyable = isMessageCopyable
+//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 
@@ -100,26 +112,30 @@ extension StateView {
     _ title: String,
     icon: IconLiteral? = nil,
     message: String? = nil,
-    @ViewBuilder messageContent: () -> Message = { EmptyView() },
+    isMessageCopyable: Bool = false,
+//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
 //  ) where Message == EmptyView, Content == EmptyView {
     self.label = QuickLabel(title, icon: icon)
     self.message = message
-    self.messageContent = messageContent()
+    self.isMessageCopyable = isMessageCopyable
+//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 
   public init(
     label: QuickLabel,
     message: String? = nil,
-    @ViewBuilder messageContent: () -> Message = { EmptyView() },
+    isMessageCopyable: Bool = false,
+//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
 //  ) where Message == EmptyView, Content == EmptyView {
     self.label = label
     self.message = message
-    self.messageContent = messageContent()
+    self.isMessageCopyable = isMessageCopyable
+//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 

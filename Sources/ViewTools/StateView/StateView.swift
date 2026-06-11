@@ -19,7 +19,6 @@ public struct StateView<Content: View>: View {
   let label: QuickLabel
   let message: String?
   let isMessageCopyable: Bool
-//  let messageContent: Message
   let additionalContent: Content
 
   public var body: some View {
@@ -50,6 +49,7 @@ public struct StateView<Content: View>: View {
     } actions: {
       additionalContent
     }
+    
 
     //    VStack {
     //      TitleAndIconView()
@@ -97,14 +97,11 @@ extension StateView {
     _ title: String,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
-//  ) where Message == EmptyView, Content == EmptyView {
     self.label = QuickLabel(title)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 
@@ -113,14 +110,11 @@ extension StateView {
     icon: IconLiteral? = nil,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
-//  ) where Message == EmptyView, Content == EmptyView {
     self.label = QuickLabel(title, icon: icon)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 
@@ -128,14 +122,11 @@ extension StateView {
     label: QuickLabel,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-//    @ViewBuilder messageContent: () -> Message = { EmptyView() },
     @ViewBuilder additionalContent: () -> Content = { EmptyView() },
   ) {
-//  ) where Message == EmptyView, Content == EmptyView {
     self.label = label
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-//    self.messageContent = messageContent()
     self.additionalContent = additionalContent()
   }
 

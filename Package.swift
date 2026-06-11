@@ -10,11 +10,9 @@ let package = Package(
   products: [
     .library(
       name: "CoreTools",
-      targets: [
-        "CoreTools",
-        "StringTools",
-      ],
+      targets: ["CoreTools"],
     ),
+    .library(name: "StringTools", targets: ["StringTools"]),
     .library(name: "ViewTools", targets: ["ViewTools"]),
     .library(name: "ColourTools", targets: ["ColourTools"]),
 

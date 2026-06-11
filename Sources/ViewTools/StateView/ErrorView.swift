@@ -43,10 +43,6 @@ public struct ErrorView<Content: View>: View {
   }
 }
 
-extension ErrorView {
-
-}
-
 #Preview(traits: .size(.normal)) {
   // @Previewable @State var store = AppHandler()
   ErrorView(

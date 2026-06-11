@@ -30,6 +30,7 @@ public struct StateView<Content: View>: View {
         hasMessage: message != nil,
         iconSize: iconSize,
       )
+//      .environment(\.layoutType, .hstack())
 
     } description: {
       if let message {
@@ -129,5 +130,4 @@ extension StateView {
     self.isMessageCopyable = isMessageCopyable
     self.additionalContent = additionalContent()
   }
-
 }

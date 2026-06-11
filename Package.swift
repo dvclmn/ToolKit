@@ -24,7 +24,11 @@ let package = Package(
     .target(name: "CoreTools"),
     .target(name: "ColourTools", dependencies: ["CoreTools"]),
     .target(name: "StringTools", dependencies: ["CoreTools"]),
-    .target(name: "ViewTools", dependencies: ["CoreTools", "StringTools", "ColourTools"]),
+    .target(
+      name: "ViewTools",
+      dependencies: ["CoreTools", "StringTools", "ColourTools"],
+      resources: [.process("Resources")],
+    ),
     .testTarget(name: "CoreToolsTests", dependencies: ["CoreTools"]),
   ],
 )

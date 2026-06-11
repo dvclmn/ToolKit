@@ -5,13 +5,25 @@
 //  Created by Dave Coleman on 28/2/2025.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public struct MaybeLabel: View {
   @Environment(\.labelDisplay) private var labelDisplay
 
   let label: QuickLabel
+
+  public init(_ label: QuickLabel) {
+    self.label = label
+  }
+
+  public init(
+    _ text: String,
+    icon: IconLiteral? = nil,
+  ) {
+    let quickLabel = QuickLabel(text, icon: icon)
+    self.label = quickLabel
+  }
 
   public var body: some View {
 
@@ -24,21 +36,5 @@ public struct MaybeLabel: View {
         IconView(icon)
       }
     }
-  }
-}
-
-// MARK: - Initialisers
-extension MaybeLabel {
-
-  public init(_ label: QuickLabel) {
-    self.label = label
-  }
-
-  public init(
-    _ text: String,
-    icon: IconLiteral? = nil,
-  ) {
-    let quickLabel = QuickLabel(text, icon: icon)
-    self.label = quickLabel
   }
 }

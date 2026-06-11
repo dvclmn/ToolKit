@@ -15,7 +15,6 @@ struct TitleAndIconView: View {
   let label: QuickLabel
   let hasMessage: Bool
   let iconSize: CGFloat
-  //  let message: String?
 
   var body: some View {
 
@@ -25,13 +24,13 @@ struct TitleAndIconView: View {
           MaybeLabel(label)
 
         default:
-          MaybeLabel(label: label)
-//          Text(label.text.toMarkdownCompatible)
+//          MaybeLabel(label: label)
+          Text(label.text.toMarkdownCompatible)
             /// Pan gesture view was causing `FeatureIconView` to take
             /// up too much space, so using overlay to keep it contained better
-//            .overlay(alignment: .top) {
-//              IconView()
-//            }
+            .overlay(alignment: .top) {
+              IconView()
+            }
       }
 //    }  // END group
 //    .multilineTextAlignment(.center)

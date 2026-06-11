@@ -23,13 +23,8 @@ public struct IconView: View {
       case .emoji(let emojiString): Text(emojiString)
       case .emojiComposition(let comp): EmojiCompositionView(composition: comp)
       case .symbol(let symbolString): Image(systemName: symbolString)
-      case .customSymbol(_): Text("Custom Symbol not implemented")
-    //          Image(
-    //            ImageResource(
-    //              name: customSymbol.reference,
-    //              bundle: Bundle.module
-    //            )
-    //          )
+      case .customSymbol(let customSymbol):
+        Image(customSymbol.reference, bundle: .module)
     }
 
   }

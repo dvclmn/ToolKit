@@ -8,11 +8,12 @@
 import Foundation
 
 /// A custom symbol reference using the `custom.` SF Symbols naming convention.
-public enum CustomSymbol: String, Sendable, Codable {
+public enum CustomSymbol: String, CaseIterable, Identifiable, Sendable, Codable {
   case artboard
   case zoom  // search, magnifying glass
   case terminal  // code
-  case circleInRectangle
+  case terminalFill
+  case circleInRectangle12
 
   public var id: String { rawValue }
 
@@ -24,7 +25,8 @@ public enum CustomSymbol: String, Sendable, Codable {
         case .artboard: "artboard"
         case .zoom: "magnifyingglass"
         case .terminal: "code.view"
-        case .circleInRectangle: "circle.rectangle"
+        case .terminalFill: "code.view.fill"
+        case .circleInRectangle12: "circle.rectangle"
       }
     return prefix + name
   }

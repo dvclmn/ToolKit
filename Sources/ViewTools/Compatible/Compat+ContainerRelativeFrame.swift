@@ -8,8 +8,7 @@
 import SwiftUI
 
 extension View {
-  @ViewBuilder
-  public func containerRelativeFrameCompatible(
+  @ViewBuilder public func containerRelativeFrameCompatible(
     _ axes: Axis.Set,
     count: Int,
     span: Int = 1,

@@ -5,9 +5,8 @@
 //  Created by Dave Coleman on 22/2/2026.
 //
 
-
-import Foundation
 import CoreGraphics
+import Foundation
 
 /// A single emoji glyph and its placement metadata inside an emoji composition.
 public struct Emoji: Identifiable, Equatable, Sendable, Hashable, Codable {

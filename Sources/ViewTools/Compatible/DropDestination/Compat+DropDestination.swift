@@ -5,7 +5,12 @@
 //  Created by Dave Coleman on 12/6/2026.
 //
 
+import Foundation
 import SwiftUI
+
+#if canImport(AppKit)
+import AppKit
+#endif
 
 /// Older (deprecated) modifier for reference:
 /// ```
@@ -25,27 +30,29 @@ extension View {
   @ViewBuilder public func dropDestinationCompatible<T>(
     for type: T.Type = T.self,
     isEnabled: Bool = true,
-    action: @escaping (_ items: [T], _ session: DropSession) -> Void
-  ) -> some View where T : Transferable {
+    action: @escaping (_ items: [T], _ session: DropSessionCompatible) -> Void,
+  ) -> some View where T: Transferable {
     if #available(macOS 26, iOS 26, *) {
-      dropDestination(for: type, isEnabled: isEnabled, action: action)
+      dropDestination(for: type, isEnabled: isEnabled) { items, session in
+        action(items, DropSessionCompatible(session))
+      }
+    } else if isEnabled {
+      dropDestination(
+        for: type,
+        action: { items, location in
+          action(
+            items,
+            DropSessionCompatible(
+              phase: .dataTransferCompleted,
+              itemsCount: items.count,
+              location: location,
+            ),
+          )
+          return true
+        },
+      )
     } else {
-      dropDestination(for: type, action: <#T##([Transferable], CGPoint) -> Bool##([Transferable], CGPoint) -> Bool##(_ items: [Transferable], _ location: CGPoint) -> Bool#>, isTargeted: <#T##(Bool) -> Void#>)
+      self
     }
   }
 }
-
-// I started recreating the new DropSession and related types for backwards
-// compat, but reconsidering
-
-//public struct DropSessionCompatible: Identifiable, Sendable {
-//  
-//}
-//
-//extension DropSessionCompatible {
-//  public struct LocalSessionCompatible: Sendable {
-//    public func draggedItemIDs<ItemID>(for type: ItemID.Type) -> [ItemID] where ItemID : Hashable {
-//      
-//    }
-//  }
-//}

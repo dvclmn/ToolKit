@@ -27,6 +27,7 @@ public struct MaybeLabel: View {
 
   public var body: some View {
 
+//    Text(label.text)
     Label {
       if !label.text.isEmpty {
         Text(label.text.toMarkdownCompatible)

@@ -8,7 +8,7 @@
 import CoreTools
 import SwiftUI
 
-public struct StateView<Content: View>: View {
+public struct StateView<Actions: View>: View {
   @Environment(\.layoutType) private var layoutType
   @Environment(\.layoutAlignment) private var layoutAlignment
   @Environment(\.layoutPadding) private var layoutPadding
@@ -19,7 +19,7 @@ public struct StateView<Content: View>: View {
   let label: QuickLabel
   let message: String?
   let isMessageCopyable: Bool
-  let additionalContent: Content
+  let actions: Actions
 
   public var body: some View {
 
@@ -48,7 +48,7 @@ public struct StateView<Content: View>: View {
           
       }
     } actions: {
-      additionalContent
+      actions
     }
     
 
@@ -58,7 +58,7 @@ public struct StateView<Content: View>: View {
     //        .safeAreaPadding(.top, paddingLength)
     //
     //      MessageView()
-    //      additionalContent
+    //      actions
     //    }
     //    .monospacedDigit()
     //    .frame(maxWidth: 380)
@@ -98,12 +98,12 @@ extension StateView {
     _ title: String,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
+    @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
     self.label = QuickLabel(title)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-    self.additionalContent = additionalContent()
+    self.actions = actions()
   }
 
   public init(
@@ -111,23 +111,23 @@ extension StateView {
     icon: IconLiteral? = nil,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
+    @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
     self.label = QuickLabel(title, icon: icon)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-    self.additionalContent = additionalContent()
+    self.actions = actions()
   }
 
   public init(
     label: QuickLabel,
     message: String? = nil,
     isMessageCopyable: Bool = false,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
+    @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
     self.label = label
     self.message = message
     self.isMessageCopyable = isMessageCopyable
-    self.additionalContent = additionalContent()
+    self.actions = actions()
   }
 }

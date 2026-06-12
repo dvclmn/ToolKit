@@ -8,37 +8,47 @@
 import CoreTools
 import SwiftUI
 
-public struct ErrorView<Content: View>: View {
+public struct ErrorView<Actions: View>: View {
 
   let error: ErrorMessage
-  let additionalContent: Content
+  let actions: Actions
 
   public init(
     error: ErrorMessage,
-  @ViewBuilder additionalContent: @escaping () -> Content = { EmptyView() },
+  @ViewBuilder actions: @escaping () -> Actions = { EmptyView() },
   ) {
     self.error = error
-    self.additionalContent = additionalContent()
+    self.actions = actions()
   }
   
   public init(
     _ title: String,
     icon: IconLiteral? = nil,
     message: String,
-    @ViewBuilder additionalContent: () -> Content = { EmptyView() },
+    @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
     self.error = ErrorMessage(title, icon: icon, message: message)
-    self.additionalContent = additionalContent()
+    self.actions = actions()
   }
 
   public var body: some View {
-    StateView(
-//    StateView<Content, EmptyView>(
-      label: error.label,
-      message: error.message,
-      isMessageCopyable: true,
-      additionalContent: additionalContent,
-    )
+    
+    ContentUnavailableView {
+//      Label("Hello", systemImage: "binoculars")
+      MaybeLabel(error.label)
+    } description: {
+      Text(error.message)
+    } actions: {
+      actions
+    }
+
+//    StateView(
+////    StateView<Content, EmptyView>(
+//      label: error.label,
+//      message: error.message,
+//      isMessageCopyable: true,
+//      actions: actions,
+//    )
 
   }
 }

@@ -20,11 +20,11 @@ public struct EmojiCompositionView: View {
   public var body: some View {
 
     ZStack {
-      ForEach(composition.emoji) { comp in
-        Text(comp.emoji.toString)
-          .offset(comp.offset)
-          .rotationEffect(.degrees(comp.rotation))
-          .scaleEffect(comp.scale)
+      ForEach(composition.emoji) { emoji in
+        Text(emoji.emoji.toString)
+          .offset(emoji.offset)
+          .rotationEffect(.degrees(emoji.rotation))
+          .scaleEffect(emoji.scale)
       }
       .font(.system(size: controlSize.scale(fontSize)))
 

@@ -26,14 +26,9 @@ public struct QuickLabel: View {
   }
 
   public var body: some View {
-    
 
-//    Text(label.text)
     Label {
-      if !label.text.isEmpty {
-        Text(label.text)
-//        Text(label.text.toMarkdownCompatible)
-      }
+      Text(label.text)
     } icon: {
       if let icon = label.icon {
         IconView(icon)

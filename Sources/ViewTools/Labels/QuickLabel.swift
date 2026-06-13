@@ -26,12 +26,14 @@ public struct QuickLabel: View {
   }
 
   public var body: some View {
-
+    
     Label {
       Text(label.text)
+        .border(Color.orange.opacity(0.3))
     } icon: {
       if let icon = label.icon {
         IconView(icon)
+          .border(Color.purple.opacity(0.3))
       }
     }
   }

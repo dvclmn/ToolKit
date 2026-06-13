@@ -12,14 +12,14 @@ import Foundation
 public struct EmojiGlyph: Identifiable, Equatable, Sendable, Hashable, Codable {
   public let id: UUID
   public let character: Character
-  public let offset: CGSize
+  public let offset: UnitOffset
   public let rotation: Double  // Degrees
   public let scale: CGFloat
 
   public init(
     id: UUID = UUID(),
     _ character: Character,
-    offset: CGSize = .zero,
+    offset: UnitOffset = .zero,
     rotation: Double = .zero,
     scale: CGFloat = 1.0,
   ) {
@@ -28,5 +28,24 @@ public struct EmojiGlyph: Identifiable, Equatable, Sendable, Hashable, Codable {
     self.offset = offset
     self.rotation = rotation
     self.scale = scale
+  }
+}
+
+public struct UnitOffset: Sendable, Hashable, Codable {
+  // [-1, 1] where 0 is center, -1 is left/top, 1 is right/bottom
+  public var x: CGFloat
+  public var y: CGFloat
+
+  public init(x: CGFloat = 0, y: CGFloat = 0) {
+    self.x = x
+    self.y = y
+  }
+
+  public static let zero = UnitOffset()
+}
+
+extension UnitOffset {
+  public func offset(in size: CGSize) -> CGSize {
+    CGSize(width: x * size.width / 2, height: y * size.height / 2)
   }
 }

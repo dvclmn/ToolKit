@@ -26,13 +26,15 @@ extension EmojiComposition {
     emoji: [
       EmojiGlyph(
         "📎",
-        offset: CGSize(width: -30, height: 14),
+        offset: .init(x: -0.5, y: 0.2),
+//        offset: CGSize(width: -30, height: 14),
         rotation: 4,
         scale: 0.8,
       ),
       EmojiGlyph(
         "✂️",
-        offset: CGSize(width: 26, height: -14),
+        offset: .init(x: 0.4, y: -0.2),
+//        offset: CGSize(width: 26, height: -14),
         rotation: 16,
         scale: 1.0,
       ),

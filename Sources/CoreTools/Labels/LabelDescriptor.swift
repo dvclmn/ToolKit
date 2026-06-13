@@ -25,16 +25,13 @@ extension LabelDescriptor {
   }
 
   /// Creates a label whose icon is an SF Symbol name.
-  ///
-  /// The `symbol` argument is not defaulted so this initializer remains
-  /// distinct from ``LabelDescriptor/init(_:icon:role:)``.
   public init(
     _ text: String,
-    symbol symbolString: String?,
+    symbol symbolString: String,
   ) {
     self.init(
       text,
-      icon: symbolString.map { IconLiteral.symbol($0) },
+      icon: IconLiteral.symbol(symbolString),
     )
   }
 }

@@ -24,12 +24,12 @@ public struct StateView<Actions: View>: View {
   public var body: some View {
 
     ContentUnavailableView {
-//      MaybeLabel(label: label)
-      TitleAndIconView(
-        label: label,
-        hasMessage: message != nil,
-        iconSize: iconSize,
-      )
+      QuickLabel(label)
+//      TitleAndIconView(
+//        label: label,
+//        hasMessage: message != nil,
+//        iconSize: iconSize,
+//      )
 //      .environment(\.layoutType, .hstack())
 
     } description: {

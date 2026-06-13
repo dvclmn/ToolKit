@@ -8,41 +8,41 @@
 import SwiftUI
 import CoreTools
 
-public struct FeatureIconView: View {
-  @Environment(\.labelDisplay) private var labelDisplay
-  let icon: IconLiteral
-  let fontSize: CGFloat
-
-  public var body: some View {
-    IconView(icon)
-      .font(.system(size: fontSize))
-//      .bouncyDrag()
-  }
-}
-
-extension FeatureIconView {
-  // MARK: - Initialisers
-
-  /// For any `IconLiteral`
-  public init(
-    _ icon: IconLiteral,
-    fontSize: CGFloat = 68
-  ) {
-    self.icon = icon
-    self.fontSize = fontSize
-  }
-
-  /// Convenience for just Emoji
-  public init(
-    emoji: String,
-    fontSize: CGFloat = 68
-  ) {
-    self.init(
-      .emoji(emoji),
-      fontSize: fontSize
-    )
-  }
-}
+//public struct FeatureIconView: View {
+//  @Environment(\.labelDisplay) private var labelDisplay
+//  let icon: IconLiteral
+//  let fontSize: CGFloat
+//
+//  public var body: some View {
+//    IconView(icon)
+//      .font(.system(size: fontSize))
+////      .bouncyDrag()
+//  }
+//}
+//
+//extension FeatureIconView {
+//  // MARK: - Initialisers
+//
+//  /// For any `IconLiteral`
+//  public init(
+//    _ icon: IconLiteral,
+//    fontSize: CGFloat = 68
+//  ) {
+//    self.icon = icon
+//    self.fontSize = fontSize
+//  }
+//
+//  /// Convenience for just Emoji
+//  public init(
+//    emoji: String,
+//    fontSize: CGFloat = 68
+//  ) {
+//    self.init(
+//      .emoji(emoji),
+//      fontSize: fontSize
+//    )
+//  }
+//}
 
 //#if DEBUG
 //#Preview(traits: .size(.normal)) {

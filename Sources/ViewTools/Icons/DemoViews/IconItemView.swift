@@ -8,23 +8,25 @@
 import SwiftUI
 
 struct IconLiteralItemView: View {
-  
+
   let example: IconLiteralExample
-  
+
   init(_ example: IconLiteralExample) {
     self.example = example
   }
-  
+
   var body: some View {
     VStack(spacing: 8) {
+//      Iconv
       IconView(example.icon)
-        .font(.system(size: 42))
-        .symbolRenderingMode(.hierarchical)
-        .frame(width: 56, height: 56)
-      
+//        .font(.system(size: 42))
+//        .symbolRenderingMode(.hierarchical)
+        //        .frame(width: 56, height: 56)
+//        .debugFrame("Icon", .green)
+
       Text(example.title)
         .font(.callout)
-      
+
       Text(example.reference)
         .font(.system(.caption, design: .monospaced))
         .foregroundStyle(.secondary)
@@ -32,5 +34,6 @@ struct IconLiteralItemView: View {
         .lineLimit(3)
         .frame(width: 150)
     }
+
   }
 }

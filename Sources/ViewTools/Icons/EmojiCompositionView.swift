@@ -5,12 +5,13 @@
 //  Created by Dave Coleman on 22/2/2026.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public struct EmojiCompositionView: View {
   @Environment(\.isDebugMode) private var isDebugMode
   @Environment(\.controlSize) private var controlSize
+
   let composition: EmojiComposition
 
   public init(composition: EmojiComposition) {
@@ -21,12 +22,13 @@ public struct EmojiCompositionView: View {
 
     ZStack {
       ForEach(composition.emoji) { emoji in
-        Text(emoji.emoji.toString)
+        Text(emoji.character.toString)
           .offset(emoji.offset)
           .rotationEffect(.degrees(emoji.rotation))
           .scaleEffect(emoji.scale)
       }
-      .font(.system(size: controlSize.scale(fontSize)))
+      .font(.system(size: 46))
+      //      .font(.system(size: controlSize.scale(fontSize)))
 
       if isDebugMode {
         Circle()
@@ -40,16 +42,16 @@ public struct EmojiCompositionView: View {
   }
 }
 
-extension EmojiCompositionView {
-  private var fontSize: CGFloat {
-    20 * composition.scale
-  }
-}
+//extension EmojiCompositionView {
+//  private var fontSize: CGFloat {
+//    20 * composition.scale
+//  }
+//}
 #if DEBUG
 #Preview {
   EmojiCompositionView(composition: .example)
     .frame(width: 400, height: 600)
-    .environment(\.isDebugMode, true)
+//    .environment(\.isDebugMode, true)
   // .environment(store)
 }
 #endif

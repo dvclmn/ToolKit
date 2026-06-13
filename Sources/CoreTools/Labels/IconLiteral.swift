@@ -11,8 +11,8 @@ import Foundation
 public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
   case emoji(String)
   case emojiComposition(EmojiComposition)
-  case symbol(String) // Uses Image(systemName:)
-  case customSymbol(CustomSymbol) // Uses Image(_:bundle:)
+  case symbol(String)  // Uses Image(systemName:)
+  case customSymbol(CustomSymbol)  // Uses Image(_:bundle:)
 }
 
 extension IconLiteral: ExpressibleByStringLiteral {
@@ -29,7 +29,7 @@ extension IconLiteral {
     switch self {
       case .emoji(let string): string
       case .emojiComposition(let comp):
-        comp.emoji.map { String($0.emoji) }.joined(separator: "")
+        comp.emoji.map { String($0.character) }.joined(separator: "")
       case .symbol(let string): string
       case .customSymbol(let symbol): symbol.reference
     }

@@ -9,34 +9,34 @@ import Foundation
 
 /// A group of emoji glyphs rendered together as one icon-like composition.
 public struct EmojiComposition: Sendable, Equatable, Codable, Hashable {
-  public let emoji: [Emoji]
-  public let scale: CGFloat
+  public let emoji: [EmojiGlyph]
+//  public let scale: CGFloat
 
   public init(
-    emoji: [Emoji],
-    scale: CGFloat = 1.0,
+    emoji: [EmojiGlyph],
+//    scale: CGFloat = 1.0,
   ) {
     self.emoji = emoji
-    self.scale = scale
+//    self.scale = scale
   }
 }
 
 extension EmojiComposition {
   package static let example: Self = .init(
     emoji: [
-      Emoji(
-        emoji: "📎",
+      EmojiGlyph(
+        "📎",
         offset: CGSize(width: -30, height: 14),
         rotation: 4,
         scale: 0.8,
       ),
-      Emoji(
-        emoji: "✂️",
+      EmojiGlyph(
+        "✂️",
         offset: CGSize(width: 26, height: -14),
         rotation: 16,
         scale: 1.0,
       ),
     ],
-    scale: 2.8,
+//    scale: 2.8,
   )
 }

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-public struct DropOperationSetCompatible: OptionSet, Sendable, Hashable {
+public struct DropOperationSetCompatible: OptionSet, Sendable, Hashable, Equatable {
   public let rawValue: Int
   
   public init(rawValue: Int) {
@@ -20,6 +20,23 @@ public struct DropOperationSetCompatible: OptionSet, Sendable, Hashable {
   public static let forbidden = Self(rawValue: 1 << 3)
   public static let delete = Self(rawValue: 1 << 4)
   public static let alias = Self(rawValue: 1 << 5)
+  
+  /// A human-readable name for the set of drop operations.
+  /// For multiple operations, names are joined by a comma.
+  /// Returns "None" when the set is empty.
+  public var displayName: String {
+    if isEmpty { return "None" }
+    var parts: [String] = []
+    if contains(.cancel) { parts.append("Cancel") }
+    if contains(.copy) { parts.append("Copy") }
+    if contains(.move) { parts.append("Move") }
+    if contains(.forbidden) { parts.append("Forbidden") }
+#if os(macOS)
+    if contains(.delete) { parts.append("Delete") }
+    if contains(.alias) { parts.append("Alias") }
+#endif
+    return parts.joined(separator: ", ")
+  }
 }
 
 @available(iOS 26, macOS 26, *)

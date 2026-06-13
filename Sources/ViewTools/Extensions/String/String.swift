@@ -5,11 +5,11 @@
 //  Created by Dave Coleman on 23/5/2026.
 //
 
-import SwiftUI
+//import SwiftUI
 
-extension String {
-
-  public var toMarkdownCompatible: LocalizedStringKey {
-    LocalizedStringKey(self)
-  }
-}
+//extension String {
+//
+//  public var toMarkdownCompatible: LocalizedStringKey {
+//    LocalizedStringKey(self)
+//  }
+//}

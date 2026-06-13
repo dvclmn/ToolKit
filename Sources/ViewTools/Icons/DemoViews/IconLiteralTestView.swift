@@ -19,7 +19,7 @@ public struct IconLiteralTestView: View {
 
       HStack(alignment: .top, spacing: 16) {
         ForEach(IconLiteralExample.examples) { example in
-          IconLiteralTestTile(example)
+          IconLiteralItemView(example)
         }
       }
     }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import StringTools
 
 public struct DropSessionCompatible: Identifiable {
   public let id: ID
@@ -15,7 +16,7 @@ public struct DropSessionCompatible: Identifiable {
   public let suggestedOperations: DropOperationSetCompatible?
   public let size: CGSize?
   public let location: CGPoint
-  
+
   public init(
     id: ID = .init(),
     phase: Phase,
@@ -32,6 +33,27 @@ public struct DropSessionCompatible: Identifiable {
     self.suggestedOperations = suggestedOperations
     self.size = size
     self.location = location
+  }
+}
+
+extension DropSessionCompatible {
+  public var isLocalSession: Bool { localSession != nil }
+}
+extension DropSessionCompatible: CustomStringConvertible {
+  public var description: String {
+    DisplayString {
+      Labeled("Phase", value: phase.displayName)
+      Labeled("Is Local Session?", value: isLocalSession)
+      Labeled("Item count", value: itemsCount?.description)
+      Labeled("Suggested Operations", value: suggestedOperations?.displayName)
+      Labeled("Size", value: size)
+      Labeled("Location", value: location)
+    }
+    .text
+//    """
+//    DropSessionCompatible
+//    - Phase: \(phase), itemsCount: \(itemsCount?.description ?? "nil"))
+//    """
   }
 }
 

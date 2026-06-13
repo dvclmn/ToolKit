@@ -12,7 +12,7 @@ struct TitleAndIconView: View {
   @Environment(\.layoutType) private var layoutType
   @Environment(\.controlSize) private var controlSize
 
-  let label: QuickLabel
+  let label: LabelDescriptor
   let hasMessage: Bool
   let iconSize: CGFloat
 
@@ -21,11 +21,12 @@ struct TitleAndIconView: View {
 //    Group {
       switch layoutType {
         case .hstack:
-          MaybeLabel(label)
+          QuickLabel(label)
 
         default:
 //          MaybeLabel(label: label)
-          Text(label.text.toMarkdownCompatible)
+          Text(label.text)
+//          Text(label.text.toMarkdownCompatible)
             /// Pan gesture view was causing `FeatureIconView` to take
             /// up too much space, so using overlay to keep it contained better
             .overlay(alignment: .top) {

@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct IconLiteralTestTile: View {
+struct IconLiteralItemView: View {
   
   let example: IconLiteralExample
   

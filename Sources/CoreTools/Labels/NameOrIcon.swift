@@ -21,10 +21,10 @@ public protocol IconItem {
 
 extension LabeledItem where Self: NamedItem, Self: RawRepresentable, Self.RawValue == String {
   /// A label derived from ``NamedItem/name``.
-  public var label: QuickLabel { .init(name) }
+  public var label: LabelDescriptor { .init(name) }
 }
 
 extension LabeledItem where Self: NamedItem & IconItem {
   /// A label derived from ``NamedItem/name`` and ``IconItem/icon``.
-  public var label: QuickLabel { .init(name, icon: icon) }
+  public var label: LabelDescriptor { .init(name, icon: icon) }
 }

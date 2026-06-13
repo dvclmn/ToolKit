@@ -14,8 +14,8 @@ public enum LayoutMode: String, CaseCyclable, CaseTogglable, Codable, Sendable {
   case grid
   case list
 
-  public var label: QuickLabel {
-    QuickLabel(rawValue.capitalized, symbol: iconString)
+  public var label: LabelDescriptor {
+    LabelDescriptor(rawValue.capitalized, symbol: iconString)
   }
 
   public var iconString: String {

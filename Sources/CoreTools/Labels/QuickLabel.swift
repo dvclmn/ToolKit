@@ -1,12 +1,12 @@
 //
-//  QuickLabel.swift
+//  LabelDescriptor.swift
 //  ToolKit
 //
 //  Created by Dave Coleman on 26/5/2025.
 //
 
 /// A lightweight label model for non-SwiftUI code.
-public struct QuickLabel: Sendable, Codable, Equatable, Hashable {
+public struct LabelDescriptor: Sendable, Codable, Equatable, Hashable {
   /// The visible text for the label.
   public var text: String
 
@@ -14,7 +14,7 @@ public struct QuickLabel: Sendable, Codable, Equatable, Hashable {
   public let icon: IconLiteral?
 }
 
-extension QuickLabel {
+extension LabelDescriptor {
 
   public init(
     _ text: String,
@@ -27,7 +27,7 @@ extension QuickLabel {
   /// Creates a label whose icon is an SF Symbol name.
   ///
   /// The `symbol` argument is not defaulted so this initializer remains
-  /// distinct from ``QuickLabel/init(_:icon:role:)``.
+  /// distinct from ``LabelDescriptor/init(_:icon:role:)``.
   public init(
     _ text: String,
     symbol symbolString: String?,
@@ -39,14 +39,14 @@ extension QuickLabel {
   }
 }
 
-extension QuickLabel: ExpressibleByStringLiteral {
+extension LabelDescriptor: ExpressibleByStringLiteral {
   public init(stringLiteral value: String) {
     self.init(value)
   }
 }
 
-extension QuickLabel: CustomStringConvertible {
+extension LabelDescriptor: CustomStringConvertible {
   public var description: String {
-    return "QuickLabel[\"\(text)\", icon: \"\(icon?.toString ?? "")\"]"
+    return "LabelDescriptor[\"\(text)\", icon: \"\(icon?.toString ?? "")\"]"
   }
 }

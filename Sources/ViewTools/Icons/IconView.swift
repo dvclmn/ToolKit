@@ -8,9 +8,7 @@
 import CoreTools
 import SwiftUI
 
-public struct IconView: View {
-  @Environment(\.labelDisplay) private var labelDisplay
-
+struct IconView: View {
   let icon: IconLiteral
 
   public init(_ icon: IconLiteral) {
@@ -18,7 +16,6 @@ public struct IconView: View {
   }
 
   public var body: some View {
-
     switch icon {
       case .emoji(let emojiString): Text(emojiString)
       case .emojiComposition(let comp): EmojiCompositionView(composition: comp)

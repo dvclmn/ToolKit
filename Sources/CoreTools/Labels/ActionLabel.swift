@@ -6,6 +6,6 @@
 //
 
 public struct ActionLabel: Sendable, Codable, Equatable, Hashable {
-  public var label: QuickLabel
+  public var label: LabelDescriptor
   public var role: ActionRole?
 }

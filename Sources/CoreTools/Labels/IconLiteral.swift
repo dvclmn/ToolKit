@@ -11,8 +11,8 @@ import Foundation
 public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
   case emoji(String)
   case emojiComposition(EmojiComposition)
-  case symbol(String)
-  case customSymbol(CustomSymbol)
+  case symbol(String) // Uses Image(systemName:)
+  case customSymbol(CustomSymbol) // Uses Image(_:bundle:)
 }
 
 extension IconLiteral: ExpressibleByStringLiteral {

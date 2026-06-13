@@ -19,7 +19,7 @@ public struct CustomSymbolTestView: View {
 
       VStack(alignment: .leading, spacing: 10) {
         ForEach(CustomSymbol.allCases) { symbol in
-          CustomSymbolTestRow(symbol)
+          CustomSymbolItemView(symbol)
         }
       }
     }
@@ -27,30 +27,6 @@ public struct CustomSymbolTestView: View {
   }
 }
 
-private struct CustomSymbolTestRow: View {
-
-  let symbol: CustomSymbol
-
-  init(_ symbol: CustomSymbol) {
-    self.symbol = symbol
-  }
-
-  var body: some View {
-    HStack(spacing: 12) {
-      
-      IconView(.customSymbol(symbol))
-        .frame(width: 28, height: 28)
-
-      Image(symbol.reference, bundle: .module)
-        .frame(width: 28, height: 28)
-
-      Text(symbol.reference)
-        .font(.system(.body, design: .monospaced))
-    }
-    .font(.system(size: 22))
-    .symbolRenderingMode(.hierarchical)
-  }
-}
 
 #Preview("Custom symbols") {
   CustomSymbolTestView()

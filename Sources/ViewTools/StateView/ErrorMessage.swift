@@ -27,7 +27,7 @@ public struct ErrorMessage: Error {
 
 extension ErrorMessage {
   public init(
-    label: QuickLabel,
+    label: LabelDescriptor,
     message: String,
   ) {
     self.init(label.text, icon: label.icon, message: message)
@@ -40,5 +40,5 @@ extension ErrorMessage {
     self.init(title, icon: icon, message: error.localizedDescription)
   }
   
-  public var label: QuickLabel { .init(title, icon: icon) }
+  public var label: LabelDescriptor { .init(title, icon: icon) }
 }

@@ -16,7 +16,7 @@ public struct StateView<Actions: View>: View {
   @Environment(\.iconFontSize) private var iconFontSize
   @Environment(\.controlSize) private var controlSize
 
-  let label: QuickLabel
+  let label: LabelDescriptor
   let message: String?
   let isMessageCopyable: Bool
   let actions: Actions
@@ -82,7 +82,8 @@ extension StateView {
   @ViewBuilder
   private func MessageView() -> some View {
     if let message = message {
-      Text(message.toMarkdownCompatible)
+      Text(message)
+//      Text(message.toMarkdownCompatible)
         .multilineTextAlignment(.center)
         .font(.system(controlSize.textStyle))
         .foregroundStyle(.secondary.opacity(0.8))
@@ -100,7 +101,7 @@ extension StateView {
     isMessageCopyable: Bool = false,
     @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
-    self.label = QuickLabel(title)
+    self.label = LabelDescriptor(title)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
     self.actions = actions()
@@ -113,14 +114,14 @@ extension StateView {
     isMessageCopyable: Bool = false,
     @ViewBuilder actions: () -> Actions = { EmptyView() },
   ) {
-    self.label = QuickLabel(title, icon: icon)
+    self.label = LabelDescriptor(title, icon: icon)
     self.message = message
     self.isMessageCopyable = isMessageCopyable
     self.actions = actions()
   }
 
   public init(
-    label: QuickLabel,
+    label: LabelDescriptor,
     message: String? = nil,
     isMessageCopyable: Bool = false,
     @ViewBuilder actions: () -> Actions = { EmptyView() },

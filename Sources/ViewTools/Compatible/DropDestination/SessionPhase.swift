@@ -17,6 +17,19 @@ extension DropSessionCompatible {
   }
 }
 
+extension DropSessionCompatible.Phase {
+
+  public var displayName: String {
+    switch self {
+      case .entering: "Entering"
+      case .active: "Active"
+      case .exiting: "Exiting"
+      case .ended: "Ended"
+      case .dataTransferCompleted: "Data Transfer Completed"
+    }
+  }
+}
+
 @available(iOS 26, macOS 26, *)
 extension DropSessionCompatible.Phase {
   public init(_ phase: DropSession.Phase) {

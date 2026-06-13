@@ -35,7 +35,7 @@ public struct ErrorView<Actions: View>: View {
     
     ContentUnavailableView {
 //      Label("Hello", systemImage: "binoculars")
-      MaybeLabel(error.label)
+      QuickLabel(error.label)
     } description: {
       Text(error.message)
     } actions: {

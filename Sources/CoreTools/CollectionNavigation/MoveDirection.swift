@@ -17,7 +17,7 @@ public enum MoveDirection: String, LabeledItem, Sendable {
   public static let backward: Self = .previous
   public static let reverse: Self = .previous
 
-  public var label: QuickLabel { QuickLabel(rawValue.capitalized, symbol: icon) }
+  public var label: LabelDescriptor { LabelDescriptor(rawValue.capitalized, symbol: icon) }
 
   public var id: String { rawValue }
   

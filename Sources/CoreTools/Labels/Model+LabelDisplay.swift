@@ -6,7 +6,6 @@
 //
 /// The preferred visible parts of a label.
 public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendable {
-
   case iconOnly
   case titleOnly
   case titleAndIcon

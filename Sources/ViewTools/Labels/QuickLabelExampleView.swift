@@ -9,20 +9,54 @@ import SwiftUI
 
 struct QuickLabelExampleView: View {
 
+  private enum FontPreset: String, CaseIterable, Identifiable {
+    case small = "Small"
+    case body = "Body"
+    case title = "Title"
+    case largeTitle = "Large Title"
+    case giant = "Giant"
+
+    var id: String { rawValue }
+
+    var font: Font {
+      switch self {
+        case .small: return .footnote
+        case .body: return .body
+        case .title: return .title
+        case .largeTitle: return .largeTitle
+        case .giant: return .system(size: 50)
+      }
+    }
+  }
+
+  @State private var selectedPreset: FontPreset = .body
+
   var body: some View {
 
-    VStack {
-      
+    VStack(spacing: 40) {
+
       VStack(alignment: .leading) {
         LabelGroup()
       }
-      .debugFrame("Left-aligned VStack", .brown)
-      
+      .padding(.top)
+
       List {
         LabelGroup()
       }
       .frame(maxWidth: 500)
-      .debugFrame("List", .yellow)
+
+    }
+    .font(selectedPreset.font)
+    .safeAreaInset(edge: .top) {
+
+      Picker("Font Size", selection: $selectedPreset) {
+        ForEach(FontPreset.allCases) { preset in
+          Text(preset.rawValue).tag(preset)
+        }
+      }
+      .pickerStyle(.segmented)
+      .padding()
+
     }
   }
 }
@@ -30,19 +64,13 @@ struct QuickLabelExampleView: View {
 extension QuickLabelExampleView {
   @ViewBuilder
   private func LabelGroup() -> some View {
-//    Group {
-//    VStack(alignment: .leading) {
-      QuickLabel("I'm an Emoji", icon: .emoji("⛱️"))
-      QuickLabel("Simple SF Symbol", icon: .randomSymbol)
-      QuickLabel("Emoji Composition", icon: .emojiComposition(.example))
-      QuickLabel("Custom Symbols", icon: .customSymbol(.terminal))
-//    }
-//    .border(Color.green.opacity(0.3))
+    QuickLabel("I'm an Emoji", icon: .emoji("⛱️"))
+    QuickLabel("Simple SF Symbol", icon: .randomSymbol)
+    QuickLabel("Composition", icon: .emojiComposition(.example))
+    QuickLabel("Custom Symbol", icon: .customSymbol(.terminal))
   }
 }
 
 #Preview(traits: .size(.normal)) {
-  // @Previewable @State var store = AppHandler()
   QuickLabelExampleView()
-  // .environment(store)
 }

@@ -34,6 +34,7 @@ private struct EmojiView: View {
   var body: some View {
 
     Image(systemName: "eye")
+      .hidden()
       .overlay {
         Text(emoji)
       }

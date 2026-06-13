@@ -10,7 +10,6 @@ import SwiftUI
 
 public struct EmojiCompositionView: View {
   @Environment(\.isDebugMode) private var isDebugMode
-  @Environment(\.controlSize) private var controlSize
 
   let composition: EmojiComposition
 
@@ -23,16 +22,15 @@ public struct EmojiCompositionView: View {
     Text(baseCharacter)
       .hidden()
       .overlay {
-        ForEach(composition.emoji) { emoji in
-          Text(emoji.character.toString)
-            .offset(emoji.offset.offset(in: <#T##CGSize#>))
-//            .offset(x: emoji.offset.x, y: emoji.offset.y)
-//            .offset(emoji.offset)
-            .rotationEffect(.degrees(emoji.rotation))
-            .scaleEffect(emoji.scale)
+        EmojiCompositionLayout {
+          ForEach(composition.emoji) { emoji in
+            Text(emoji.character.toString)
+              .layoutValue(key: EmojiGlyphOffsetKey.self, value: emoji.offset)
+              .rotationEffect(.degrees(emoji.rotation))
+              .scaleEffect(emoji.scale)
+          }
         }
         //          .font(.system(size: 46))
-        //      .font(.system(size: controlSize.scale(fontSize)))
 
         //          if isDebugMode {
         //            Circle()
@@ -45,6 +43,53 @@ public struct EmojiCompositionView: View {
 
     //    .drawingGroup()
   }
+}
+
+private struct EmojiCompositionLayout: Layout {
+  func sizeThatFits(
+    proposal: ProposedViewSize,
+    subviews: Subviews,
+    cache: inout Void,
+  ) -> CGSize {
+    let intrinsicSize = subviews.reduce(into: CGSize.zero) { size, subview in
+      let subviewSize = subview.sizeThatFits(.unspecified)
+      size.width = max(size.width, subviewSize.width)
+      size.height = max(size.height, subviewSize.height)
+    }
+
+    return CGSize(
+      width: proposal.width ?? intrinsicSize.width,
+      height: proposal.height ?? intrinsicSize.height,
+    )
+  }
+
+  func placeSubviews(
+    in bounds: CGRect,
+    proposal: ProposedViewSize,
+    subviews: Subviews,
+    cache: inout Void,
+  ) {
+    let centre = CGPoint(x: bounds.midX, y: bounds.midY)
+
+    for subview in subviews {
+      let unitOffset = subview[EmojiGlyphOffsetKey.self]
+      let offset = unitOffset.offset(in: bounds.size)
+      let position = CGPoint(
+        x: centre.x + offset.width,
+        y: centre.y + offset.height,
+      )
+
+      subview.place(
+        at: position,
+        anchor: .center,
+        proposal: .unspecified,
+      )
+    }
+  }
+}
+
+private struct EmojiGlyphOffsetKey: LayoutValueKey {
+  static let defaultValue = UnitOffset.zero
 }
 
 extension EmojiCompositionView {

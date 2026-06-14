@@ -19,6 +19,13 @@ extension DropSessionCompatible {
 
 extension DropSessionCompatible.Phase {
 
+  public var isTargeted: Bool {
+    switch self {
+      case .entering, .active: true
+      case .exiting, .ended, .dataTransferCompleted: false
+    }
+  }
+
   public var displayName: String {
     switch self {
       case .entering: "Entering"

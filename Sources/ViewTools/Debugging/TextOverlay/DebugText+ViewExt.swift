@@ -12,11 +12,13 @@ import StringTools
 extension View {
   public func debugTextOverlay(
     isEnabled: Bool = true,
+    edge: VerticalEdge = .bottom,
     alignment: Alignment = .bottomLeading,
   ) -> some View {
     modifier(
       DebugTextOverlayModifier(
         isEnabled: isEnabled,
+        edge: edge,
         alignment: alignment,
       )
     )

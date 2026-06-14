@@ -14,21 +14,20 @@ extension View {
     edge: VerticalEdge,
     alignment: HorizontalAlignment = .center,
     spacing: CGFloat? = nil,
-    @ViewBuilder content: () -> some View
+    @ViewBuilder content: () -> some View,
   ) -> some View {
     if #available(macOS 26.0, iOS 26.0, *) {
       safeAreaBar(
         edge: edge,
         alignment: alignment,
         spacing: spacing,
-        content: content
+        content: content,
       )
     } else {
-      overlay(
-        alignment: Alignment(
-          horizontal: alignment,
-          vertical: edge.toAlignment
-        ),
+      safeAreaInset(
+        edge: edge,
+        alignment: alignment,
+        spacing: spacing,
         content: content
       )
     }
@@ -39,21 +38,20 @@ extension View {
     edge: HorizontalEdge,
     alignment: VerticalAlignment = .center,
     spacing: CGFloat? = nil,
-    @ViewBuilder content: () -> some View
+    @ViewBuilder content: () -> some View,
   ) -> some View {
     if #available(macOS 26.0, iOS 26.0, *) {
       safeAreaBar(
         edge: edge,
         alignment: alignment,
         spacing: spacing,
-        content: content
+        content: content,
       )
     } else {
-      overlay(
-        alignment: Alignment(
-          horizontal: edge.toAlignment,
-          vertical: alignment
-        ),
+      safeAreaInset(
+        edge: edge,
+        alignment: alignment,
+        spacing: spacing,
         content: content
       )
     }

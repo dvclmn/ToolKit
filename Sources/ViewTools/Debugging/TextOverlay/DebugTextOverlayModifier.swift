@@ -12,27 +12,29 @@ struct DebugTextOverlayModifier: ViewModifier {
   @State private var ownedStore = DebugItemStore()
 
   let isEnabled: Bool
+  let edge: VerticalEdge
   var alignment: Alignment
 
   func body(content: Content) -> some View {
-    //    if inheritedStore != nil {
-    /// A store already exists higher up — become a transparent pass-through.
-    /// Any .debugItem(...) descendants will write to the inherited store naturally.
-    //      content
-    //    } else {
-    /// We're the canonical host — own the store, inject it, render the overlay.
     content
       .environment(ownedStore)
-      .overlay(alignment: alignment) {
+      .safeAreaBarCompatible(
+        edge: edge,
+        alignment: alignment.horizontal,
+        spacing: nil,
+      ) {
         if isEnabled, !ownedStore.items.isEmpty {
           DebugItemsOverlayView(
             store: ownedStore,
             alignment: alignment,
           )
           .allowsHitTesting(false)
-//          .border(Color.green.opacity(0.3))
+
         }
       }
+      //      .overlay(alignment: alignment) {
+
+      //      }
       .overlay {
         if inheritedStore != nil {
           Text(

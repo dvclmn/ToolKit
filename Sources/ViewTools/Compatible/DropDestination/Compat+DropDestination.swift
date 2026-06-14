@@ -24,6 +24,9 @@ extension View {
       ) { items, session in
         action(items, DropSessionCompatible(session))
       }
+      .onDropSessionUpdated { session in
+        action([], DropSessionCompatible(session))
+      }
     } else if isEnabled {
       dropDestination(
         for: type,

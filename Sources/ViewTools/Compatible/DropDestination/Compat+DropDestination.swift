@@ -16,6 +16,7 @@ extension View {
       _ items: [T],
       _ session: DropSessionCompatible
     ) -> Void,
+    onSessionUpdated: ((_ session: DropSessionCompatible) -> Void)? = nil,
   ) -> some View where T: Transferable {
     if #available(macOS 26, iOS 26, *) {
       dropDestination(
@@ -25,7 +26,7 @@ extension View {
         action(items, DropSessionCompatible(session))
       }
       .onDropSessionUpdated { session in
-        action([], DropSessionCompatible(session))
+        onSessionUpdated?(DropSessionCompatible(session))
       }
     } else if isEnabled {
       dropDestination(
@@ -42,8 +43,7 @@ extension View {
           return true
         },
         isTargeted: { isTargeted in
-          action(
-            [],
+          onSessionUpdated?(
             DropSessionCompatible(
               phase: isTargeted ? .entering : .exiting,
               itemsCount: nil,

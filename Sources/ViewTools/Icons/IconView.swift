@@ -18,7 +18,7 @@ struct IconView: View {
   public var body: some View {
     switch icon {
       case .emoji(let emojiString): EmojiView(emoji: emojiString)
-      case .emojiComposition(let comp): EmojiCompositionView(composition: comp)
+      case .emojiComposition(let comp): EmojiCompositionView(comp)
       case .symbol(let symbolString): Image(systemName: symbolString)
       case .customSymbol(let customSymbol):
         Image(customSymbol.reference, bundle: .module)

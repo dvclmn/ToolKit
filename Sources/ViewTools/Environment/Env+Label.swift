@@ -16,6 +16,10 @@ extension EnvironmentValues {
   @Entry public var labelFontStyle: Font.TextStyle? = nil
   @Entry public var labelFontSize: CGFloat? = nil
   @Entry public var labelTextCase: Text.Case? = nil
+  
+  /// True when label is displayed in a vertical stack, usually with a larger icon size.
+  /// For instance in ErrorView, which is based on ContentUnavailableView.
+  @Entry public var isLabelStacked: Bool = false
 
   /// This is useful because SwiftUI exposes control over display of
   /// icon and label elements in the form of the `LabelStyle` protocol.

@@ -5,10 +5,10 @@
 //  Created by Dave Coleman on 14/6/2026.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
-package struct EmojiCompositionLayout: Layout {
+struct EmojiCompositionLayout: Layout {
   func sizeThatFits(
     proposal: ProposedViewSize,
     subviews: Subviews,
@@ -19,13 +19,13 @@ package struct EmojiCompositionLayout: Layout {
       size.width = max(size.width, subviewSize.width)
       size.height = max(size.height, subviewSize.height)
     }
-    
+
     return CGSize(
       width: proposal.width ?? intrinsicSize.width,
       height: proposal.height ?? intrinsicSize.height,
     )
   }
-  
+
   func placeSubviews(
     in bounds: CGRect,
     proposal: ProposedViewSize,
@@ -33,7 +33,7 @@ package struct EmojiCompositionLayout: Layout {
     cache: inout Void,
   ) {
     let centre = CGPoint(x: bounds.midX, y: bounds.midY)
-    
+
     for subview in subviews {
       let unitOffset = subview[EmojiGlyphOffsetKey.self]
       let offset = unitOffset.offset(in: bounds.size)
@@ -41,7 +41,7 @@ package struct EmojiCompositionLayout: Layout {
         x: centre.x + offset.width,
         y: centre.y + offset.height,
       )
-      
+
       subview.place(
         at: position,
         anchor: .center,
@@ -51,6 +51,6 @@ package struct EmojiCompositionLayout: Layout {
   }
 }
 
-package struct EmojiGlyphOffsetKey: LayoutValueKey {
+struct EmojiGlyphOffsetKey: LayoutValueKey {
   static let defaultValue = UnitOffset.zero
 }

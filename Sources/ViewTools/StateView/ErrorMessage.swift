@@ -40,5 +40,13 @@ extension ErrorMessage {
     self.init(title, icon: icon, message: error.localizedDescription)
   }
   
+  public init(
+    _ title: String,
+    symbol: String,
+    error: Error,
+  ) {
+    self.init(title, icon: .symbol(symbol), message: error.localizedDescription)
+  }
+  
   public var label: LabelDescriptor { .init(title, icon: icon) }
 }

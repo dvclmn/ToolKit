@@ -9,6 +9,7 @@ import CoreTools
 import SwiftUI
 
 struct IconView: View {
+
   let icon: IconLiteral
 
   public init(_ icon: IconLiteral) {
@@ -17,27 +18,11 @@ struct IconView: View {
 
   public var body: some View {
     switch icon {
-      case .emoji(let emojiString): EmojiView(emoji: emojiString)
+      case .emoji(let emojiString): EmojiIconView(emoji: emojiString)
       case .emojiComposition(let comp): EmojiCompositionView(comp)
       case .symbol(let symbolString): Image(systemName: symbolString)
       case .customSymbol(let customSymbol):
         Image(customSymbol.reference, bundle: .module)
     }
-
-  }
-}
-
-private struct EmojiView: View {
-
-  let emoji: String
-
-  var body: some View {
-
-    Image(systemName: "eye")
-      .hidden()
-      .overlay {
-        Text(emoji)
-      }
-
   }
 }

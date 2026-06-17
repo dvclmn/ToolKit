@@ -39,7 +39,8 @@ public struct ErrorView<Actions: View>: View {
         .environment(\.isLabelStacked, true)
       
     } description: {
-      Text(error.message)
+      CopyableText(error.message.toLocalisedStringKey)
+        
     } actions: {
       actions
     }
@@ -50,6 +51,6 @@ public struct ErrorView<Actions: View>: View {
   ErrorView(
     "Error finding file",
     icon: .emoji("☔️"),
-    message: "Oh dear, I can't find that file.",
+    message: "Oh dear, I *can't* find that `file`.",
   )
 }

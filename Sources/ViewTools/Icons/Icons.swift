@@ -31,6 +31,7 @@ public enum Icons: String, Codable, Equatable, Sendable, CaseIterable, Identifia
   case down = "chevron.down"                                        // 􀆈
 
   case sort = "arrow.up.arrow.down"                                 // 􀄬
+  case box = "shippingbox"                                          // 􀐚
   case debug = "ladybug"                                            // 􀯔
   case filter = "line.horizontal.3.decrease"                        // 􀜓
   case store = "storefront"                                         // 􁽇

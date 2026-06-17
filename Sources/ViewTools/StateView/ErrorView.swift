@@ -39,7 +39,7 @@ public struct ErrorView<Actions: View>: View {
         .environment(\.isLabelStacked, true)
       
     } description: {
-      CopyableText(error.message.toLocalisedStringKey)
+      CopyableText(error.message.toLocalisedStringResource)
         
     } actions: {
       actions

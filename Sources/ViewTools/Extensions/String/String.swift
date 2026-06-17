@@ -10,6 +10,10 @@ import SwiftUI
 extension String {
 
   public var toLocalisedStringKey: LocalizedStringKey {
-    LocalizedStringKey(self)
+    .init(self)
+  }
+  
+  public var toLocalisedStringResource: LocalizedStringResource {
+    .init(stringLiteral: self)
   }
 }

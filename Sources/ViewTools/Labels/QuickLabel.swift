@@ -28,7 +28,7 @@ public struct QuickLabel: View {
   public var body: some View {
     
     Label {
-      Text(label.localisedText)
+      Text(label.localisedTextResource)
 //        .border(Color.orange.opacity(0.3))
     } icon: {
       if let icon = label.icon {

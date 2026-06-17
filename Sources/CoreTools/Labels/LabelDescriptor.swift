@@ -18,7 +18,7 @@ public struct LabelDescriptor: Sendable, Codable, Equatable, Hashable {
 
 extension LabelDescriptor {
   
-  public var localisedText: LocalizedStringKey {
+  public var localisedTextKey: LocalizedStringKey {
     .init(text)
 //  public var localisedText: AttributedString {
 //    try! .init(markdown: text)
@@ -27,6 +27,10 @@ extension LabelDescriptor {
 //    let attr = AttributedString(text)
 //    return .init(stringLiteral: attr)
 //    .init(stringLiteral: text)
+  }
+  
+  public var localisedTextResource: LocalizedStringResource {
+    .init(stringLiteral: text)
   }
 
   public init(

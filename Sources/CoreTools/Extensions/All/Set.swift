@@ -7,6 +7,9 @@
 
 import Foundation
 
+// NOTE:
+// Set conforms to both Collection and Sequence
+
 extension Set {
   public var toArray: [Element] {
     Array(self)

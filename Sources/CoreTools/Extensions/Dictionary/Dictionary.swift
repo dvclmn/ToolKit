@@ -7,6 +7,9 @@
 
 import Foundation
 
+// NOTE:
+// Dictionary conforms to both Collection and Sequence
+
 extension Dictionary where Key: CustomStringConvertible, Value: CustomStringConvertible {
   public func displayString<T: Comparable>(
     sortedBy keyPath: KeyPath<Element, T>,

@@ -5,13 +5,12 @@
 //  Created by Dave Coleman on 6/1/2026.
 //
 
-
 import Foundation
 
 // MARK: - Stridable Stepping Extension
 
 extension Strideable {
-  
+
   /// Advances this value by `step`, clamping the result to `range`.
   ///
   /// - Parameters:
@@ -22,19 +21,19 @@ extension Strideable {
   public func stepping(
     by step: Stride,
     in range: ClosedRange<Self>,
-    onEditingChanged: ((Self, Self) -> Void)? = nil
+    onEditingChanged: ((Self, Self) -> Void)? = nil,
   ) -> Self {
     let oldValue = self
     let newValue = self.advanced(by: step)
     let clampedValue = min(max(newValue, range.lowerBound), range.upperBound)
-    
+
     if oldValue != clampedValue {
       onEditingChanged?(oldValue, clampedValue)
     }
-    
+
     return clampedValue
   }
-  
+
   /// Advances this value upward by `step`, clamping the result to `range`.
   ///
   /// - Parameters:
@@ -45,11 +44,11 @@ extension Strideable {
   public func steppingUp(
     by step: Stride,
     in range: ClosedRange<Self>,
-    onEditingChanged: ((Self, Self) -> Void)? = nil
+    onEditingChanged: ((Self, Self) -> Void)? = nil,
   ) -> Self {
     stepping(by: step, in: range, onEditingChanged: onEditingChanged)
   }
-  
+
   /// Advances this value downward by `step`, clamping the result to `range`.
   ///
   /// - Parameters:
@@ -60,11 +59,11 @@ extension Strideable {
   public func steppingDown(
     by step: Stride,
     in range: ClosedRange<Self>,
-    onEditingChanged: ((Self, Self) -> Void)? = nil
+    onEditingChanged: ((Self, Self) -> Void)? = nil,
   ) -> Self {
     stepping(by: -step, in: range, onEditingChanged: onEditingChanged)
   }
-  
+
   /// Returns whether advancing by `step` would remain inside `range`.
   ///
   /// - Parameters:

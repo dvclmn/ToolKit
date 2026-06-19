@@ -13,6 +13,7 @@ extension Array where Element: Hashable {
   }
 }
 
+// MARK: - Codable
 // From https://fatbobman.com/en/snippet/extending-supported-data-types-for-appstorage/#2-supporting-arrays
 extension Array: @retroactive RawRepresentable where Element: Codable {
   public init?(rawValue: String) {

@@ -62,7 +62,7 @@ extension Equatable {
   ///
   /// This is exact, position-based navigation: `allowed` keeps its existing order,
   /// and `nil` is returned when this value is not present.
-  public func stepped<C>(
+  @_spi(Internal) public func stepped<C>(
     in allowed: C,
     direction: StepDirection = .up,
     wrapping: Bool = false

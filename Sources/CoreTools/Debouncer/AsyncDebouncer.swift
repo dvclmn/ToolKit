@@ -10,9 +10,10 @@ import Foundation
 /// Debounces asynchronous work by cancelling pending trailing-edge execution when
 /// a newer request arrives.
 ///
-/// Store the debouncer for at least as long as the work it coordinates. In
-/// SwiftUI views, prefer `@State private var debouncer = AsyncDebouncer()` so
-/// the instance survives body recomputation.
+/// This is a core scheduling primitive rather than a SwiftUI view helper. Store
+/// the debouncer for at least as long as the work it coordinates; in SwiftUI,
+/// `ViewTools` provides convenience APIs for holding and using debouncers from
+/// views.
 ///
 /// Use a separate instance for each independent task stream; calls made through
 /// one debouncer share cancellation state.
@@ -20,7 +21,7 @@ import Foundation
 public final class AsyncDebouncer {
   private var task: Task<Void, Error>?
 
-  // Tracks the cooldown window used by leading-edge execution.
+  /// Tracks the cooldown window used by leading-edge execution.
   private var cooldownTask: Task<Void, Error>?
 
   private let interval: Duration

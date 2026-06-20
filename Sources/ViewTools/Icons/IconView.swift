@@ -8,7 +8,7 @@
 import CoreTools
 import SwiftUI
 
-struct IconView: View {
+public struct IconView: View {
 
   let icon: IconLiteral
 

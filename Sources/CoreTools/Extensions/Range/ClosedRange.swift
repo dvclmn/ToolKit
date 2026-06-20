@@ -7,11 +7,17 @@
 
 import Foundation
 
+// MARK: - Checks
+extension ClosedRange {
+  public var isZero: Bool { lowerBound == upperBound }
+  public var isGreaterThanZero: Bool { lowerBound < upperBound }
+  public var isGreaterThanOrEqualToZero: Bool { lowerBound <= upperBound }
+}
+
 extension ClosedRange where Bound: BinaryFloatingPoint {
   public static var phaseRange: Self { 0...1 * .pi }
   public static var unitRange: Self { 0...1 }
-  
-  
+
   /// Returns the fractional position of the given value within the range.
   /// The inverse operation of the above `value(atPercent:)`
   /// "How far through the zoom range is 8.08?"
@@ -29,89 +35,18 @@ extension ClosedRange where Bound: BinaryFloatingPoint {
     guard lowerBound != upperBound else { return 0 }
     return (value - lowerBound) / (upperBound - lowerBound)
   }
-  
+
   /// "Give me the value that is 20% along the zoom range"
   /// `let zoom = (0.1...40).value(atPercent: 0.2)  // → 8.08`
   /// The inverse operation of the below `fractionThroughRange(for:)`
   public func value(atPercent percent: Self.Bound) -> Self.Bound {
     lowerBound + (upperBound - lowerBound) * percent
   }
-  
+
   public var halfway: Self.Bound {
     (upperBound + lowerBound) / 2
   }
-  
+
   public var length: Self.Bound { upperBound - lowerBound }
 
-}
-
-extension ClosedRange where Bound: BinaryFloatingPoint, Bound.Stride: BinaryFloatingPoint {
-  
-  
-  /// Returns `count` evenly spaced values from lowerBound to upperBound, inclusive.
-  ///
-  /// Usage:
-  /// ```
-  /// let values = (0.0...1.0).split(into: 5)
-  /// // [0.0, 0.25, 0.5, 0.75, 1.0]
-  /// ```
-  public func split(into count: Int) -> [Bound] {
-    guard count > 1 else { return [lowerBound] }
-    let stepSize = Bound(upperBound - lowerBound) / Bound(count - 1)
-    return Array(
-      stride(
-        from: lowerBound,
-        through: upperBound,
-        by: Bound.Stride(stepSize),
-      )
-    )
-  }
-  
-  /// Returns values starting at lowerBound, incremented by stepSize, up to upperBound.
-  public func split(by stepSize: Bound) -> [Bound] {
-    Array(
-      stride(
-        from: lowerBound,
-        through: upperBound,
-        by: Bound.Stride(stepSize)
-      )
-    )
-  }
-}
-
-extension ClosedRange {
-  public var isZero: Bool { lowerBound == upperBound }
-  public var isGreaterThanZero: Bool { lowerBound < upperBound }
-  public var isGreaterThanOrEqualToZero: Bool { lowerBound <= upperBound }
-}
-
-
-extension ClosedRange where Bound == Double {
-  public var toCGFloatRange: ClosedRange<CGFloat> {
-    CGFloat(lowerBound)...CGFloat(upperBound)
-  }
-}
-
-extension ClosedRange where Bound == Int {
-  public var toDoubleRange: ClosedRange<Double> {
-    Double(lowerBound)...CGFloat(upperBound)
-  }
-  public var toCGFloatRange: ClosedRange<CGFloat> {
-    CGFloat(lowerBound)...CGFloat(upperBound)
-  }
-  public func toBinaryFloatingPointRange<T: BinaryFloatingPoint>() -> ClosedRange<T> {
-    T(lowerBound)...T(upperBound)
-  }
-}
-
-extension ClosedRange where Bound: BinaryFloatingPoint & Sendable {
-  public var toCGFloatRange: ClosedRange<CGFloat> {
-    CGFloat(lowerBound)...CGFloat(upperBound)
-  }
-  public var toDoubleRange: ClosedRange<Double> {
-    Double(lowerBound)...Double(upperBound)
-  }
-  public var toIntRange: ClosedRange<Int> {
-    Int(lowerBound)...Int(upperBound)
-  }
 }

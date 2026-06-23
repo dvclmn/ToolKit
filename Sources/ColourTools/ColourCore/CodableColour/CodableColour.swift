@@ -21,8 +21,10 @@ public enum CodableColour: Codable, Equatable, Hashable, Sendable, Identifiable 
   case system(SystemColour, opacity: Double = 1)
   case grey(Double, opacity: Double = 1)  // 0 == black, 1 == white
   case mix(
-    SystemColour,
-    SystemColour,
+    RGBColour,
+    RGBColour,
+//    SystemColour,
+//    SystemColour,
     Double = 0.5,
     opacity: Double = 1
   )
@@ -58,8 +60,8 @@ extension CodableColour {
       case .grey(let double, let opacity):
         "Grey: \(double), Opacity: \(opacity)"
 
-      case .mix(let systemColour, let systemColour2, let double, let opacity):
-        "Mix: \(systemColour.name) + \(systemColour2.name), Amount: \(double), Opacity: \(opacity)"
+      case .mix(let primary, let secondary, let strength, let opacity):
+        "Mix: \(primary.description) + \(secondary.description), Amount: \(strength), Opacity: \(opacity)"
     }
   }
 }

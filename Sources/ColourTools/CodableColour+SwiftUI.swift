@@ -68,7 +68,11 @@ extension CodableColour {
         return system.toColour.opacity(opacity)
 
       case .mix(let a, let b, let t, let opacity):
-        return ColourMix(a, b, mixAmount: t).colour.opacity(opacity)
+        return ColourMix(
+          primary: a,
+          secondary: b,
+          strength: t
+        ).colour.opacity(opacity)
     }
   }
 }

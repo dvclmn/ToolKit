@@ -21,27 +21,17 @@ extension CodableColour {
         return NSColor.fromHexString(hex)?.withAlphaComponent(opacity)
 
       case .rgb(let model):
-        return NSColor(
-          red: model.red,
-          green: model.green,
-          blue: model.blue,
-          alpha: model.alpha
-        )
+        return model.toNSColor
 
       case .hsv(let model):
-        return NSColor(
-          hue: model.hue,
-          saturation: model.saturation,
-          brightness: model.brightness,
-          alpha: model.alpha
-        )
+        return model.toNSColor
 
       case .hsvRaw(let h, let s, let v, let opacity):
         return NSColor(
           hue: h,
           saturation: s,
           brightness: v,
-          alpha: opacity
+          alpha: opacity,
         )
 
       case .rgbRaw(let r, let g, let b, let opacity):
@@ -57,9 +47,8 @@ extension CodableColour {
         return NSColor(cgColor: CGColor(gray: v, alpha: opacity))
 
       case .mix(let a, let b, let t, let opacity):
-        guard let colorA = a.toNSColor,
-          let colorB = b.toNSColor
-        else { return nil }
+        let colorA = a.toNSColor
+        let colorB = b.toNSColor
         return colorA.blended(withFraction: t, of: colorB)?.withAlphaComponent(opacity)
     }
   }

@@ -18,7 +18,7 @@ extension ControlSize {
       @unknown default: "Regular"
     }
   }
-  
+
 }
 
 extension ControlSize: @retroactive Identifiable {
@@ -58,3 +58,21 @@ extension ControlSize {
   }
 
 }
+
+#if os(macOS)
+import AppKit
+
+extension ControlSize {
+  public var nsControlSize: NSControl.ControlSize {
+    switch self {
+      case .mini: .mini
+      case .small: .small
+      case .regular: .regular
+      case .large: .large
+      case .extraLarge: .large
+      @unknown default: .regular
+    }
+  }
+}
+
+#endif

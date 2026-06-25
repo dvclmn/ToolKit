@@ -13,9 +13,9 @@ public struct ColourMix: Sendable, Codable, Equatable, Hashable {
   //  public let mix: SystemColour?
   //  public let mixAmount: Double
 
-  let primary: RGBColour
-  let secondary: RGBColour?
-  let strength: Double
+  public var primary: RGBColour
+  public var secondary: RGBColour?
+  public var strength: Double
 
   public init(
     primary: RGBColour,
@@ -28,7 +28,7 @@ public struct ColourMix: Sendable, Codable, Equatable, Hashable {
   }
 }
 extension ColourMix {
-
+//  public var baseColour: RGBColour { primary }
   public var colour: Color {
     guard let secondary else { return primary.toColour }
     return primary.withMix(secondary, strength)

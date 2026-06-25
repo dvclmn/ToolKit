@@ -35,6 +35,13 @@ extension BinaryFloatingPoint {
     self.normalised(in: range) * 100
   }
   
+  public func isApproximatelyEqual(
+    to other: Self,
+    within tolerance: Self = .ulpOfOne
+  ) -> Bool {
+    abs(self - other) <= tolerance
+  }
+  
   public var isGreaterThanZero: Bool { self > 0 }
   public var isFiniteAndGreaterThanZero: Bool { isFinite && self > 0 }
   public var isGreaterThanOrEqualToZero: Bool { self >= 0 }

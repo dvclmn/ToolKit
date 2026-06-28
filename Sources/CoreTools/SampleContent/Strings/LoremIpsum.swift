@@ -1,6 +1,6 @@
 //
 //  LoremIpsum.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 31/10/2025.
 //

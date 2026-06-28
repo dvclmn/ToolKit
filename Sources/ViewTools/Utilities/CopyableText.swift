@@ -1,6 +1,6 @@
 //
 //  CopyableText.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 17/6/2026.
 //

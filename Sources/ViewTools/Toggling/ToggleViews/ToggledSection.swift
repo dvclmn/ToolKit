@@ -1,6 +1,6 @@
 //
 //  ToggledSection.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 6/2/2026.
 //

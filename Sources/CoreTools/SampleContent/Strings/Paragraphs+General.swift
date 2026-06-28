@@ -1,6 +1,6 @@
 //
 //  Paragraphs+General.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 28/2/2025.
 //

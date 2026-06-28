@@ -1,6 +1,6 @@
 //
 //  ToggleState.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 10/2/2026.
 //

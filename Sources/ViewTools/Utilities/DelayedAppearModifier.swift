@@ -1,6 +1,6 @@
 //
 //  DelayedAppearModifier.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 17/4/2026.
 //

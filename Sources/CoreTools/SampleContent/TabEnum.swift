@@ -1,12 +1,11 @@
 //
 //  TabEnum.swift
-//  BaseHelpers
+//  ToolKit
 //
 //  Created by Dave Coleman on 21/9/2025.
 //
 
 import SwiftUI
-import CoreTools
 
 public enum ExampleTab: String, Pickable {
   

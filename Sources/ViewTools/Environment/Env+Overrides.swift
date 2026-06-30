@@ -23,7 +23,7 @@ extension EnvironmentValues {
   
   /// Helpful article on `aspectRatio`
   /// https://alejandromp.com/development/blog/image-aspectratio-without-frames/
-  /// See also `viewAspectRatio()` in BaseHelpers
+  /// See also `viewAspectRatio()` in ToolKit
   @Entry public var aspectRatioOverride: CGFloat?
   @Entry public var contentModeOverride: ContentMode?
   @Entry public var controlSizeOverride: ControlSize?

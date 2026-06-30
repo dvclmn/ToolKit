@@ -34,7 +34,7 @@ extension EnvironmentValues {
   @Entry public var opticalCentreBias: CGFloat? = nil
 
   /// This (perhaps unneccesarily) pairs with `ContainerValue`
-  /// of the same name, in BaseHelpers' Compatible collection.
+  /// of the same name, in ToolKits' Compatible collection.
   @Entry public var isShowingSectionHeader: Bool = true
   @Entry public var isBackgroundHidden: Bool = false
 

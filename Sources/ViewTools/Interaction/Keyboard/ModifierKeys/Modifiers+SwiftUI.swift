@@ -20,6 +20,12 @@ extension Modifiers {
 }
 
 extension EventModifiers {
+  
+  public var displayName: String {
+    let modifiers = Modifiers(from: self)
+    return modifiers.displayString
+  }
+  
   public init(from modifiers: Modifiers) {
     self = ModifierKeyBridge.eventModifiers { mapping in
       guard let modifier = mapping.modifiers else { return false }

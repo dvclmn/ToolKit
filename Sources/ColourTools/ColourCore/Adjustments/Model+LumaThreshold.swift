@@ -21,8 +21,8 @@ public enum LuminanceThreshold: HSVModifier {
   /// A basic baseline adjustment based on what suits light vs dark colours
   public var adjustment: HSVAdjustment {
     switch self {
-      case .dark: HSVAdjustment(h: -18, s: -0.01, v: 0.75)
-      case .light: HSVAdjustment(h: -16, s: 0.35, v: -0.75)
+      case .dark: HSVAdjustment(hueDegrees: -18, saturation: -0.01, brightness: 0.75)
+      case .light: HSVAdjustment(hueDegrees: -16, saturation: 0.35, brightness: -0.75)
     }
   }
 }

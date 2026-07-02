@@ -34,7 +34,7 @@ The useful centre of gravity is clear: model code can store and pass colour valu
 - Decide whether colour equality should mean "same identity" or "same components". If identity is only for SwiftUI lists, consider separating persistent colour value from UI identity.
 - Introduce a small normalisation policy: either clamp at initialisation, add `normalised`/`clamped` computed copies, or clearly document that callers must keep components in range.
 - Replace the AppKit-backed HSV conversion with the commented pure Swift implementation once it is tested. That would make the core model layer match the module's stated reason for existing.
-- Collapse duplicate hex parsing. `RGBAConvertible+Hex`, `HexColor`, `NSColor.fromHexString`, and `Color.init(hex:)` overlap and currently support slightly different formats and failure behaviour.****
+- Collapse duplicate hex parsing. `RGBAConvertible+Hex`, `HexColor`, `NSColor.fromHexString`, and `Color.init(hex:)` overlap and currently support slightly different formats and failure behaviour.
 - Move or delete stale commented-out experimental blocks, especially `Model+Complementary.swift` and the old conversion implementations, after any useful context is captured in notes.
 - Revisit `SystemColour` naming. `RGBColour.red` et al. are static approximations, while `SystemColour.red` is environment/platform-resolved. Keeping that distinction clear in docs will prevent misuse.
 - Audit access control. Some convenience presets such as `CodableColour.olive` and `CodableColour.reddish` are internal while adjacent presets are public; that may be intentional, but it is not obvious.

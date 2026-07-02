@@ -12,6 +12,8 @@ import Foundation
 /// The optional channel values are added to an existing ``HSVColour`` rather than
 /// assigned as absolute values. Hue deltas use the same unit interval as ``HSVColour/hue``;
 /// saturation and brightness deltas are expected to be in roughly `-1...1`.
+/// Applying an adjustment normalises the result: hue wraps to `[0, 1)`, while
+/// saturation and brightness clamp to `0...1`.
 public struct HSVAdjustment: Sendable, Codable, Equatable, Hashable {
 
   /// Hue is cyclic. Unit interval `[0,1)`
@@ -43,6 +45,24 @@ public struct HSVAdjustment: Sendable, Codable, Equatable, Hashable {
     v: Double? = nil,
   ) {
     self.init(hue: h, saturation: s, brightness: v)
+  }
+
+  /// Creates an adjustment from degree-based hue deltas.
+  ///
+  /// Use this when design values are expressed as angles. For example, `-18`
+  /// degrees is stored as `-18 / 360` in the unit hue interval.
+  public init(
+    hueDegrees: Double? = nil,
+    saturation: Double? = nil,
+    brightness: Double? = nil,
+    strength: Double = 1.0,
+  ) {
+    self.init(
+      hue: hueDegrees.map { $0 / 360.0 },
+      saturation: saturation,
+      brightness: brightness,
+      strength: strength
+    )
   }
 }
 
@@ -85,7 +105,7 @@ extension HSVAdjustment {
 
   public func scaled(by factor: Double) -> HSVAdjustment {
     HSVAdjustment(
-      hue: hue.map { $0 * factor },  // see clamping below
+      hue: hue.map { $0 * factor },
       saturation: saturation.map { $0 * factor },
       brightness: brightness.map { $0 * factor },
       strength: strength * factor,
@@ -120,7 +140,7 @@ extension HSVAdjustment {
     shouldScaleStrength: Bool = false,
   ) -> Self {
     HSVAdjustment(
-      hue: hue.combined(with: other.hue) { $0.interpolatedHue(towards: $1, amount: 1.0) },
+      hue: hue.combined(with: other.hue, using: +),
       saturation: saturation.combined(with: other.saturation, using: +),
       brightness: brightness.combined(with: other.brightness, using: +),
       strength: shouldScaleStrength ? strength + other.strength : self.strength,

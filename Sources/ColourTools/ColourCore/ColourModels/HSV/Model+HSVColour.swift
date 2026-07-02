@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 12/5/2025.
 //
 
+import CoreTools
 import Foundation
 
 /// Notes:
@@ -20,10 +21,11 @@ import Foundation
 /// A lightweight, serialisable HSV colour model.
 ///
 /// Hue, saturation, brightness, and alpha are represented as normalised
-/// `Double` values. Hue uses the unit interval, where `0.5` represents
-/// 180 degrees. This type is useful for colour-editing interactions because
-/// hue, chroma, and brightness can be adjusted independently before converting
-/// back to ``RGBColour``.
+/// `Double` values. Hue uses the wrapped unit interval `[0, 1)`, where `0.5`
+/// represents 180 degrees. Saturation, brightness, and alpha are clamped to
+/// `0...1`. This type is useful for colour-editing interactions because hue,
+/// chroma, and brightness can be adjusted independently before converting back
+/// to ``RGBColour``.
 public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashable {
   public let id: UUID
   public var hue: Double
@@ -39,13 +41,32 @@ public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashabl
     alpha: Double = 1.0,
     name: String? = nil,
   ) {
-    self.id = UUID()
-    self.hue = hue
-    self.saturation = saturation
-    self.brightness = brightness
-    self.alpha = alpha
+    self.init(
+      id: UUID(),
+      hue: hue,
+      saturation: saturation,
+      brightness: brightness,
+      alpha: alpha,
+      name: name
+    )
+  }
+
+  private init(
+    id: UUID,
+    hue: Double,
+    saturation: Double,
+    brightness: Double,
+    alpha: Double,
+    name: String?
+  ) {
+    self.id = id
+    self.hue = ColourComponentNormalisation.wrapHue(hue)
+    self.saturation = ColourComponentNormalisation.clampUnit(saturation)
+    self.brightness = ColourComponentNormalisation.clampUnit(brightness)
+    self.alpha = ColourComponentNormalisation.clampUnit(alpha)
     self.name = name
   }
+
   public init(
     h: Double,
     s: Double,
@@ -58,6 +79,31 @@ public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashabl
 }
 
 extension HSVColour {
+
+  /// Returns a copy whose hue is wrapped to `[0, 1)` and other components are
+  /// clamped to `0...1`.
+  public var normalised: Self {
+    Self(
+      id: id,
+      hue: hue,
+      saturation: saturation,
+      brightness: brightness,
+      alpha: alpha,
+      name: name
+    )
+  }
+
+  /// Normalises this colour in place.
+  public mutating func normalise() {
+    self = normalised
+  }
+
+  public var areAllComponentsNormalised: Bool {
+    hue >= 0 && hue < 1
+      && saturation.isWithin(.unitRange)
+      && brightness.isWithin(.unitRange)
+      && alpha.isWithin(.unitRange)
+  }
 
   /// Hue is only meaningful when there is chroma and not pure black.
   /// (You can decide whether `brightness == 0` should count as undefined even if saturation > 0;
@@ -156,5 +202,53 @@ extension HSVColour: CustomStringConvertible {
       """
 
     return result
+  }
+}
+
+extension HSVColour {
+  private enum CodingKeys: String, CodingKey {
+    case hue
+    case saturation
+    case brightness
+    case alpha
+    case name
+  }
+
+  public init(from decoder: Decoder) throws {
+    let container = try decoder.container(keyedBy: CodingKeys.self)
+    try self.init(
+      hue: container.decode(Double.self, forKey: .hue),
+      saturation: container.decode(Double.self, forKey: .saturation),
+      brightness: container.decode(Double.self, forKey: .brightness),
+      alpha: container.decodeIfPresent(Double.self, forKey: .alpha) ?? 1.0,
+      name: container.decodeIfPresent(String.self, forKey: .name)
+    )
+  }
+
+  public func encode(to encoder: Encoder) throws {
+    var container = encoder.container(keyedBy: CodingKeys.self)
+    let colour = normalised
+    try container.encode(colour.hue, forKey: .hue)
+    try container.encode(colour.saturation, forKey: .saturation)
+    try container.encode(colour.brightness, forKey: .brightness)
+    try container.encode(colour.alpha, forKey: .alpha)
+    try container.encodeIfPresent(colour.name, forKey: .name)
+  }
+
+  public static func == (lhs: Self, rhs: Self) -> Bool {
+    let lhs = lhs.normalised
+    let rhs = rhs.normalised
+    return lhs.hue == rhs.hue
+      && lhs.saturation == rhs.saturation
+      && lhs.brightness == rhs.brightness
+      && lhs.alpha == rhs.alpha
+  }
+
+  public func hash(into hasher: inout Hasher) {
+    let colour = normalised
+    hasher.combine(colour.hue)
+    hasher.combine(colour.saturation)
+    hasher.combine(colour.brightness)
+    hasher.combine(colour.alpha)
   }
 }

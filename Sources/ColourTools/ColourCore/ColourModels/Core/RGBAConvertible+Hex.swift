@@ -12,9 +12,10 @@ extension RGBAConvertible {
   /// Create an RGBA-compatible colour value from a hex string.
   /// Supports the following formats:
 
-  /// 1. 3-digit hex (RGB)
-  /// 2. 6-digit hex (RGB)
-  /// 3. 8-digit hex (ARGB)
+  /// 1. 3-digit hex (`RGB`)
+  /// 2. 4-digit hex (`RGBA`)
+  /// 3. 6-digit hex (`RRGGBB`)
+  /// 4. 8-digit hex (`RRGGBBAA`)
   ///
   /// 6-digit hex (RGB)
   /// `let red = RGBColour(hex: "FE6057")`
@@ -22,40 +23,17 @@ extension RGBAConvertible {
   /// 3-digit hex (RGB)
   /// `let blue = RGBColour(hex: "00F")`
   ///
-  /// 8-digit hex (ARGB)
-  /// `let transparentGreen = RGBColour(hex: "8000FF00")`
+  /// 8-digit hex (`RRGGBBAA`)
+  /// `let transparentGreen = RGBColour(hex: "00FF0080")`
   public init?(hex: String, name: String? = nil) {
-
-    /// Clean up the hex string (removing `#` if present etc)
-    let hexSanitized = hex.toSanitisedHex
-
-    var rgb: UInt64 = 0
-
-    let r: CGFloat
-    let g: CGFloat
-    let b: CGFloat
-    let a: CGFloat
-
-    let length = hexSanitized.count
-
-    guard Scanner(string: hexSanitized).scanHexInt64(&rgb) else { return nil }
-
-    if length == 6 {
-      r = CGFloat((rgb & 0xFF0000) >> 16) / 255.0
-      g = CGFloat((rgb & 0x00FF00) >> 8) / 255.0
-      b = CGFloat(rgb & 0x0000FF) / 255.0
-      a = 1.0  // Set to default of 1.0 for RGB
-
-    } else if length == 8 {
-      r = CGFloat((rgb & 0xFF00_0000) >> 24) / 255.0
-      g = CGFloat((rgb & 0x00FF_0000) >> 16) / 255.0
-      b = CGFloat((rgb & 0x0000_FF00) >> 8) / 255.0
-      a = CGFloat(rgb & 0x0000_00FF) / 255.0
-
-    } else {
-      return nil
-    }
-    self.init(r: r, g: g, b: b, a: a, name: name)
+    guard let components = HexColor.components(from: hex) else { return nil }
+    self.init(
+      r: components.r,
+      g: components.g,
+      b: components.b,
+      a: components.a,
+      name: name
+    )
   }
 }
 
@@ -63,8 +41,6 @@ extension String {
 
   /// Removes `#` or whitespace if present etc
   public var toSanitisedHex: String {
-    var hexSanitized = self.trimmingCharacters(in: .whitespacesAndNewlines)
-    hexSanitized = hexSanitized.replacingOccurrences(of: "#", with: "")
-    return hexSanitized
+    HexColor.sanitisedHexString(self)
   }
 }

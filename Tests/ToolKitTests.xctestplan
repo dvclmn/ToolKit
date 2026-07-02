@@ -19,6 +19,13 @@
         "identifier" : "CoreToolsTests",
         "name" : "CoreToolsTests"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "ColourToolsTests",
+        "name" : "Missing Target"
+      }
     }
   ],
   "version" : 1

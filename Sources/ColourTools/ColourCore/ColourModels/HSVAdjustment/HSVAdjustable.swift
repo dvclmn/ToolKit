@@ -21,7 +21,8 @@ public protocol HSVAdjustable {
 extension HSVAdjustable {
 
   /// Adjustment by delta. Increase/decrease by amount provided.
-  /// `0` =  no adjustment
+  /// `0` = no adjustment. Hue is wrapped after applying the delta;
+  /// saturation and brightness are clamped to `0...1`.
   public func adjust(
     hue: Double,
     saturation: Double,
@@ -32,9 +33,10 @@ extension HSVAdjustable {
     hsv.saturation += saturation
     hsv.brightness += brightness
 
-    return Self(fromHSV: hsv)
+    return Self(fromHSV: hsv.normalised)
   }
 
+  /// Applies an HSV delta, wrapping hue and clamping saturation/brightness.
   public func adjust(
     by adjustment: HSVAdjustment
   ) -> Self {
@@ -44,11 +46,12 @@ extension HSVAdjustable {
     if let ds = adjustment.saturation { hsv.saturation += ds }
     if let dv = adjustment.brightness { hsv.brightness += dv }
 
-    return Self(fromHSV: hsv)
+    return Self(fromHSV: hsv.normalised)
   }
 
   /// Set a new value, returns new instance
-  /// If value is `nil`, that property doesn't get touched
+  /// If value is `nil`, that property doesn't get touched. Hue is wrapped after
+  /// setting; saturation and brightness are clamped to `0...1`.
   public func set(
     hue: Double?,
     saturation: Double?,
@@ -64,7 +67,7 @@ extension HSVAdjustable {
     if let brightness {
       hsv.brightness = brightness
     }
-    return Self(fromHSV: hsv)
+    return Self(fromHSV: hsv.normalised)
   }
 
   /// This will 'pass through', returning `self` if `modification` is `nil`

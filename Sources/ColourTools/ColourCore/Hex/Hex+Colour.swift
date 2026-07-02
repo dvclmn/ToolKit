@@ -11,26 +11,24 @@
  *  Licensed under the MIT license (see LICENSE file)
  */
 
-#if os(macOS)
-import AppKit
-#else
-import UIKit
-#endif
+import CoreGraphics
+import Foundation
 
 public struct HexColor {
   private init() {}
 
   private static let invalidHexCharactersSet = CharacterSet(charactersIn: "0123456789abcdefABCDEF").inverted
 
+  public static func components(from hex: String) -> (r: Double, g: Double, b: Double, a: Double)? {
+    guard let integer = intFromHexString(hex) else { return nil }
+    return rgbaComponents(from: integer)
+  }
+
   public static func intFromHexString(_ hex: String) -> UInt64? {
-    var s = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+    var s = sanitisedHexString(hex)
 
     guard !s.isEmpty else {
       return nil
-    }
-
-    if s.hasPrefix("#") {
-      s = String(s.dropFirst())
     }
 
     guard s.rangeOfCharacter(from: invalidHexCharactersSet) == nil else {
@@ -60,13 +58,31 @@ public struct HexColor {
     return rgb
   }
 
-  public static func rgbaFromInt(_ integer: UInt64) -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
-    let maxValue = CGFloat(255)
+  public static func sanitisedHexString(_ hex: String) -> String {
+    var s = hex.trimmingCharacters(in: .whitespacesAndNewlines)
+    if s.hasPrefix("#") {
+      s = String(s.dropFirst())
+    }
+    return s
+  }
+
+  public static func rgbaComponents(from integer: UInt64) -> (r: Double, g: Double, b: Double, a: Double) {
+    let maxValue = Double(255)
     return (
-      r: CGFloat((integer & 0xFF000000) >> 24) / maxValue,
-      g: CGFloat((integer & 0xFF0000) >> 16) / maxValue,
-      b: CGFloat((integer & 0xFF00) >> 8) / maxValue,
-      a: CGFloat((integer & 0xFF)) / maxValue
+      r: Double((integer & 0xFF000000) >> 24) / maxValue,
+      g: Double((integer & 0xFF0000) >> 16) / maxValue,
+      b: Double((integer & 0xFF00) >> 8) / maxValue,
+      a: Double((integer & 0xFF)) / maxValue
+    )
+  }
+
+  public static func rgbaFromInt(_ integer: UInt64) -> (r: CGFloat, g: CGFloat, b: CGFloat, a: CGFloat) {
+    let components = rgbaComponents(from: integer)
+    return (
+      r: CGFloat(components.r),
+      g: CGFloat(components.g),
+      b: CGFloat(components.b),
+      a: CGFloat(components.a)
     )
   }
 }

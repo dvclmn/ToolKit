@@ -19,21 +19,20 @@ import AppKit
 
 public extension NSColor {
   static func fromHexString(_ hex: String, alpha: CGFloat? = nil) -> NSColor? {
-    guard let integer = HexColor.intFromHexString(hex) else { return nil }
-    let components = HexColor.rgbaFromInt(integer)
+    guard let components = HexColor.components(from: hex) else { return nil }
     
     if let alpha = alpha {
       return NSColor(
-        red:   components.r,
-        green: components.g,
-        blue:  components.b,
+        red:   CGFloat(components.r),
+        green: CGFloat(components.g),
+        blue:  CGFloat(components.b),
         alpha: alpha)
     } else {
       return NSColor(
-        red:   components.r,
-        green: components.g,
-        blue:  components.b,
-        alpha: components.a)
+        red:   CGFloat(components.r),
+        green: CGFloat(components.g),
+        blue:  CGFloat(components.b),
+        alpha: CGFloat(components.a))
     }
   }
 }

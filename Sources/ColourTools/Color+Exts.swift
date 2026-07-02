@@ -6,18 +6,20 @@
 //
 
 import SwiftUI
-import CoreTools
 
 extension Color {
   public init(hex: String) {
-    let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-    var int: UInt64 = 0
-    Scanner(string: hex).scanHexInt64(&int)
+    guard let components = HexColor.components(from: hex) else {
+      self.init(.sRGB, red: 0, green: 0, blue: 0, opacity: 1)
+      return
+    }
+
     self.init(
       .sRGB,
-      red: Double((int & 0xFF0000) >> 16) / 255,
-      green: Double((int & 0x00FF00) >> 8) / 255,
-      blue: Double(int & 0x0000FF) / 255
+      red: components.r,
+      green: components.g,
+      blue: components.b,
+      opacity: components.a
     )
   }
 }

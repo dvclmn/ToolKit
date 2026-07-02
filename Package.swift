@@ -26,6 +26,11 @@ let package = Package(
       dependencies: ["CoreTools", "StringTools", "ColourTools"],
       resources: [.process("Resources")],
     ),
-    .testTarget(name: "CoreToolsTests", dependencies: ["CoreTools"]),
+    .testTarget(
+      name: "CoreToolsTests",
+      dependencies: ["CoreTools"],
+      exclude: ["CoreTools.xctestplan"],
+    ),
+    .testTarget(name: "ColourToolsTests", dependencies: ["ColourTools"]),
   ],
 )

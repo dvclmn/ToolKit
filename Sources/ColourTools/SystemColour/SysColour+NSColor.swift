@@ -18,8 +18,10 @@ extension SystemColour {
     self = match
   }
 
-  /// Convenience, assumes a colour space of `sRGB`
-  /// Use ``toNSColor(using:)`` to select a different space
+  /// Resolves this symbolic colour to its AppKit equivalent.
+  ///
+  /// This currently returns AppKit's platform colour directly rather than
+  /// forcing it into a specific destination colour space.
   public var toNSColor: NSColor? {
     toNSColorWithPossibleColorSpaceIDontKnow()
 //    toNSColor(using: .sRGB)

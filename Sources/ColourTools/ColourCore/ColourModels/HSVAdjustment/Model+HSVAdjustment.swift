@@ -7,8 +7,11 @@
 
 import Foundation
 
-/// Represents a *delta* adjustment in HSV space
-/// Does not set hsv values to these, but adds to them
+/// Represents a delta adjustment in HSV space.
+///
+/// The optional channel values are added to an existing ``HSVColour`` rather than
+/// assigned as absolute values. Hue deltas use the same unit interval as ``HSVColour/hue``;
+/// saturation and brightness deltas are expected to be in roughly `-1...1`.
 public struct HSVAdjustment: Sendable, Codable, Equatable, Hashable {
 
   /// Hue is cyclic. Unit interval `[0,1)`

@@ -17,6 +17,13 @@ import Foundation
 ///   based on human perception.
 
 //
+/// A lightweight, serialisable HSV colour model.
+///
+/// Hue, saturation, brightness, and alpha are represented as normalised
+/// `Double` values. Hue uses the unit interval, where `0.5` represents
+/// 180 degrees. This type is useful for colour-editing interactions because
+/// hue, chroma, and brightness can be adjusted independently before converting
+/// back to ``RGBColour``.
 public struct HSVColour: Identifiable, Equatable, Sendable, ColourModel, Hashable {
   public let id: UUID
   public var hue: Double

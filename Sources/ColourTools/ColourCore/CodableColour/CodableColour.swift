@@ -5,6 +5,13 @@
 //  Created by Dave Coleman on 3/9/2025.
 //
 
+/// A serialisable colour description that can hold concrete model colours,
+/// raw components, system colours, greys, hex strings, and simple mixes.
+///
+/// Use this when stored data or lightweight core models need to refer to a
+/// colour without depending on SwiftUI `Color` or AppKit `NSColor`.
+/// UI-specific files in this target resolve `CodableColour` into framework colours at the edge.
+///
 /// Renderers can often take HSV values directly, but resolved output usually gives RGB.
 
 // Credit to Natalia Panferova and Matthaus Woolard of
@@ -23,10 +30,10 @@ public enum CodableColour: Codable, Equatable, Hashable, Sendable, Identifiable 
   case mix(
     RGBColour,
     RGBColour,
-//    SystemColour,
-//    SystemColour,
+    //    SystemColour,
+    //    SystemColour,
     Double = 0.5,
-    opacity: Double = 1
+    opacity: Double = 1,
   )
 }
 

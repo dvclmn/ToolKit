@@ -1,4 +1,4 @@
-import CoreTools
+@_spi(Internal) import CoreTools
 import Testing
 
 struct CollectionNavigationTests {

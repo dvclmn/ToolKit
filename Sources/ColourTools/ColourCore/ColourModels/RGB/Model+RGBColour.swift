@@ -7,6 +7,12 @@
 
 import Foundation
 
+/// A lightweight, serialisable RGBA colour model with no direct dependency on SwiftUI or AppKit.
+///
+/// `RGBColour` stores components as normalised `Double` values in the range
+/// `0...1`. It is the main value type to use when shared model code needs to
+/// describe a concrete colour without carrying a UI framework colour type
+/// through the API.
 public struct RGBColour: Identifiable, Equatable, Hashable, Sendable, Codable,
   ColourModel, RGBColourSpaceRepresentable
 {
@@ -18,10 +24,15 @@ public struct RGBColour: Identifiable, Equatable, Hashable, Sendable, Codable,
 
   public var name: String?
 
-  /// 8-bit integers (0–255)
+  /// Records whether the colour was initialised from 8-bit channel values.
   public let is255: Bool
 
-  /// Values are expected to be normalised
+  /// Creates a colour from normalised component values.
+  ///
+  /// `red`, `green`, `blue`, and `alpha` are expected to be in `0...1`.
+  /// The initializer does not currently clamp or validate those values, because
+  /// existing callers may rely on inspecting or correcting out-of-range values
+  /// themselves.
   // TODO: Add check for 0-255 vs normalised [0-1] values
   public init(
     red: Double,
@@ -150,6 +161,7 @@ extension RGBColour {
       && blue.isWithin(.unitRange)
   }
 
+  /// Creates a colour from 8-bit channel values and stores them as normalised components.
   public static func from255(
     _ r: Int,
     _ g: Int,
@@ -157,16 +169,16 @@ extension RGBColour {
     name: String? = nil
   ) -> RGBColour {
     self.init(
-      red: Double(r / 255),
-      green: Double(g / 255),
-      blue: Double(b / 255),
+      red: Double(r) / 255.0,
+      green: Double(g) / 255.0,
+      blue: Double(b) / 255.0,
       is255: true,
       alpha: 1.0,
       name: name
     )
   }
 
-  /// Create a color with specified brightness (0.0 to 1.0)
+  /// Creates a grey colour with the specified brightness.
   public static func gray(
     _ brightness: Double,
     alpha: Double = 1.0,

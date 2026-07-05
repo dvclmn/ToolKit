@@ -9,10 +9,10 @@ import Foundation
 
 /// A group of emoji glyphs rendered together as one icon-like composition.
 public struct EmojiComposition: Sendable, Equatable, Codable, Hashable {
-  public let emoji: [EmojiGlyph]
+  public let emoji: [EmojiComposition.Glyph]
 
   public init(
-    emoji: [EmojiGlyph]
+    emoji: [EmojiComposition.Glyph]
   ) {
     self.emoji = emoji
   }
@@ -21,13 +21,13 @@ public struct EmojiComposition: Sendable, Equatable, Codable, Hashable {
 extension EmojiComposition {
   package static let example: Self = .init(
     emoji: [
-      EmojiGlyph(
+      EmojiComposition.Glyph(
         "📎",
         offset: .init(x: -0.5, y: 0.2),
         rotation: 4,
         scale: 0.8,
       ),
-      EmojiGlyph(
+      EmojiComposition.Glyph(
         "✂️",
         offset: .init(x: 0.4, y: -0.2),
         rotation: 16,

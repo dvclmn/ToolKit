@@ -35,7 +35,7 @@ struct EmojiCompositionLayout: Layout {
     let centre = CGPoint(x: bounds.midX, y: bounds.midY)
 
     for subview in subviews {
-      let unitOffset = subview[EmojiGlyphOffsetKey.self]
+      let unitOffset = subview[EmojiComposition.OffsetKey.self]
       let offset = unitOffset.offset(in: bounds.size)
       let position = CGPoint(
         x: centre.x + offset.width,
@@ -51,6 +51,9 @@ struct EmojiCompositionLayout: Layout {
   }
 }
 
-struct EmojiGlyphOffsetKey: LayoutValueKey {
-  static let defaultValue = UnitOffset.zero
+extension EmojiComposition {
+  struct OffsetKey: LayoutValueKey {
+    static let defaultValue = UnitOffset.zero
+  }
+  
 }

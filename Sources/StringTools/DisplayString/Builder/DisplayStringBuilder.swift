@@ -58,7 +58,7 @@ extension DisplayStringBuilder {
   /// Adds support for line-based indented content.
   public static func buildExpression(_ value: IndentedLines) -> [DisplayBlock] {
     guard !value.lines.isEmpty else { return [] }
-    return [.indented(Indented(fromLines: value))]
+    return [.indented(.makeFromLines(value))]
   }
 
   /// Adds support for values that already provide a description.

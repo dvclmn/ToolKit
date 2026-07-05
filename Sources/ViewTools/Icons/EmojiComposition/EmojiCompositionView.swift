@@ -25,7 +25,10 @@ public struct EmojiCompositionView: View {
         EmojiCompositionLayout {
           ForEach(composition.emoji) { emoji in
             Text(emoji.character.toString)
-              .layoutValue(key: EmojiGlyphOffsetKey.self, value: emoji.offset)
+              .layoutValue(
+                key: EmojiComposition.OffsetKey.self,
+                value: emoji.offset
+              )
               .rotationEffect(.degrees(emoji.rotation))
               .scaleEffect(emoji.scale)
           }

@@ -26,13 +26,6 @@ extension Indented {
     self.content = content()
   }
 
-  init(fromLines indentedLines: IndentedLines) {
-    let blocks: [DisplayBlock] = indentedLines.lines.map {
-      DisplayBlock.text(DisplayFragment($0))
-    }
-    self.init(title: indentedLines.title, content: blocks)
-  }
-
   public func render(
     using format: FloatDisplayFormat,
     with labelStyle: AbbreviableLabel.Style = .standard,
@@ -65,4 +58,15 @@ extension Indented {
     var builder = IndentedLineBuilder(indent: indent)
     return builder.build(from: content)
   }
+}
+
+extension Indented {
+  /// for ``DisplayStringBuilder``
+  static func makeFromLines (_ indentedLines: IndentedLines) -> Self {
+    let blocks: [DisplayBlock] = indentedLines.lines.map {
+      DisplayBlock.text(DisplayFragment($0))
+    }
+    return Self.init(title: indentedLines.title, content: blocks)
+  }
+
 }

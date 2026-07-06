@@ -60,7 +60,7 @@ extension CGRect {
   }
 
   /// Creates a rectangle with `size` centred in `containerSize`.
-  public init(size: CGSize, centeredIn containerSize: CGSize) {
+  public init(size: CGSize, centredIn containerSize: CGSize) {
     let origin = CGPoint(
       x: (containerSize.width - size.width) / 2,
       y: (containerSize.height - size.height) / 2,

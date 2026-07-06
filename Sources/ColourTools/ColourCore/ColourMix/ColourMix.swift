@@ -28,7 +28,7 @@ public struct ColourMix: Sendable, Codable, Equatable, Hashable {
   }
 }
 extension ColourMix {
-//  public var baseColour: RGBColour { primary }
+
   public var colour: Color {
     guard let secondary else { return primary.toColour }
     return primary.withMix(secondary, strength)
@@ -37,6 +37,7 @@ extension ColourMix {
   public static func solid(colour: RGBColour) -> Self {
     .init(primary: colour, secondary: nil)
   }
+  
   public var isSolidColour: Bool { secondary == nil }
 }
 

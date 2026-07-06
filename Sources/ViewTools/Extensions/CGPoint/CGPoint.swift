@@ -69,20 +69,20 @@ extension CGPoint {
     return CGPoint(x: anchor.x - self.x, y: anchor.y - self.y)
   }
   
-  /// Returns the closest named UnitPoint (e.g., .topLeading, .center, etc) within a given size.
-  /// If the point is within a central region defined by tolerance, `.center` is returned.
+  /// Returns the closest named UnitPoint (e.g., .topLeading, .centre, etc) within a given size.
+  /// If the point is within a central region defined by tolerance, `.centre` is returned.
   public func nearestAnchor(
     in size: CGSize,
-    centerTolerance: CGFloat = 0.2,
+    centreTolerance: CGFloat = 0.2,
   ) -> UnitPoint {
     let relative = toUnitPoint(in: size)
     
-    /// If close enough to center, return .center early
-    let center = UnitPoint.center
-    let dx = abs(relative.x - center.x)
-    let dy = abs(relative.y - center.y)
+    /// If close enough to centre, return .centre early
+    let centre = UnitPoint.center
+    let dx = abs(relative.x - centre.x)
+    let dy = abs(relative.y - centre.y)
     
-    if dx <= centerTolerance / 2 && dy <= centerTolerance / 2 {
+    if dx <= centreTolerance / 2 && dy <= centreTolerance / 2 {
       return .center
     }
     

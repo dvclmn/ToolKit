@@ -90,7 +90,7 @@ extension CGRect {
   /// Top-left corner (minX, minY)
   public var topLeading: CGPoint { point(at: .topLeading) }
 
-  /// Top-center (midX, minY)
+  /// Top-centre (midX, minY)
   public var top: CGPoint { point(at: .top) }
 
   /// Top-right corner (maxX, minY)
@@ -99,7 +99,7 @@ extension CGRect {
   /// Center-left (minX, midY)
   public var leading: CGPoint { point(at: .leading) }
 
-  /// Dead center (midX, midY)
+  /// Dead centre (midX, midY)
   public var center: CGPoint { point(at: .center) }
 
   /// Center-right (maxX, midY)
@@ -108,7 +108,7 @@ extension CGRect {
   /// Bottom-left corner (minX, maxY)
   public var bottomLeading: CGPoint { point(at: .bottomLeading) }
 
-  /// Bottom-center (midX, maxY)
+  /// Bottom-centre (midX, maxY)
   public var bottom: CGPoint { point(at: .bottom) }
 
   /// Bottom-right corner (maxX, maxY)

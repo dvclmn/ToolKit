@@ -124,13 +124,13 @@ extension UnitPoint {
     }
   }
 
-  /// Corner intermediates (positioned between corners and edge centers)
+  /// Corner intermediates (positioned between corners and edge centres)
   public static let topLeadingMid = UnitPoint(x: 0.25, y: 0.25)
   public static let topTrailingMid = UnitPoint(x: 0.75, y: 0.25)
   public static let bottomLeadingMid = UnitPoint(x: 0.25, y: 0.75)
   public static let bottomTrailingMid = UnitPoint(x: 0.75, y: 0.75)
 
-  /// Edge intermediates (positioned between edge centers and corners)
+  /// Edge intermediates (positioned between edge centres and corners)
   public static let topMid = UnitPoint(x: 0.5, y: 0.25)
   public static let leadingMid = UnitPoint(x: 0.25, y: 0.5)
   public static let trailingMid = UnitPoint(x: 0.75, y: 0.5)

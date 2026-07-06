@@ -35,7 +35,7 @@ extension EmojiComposition {
 }
 
 public struct UnitOffset: Sendable, Hashable, Codable {
-  // [-1, 1] where 0 is center, -1 is left/top, 1 is right/bottom
+  // [-1, 1] where 0 is centre, -1 is left/top, 1 is right/bottom
   public var x: CGFloat
   public var y: CGFloat
 

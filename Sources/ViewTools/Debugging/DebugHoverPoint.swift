@@ -26,7 +26,7 @@ extension DebugHoverPointModifier {
 
   var nearbyPoint: UnitPoint? {
     guard let point else { return nil }
-    return point.nearestAnchor(in: containerSize, centerTolerance: 0.9)
+    return point.nearestAnchor(in: containerSize, centreTolerance: 0.9)
   }
 
   private var edgeBasedOffset: CGSize {

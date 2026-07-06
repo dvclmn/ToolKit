@@ -17,21 +17,21 @@ extension CGSize {
   /// - Returns: A rectangle positioned according to `strategy`.
   public func toCGRect(
     in containerSize: CGSize,
-    strategy: PlacementStrategy = .centerWithOverflow,
+    strategy: PlacementStrategy = .centreWithOverflow,
   ) -> CGRect {
 
     switch strategy {
 
-      case .centerWithOverflow:
-        return centeredRect(in: containerSize, with: self)
+      case .centreWithOverflow:
+        return centredRect(in: containerSize, with: self)
 
       case .scaleToFit:
         let scaledSize = self.aspectFitSize(in: containerSize)
-        return centeredRect(in: containerSize, with: scaledSize)
+        return centredRect(in: containerSize, with: scaledSize)
 
       case .scaleToFill:
         let scaledSize = self.aspectFillSize(in: containerSize)
-        return centeredRect(in: containerSize, with: scaledSize)
+        return centredRect(in: containerSize, with: scaledSize)
 
       case .topLeft:
         return CGRect(origin: .zero, size: self)
@@ -62,7 +62,7 @@ extension CGSize {
     }
   }
 
-  private func centeredRect(
+  private func centredRect(
     in containerSize: CGSize,
     with size: CGSize,
   ) -> CGRect {
@@ -94,7 +94,7 @@ extension CGSize {
   /// Strategy for positioning a size within a container.
   public enum PlacementStrategy {
     /// Centre the size within the container, allowing overflow.
-    case centerWithOverflow
+    case centreWithOverflow
 
     /// Scale proportionally to fit inside the container.
     case scaleToFit

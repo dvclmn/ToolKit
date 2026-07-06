@@ -51,15 +51,15 @@ extension CGPoint {
     let normalisedValue =
       options.contains(.normalised) ? rawLocation / viewLength : rawLocation
 
-    let centered: CGFloat
+    let centred: CGFloat
     let result: CGFloat
 
     if options.contains(.normalised) {
-      centered = normalisedValue - 0.5
-      result = centered * stretchFactor + 0.5
+      centred = normalisedValue - 0.5
+      result = centred * stretchFactor + 0.5
     } else {
-      centered = rawLocation - (viewLength / 2)
-      result = centered * stretchFactor + (viewLength / 2)
+      centred = rawLocation - (viewLength / 2)
+      result = centred * stretchFactor + (viewLength / 2)
     }
 
     if options.contains(.clamped) {

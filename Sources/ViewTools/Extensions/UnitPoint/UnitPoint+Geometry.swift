@@ -98,18 +98,18 @@ extension UnitPoint {
     ]
   }
 
-  /// A collection of unit points arranged horizontally along the vertical center.
+  /// A collection of unit points arranged horizontally along the vertical centre.
   ///
   /// This property provides the three unit points that form the middle row of a rectangular layout.
   ///
   /// ## Usage
   ///
-  /// Use this property when you need to work with all points along the vertical center line,
-  /// perfect for center-based animations or layouts.
+  /// Use this property when you need to work with all points along the vertical centre line,
+  /// perfect for centre-based animations or layouts.
   ///
   /// ```swift
   /// let centerPoints = UnitPoint.rowMiddle
-  /// // Apply effects to horizontally centered points
+  /// // Apply effects to horizontally centred points
   /// ```
   ///
   /// ## Visual Layout
@@ -120,7 +120,7 @@ extension UnitPoint {
   /// │   │   │
   /// ```
   ///
-  /// - Returns: An array containing the three unit points along the vertical center.
+  /// - Returns: An array containing the three unit points along the vertical centre.
   public static var rowMiddle: [UnitPoint] {
     [
       .leading,
@@ -196,14 +196,14 @@ extension UnitPoint {
     ]
   }
 
-  /// A collection of unit points arranged vertically along the horizontal center.
+  /// A collection of unit points arranged vertically along the horizontal centre.
   ///
   /// This property provides the three unit points that form the middle column of a rectangular layout.
   ///
   /// ## Usage
   ///
-  /// Use this property when you need to work with all points along the horizontal center line,
-  /// ideal for center-aligned layouts and animations.
+  /// Use this property when you need to work with all points along the horizontal centre line,
+  /// ideal for centre-aligned layouts and animations.
   ///
   /// ```swift
   /// let centerColumn = UnitPoint.columnMiddle
@@ -220,7 +220,7 @@ extension UnitPoint {
   /// │   ●   │
   /// ```
   ///
-  /// - Returns: An array containing the three unit points along the horizontal center.
+  /// - Returns: An array containing the three unit points along the horizontal centre.
   public static var columnMiddle: [UnitPoint] {
     [
       .top,

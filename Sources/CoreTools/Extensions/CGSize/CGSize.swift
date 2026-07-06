@@ -51,7 +51,7 @@ extension CGSize {
   /// Returns the offset needed to centre a child of the given size within this container.
   /// Aka: The vector from container origin to child origin that equalises margins.
   /// Negative offsets indicate the child is larger than the container and will overflow equally on all sides.
-  public func centeringOffset(forChild childSize: CGSize) -> CGSize {
+  public func centringOffset(forChild childSize: CGSize) -> CGSize {
     guard
       width.isFinite, height.isFinite,
       childSize.width.isFinite, childSize.height.isFinite

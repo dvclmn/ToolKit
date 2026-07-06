@@ -38,7 +38,7 @@ extension WeightedPaddingModifier {
     let biasH = horizontalBiasOverride ?? horizontalBias
     let biasCentre = opticalCentreBiasOverride ?? opticalCentreBias
 
-    /// Calculate vertical padding with optical center bias.
+    /// Calculate vertical padding with optical centre bias.
     /// Increasing opticalCentreBias increases bottom padding and decreases top padding,
     /// shifting content upward.
     let safeBias = max(biasCentre, 0.01)

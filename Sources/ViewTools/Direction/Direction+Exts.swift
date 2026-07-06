@@ -40,7 +40,7 @@ extension UnitPoint {
       return radialDirection.multiplier
     }
     
-    /// No explicit radial direction: infer based on position relative to center (0.5)
+    /// No explicit radial direction: infer based on position relative to centre (0.5)
     if axisValue < 0.5 { return +1 }
     if axisValue > 0.5 { return -1 }
     return 0

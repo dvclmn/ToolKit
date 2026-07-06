@@ -54,7 +54,7 @@ public struct StateView<Actions: View>: View {
 
     //    VStack {
     //      TitleAndIconView()
-    //        /// Padding to achieve nice vertical optical centering
+    //        /// Padding to achieve nice vertical optical centring
     //        .safeAreaPadding(.top, paddingLength)
     //
     //      MessageView()

@@ -18,7 +18,9 @@
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
 
 public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiable {
-  case hex(String, opacity: Double = 1)
+  
+  /// Supports up to 8-digit hex value. See ``RGBAConvertible``
+  case hex(String)
   case rgb(RGBColour)
   case rgbRaw(r: Double, g: Double, b: Double, a: Double = 1)
   case hsv(HSVColour)
@@ -26,6 +28,13 @@ public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiab
   case system(SystemColour, opacity: Double = 1)
   case grey(Double, opacity: Double = 1)  // 0 == black, 1 == white
 
+}
+
+extension ColourDescriptor {
+  @available(*, deprecated, renamed: "hex(_:)")
+  public static func hex(_ string: String, opacity: Double = 1) -> Self {
+    .hex(string)
+  }
 }
 
 extension ColourDescriptor {

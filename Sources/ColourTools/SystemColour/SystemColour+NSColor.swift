@@ -1,5 +1,5 @@
 //
-//  SysColour+NSColor.swift
+//  SystemColour+NSColor.swift
 //  ToolKit
 //
 //  Created by Dave Coleman on 20/11/2025.
@@ -24,12 +24,12 @@ extension SystemColour {
   /// forcing it into a specific destination colour space.
   public var toNSColor: NSColor? {
     toNSColorWithPossibleColorSpaceIDontKnow()
-//    toNSColor(using: .sRGB)
+    //    toNSColor(using: .sRGB)
   }
 
-  public func toNSColorWithPossibleColorSpaceIDontKnow(
-//    using colourSpace: NSColorSpace = .deviceRGB
-  ) -> NSColor? {
+  public func toNSColorWithPossibleColorSpaceIDontKnow(//    using colourSpace: NSColorSpace = .deviceRGB
+    ) -> NSColor?
+  {
 
     let colour =
       switch self {
@@ -51,26 +51,26 @@ extension SystemColour {
         case .clear: NSColor.clear
         case .primary: NSColor.labelColor
         case .secondary: NSColor.secondaryLabelColor
-//        case .secondary: NSColor(.secondary)
-//        case .secondary: NSColor.labelColor.withAlphaComponent(0.8)
+        //        case .secondary: NSColor(.secondary)
+        //        case .secondary: NSColor.labelColor.withAlphaComponent(0.8)
         case .tertiary: NSColor.tertiaryLabelColor
         case .quaternary: NSColor.quaternaryLabelColor
         case .quinary: NSColor.quinaryLabel
         case .accentColor: NSColor.controlAccentColor
         case .link: NSColor.linkColor
-          
-          // TODO:
-//        case .primary, .secondary: return nil
+
+      // TODO:
+      //        case .primary, .secondary: return nil
       }
-//    guard let result = colour.usingColorSpace(colourSpace) else {
-//      print(
-//        "Couldn't resolve NSColor using colourspace \(colourSpace), for `SystemColour` \(self.name)"
-//      )
-//      return nil
-//    }
+    //    guard let result = colour.usingColorSpace(colourSpace) else {
+    //      print(
+    //        "Couldn't resolve NSColor using colourspace \(colourSpace), for `SystemColour` \(self.name)"
+    //      )
+    //      return nil
+    //    }
     //    print("Successfully resolved NSColor for SystemColour.\(self.rawValue)")
     return colour
-//    return result
+    //    return result
   }
 
   //  public var toNSColor: NSColor {

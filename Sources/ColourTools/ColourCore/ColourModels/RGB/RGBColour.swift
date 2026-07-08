@@ -33,42 +33,44 @@ public struct RGBColour: Identifiable, Equatable, Hashable, Sendable, Codable,
   /// `red`, `green`, `blue`, and `alpha` are normalised `0...1` values.
   /// Values outside that range are clamped. Use ``from255(_:_:_:name:)`` for
   /// 8-bit channel values rather than passing `0...255` values here.
+//  public init(
+//    red: Double,
+//    green: Double,
+//    blue: Double,
+//    is255: Bool = false,
+//    alpha: Double = 1.0,
+//    name: String? = nil
+//  ) {
+//    self.init(
+//      id: UUID(),
+//      red: red,
+//      green: green,
+//      blue: blue,
+//      is255: is255,
+//      alpha: alpha,
+//      name: name
+//    )
+//  }
+  
   public init(
+    id: UUID = UUID(),
+    name: String? = nil,
     red: Double,
     green: Double,
     blue: Double,
-    is255: Bool = false,
-    alpha: Double = 1.0,
-    name: String? = nil
-  ) {
-    self.init(
-      id: UUID(),
-      red: red,
-      green: green,
-      blue: blue,
-      is255: is255,
-      alpha: alpha,
-      name: name
-    )
-  }
-
-  private init(
-    id: UUID,
-    red: Double,
-    green: Double,
-    blue: Double,
-    is255: Bool,
     alpha: Double,
-    name: String?
+    is255: Bool = false,
   ) {
     self.id = id
+    self.name = name
     self.red = ColourComponentNormalisation.clampUnit(red)
     self.green = ColourComponentNormalisation.clampUnit(green)
     self.blue = ColourComponentNormalisation.clampUnit(blue)
     self.alpha = ColourComponentNormalisation.clampUnit(alpha)
-    self.name = name
     self.is255 = is255
   }
+
+
 }
 // MARK: - Initialisers
 extension RGBColour: _ExpressibleByColorLiteral {
@@ -79,11 +81,11 @@ extension RGBColour: _ExpressibleByColorLiteral {
     alpha: Float
   ) {
     self.init(
+      name: nil,
       red: Double(red),
       green: Double(green),
       blue: Double(blue),
       alpha: Double(alpha),
-      name: nil
     )
   }
 

@@ -1,5 +1,5 @@
 //
-//  Model+ColourComponent.swift
+//  ColourComponent.swift
 //  BaseComponents
 //
 //  Created by Dave Coleman on 14/6/2025.

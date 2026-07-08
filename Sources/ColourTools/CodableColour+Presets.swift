@@ -32,18 +32,18 @@ extension ColourDescriptor {
   public static let link: Self = .system(.link)
 
   static var olive: Self {
-    Colour.hsvRaw(
+    .hsvRaw(
       h: 0.34,
       s: 0.17,
-      v: 0.2
+      v: 0.2,
     )
   }
 
   static var reddish: Self {
-    Colour.hsvRaw(
+    .hsvRaw(
       h: 0.02,
       s: 0.69,
-      v: 0.82
+      v: 0.82,
     )
   }
 }

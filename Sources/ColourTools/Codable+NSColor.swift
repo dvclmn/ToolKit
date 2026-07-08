@@ -46,10 +46,10 @@ extension ColourDescriptor {
       case .grey(let v, let opacity):
         return NSColor(cgColor: CGColor(gray: v, alpha: opacity))
 
-      case .mix(let a, let b, let t, let opacity):
-        let colorA = a.toNSColor
-        let colorB = b.toNSColor
-        return colorA.blended(withFraction: t, of: colorB)?.withAlphaComponent(opacity)
+//      case .mix(let a, let b, let t, let opacity):
+//        let colorA = a.toNSColor
+//        let colorB = b.toNSColor
+//        return colorA.blended(withFraction: t, of: colorB)?.withAlphaComponent(opacity)
     }
   }
 }

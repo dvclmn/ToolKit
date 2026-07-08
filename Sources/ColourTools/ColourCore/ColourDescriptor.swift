@@ -17,8 +17,6 @@
 // Credit to Natalia Panferova and Matthaus Woolard of
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
 
-public typealias Colour = ColourDescriptor
-
 public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiable {
   case hex(String, opacity: Double = 1)
   case rgb(RGBColour)
@@ -27,14 +25,7 @@ public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiab
   case hsvRaw(h: Double, s: Double, v: Double, a: Double = 1)
   case system(SystemColour, opacity: Double = 1)
   case grey(Double, opacity: Double = 1)  // 0 == black, 1 == white
-  case mix(
-    RGBColour,
-    RGBColour,
-    //    SystemColour,
-    //    SystemColour,
-    Double = 0.5,
-    opacity: Double = 1,
-  )
+
 }
 
 extension ColourDescriptor {
@@ -67,8 +58,8 @@ extension ColourDescriptor {
       case .grey(let double, let opacity):
         "Grey: \(double), Opacity: \(opacity)"
 
-      case .mix(let primary, let secondary, let strength, let opacity):
-        "Mix: \(primary.description) + \(secondary.description), Amount: \(strength), Opacity: \(opacity)"
+//      case .mix(let primary, let secondary, let strength, let opacity):
+//        "Mix: \(primary.description) + \(secondary.description), Amount: \(strength), Opacity: \(opacity)"
     }
   }
 }

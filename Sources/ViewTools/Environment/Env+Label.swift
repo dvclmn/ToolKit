@@ -28,9 +28,11 @@ extension EnvironmentValues {
   @Entry public var labelDisplay: LabelDisplay? = nil
 
   // MARK: Icons
+//  @Entry public var iconColour: ForegroundStyle? = nil
   @Entry public var iconColour: AnyShapeStyle? = nil
   @Entry public var iconWeight: Font.Weight? = nil
   @Entry public var iconFontSize: CGFloat? = nil
+  @Entry public var iconFontStyle: Font.TextStyle? = nil
 
   /// Already a native value for this: `labelIconToTitleSpacing`
   //  @Entry public var labelIconSpacing: CGFloat? = nil

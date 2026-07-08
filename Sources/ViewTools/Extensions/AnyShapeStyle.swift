@@ -13,4 +13,5 @@ extension AnyShapeStyle {
     self.init(colour)
   }
   public static var clear: Self { Self(Color.clear) }
+  public static var secondary: Self { Self(.secondary) }
 }

@@ -125,6 +125,9 @@ extension IdentifiedList {
   }
 }
 
-// MARK: - Collection conformance
-
-// MARK: - Codable
+extension IdentifiedList: ExpressibleByArrayLiteral {
+  public init(arrayLiteral elements: Element...) {
+    self.init(elements)
+//    self.elements = elements
+  }
+}

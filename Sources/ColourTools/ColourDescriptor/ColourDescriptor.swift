@@ -62,4 +62,8 @@ extension ColourDescriptor {
 //        "Mix: \(primary.description) + \(secondary.description), Amount: \(strength), Opacity: \(opacity)"
     }
   }
+  
+  public init(_ rgbColour: RGBColour) {
+    self = .rgb(rgbColour)
+  }
 }

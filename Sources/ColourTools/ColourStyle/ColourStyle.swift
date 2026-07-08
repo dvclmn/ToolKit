@@ -6,13 +6,24 @@
 //
 
 // TODO: Can this produce a SwiftUI ShapeStyle?
-public enum ColourStyle {
+public enum ColourStyle: Sendable, Hashable, Codable {
 
-  case solid(RGBColour)
+  case solid(ColourDescriptor)
 
   // TODO: Just linear for now, maybe support more later
-  case gradient([RGBColour])
+  case gradient([ColourDescriptor])
 
-  /// Returns a solid colour from a blend of two other colours
-  case blend(from: RGBColour, to: RGBColour, strength: Double)
+  /// A solid colour produced by perceptually interpolating from `from` to `to`.
+  /// A strength of `0` returns `from`; a strength of `1` returns `to`.
+  case mix(
+    from: ColourDescriptor,
+    to: ColourDescriptor,
+    amount: Double,
+  )
+}
+
+extension ColourStyle {
+  public init(_ rgbColour: RGBColour) {
+    self = .solid(.rgb(rgbColour))
+  }
 }

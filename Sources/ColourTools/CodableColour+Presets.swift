@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 19/11/2025.
 //
 
-extension CodableColour {
+extension ColourDescriptor {
   /// Handy presets to get straight to a system colour
   public static let red: Self = .system(.red)
   public static let orange: Self = .system(.orange)

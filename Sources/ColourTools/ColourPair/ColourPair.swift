@@ -8,20 +8,20 @@
 import AppKit
 
 public struct ColourPair: Sendable, Codable, Hashable {
-  public let foreground: CodableColour
-  public let background: CodableColour?
+  public let foreground: ColourDescriptor
+  public let background: ColourDescriptor?
 
   public init(
-    foreground: CodableColour,
-    background: CodableColour? = nil
+    foreground: ColourDescriptor,
+    background: ColourDescriptor? = nil
   ) {
     self.foreground = foreground
     self.background = background
   }
 
   public init(
-    _ foreground: CodableColour,
-    background: CodableColour? = nil
+    _ foreground: ColourDescriptor,
+    background: ColourDescriptor? = nil
   ) {
     self.init(
       foreground: foreground,

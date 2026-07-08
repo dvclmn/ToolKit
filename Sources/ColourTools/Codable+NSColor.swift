@@ -9,7 +9,7 @@
 import AppKit
 import CoreTools
 
-extension CodableColour {
+extension ColourDescriptor {
   public func nsColor(fallback: NSColor) -> NSColor {
     //  public func nsColor(fallback: NSColor = .textColor) -> NSColor {
     return self.nsColor ?? fallback

@@ -14,7 +14,7 @@ extension Color {
   }
 }
 
-extension CodableColour {
+extension ColourDescriptor {
 
   public var colour: Color? {
     switch self {

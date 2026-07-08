@@ -10,7 +10,7 @@ The centre of the target is ``RGBColour``: a `Codable`, `Sendable`, hashable val
 
 Concrete colour models normalise their stored components when they are created. RGB components and alpha are clamped to `0...1`; HSV hue is wrapped to `[0, 1)`, while saturation, brightness, and alpha are clamped to `0...1`. Generated `id` values exist for `Identifiable` usage, but equality, hashing, and coding are based on colour components rather than per-instance identity.
 
-``CodableColour`` is the broader storage vocabulary. It can describe colours as RGB, HSV, raw component tuples, hex strings, system colours, greys, or simple mixes. The framework-specific extension files resolve those descriptions into SwiftUI and AppKit colours at the UI boundary.
+``ColourDescriptor`` is the broader storage vocabulary. It can describe colours as RGB, HSV, raw component tuples, hex strings, system colours, greys, or simple mixes. The framework-specific extension files resolve those descriptions into SwiftUI and AppKit colours at the UI boundary.
 
 The target also contains a small set of opinionated tools for luminance, contrast, and colour modification. Those APIs are useful, but more heuristic than the model types: treat them as interaction helpers rather than colour-science primitives.
 
@@ -26,7 +26,7 @@ The target also contains a small set of opinionated tools for luminance, contras
 
 ### Serialisable Colour Descriptions
 
-- ``CodableColour``
+- ``ColourDescriptor``
 - ``Colour``
 - ``SystemColour``
 - ``PrimitiveColour``

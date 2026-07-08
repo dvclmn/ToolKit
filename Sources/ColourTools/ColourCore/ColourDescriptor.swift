@@ -1,5 +1,5 @@
 //
-//  Model+CodableColour.swift
+//  ColourDescriptor.swift
 //  Colour Library
 //
 //  Created by Dave Coleman on 3/9/2025.
@@ -10,16 +10,16 @@
 ///
 /// Use this when stored data or lightweight core models need to refer to a
 /// colour without depending on SwiftUI `Color` or AppKit `NSColor`.
-/// UI-specific files in this target resolve `CodableColour` into framework colours at the edge.
+/// UI-specific files in this target resolve `ColourDescriptor` into framework colours at the edge.
 ///
 /// Renderers can often take HSV values directly, but resolved output usually gives RGB.
 
 // Credit to Natalia Panferova and Matthaus Woolard of
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
 
-public typealias Colour = CodableColour
+public typealias Colour = ColourDescriptor
 
-public enum CodableColour: Codable, Equatable, Hashable, Sendable, Identifiable {
+public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiable {
   case hex(String, opacity: Double = 1)
   case rgb(RGBColour)
   case rgbRaw(r: Double, g: Double, b: Double, a: Double = 1)
@@ -37,12 +37,12 @@ public enum CodableColour: Codable, Equatable, Hashable, Sendable, Identifiable 
   )
 }
 
-extension CodableColour {
+extension ColourDescriptor {
   public var id: Self { self }
 
   public init?(fromPrimitive primitiveColour: PrimitiveColour) {
     guard let colour = primitiveColour.toSystemColour else { return nil }
-    self = CodableColour.system(colour, opacity: 1.0)
+    self = ColourDescriptor.system(colour, opacity: 1.0)
   }
   public var name: String {
     switch self {

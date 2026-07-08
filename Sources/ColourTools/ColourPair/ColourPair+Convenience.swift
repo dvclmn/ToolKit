@@ -37,13 +37,13 @@ extension ColourPair {
     guard let fg = foreground.usingColorSpace(.deviceRGB) else { return nil }
     let bg = background?.usingColorSpace(.deviceRGB)
 
-    let fgRGB = CodableColour.rgbRaw(
+    let fgRGB = ColourDescriptor.rgbRaw(
       r: fg.redComponent,
       g: fg.greenComponent,
       b: fg.blueComponent
     )
-    let bgRGB: CodableColour? = bg.map {
-      CodableColour.rgbRaw(
+    let bgRGB: ColourDescriptor? = bg.map {
+      ColourDescriptor.rgbRaw(
         r: $0.redComponent,
         g: $0.greenComponent,
         b: $0.blueComponent

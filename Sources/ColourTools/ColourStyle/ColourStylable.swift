@@ -8,7 +8,7 @@
 public protocol ColourStylable {
   var style: ColourStyle { get set }
   
-  init (style: ColourStyle)
+//  init (style: ColourStyle)
 }
 
 extension ColourStylable {
@@ -20,9 +20,9 @@ extension ColourStylable {
     }
   }
 
-  public init(_ rgbColour: RGBColour) {
-    self.init(style: .solid(.init(rgbColour)))
-//    self = .solid(.rgb(rgbColour))
-  }
+//  public init(_ rgbColour: RGBColour) {
+//    self.init(style: .solid(.init(rgbColour)))
+////    self = .solid(.rgb(rgbColour))
+//  }
 
 }

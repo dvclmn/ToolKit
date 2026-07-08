@@ -21,3 +21,4 @@ public enum ColourStyle: Sendable, Hashable, Codable {
     amount: Double,
   )
 }
+

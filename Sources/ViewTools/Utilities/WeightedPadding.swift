@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct WeightedPaddingModifier: ViewModifier {
-  @Environment(\.horizontalBias) private var horizontalBiasOverride
+  @Environment(\.horizontalBiasOverride) private var horizontalBiasOverride
   @Environment(\.opticalCentreBias) private var opticalCentreBiasOverride
 
   let padding: CGFloat

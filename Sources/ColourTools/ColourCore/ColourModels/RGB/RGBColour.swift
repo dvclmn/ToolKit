@@ -1,5 +1,5 @@
 //
-//  Model+RGB.swift
+//  RGBColour.swift
 //  BaseComponents
 //
 //  Created by Dave Coleman on 12/5/2025.

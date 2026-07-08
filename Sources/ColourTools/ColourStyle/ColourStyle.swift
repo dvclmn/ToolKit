@@ -21,9 +21,3 @@ public enum ColourStyle: Sendable, Hashable, Codable {
     amount: Double,
   )
 }
-
-extension ColourStyle {
-  public init(_ rgbColour: RGBColour) {
-    self = .solid(.rgb(rgbColour))
-  }
-}

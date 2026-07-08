@@ -6,14 +6,13 @@ import Testing
 struct RGBColourTests {
   @Test
   func from255NormalisesEightBitComponents() {
-    let colour = RGBColour.from255(128, 64, 32, name: "Sample")
+    let colour = RGBColour.from255(128, 64, 32)
 
     #expect(colour.red.isApproximatelyEqual(to: 128.0 / 255.0))
     #expect(colour.green.isApproximatelyEqual(to: 64.0 / 255.0))
     #expect(colour.blue.isApproximatelyEqual(to: 32.0 / 255.0))
     #expect(colour.alpha == 1.0)
     #expect(colour.is255)
-    #expect(colour.name == "Sample")
   }
 
   @Test
@@ -47,8 +46,8 @@ struct RGBColourTests {
 
   @Test
   func equalityAndHashingUseComponentsNotGeneratedIdentity() {
-    let first = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4, name: "First")
-    let second = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4, name: "Second")
+    let first = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4)
+    let second = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4)
 
     #expect(first.id != second.id)
     #expect(first == second)
@@ -56,8 +55,8 @@ struct RGBColourTests {
   }
 
   @Test
-  func codingOmitsGeneratedIdentityAndDecodesLegacyIdentityPayload() throws {
-    let colour = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4, name: "Stored")
+  func codingOmitsGeneratedIdentityAndIgnoresLegacyMetadataPayload() throws {
+    let colour = RGBColour(red: 0.1, green: 0.2, blue: 0.3, alpha: 0.4)
     let encoded = try JSONEncoder().encode(colour)
     let object = try #require(JSONSerialization.jsonObject(with: encoded) as? [String: Any])
 
@@ -78,6 +77,5 @@ struct RGBColourTests {
     let decoded = try JSONDecoder().decode(RGBColour.self, from: legacyData)
 
     #expect(decoded == colour)
-    #expect(decoded.name == "Stored")
   }
 }

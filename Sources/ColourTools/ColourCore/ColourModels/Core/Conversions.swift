@@ -16,8 +16,7 @@ extension HSVColour {
       fromRGB: rgb.red,
       g: rgb.green,
       b: rgb.blue,
-      a: rgb.alpha,
-      name: rgb.name
+      a: rgb.alpha
     )
   }
 
@@ -26,7 +25,7 @@ extension HSVColour {
     g: Double,
     b: Double,
     a: Double,
-    name: String?
+    name: String? = nil
   ) {
 
     let red = ColourComponentNormalisation.clampUnit(r)

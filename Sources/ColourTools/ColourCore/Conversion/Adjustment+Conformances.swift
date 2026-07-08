@@ -94,7 +94,6 @@ extension RGBColour: HSVAdjustable {
       g: green,
       b: blue,
       a: hsv.alpha,
-      name: hsv.name,
     )
   }
 

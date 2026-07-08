@@ -17,8 +17,8 @@ extension ColourDescriptor {
 
   public var nsColor: NSColor? {
     switch self {
-      case .hex(let hex, let opacity):
-        return NSColor.fromHexString(hex)?.withAlphaComponent(opacity)
+      case .hex(let hex):
+        return NSColor.fromHexString(hex)
 
       case .rgb(let model):
         return model.toNSColor

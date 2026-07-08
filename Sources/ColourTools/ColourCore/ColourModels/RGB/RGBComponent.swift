@@ -33,16 +33,6 @@ public enum RGBComponent: String, ColourComponent {
     }
   }
 
-  //  public var keyPath: WritableKeyPath<Model, UnitInterval> {
-  //  public var keyPath: WritableKeyPath<Model, Double> {
-  //    switch self {
-  //      case .red: \.red
-  //      case .green: \.green
-  //      case .blue: \.blue
-  //      case .alpha: \.alpha
-  //    }
-  //  }
-
   public var nameInitial: Character {
     switch self {
       case .red: "R"
@@ -51,5 +41,4 @@ public enum RGBComponent: String, ColourComponent {
       case .alpha: "A"
     }
   }
-
 }

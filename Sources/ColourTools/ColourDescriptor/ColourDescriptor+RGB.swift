@@ -6,6 +6,11 @@
 //
 
 extension ColourDescriptor {
+  /// Returns a concrete RGB representation when the descriptor already contains
+  /// component data that can be flattened without resolving a UI framework colour.
+  ///
+  /// System colours return `nil` because they are symbolic platform colours.
+  /// Resolve them through the SwiftUI or AppKit bridge properties instead.
   public var rgbColour: RGBColour? {
     switch self {
       case .hex(let hex):
@@ -21,13 +26,14 @@ extension ColourDescriptor {
           return .init(fromHSV: hsvColour)
         
       case .hsvRaw(let h, let s, let v, let a):
-          let hsv = HSVColour(hue: h, saturation: s, brightness: v, alpha: a)
+        let hsv = HSVColour(hue: h, saturation: s, brightness: v, alpha: a)
         return .init(fromHSV: hsv)
         
-      case .system(let systemColour, let opacity):
-        <#code#>
+      case .system:
+        return nil
+
       case .grey(let double, let opacity):
-        <#code#>
+        return .gray(double, alpha: opacity)
     }
   }
 }

@@ -7,6 +7,19 @@
 import AppKit
 
 extension RGBColour {
+  public init?(nsColor: NSColor, colourSpace: NSColorSpace = .sRGB) {
+    guard let colour = nsColor.usingColorSpace(colourSpace) else {
+      return nil
+    }
+
+    self.init(
+      red: colour.redComponent,
+      green: colour.greenComponent,
+      blue: colour.blueComponent,
+      alpha: colour.alphaComponent,
+    )
+  }
+
   public var toNSColor: NSColor {
     NSColor(
       colorSpace: colourSpace.nsColorSpace,

@@ -12,12 +12,11 @@ public protocol ColourStylable {
 }
 
 extension ColourStylable {
-      public var baseColour: RGBColour? {
+  public var baseColour: RGBColour? {
     switch style {
-      case .solid(let colour): colour
-      case .gradient(let colours): colours.first
-      case .mix(let start, let end, let amount):
-
+      case .solid(let colour): colour.rgbColour
+      case .gradient(let colours): colours.first?.rgbColour
+      case .mix(let start, _, _): start.rgbColour
     }
   }
 

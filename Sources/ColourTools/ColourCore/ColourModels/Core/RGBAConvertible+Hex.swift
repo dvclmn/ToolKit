@@ -9,7 +9,10 @@ import Foundation
 
 extension RGBAConvertible {
 
-  /// Create an RGBA-compatible colour value from a hex string.
+  /// Creates an RGBA-compatible colour value from a hex string.
+  ///
+  /// Hex parsing produces component values only. Wrap the result in
+  /// ``NamedColour`` if the hex string came from a labelled palette or token.
   /// Supports the following formats:
 
   /// 1. 3-digit hex (`RGB`)
@@ -25,14 +28,13 @@ extension RGBAConvertible {
   ///
   /// 8-digit hex (`RRGGBBAA`)
   /// `let transparentGreen = RGBColour(hex: "00FF0080")`
-  public init?(hex: String, name: String? = nil) {
+  public init?(hex: String) {
     guard let components = HexColor.components(from: hex) else { return nil }
     self.init(
       r: components.r,
       g: components.g,
       b: components.b,
-      a: components.a,
-      name: name
+      a: components.a
     )
   }
 }

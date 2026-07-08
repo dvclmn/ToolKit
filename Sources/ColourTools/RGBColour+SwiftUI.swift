@@ -25,8 +25,7 @@ extension RGBColour: SwiftUIColourConvertible {
   ) {
     self.init(
       colour: system.toColour,
-      environment: env,
-      name: system.name,
+      environment: env
     )
   }
 }

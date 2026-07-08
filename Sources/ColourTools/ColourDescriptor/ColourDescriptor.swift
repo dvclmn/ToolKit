@@ -12,20 +12,28 @@
 /// colour without depending on SwiftUI `Color` or AppKit `NSColor`.
 /// UI-specific files in this target resolve `ColourDescriptor` into framework colours at the edge.
 ///
-/// Renderers can often take HSV values directly, but resolved output usually gives RGB.
+/// Renderers can often take HSV values directly, but resolved concrete output
+/// usually gives RGB. System colours remain symbolic until a SwiftUI or AppKit
+/// bridge resolves them.
 
 // Credit to Natalia Panferova and Matthaus Woolard of
 // https://nilcoalescing.com/blog/EncodeAndDecodeSwiftUIColor/
 
 public enum ColourDescriptor: Codable, Equatable, Hashable, Sendable, Identifiable {
   
-  /// Supports up to 8-digit hex value. See ``RGBAConvertible``
+  /// Supports up to 8-digit hex values. See ``RGBAConvertible``.
   case hex(String)
   case rgb(RGBColour)
   case rgbRaw(r: Double, g: Double, b: Double, a: Double = 1)
   case hsv(HSVColour)
   case hsvRaw(h: Double, s: Double, v: Double, a: Double = 1)
+
+  /// A platform semantic colour resolved by SwiftUI or AppKit bridge code.
+  ///
+  /// This case is intentionally not flattened by ``rgbColour`` because system
+  /// colours can be dynamic and environment-dependent.
   case system(SystemColour, opacity: Double = 1)
+
   case grey(Double, opacity: Double = 1)  // 0 == black, 1 == white
 
 }
@@ -46,8 +54,8 @@ extension ColourDescriptor {
   }
   public var name: String {
     switch self {
-      case .hex(let string, let opacity):
-        "Hex: \(string), Opacity: \(opacity)"
+      case .hex(let string):
+        "Hex: \(string)"
 
       case .rgb(let rGBColour):
         "RGBColour: \(rGBColour.description)"

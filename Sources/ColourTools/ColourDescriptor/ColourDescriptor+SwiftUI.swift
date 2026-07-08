@@ -18,8 +18,8 @@ extension ColourDescriptor {
 
   public var colour: Color? {
     switch self {
-      case .hex(let hex, let opacity):
-        return Color(hex: hex)?.opacity(opacity)
+      case .hex(let hex):
+        return Color(hex: hex)
 
       case .rgb(let model):
         return Color(

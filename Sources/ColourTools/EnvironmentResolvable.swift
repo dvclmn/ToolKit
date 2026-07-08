@@ -10,16 +10,14 @@ import CoreTools
 
 public protocol EnvironmentResolvableColour {
 
+  /// Creates a concrete model colour by resolving a SwiftUI colour in an environment.
   init(
     colour: Color,
-    environment: EnvironmentValues,
-    name: String?,
+    environment: EnvironmentValues
   )
 
-  init(
-    resolved: Color.Resolved,
-    name: String?,
-  )
+  /// Creates a concrete model colour from SwiftUI's resolved component values.
+  init(resolved: Color.Resolved)
 }
 
 extension RGBColour: EnvironmentResolvableColour {
@@ -32,26 +30,18 @@ extension RGBColour: EnvironmentResolvableColour {
 extension RGBColour {
   public init(
     colour: Color,
-    environment: EnvironmentValues,
-    name: String?,
+    environment: EnvironmentValues
   ) {
     let resolved = colour.resolve(in: environment)
-    self.init(
-      resolved: resolved,
-      name: name,
-    )
+    self.init(resolved: resolved)
   }
 
-  public init(
-    resolved: Color.Resolved,
-    name: String?,
-  ) {
+  public init(resolved: Color.Resolved) {
     self.init(
       red: resolved.red.toDouble,
       green: resolved.green.toDouble,
       blue: resolved.blue.toDouble,
-      alpha: resolved.opacity.toDouble,
-      name: name,
+      alpha: resolved.opacity.toDouble
     )
   }
 }
@@ -64,18 +54,13 @@ extension HSVColour {
 
   public init(
     colour: Color,
-    environment: EnvironmentValues,
-    name: String?,
+    environment: EnvironmentValues
   ) {
     let resolved = colour.resolve(in: environment)
-    self.init(resolved: resolved, name: name)
+    self.init(resolved: resolved)
   }
 
-  public init(
-    resolved: Color.Resolved,
-    name: String?,
-  ) {
-    let rgba = RGBColour(resolved: resolved, name: name)
-    self.init(fromRGB: rgba)
+  public init(resolved: Color.Resolved) {
+    self.init(fromRGB: RGBColour(resolved: resolved))
   }
 }

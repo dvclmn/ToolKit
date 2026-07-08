@@ -19,13 +19,12 @@ nonisolated public protocol ColourComponent: Identifiable, CaseIterable, RawRepr
   var name: String { get }
   var nameInitial: Character { get }
   
-  /// ```
+  /// ```swift
   /// var hsv = HSVColour(
   ///   hue: 0.1,
   ///   saturation: 0.5,
   ///   brightness: 0.8,
-  ///   alpha: 1.0,
-  ///   name: nil
+  ///   alpha: 1.0
   /// )
   /// let component = HSVComponent.hue
   ///

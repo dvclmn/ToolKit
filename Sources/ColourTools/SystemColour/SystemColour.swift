@@ -5,6 +5,12 @@
 //  Created by Dave Coleman on 1/9/2025.
 //
 
+/// A symbolic platform colour role.
+///
+/// `SystemColour` describes colours supplied by SwiftUI and AppKit, including
+/// dynamic semantic colours such as primary text, link, and accent colours. It
+/// should be resolved at a framework boundary rather than treated as stable RGB
+/// component data.
 public enum SystemColour: String, CaseIterable, Sendable, Codable,
   Equatable, Hashable, Identifiable
 {

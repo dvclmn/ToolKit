@@ -27,7 +27,7 @@ extension Color {
 
 extension Color: RGBAConvertible {
   /// Important: Assumes `SwiftUI/RGBColorSpace/sRGB` colour space
-  public init(r: Double, g: Double, b: Double, a: Double, name: String? = nil) {
+  public init(r: Double, g: Double, b: Double, a: Double) {
     self.init(.sRGB, red: r, green: g, blue: b, opacity: a)
   }
 }

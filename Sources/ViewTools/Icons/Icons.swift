@@ -66,6 +66,7 @@ public enum Icons: String, Codable, Equatable, Sendable, CaseIterable, Identifia
   case rays = "rays"                                                // 􀇯
   case rotate = "arrow.counterclockwise"                            // 􀅉
   case window = "macwindow"                                         // 􀏜
+  case play = "play"                                                // 􀊃
   case pause = "pause"                                              // 􀊅
   case stop = "stop"                                                // 􀛶
   case stopAlt = "octagon"                                          // 􀟊

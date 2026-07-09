@@ -16,12 +16,11 @@ public protocol RoundedRectangularShapeCompatible: InsettableShape {
   nonisolated func cornersCompatible(in size: CGSize?) -> RoundedRectangularShapeCornersCompatible?
 }
 
-
 extension View {
-//  @ViewBuilder
-//  public func containerShapeCompatible<S: InsettableShape>(_ shape: S) -> some View {
-//    containerShape(shape)
-//  }
+  //  @ViewBuilder
+  //  public func containerShapeCompatible<S: InsettableShape>(_ shape: S) -> some View {
+  //    containerShape(shape)
+  //  }
 
   @ViewBuilder
   public func containerShapeCompatible<S: RoundedRectangularShapeCompatible>(_ shape: S) -> some View {

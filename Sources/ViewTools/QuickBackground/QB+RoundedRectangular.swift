@@ -16,6 +16,7 @@ struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompa
   
   func body(content: Content) -> some View {
     content
+      .containerShapeCompatible(shape)
       .modifier(
         QuickBackgroundModifier(
           isEnabled: isEnabled,
@@ -25,6 +26,5 @@ struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompa
           tint: tint,
         )
       )
-      .containerShapeCompatible(shape)
   }
 }

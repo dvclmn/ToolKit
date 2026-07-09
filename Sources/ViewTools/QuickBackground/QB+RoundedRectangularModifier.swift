@@ -1,16 +1,13 @@
 //
-//  QuickBackgroundModifier.swift
-//  BaseComponents
+//  QB+RoundedRectangular.swift
+//  ToolKit
 //
-//  Created by Dave Coleman on 19/5/2025.
+//  Created by Dave Coleman on 9/7/2026.
 //
 
-import CoreTools
 import SwiftUI
 
-struct QuickBackgroundModifier<S: Shape>: ViewModifier {
-  @Environment(\.emphasisColour) private var emphasisColour
-  @Environment(\.aspectRatioOverride) private var aspectRatioOverride
+struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompatible>: ViewModifier {
   @Environment(\.layoutPadding) private var layoutPadding
   @Environment(\.backgroundMaterial) private var backgroundMaterial
   @Environment(\.colourOverride) private var colourOverride
@@ -23,10 +20,11 @@ struct QuickBackgroundModifier<S: Shape>: ViewModifier {
   let glass: GlassTypeCompatible?
   let padding: CGFloat
   let tint: Color?
-
+  
   func body(content: Content) -> some View {
     content
       .weightedPadding(layoutPadding ?? padding)
+      .containerShapeCompatible(shape)
       .glassEffectCompatible(glass, in: shape)
       .clipShape(shape)
       .background {
@@ -34,7 +32,6 @@ struct QuickBackgroundModifier<S: Shape>: ViewModifier {
           shape
             .fill(backgroundColour.opacity(colourIntensity ?? 0.3))
             .fill(material)
-
             .stroke(
               LinearGradient.lightFalloff(
                 .white.opacity(0.08),
@@ -49,19 +46,16 @@ struct QuickBackgroundModifier<S: Shape>: ViewModifier {
             )
         }
       }
-
   }
 }
 
-
-extension QuickBackgroundModifier {
+extension QuickRoundedRectangularBackgroundModifier {
   private var backgroundColour: Color {
     colourOverride ?? tint ?? .clear
   }
-  
+
   private var material: AnyShapeStyle {
     guard isEnabled else { return .clear }
     return AnyShapeStyle(backgroundMaterial ?? .regularMaterial)
   }
 }
-

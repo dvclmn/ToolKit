@@ -27,24 +27,24 @@ extension View {
     )
   }
 
-  /// This overload doesn't need an explicit `rounding`
-  /// argument, as it's handled through `shape`
-  public func quickBackground<S: Shape>(
-    shape: S = .rect(cornerRadius: Styles.sizeSmall),
-    padding: CGFloat = Styles.sizeTiny,
-    tint: Color? = nil,
-    isEnabled: Bool = true,
-  ) -> some View {
-    self.modifier(
-      QuickBackgroundModifier(
-        isEnabled: isEnabled,
-        shape: shape,
-        glass: nil,
-        padding: padding,
-        tint: tint,
-      )
-    )
-  }
+//  /// This overload doesn't need an explicit `rounding`
+//  /// argument, as it's handled through `shape`
+//  public func quickBackground<S: Shape>(
+//    shape: S = .rect(cornerRadius: Styles.sizeSmall),
+//    padding: CGFloat = Styles.sizeTiny,
+//    tint: Color? = nil,
+//    isEnabled: Bool = true,
+//  ) -> some View {
+//    self.modifier(
+//      QuickBackgroundModifier(
+//        isEnabled: isEnabled,
+//        shape: shape,
+//        glass: nil,
+//        padding: padding,
+//        tint: tint,
+//      )
+//    )
+//  }
 
   public func quickRoundedBackground(
     glass: GlassTypeCompatible? = nil,

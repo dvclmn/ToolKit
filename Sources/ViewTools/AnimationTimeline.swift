@@ -13,16 +13,16 @@ public struct AnimationTimeline<Content: View>: View {
   @Environment(\.frameRate) private var frameRate
 
   let isNotifyingPaused: Bool
-  let content: Content
-//  let content: (TimeInterval) -> Content
+//  let content: Content
+  let content: (TimeInterval) -> Content
 
   public init(
     isNotifyingPaused: Bool = true,
-    @ViewBuilder content: @escaping () -> Content,
-//    @ViewBuilder content: @escaping (TimeInterval) -> Content,
+//    @ViewBuilder content: @escaping () -> Content,
+    @ViewBuilder content: @escaping (TimeInterval) -> Content,
   ) {
     self.isNotifyingPaused = isNotifyingPaused
-    self.content = content()
+    self.content = content
   }
 
   public var body: some View {
@@ -33,10 +33,10 @@ public struct AnimationTimeline<Content: View>: View {
         paused: isPaused.wrappedValue
       )
     ) { context in
-      content
-//      content(context.date.timeIntervalSinceReferenceDate)
+//      content
+      content(context.date.timeIntervalSinceReferenceDate)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-        .environment(\.animationClock, context.date.timeIntervalSinceReferenceDate)
+//        .environment(\.animationClock, context.date.timeIntervalSinceReferenceDate)
         .debugText {
           if isNotifyingPaused && isPaused.wrappedValue {
             "Timeline is Paused"

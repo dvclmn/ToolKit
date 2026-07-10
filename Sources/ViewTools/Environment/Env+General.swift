@@ -83,7 +83,10 @@ extension EnvironmentValues {
   /// initialise them somewhere in the app, to establish their source of truth
   @Entry public var isPaused: Binding<Bool> = .constant(true)
   @Entry public var frameRate: Binding<FrameRate> = .constant(.unlocked)
+  
+  @available(*, deprecated, message: "Retired due to issues updating an Environment value like this so frequently")
   @Entry public var animationClock: TimeInterval?
+  
   @Entry public var isAnimationEnabled: Bool = false
 
 }

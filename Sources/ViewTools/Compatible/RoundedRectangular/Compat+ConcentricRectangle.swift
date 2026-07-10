@@ -37,11 +37,11 @@ extension View {
   @ViewBuilder
   public func concentricBackgroundCompatible<S: ShapeStyle>(
     _ style: S,
-    isEnabled: Bool = true,
+//    isEnabled: Bool = true,
     cornerStyle: RoundedRectangularCornerStyleCompatible = .concentric(),
     isUniform: Bool = false
   ) -> some View {
-    if isEnabled {
+//    if isEnabled {
       if #available(iOS 26.0, macOS 26.0, tvOS 26.0, watchOS 26.0, visionOS 26.0, *) {
         background(
           style,
@@ -53,8 +53,8 @@ extension View {
       } else {
         background(style, in: ContainerRelativeShape())
       }
-    } else {
-      self
-    }
+//    } else {
+//      self
+//    }
   }
 }

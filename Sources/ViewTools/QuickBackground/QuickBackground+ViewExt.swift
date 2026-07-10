@@ -12,6 +12,7 @@ extension View {
   /// `ContainerRelativeShape` and, on macOS 26+, `ConcentricRectangle`.
   public func quickBackground<S: RoundedRectangularShapeCompatible>(
     shape: S = .rect(cornerRadius: Styles.sizeSmall),
+    glass: GlassTypeCompatible? = nil,
     padding: CGFloat = Styles.sizeTiny,
     tint: Color? = nil,
     isEnabled: Bool = true,
@@ -20,7 +21,7 @@ extension View {
       QuickRoundedRectangularBackgroundModifier(
         isEnabled: isEnabled,
         shape: shape,
-        glass: nil,
+        glass: glass,
         padding: padding,
         tint: tint,
       )
@@ -33,6 +34,7 @@ extension View {
   /// because arbitrary shapes cannot always describe truthful corner geometry.
   public func quickBackground<S: Shape>(
     customShape shape: S,
+    glass: GlassTypeCompatible? = nil,
     padding: CGFloat = Styles.sizeTiny,
     tint: Color? = nil,
     isEnabled: Bool = true,
@@ -41,7 +43,7 @@ extension View {
       QuickBackgroundModifier(
         isEnabled: isEnabled,
         shape: shape,
-        glass: nil,
+        glass: glass,
         padding: padding,
         tint: tint,
       )
@@ -49,8 +51,8 @@ extension View {
   }
 
   public func quickRoundedBackground(
-    glass: GlassTypeCompatible? = nil,
     rounding: Double = Styles.sizeSmall,
+    glass: GlassTypeCompatible? = nil,
     padding: CGFloat = Styles.sizeTiny,
     tint: Color? = nil,
     isEnabled: Bool = true,

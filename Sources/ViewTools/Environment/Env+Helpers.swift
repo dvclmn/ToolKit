@@ -13,7 +13,11 @@ extension View {
     self.environment(\.isDebugMode, mode)
   }
 
+  /// Adds a String value to Environment Key `helpText`, and sets
+  /// value for SwiftUI `help(:)`
   public func helpText(_ text: String) -> some View {
-    self.environment(\.helpText, text).help(text)
+    self
+      .environment(\.helpText, text)
+      .help(text)
   }
 }

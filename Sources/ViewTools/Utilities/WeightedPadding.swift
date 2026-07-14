@@ -74,14 +74,14 @@ extension View {
     _ padding: CGFloat,
     horizontalBias: CGFloat = 1.2,
     opticalCentreBias: CGFloat = 1.2,
-    excludedEdge: Edge? = nil
+    excludedEdge: Edge? = nil,
   ) -> some View {
     self.modifier(
       WeightedPaddingModifier(
         padding: padding,
         horizontalBias: horizontalBias,
         opticalCentreBias: opticalCentreBias,
-        excludedEdge: excludedEdge
+        excludedEdge: excludedEdge,
       )
     )
   }

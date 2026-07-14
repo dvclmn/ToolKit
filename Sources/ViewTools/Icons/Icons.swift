@@ -29,6 +29,8 @@ public enum Icons: String, Codable, Equatable, Sendable, CaseIterable, Identifia
   case moon = "moon"                                                // 􀆹
   case up = "chevron.up"                                            // 􀆇
   case down = "chevron.down"                                        // 􀆈
+  
+  case todo = "checklist"                                           // 􀷾
 
   case sort = "arrow.up.arrow.down"                                 // 􀄬
   case box = "shippingbox"                                          // 􀐚
@@ -196,5 +198,7 @@ extension Icons {
   public static let size = Self.dimensions
   public static let viewport = Self.window
   public static let zoom = Self.search
+  public static let checklist = Self.todo
+  public static let wavesAlt = Self.gradient
 
 }

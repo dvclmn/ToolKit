@@ -2,7 +2,7 @@
 //  Compat+ConcentricRectangle.swift
 //  ToolKit
 //
-//  Created by Codex on 9/7/2026.
+//  Created by Dave Coleman on 9/7/2026.
 //
 
 import SwiftUI

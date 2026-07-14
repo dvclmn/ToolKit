@@ -44,6 +44,7 @@ public struct ToggledView<Content: View>: View {
     self.content = content
   }
 
+  // MARK: - Public initialisers
   /// Public initializers delegate to private init
   /// Key-based initialiser (title derived from key)
   public init<K: ToggleKey>(
@@ -71,6 +72,7 @@ public struct ToggledView<Content: View>: View {
     self.init(configuration: ToggleConfiguration(title, transient: defaultEnabled), content: content)
   }
 
+  // MARK: - View body
   public var body: some View {
     ToggledViewCommon(title, isEnabled: $isEnabled) {
       content()

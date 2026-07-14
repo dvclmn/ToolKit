@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import CoreTools
 import StringTools
 
 extension View {

@@ -18,11 +18,14 @@ struct DebugTextOverlayModifier: ViewModifier {
   func body(content: Content) -> some View {
     content
       .environment(ownedStore)
-      .safeAreaBarCompatible(
-        edge: edge,
-        alignment: alignment.horizontal,
-        spacing: nil,
-      ) {
+    // TODO: Perhaps shouldn't assume that `safeAreaBarCompatible` is
+    // always the right way to present the debug text
+//      .safeAreaBarCompatible(
+//        edge: edge,
+//        alignment: alignment.horizontal,
+//        spacing: nil,
+//      ) {
+      .overlay(alignment: .bottomLeading) {
         if isEnabled, !ownedStore.items.isEmpty {
           DebugItemsOverlayView(
             store: ownedStore,

@@ -34,10 +34,12 @@ extension EnvironmentValues {
 }
 
 extension View {
+  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.shapeStyleOverride, myShapeStyle)` for clarity.")
   public func backgroundTint(_ style: AnyShapeStyle?) -> some View {
     self.environment(\.shapeStyleOverride, style)
   }
   
+  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.colourOverride, myColour)` for clarity.")
   public func backgroundTint(_ colour: Color?) -> some View {
     self.environment(\.colourOverride, colour)
   }

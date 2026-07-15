@@ -15,7 +15,7 @@ struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompa
   let glass: GlassTypeCompatible?
   let padding: CGFloat
   let tint: Color?
-  
+
   func body(content: Content) -> some View {
     content
       .weightedPadding(layoutPadding ?? padding)
@@ -23,12 +23,13 @@ struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompa
       .glassEffectCompatible(glass, in: shape)
       .clipShape(shape)
       .background {
-        QuickBackgroundSurface(
-          isEnabled: isEnabled,
-          shape: shape,
-          glass: glass,
-          tint: tint,
-        )
+        if glass == nil {
+          QuickBackgroundSurface(
+            isEnabled: isEnabled,
+            shape: shape,
+            tint: tint,
+          )
+        }
       }
   }
 }

@@ -8,8 +8,6 @@
 import SwiftUI
 
 struct DebugItemsOverlayView: View {
-  //  @Environment(\.colourOverride) private var colourOverride
-
   let store: DebugItemStore
   let alignment: Alignment
   var body: some View {

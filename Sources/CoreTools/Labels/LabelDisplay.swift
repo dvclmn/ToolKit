@@ -32,4 +32,11 @@ public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendabl
       default: false
     }
   }
+  
+  public var isVisible: Bool {
+    switch self {
+      case .hidden: false
+      default: true
+    }
+  }
 }

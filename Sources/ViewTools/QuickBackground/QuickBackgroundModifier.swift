@@ -22,12 +22,13 @@ struct QuickBackgroundModifier<S: Shape>: ViewModifier {
       .glassEffectCompatible(glass, in: shape)
       .clipShape(shape)
       .background {
-        QuickBackgroundSurface(
-          isEnabled: isEnabled,
-          shape: shape,
-          glass: glass,
-          tint: tint,
-        )
+        if glass == nil {
+          QuickBackgroundSurface(
+            isEnabled: isEnabled,
+            shape: shape,
+            tint: tint,
+          )
+        }
       }
   }
 }

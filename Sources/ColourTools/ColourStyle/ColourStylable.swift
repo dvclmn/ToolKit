@@ -6,14 +6,14 @@
 //
 
 public protocol ColourStylable {
-  var style: ColourStyle { get set }
+  var colourStyle: ColourStyle { get set }
   
 //  init (style: ColourStyle)
 }
 
 extension ColourStylable {
   public var baseColour: RGBColour? {
-    switch style {
+    switch colourStyle {
       case .solid(let colour): colour.rgbColour
       case .gradient(let colours): colours.first?.rgbColour
       case .mix(let start, _, _): start.rgbColour

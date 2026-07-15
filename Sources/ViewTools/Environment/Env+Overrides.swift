@@ -30,6 +30,8 @@ extension EnvironmentValues {
 
   /// Perhaps the below two can be merged.
   @Entry public var shapeStyleOverride: AnyShapeStyle?
+  
+  @available(*, deprecated, message: "This property's purpose is ambiguous. Prefer init arguments, or something, I dunno.")
   @Entry public var colourOverride: Color?
 }
 

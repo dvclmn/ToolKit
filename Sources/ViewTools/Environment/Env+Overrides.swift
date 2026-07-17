@@ -11,39 +11,49 @@ extension EnvironmentValues {
 
   /// As opposed to the more *specific* naming such as icon{x},
   /// stroke{x}, these override{x} properties can be applied to anything.
-  @Entry public var sizeOverride: CGSize?
-  @Entry public var heightOverride: CGFloat?
-  @Entry public var widthOverride: CGFloat?
-  @Entry public var fontSizeOverride: CGFloat?
-  @Entry public var fontWeightOverride: Font.Weight?
+//  @Entry public var sizeOverride: CGSize?
+  
+  // Previously `heightOverride`
+  @Entry public var frameHeight: CGFloat?
+  
+  // Previously `widthOverride`
+  @Entry public var frameWidth: CGFloat?
+//  @Entry public var fontSizeOverride: CGFloat?
+//  @Entry public var fontWeightOverride: Font.Weight?
   
   /// `length` useful when referring to neither height nor width specifically
-  @Entry public var lengthOverride: CGFloat?
-  @Entry public var rangeOverride: ClosedRange<CGFloat>?
+//  @Entry public var lengthOverride: CGFloat?
+//  @Entry public var rangeOverride: ClosedRange<CGFloat>?
   
   /// Helpful article on `aspectRatio`
   /// https://alejandromp.com/development/blog/image-aspectratio-without-frames/
   /// See also `viewAspectRatio()` in ToolKit
-  @Entry public var aspectRatioOverride: CGFloat?
-  @Entry public var contentModeOverride: ContentMode?
-  @Entry public var controlSizeOverride: ControlSize?
+//  @Entry public var aspectRatioOverride: CGFloat?
+  @Entry public var contentMode: ContentMode?
+//  @Entry public var controlSizeOverride: ControlSize?
 
   /// Perhaps the below two can be merged.
-  @Entry public var shapeStyleOverride: AnyShapeStyle?
+//  @Entry public var shapeStyleOverride: AnyShapeStyle?
   
-  @available(*, deprecated, message: "This property's purpose is ambiguous. Prefer init arguments, or something, I dunno.")
-  @Entry public var colourOverride: Color?
+//  @available(*, deprecated, message: "This property's purpose is ambiguous. Prefer init arguments, or something, I dunno.")
+//  @Entry public var colourOverride: Color?
+//}
+//
+//extension View {
+//  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.shapeStyleOverride, myShapeStyle)` for clarity.")
+//  public func backgroundTint(_ style: AnyShapeStyle?) -> some View {
+//    self.environment(\.shapeStyleOverride, style)
+//  }
+//  
+//  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.colourOverride, myColour)` for clarity.")
+//  public func backgroundTint(_ colour: Color?) -> some View {
+//    self.environment(\.colourOverride, colour)
+//  }
+
 }
 
-extension View {
-  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.shapeStyleOverride, myShapeStyle)` for clarity.")
-  public func backgroundTint(_ style: AnyShapeStyle?) -> some View {
-    self.environment(\.shapeStyleOverride, style)
-  }
-  
-  @available(*, deprecated, message: "This modifier's purpose is ambiguous. Prefer direct use of `environment(\\.colourOverride, myColour)` for clarity.")
-  public func backgroundTint(_ colour: Color?) -> some View {
-    self.environment(\.colourOverride, colour)
-  }
-
-}
+//extension View {
+//  public func frameSize() -> some View {
+//    self.modifier(ExampleModifier())
+//  }
+//}

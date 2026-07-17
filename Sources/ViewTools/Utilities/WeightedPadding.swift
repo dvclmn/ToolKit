@@ -8,12 +8,12 @@
 import SwiftUI
 
 public struct WeightedPaddingModifier: ViewModifier {
-  @Environment(\.horizontalBiasOverride) private var horizontalBiasOverride
-  @Environment(\.opticalCentreBias) private var opticalCentreBiasOverride
+  @Environment(\.horizontalBias) private var horizontalBias
+  @Environment(\.opticalCentreBias) private var opticalCentreBias
 
   let padding: CGFloat
-  let horizontalBias: CGFloat  // Increase to add width
-  let opticalCentreBias: CGFloat  // Increase to shift content upward
+  let horizontalBiasOverride: CGFloat?  // Increase to add width
+  let opticalCentreBiasOverride: CGFloat?  // Increase to shift content upward
   let excludedEdge: Edge?
 
   public func body(content: Content) -> some View {
@@ -35,15 +35,14 @@ extension WeightedPaddingModifier {
     )
   {
 
-    let biasH = horizontalBiasOverride ?? horizontalBias
-    let biasCentre = opticalCentreBiasOverride ?? opticalCentreBias
+    let biasH = 1.0 + (horizontalBiasOverride ?? horizontalBias ?? .zero)
+    let biasCentre = 1.0 + (opticalCentreBiasOverride ?? opticalCentreBias ?? .zero)
 
     /// Calculate vertical padding with optical centre bias.
     /// Increasing opticalCentreBias increases bottom padding and decreases top padding,
     /// shifting content upward.
-    let safeBias = max(biasCentre, 0.01)
-    let paddingTop = max(0, padding / safeBias)
-    let paddingBottom = max(0, padding * safeBias)
+    let paddingTop = max(0, padding / biasCentre)
+    let paddingBottom = max(0, padding * biasCentre)
 
     /// Calculate horizontal padding with direct bias multiplier
     let paddingH = max(0, padding * biasH)
@@ -72,15 +71,15 @@ extension WeightedPaddingModifier {
 extension View {
   public func weightedPadding(
     _ padding: CGFloat,
-    horizontalBias: CGFloat = 1.2,
-    opticalCentreBias: CGFloat = 1.2,
+    horizontalBias horizontalBiasOverride: CGFloat? = nil,
+    opticalCentreBias opticalCentreBiasOverride: CGFloat = 0.2,
     excludedEdge: Edge? = nil,
   ) -> some View {
     self.modifier(
       WeightedPaddingModifier(
         padding: padding,
-        horizontalBias: horizontalBias,
-        opticalCentreBias: opticalCentreBias,
+        horizontalBiasOverride: horizontalBiasOverride,
+        opticalCentreBiasOverride: opticalCentreBiasOverride,
         excludedEdge: excludedEdge,
       )
     )

@@ -15,6 +15,14 @@ extension Optional where Wrapped: BinaryFloatingPoint {
     map { Double($0) }
   }
 }
+extension Optional where Wrapped == Int {
+  public var toCGFloatIfPresent: CGFloat? {
+    map { CGFloat($0) }
+  }
+  public var toDoubleIfPresent: Double? {
+    map { Double($0) }
+  }
+}
 
 extension Optional where Wrapped == Bool {
   var _boundBool: Bool? {

@@ -43,16 +43,7 @@ extension RGBColour {
   public static let navy: RGBColour =                   #colorLiteral(red: 0.0, green: 0.0, blue: 0.5019607843, alpha: 1.0)
   public static let fuchsia: RGBColour =                #colorLiteral(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
   public static let purpleWeb: RGBColour =              #colorLiteral(red: 0.5019607843, green: 0.0, blue: 0.5019607843, alpha: 1.0)
-  
-  // MARK: - Aliases for basic colours
-  
-  /// cyan = aqua (`#00ffff`)
-  public static let cyanWeb: RGBColour =                #colorLiteral(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
-  /// magenta = fuchsia (`#ff00ff`)
-  public static let magenta: RGBColour =                #colorLiteral(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
-  /// grey = gray (`#808080`)
-  public static let grey: RGBColour =                   #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1.0)
-  
+
   // MARK: - Reds
   public static let tomato: RGBColour =                 #colorLiteral(red: 1.0, green: 0.3882352941, blue: 0.2784313725, alpha: 1.0)
   public static let orangered: RGBColour =              #colorLiteral(red: 1.0, green: 0.2705882353, blue: 0.0, alpha: 1.0)
@@ -198,4 +189,20 @@ extension RGBColour {
   public static let slategray: RGBColour =              #colorLiteral(red: 0.4392156863, green: 0.5019607843, blue: 0.5647058824, alpha: 1.0)
   public static let darkslategray: RGBColour =          #colorLiteral(red: 0.1843137255, green: 0.3098039216, blue: 0.3098039216, alpha: 1.0)
   
+}
+
+extension RGBColour {
+  
+  // MARK: - Aliases for basic colours
+  
+  /// cyan = aqua (`#00ffff`)
+  public static let cyanWeb: RGBColour =                #colorLiteral(red: 0.0, green: 1.0, blue: 1.0, alpha: 1.0)
+  /// magenta = fuchsia (`#ff00ff`)
+  public static let magenta: RGBColour =                #colorLiteral(red: 1.0, green: 0.0, blue: 1.0, alpha: 1.0)
+  /// grey = gray (`#808080`)
+  public static let grey: RGBColour =                   #colorLiteral(red: 0.5019607843, green: 0.5019607843, blue: 0.5019607843, alpha: 1.0)
+  
+  /// CSS defines azure as a pale cyan / off-white, but traditionally it is a deep blue,
+  /// between blue and cyan. This is the traditional blue version.
+  public static let azureBlue: RGBColour =              #colorLiteral(red: 0, green: 0.5, blue: 1.0, alpha: 1)
 }

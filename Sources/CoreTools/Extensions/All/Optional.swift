@@ -24,6 +24,14 @@ extension Optional where Wrapped == Int {
   }
 }
 
+extension Optional where Wrapped == Double {
+  public var boundDoubleOrZero: Double {
+    get { self ?? .zero }
+    set { self = newValue }
+  }
+
+}
+
 extension Optional where Wrapped == Bool {
   var _boundBool: Bool? {
     get { self }

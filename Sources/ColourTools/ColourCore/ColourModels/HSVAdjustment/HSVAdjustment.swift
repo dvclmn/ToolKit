@@ -61,7 +61,7 @@ public struct HSVAdjustment: Sendable, Codable, Equatable, Hashable {
     self.init(
       hue: hueDegrees.map { $0 / 360.0 },
       saturation: saturation,
-      brightness: brightness
+      brightness: brightness,
     )
   }
 }
@@ -74,9 +74,7 @@ extension HSVAdjustment {
     return modifiers.map(\.adjustment)
   }
 
-  public static var zero: HSVAdjustment {
-    HSVAdjustment()
-  }
+  public static var noAdjustment: HSVAdjustment { .init(h: nil, s: nil, v: nil) }
 
   public func interpolated(
     towards other: HSVAdjustment,
@@ -85,7 +83,7 @@ extension HSVAdjustment {
     HSVAdjustment(
       hue: hue.interpolated(towards: other.hue, amount: amount),
       saturation: saturation.interpolated(towards: other.saturation, amount: amount),
-      brightness: brightness.interpolated(towards: other.brightness, amount: amount)
+      brightness: brightness.interpolated(towards: other.brightness, amount: amount),
     )
   }
 
@@ -93,7 +91,7 @@ extension HSVAdjustment {
     HSVAdjustment(
       hue: hue.map { $0 * factor },
       saturation: saturation.map { $0 * factor },
-      brightness: brightness.map { $0 * factor }
+      brightness: brightness.map { $0 * factor },
     )
   }
 
@@ -121,12 +119,12 @@ extension HSVAdjustment {
   }
 
   public func adding(
-    other: Self,
+    other: Self
   ) -> Self {
     HSVAdjustment(
       hue: hue.combined(with: other.hue, using: +),
       saturation: saturation.combined(with: other.saturation, using: +),
-      brightness: brightness.combined(with: other.brightness, using: +)
+      brightness: brightness.combined(with: other.brightness, using: +),
     )
   }
 }

@@ -15,9 +15,9 @@ extension Array where Element == HSVAdjustment {
 
   /// Combines adjustments with a strength multiplier
   public func combined(with strength: Double) -> HSVAdjustment {
-    guard !isEmpty else { return .zero }
+    guard !isEmpty else { return .noAdjustment }
     let weighted = self.map { $0.scaled(by: strength) }
-    return weighted.reduce(.zero, +)
+    return weighted.reduce(.noAdjustment, +)
   }
   //  public func combined(with strength: Double) -> HSVAdjustment {
   //    guard !isEmpty else { return .zero }

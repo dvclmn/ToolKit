@@ -65,4 +65,13 @@ extension RGBColour {
     )
   }
 
+  public var hsv: HSVColour {
+    get {
+      self.toHSV
+    }
+    set {
+      self = newValue.toRGB
+    }
+  }
+  
 }

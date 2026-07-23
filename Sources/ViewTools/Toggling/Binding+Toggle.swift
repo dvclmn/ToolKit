@@ -5,129 +5,61 @@
 //  Created by Dave Coleman on 21/2/2026.
 //
 
- import SwiftUI
+import SwiftUI
 
-extension Binding where Value: OptionSet & Sendable, Value.Element == Value {
-  /// Returns a Boolean binding that toggles the presence of a single option in the set.
-  func contains(_ element: Value) -> Binding<Bool> {
-    Binding<Bool>(
-      get: { wrappedValue.contains(element) },
-      set: { isIncluded in
-        if isIncluded {
-          wrappedValue.insert(element)
-        } else {
-          wrappedValue.remove(element)
-        }
-      }
-    )
-  }
-}
-
-extension Binding where Value: OptionSet {
-
-  /// Returns a Boolean binding that represents membership of `option` inside an OptionSet.
+extension OptionSet where Element == Self, Self: Hashable {
+  /// Whether this option set includes `option`.
   ///
-  /// - Parameters:
-  ///   - option: The option whose membership is being toggled.
-  ///   - clearing: Optional set of options to clear when enabling this one.
-  ///   - preventEmpty: If true, removing the final remaining option becomes a no-op.
-  @MainActor
-  public func bindingToggle(
-    option: Value.Element,
-    clearing others: Value? = nil,
-    preventEmpty: Bool = false
-  ) -> Binding<Bool> {
-    Binding<Bool> {
-      wrappedValue.contains(option)
-    } set: { isOn in
-      if isOn {
-        if let others {
-          wrappedValue.subtract(others)
-        }
-        wrappedValue.insert(option)
+  /// Use this through a binding subscript: `$options[contains: .square]`.
+  /// The option set must be `Hashable`, because Swift key paths require their
+  /// subscript arguments to be hashable.
+  public subscript(contains option: Self) -> Bool {
+    get { contains(option) }
+    set {
+      if newValue {
+        insert(option)
       } else {
-        var proposed = wrappedValue
+        remove(option)
+      }
+    }
+  }
+
+  /// Whether this option set includes `option`, with optional exclusivity rules.
+  ///
+  /// Use this through a binding subscript, for example:
+  /// `$options[toggling: .square, clearing: .all, preventingEmpty: true]`.
+  public subscript(
+    toggling option: Self,
+    clearing others: Self? = nil,
+    preventingEmpty preventEmpty: Bool = false,
+  ) -> Bool {
+    get { contains(option) }
+    set {
+      if newValue {
+        if let others {
+          subtract(others)
+        }
+        insert(option)
+      } else {
+        var proposed = self
         proposed.remove(option)
 
         if preventEmpty && proposed.isEmpty {
-          return  // no-op
+          return
         }
 
-        wrappedValue = proposed
+        self = proposed
       }
     }
   }
-
-  /// Returns a Boolean binding that represents membership of `option` inside an OptionSet.
-  /// Setting `true` inserts the option; setting `false` removes it.
-  ///
-  /// ```
-  /// Toggle(
-  ///   "Square only",
-  ///   isOn: $components.bindingToggle(option: .square, clearing: .all)
-  /// )
-  /// ```
-  @MainActor
-  public func bindingToggle(
-    option: Value.Element,
-    clearing others: Value? = nil
-  ) -> Binding<Bool> {
-    Binding<Bool> {
-      wrappedValue.contains(option)
-    } set: { isOn in
-      if isOn {
-        if let others { wrappedValue.subtract(others) }
-        wrappedValue.insert(option)
-      } else {
-        wrappedValue.remove(option)
-      }
-    }
-  }
-
-  /// Like `bindingToggle(option:)`, but can optionally clear other options when enabling.
-  //  @MainActor
-  //  public func bindingToggle(
-  //    option: Option,
-  //
-  //  ) -> Binding<Bool>
-  //  where Value == Option, Option: OptionSet {
-  //
-  //    Binding<Bool> {
-  //      wrappedValue.contains(option)
-  //    } set: { isOn in
-  //      if isOn {
-  //
-  //        wrappedValue.insert(option)
-  //      } else {
-  //        wrappedValue.remove(option)
-  //      }
-  //    }
-  //  }
 }
 
-extension Binding {
-
-  /// Returns a Boolean binding that toggles the Bool for the given Key in the Dictionary
-  @MainActor
-  public func bindingToggle<T>(key: T) -> Binding<Bool>
-  where Value == [T: Bool], T: Hashable {
-    Binding<Bool> {
-      wrappedValue[key] ?? false
-    } set: {
-      wrappedValue[key] = $0
-    }
+extension Dictionary where Value == Bool {
+  /// The Boolean value for `key`, treating missing keys as `false`.
+  ///
+  /// Use this through a binding subscript: `$values[toggling: key]`.
+  public subscript(toggling key: Key) -> Bool {
+    get { self[key] ?? false }
+    set { self[key] = newValue }
   }
-  //  func contains(_ element: Value) -> Binding<Bool> {
-  //    Binding<Bool>(
-  //      get: { wrappedValue.contains(element) },
-  //      set: { isIncluded in
-  //        if isIncluded {
-  //          wrappedValue.insert(element)
-  //        } else {
-  //          wrappedValue.remove(element)
-  //        }
-  //      }
-  //    )
-  //  }
-
 }

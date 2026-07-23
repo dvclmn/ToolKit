@@ -8,56 +8,47 @@
 import CoreTools
 import SwiftUI
 
-// MARK: - Binding CGRect
-extension Binding where Value == CGRect {
-  public var getOrigin: CGPoint {
-    return self.wrappedValue.origin
-  }
-  public var getSize: CGSize {
-    return self.wrappedValue.size
+extension CGRect {
+  /// The rectangle's origin, projected as `$rect.toBindingOrigin` when needed.
+  public var toBindingOrigin: CGPoint {
+    get { origin }
+    set { origin = newValue }
   }
 
-  public var toBindingOrigin: Binding<CGPoint> {
-    return Binding<CGPoint> {
-      return self.wrappedValue.origin
-    } set: { newValue in
-      let currentSize: CGSize = self.wrappedValue.size
-      self.wrappedValue = CGRect(origin: newValue, size: currentSize)
-    }
-  }
-
-  public var toBindingSize: Binding<CGSize> {
-    return Binding<CGSize> {
-      wrappedValue.size
-    } set: {
-      let currentOrigin = wrappedValue.origin
-      wrappedValue = CGRect(origin: currentOrigin, size: $0)
-    }
+  /// The rectangle's size, projected as `$rect.toBindingSize` when needed.
+  public var toBindingSize: CGSize {
+    get { size }
+    set { size = newValue }
   }
 }
 
-extension Binding where Value == CGFloat? {
-  public func toBindingRect(
-    along axis: GeometryAxis,
-    reversed: Bool = false,
-  ) -> Binding<CGRect?> {
-    return Binding<CGRect?> {
-      guard let value = wrappedValue else { return nil }
-      let valueAdjusted: CGFloat = reversed ? -value : value
+extension Optional where Wrapped == CGFloat {
+  /// A zero-origin rectangle whose size is this value on `axis`.
+  ///
+  /// Use this through a binding subscript, for example
+  /// `$length[rectAlong: .horizontal]`. The subscript is key-path projectable,
+  /// unlike the previous `Binding(get:set:)` helper.
+  public subscript(
+    rectAlong axis: GeometryAxis,
+    reversed isReversed: Bool = false,
+  ) -> CGRect? {
+    get {
+      guard let value = self else { return nil }
+      let valueAdjusted: CGFloat = isReversed ? -value : value
       let size: CGSize =
         switch axis {
           case .horizontal: CGSize(width: valueAdjusted, height: .zero)
           case .vertical: CGSize(width: .zero, height: valueAdjusted)
         }
       return CGRect(origin: .zero, size: size)
-    } set: {
+    }
+    set {
       switch axis {
         case .horizontal:
-          wrappedValue = $0?.size.width
+          self = newValue?.size.width
         case .vertical:
-          wrappedValue = $0?.size.height
+          self = newValue?.size.height
       }
-      //
     }
   }
 }

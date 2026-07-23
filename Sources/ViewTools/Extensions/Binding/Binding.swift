@@ -8,6 +8,10 @@
 import SwiftUI
 
 extension Binding where Value: Sendable {
+  /// Presents a nonoptional binding as optional, ignoring writes of `nil`.
+  ///
+  /// This remains closure-backed because an arbitrary `Value` cannot expose a
+  /// writable optional member for `Binding`'s dynamic-member projection.
   public var toOptionalBinding: Binding<Value?> {
     Binding<Value?>(
       get: { wrappedValue },
@@ -19,11 +23,13 @@ extension Binding where Value: Sendable {
   }
 }
 
-extension Binding where Value == Bool {
-  public var reversed: Binding<Bool> {
-    return .init(
-      get: { !self.wrappedValue },
-      set: { self.wrappedValue = !$0 },
-    )
+extension Bool {
+  /// The logical inverse of this value.
+  ///
+  /// `Binding` projects this writable property through dynamic-member lookup,
+  /// so `$isEnabled.reversed` retains SwiftUI's key-path binding identity.
+  public var reversed: Self {
+    get { !self }
+    set { self = !newValue }
   }
 }

@@ -13,7 +13,7 @@ extension RGBColour {
   
   // MARK: - Platform System Colours (dark-mode approximations)
   public static let red: RGBColour =                    #colorLiteral(red: 1.0,   green: 0.271, blue: 0.227, alpha: 1.0)
-public static let orange: RGBColour =                   #colorLiteral(red: 1.0,   green: 0.624, blue: 0.039, alpha: 1.0)
+  public static let orange: RGBColour =                 #colorLiteral(red: 1.0,   green: 0.624, blue: 0.039, alpha: 1.0)
   public static let yellow: RGBColour =                 #colorLiteral(red: 1.0,   green: 0.839, blue: 0.039, alpha: 1.0)
   public static let green: RGBColour =                  #colorLiteral(red: 0.188, green: 0.820, blue: 0.345, alpha: 1.0)
   public static let mint: RGBColour =                   #colorLiteral(red: 0.388, green: 0.902, blue: 0.886, alpha: 1.0)

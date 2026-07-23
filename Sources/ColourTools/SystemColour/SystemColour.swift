@@ -57,12 +57,16 @@ extension SystemColour {
 }
 
 extension SystemColour {
-  public var hsvAdjustment: HSVAdjustment? {
+  /// Resolves this platform colour to an absolute HSV snapshot.
+  ///
+  /// The result reflects the current AppKit resolution of this symbolic colour;
+  /// it is not an ``HSVAdjustment`` and must not be applied as a delta.
+  public var hsvColour: HSVColour? {
     guard let nsColour = self.toNSColor else { return nil }
     let hue = nsColour.hueComponent
     let sat = nsColour.saturationComponent
     let val = nsColour.brightnessComponent
-    return HSVAdjustment(h: hue, s: sat, v: val)
+    return HSVColour(h: hue, s: sat, v: val)
   }
 
 }

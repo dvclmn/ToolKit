@@ -36,6 +36,7 @@ The target also contains a small set of opinionated tools for luminance, contras
 
 ### Components and Editing
 
+- <doc:HSVSemantics>
 - ``ColourComponent``
 - ``RGBComponent``
 - ``HSVComponent``

@@ -28,25 +28,22 @@ extension HSVAdjustable {
     saturation: Double,
     brightness: Double
   ) -> Self {
-    var hsv = self.toHSV
-    hsv.hue += hue
-    hsv.saturation += saturation
-    hsv.brightness += brightness
-
-    return Self(fromHSV: hsv.normalised)
+    Self(
+      fromHSV: toHSV.applying(
+        HSVAdjustment(
+          hue: hue,
+          saturation: saturation,
+          brightness: brightness
+        )
+      )
+    )
   }
 
   /// Applies an HSV delta, wrapping hue and clamping saturation/brightness.
   public func adjust(
     by adjustment: HSVAdjustment
   ) -> Self {
-    var hsv = self.toHSV
-
-    if let dh = adjustment.hue { hsv.hue += dh }
-    if let ds = adjustment.saturation { hsv.saturation += ds }
-    if let dv = adjustment.brightness { hsv.brightness += dv }
-
-    return Self(fromHSV: hsv.normalised)
+    Self(fromHSV: toHSV.applying(adjustment))
   }
 
   /// Set a new value, returns new instance
@@ -57,17 +54,13 @@ extension HSVAdjustable {
     saturation: Double?,
     brightness: Double?
   ) -> Self {
-    var hsv = self.toHSV
-    if let hue {
-      hsv.hue = hue
-    }
-    if let saturation {
-      hsv.saturation = saturation
-    }
-    if let brightness {
-      hsv.brightness = brightness
-    }
-    return Self(fromHSV: hsv.normalised)
+    Self(
+      fromHSV: toHSV.replacing(
+        hue: hue,
+        saturation: saturation,
+        brightness: brightness
+      )
+    )
   }
 
   /// This will 'pass through', returning `self` if `modification` is `nil`
@@ -91,8 +84,6 @@ extension HSVAdjustable where Self: LuminanceReadable {
     chroma: ColourChroma = .standard,
   ) -> Self {
 
-    let hsv = self.toHSV
-
     guard strength.adjustmentStrength > 0 else { return self }
 
     let adjustment = HSVAdjustment.applyingModifiers(
@@ -102,12 +93,7 @@ extension HSVAdjustable where Self: LuminanceReadable {
       chroma: chroma
     )
 
-    let adjustedHSV = hsv.adjust(by: adjustment)
-    //    let adjustedHSV = hsv.apply(adjustment: adjustment)
-
-    let adjustedColour = Self(fromHSV: adjustedHSV)
-
-    return adjustedColour
+    return Self(fromHSV: toHSV.applying(adjustment))
 
   }
 }

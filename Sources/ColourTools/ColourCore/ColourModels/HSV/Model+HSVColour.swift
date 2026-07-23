@@ -157,6 +157,43 @@ extension HSVColour {
 
   public var toRGB: RGBColour { RGBColour(fromHSV: self) }
 
+  /// Returns a colour produced by adding the supplied HSV deltas.
+  ///
+  /// An ``HSVAdjustment`` is relative to this colour: each non-`nil` channel
+  /// is added, while a `nil` channel is left unchanged. The returned colour is
+  /// normalised by ``HSVColour/init(hue:saturation:brightness:alpha:name:)``:
+  /// hue wraps into `[0, 1)`, and saturation and brightness clamp to `0...1`.
+  public func applying(_ adjustment: HSVAdjustment) -> Self {
+    Self(
+      id: id,
+      hue: hue + (adjustment.hue ?? 0),
+      saturation: saturation + (adjustment.saturation ?? 0),
+      brightness: brightness + (adjustment.brightness ?? 0),
+      alpha: alpha,
+      name: name
+    )
+  }
+
+  /// Returns a colour with the supplied absolute HSV components.
+  ///
+  /// A non-`nil` value replaces the corresponding component; a `nil` value
+  /// retains this colour's component. The result is normalised in the same way
+  /// as any newly-created ``HSVColour``.
+  public func replacing(
+    hue: Double? = nil,
+    saturation: Double? = nil,
+    brightness: Double? = nil,
+  ) -> Self {
+    Self(
+      id: id,
+      hue: hue ?? self.hue,
+      saturation: saturation ?? self.saturation,
+      brightness: brightness ?? self.brightness,
+      alpha: alpha,
+      name: name
+    )
+  }
+
   public static func gray(
     _ brightness: Double,
     alpha: Double = 1.0,
@@ -170,30 +207,7 @@ extension HSVColour {
     )
   }
 
-  /// This is handled in ``HSVAdjustable/adjust(by:)``
-  //  func applying(adjustment: HSVAdjustment) -> HSVColour {
-  //    let adjustedHue = adjustment.hue.map { hue + $0 } ?? hue
-  //
-  //    let adjustedSaturation =
-  //      adjustment.saturation.map { saturation + $0 } ?? saturation
-  //
-  //    let adjustedBrightness =
-  //      adjustment.brightness.map { brightness + $0 } ?? brightness
-  //
-  //    return HSVColour(
-  //      hue: adjustedHue,
-  //      saturation: adjustedSaturation,
-  //      brightness: adjustedBrightness,
-  //      alpha: alpha,
-  //      name: self.name
-  //    )
-  //  }
 }
-
-//
-//public func + (lhs: HSVColour, rhs: HSVAdjustment) -> HSVColour {
-//  lhs.applying(adjustment: rhs)
-//}
 
 extension HSVColour: CustomStringConvertible {
   public var description: String {

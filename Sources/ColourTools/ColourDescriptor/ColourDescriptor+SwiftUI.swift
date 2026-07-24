@@ -16,7 +16,7 @@ extension Color {
 
 extension ColourDescriptor {
 
-  public var colour: Color? {
+  public var swiftUIColor: Color? {
     switch self {
       case .hex(let hex):
         return Color(hex: hex)

@@ -8,7 +8,7 @@
 import SwiftUI
 
 public struct DebugFrameModifier: ViewModifier {
-
+  @Environment(\.isDebugMode) private var isDebugMode
   let label: String
   let labelOpacity: CGFloat
   let colour: Color
@@ -18,7 +18,7 @@ public struct DebugFrameModifier: ViewModifier {
     content
       .border(colour.opacity(isEnabled ? 0.3 : 0.0), width: 1)
       .overlay(alignment: .topLeading) {
-        if isEnabled, !label.isEmpty {
+        if isEnabled, isDebugMode, !label.isEmpty {
           Text(label)
             .font(.caption2)
             .fixedSize(horizontal: true, vertical: false)
@@ -32,9 +32,10 @@ public struct DebugFrameModifier: ViewModifier {
   }
 }
 extension View {
+  // Will only show if Env value `isDebugMode` is true
   public func debugFrame(
     _ text: String,
-    _ colour: Color,
+    colour: Color,
     labelOpacity: CGFloat = 0.85,
     isEnabled: Bool = true,
   ) -> some View {
@@ -45,6 +46,19 @@ extension View {
         colour: colour,
         isEnabled: isEnabled,
       )
+    )
+  }
+  // Will only show if Env value `isDebugMode` is true
+  public func debugFrame(
+    _ colour: Color,
+    labelOpacity: CGFloat = 0.85,
+    isEnabled: Bool = true,
+  ) -> some View {
+    debugFrame(
+      "",
+      colour: colour,
+      labelOpacity: labelOpacity,
+      isEnabled: isEnabled
     )
   }
 }

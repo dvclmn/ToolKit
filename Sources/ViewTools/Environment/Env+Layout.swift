@@ -46,4 +46,15 @@ extension EnvironmentValues {
   /// See ``TextColumns`` for an example.
   @Entry public var maxCharacterColumns: Int = 5
 
+  // May possibly deprecate above `maxCharacterColumns`, not sure
+  @Entry public var textColumnCount: Int? = nil
+}
+
+extension View {
+  public func textColumns(
+    _ count: Int,
+//    fontStyle: Font.TextStyle = .body
+  ) -> some View {
+    environment(\.textColumnCount, count)
+  }
 }

@@ -13,15 +13,16 @@ public struct AnimationTimeline<Content: View>: View {
   @Environment(\.frameRate) private var frameRate
 
   let isNotifyingPaused: Bool
-//  let content: Content
+  let frameRateOverride: FrameRate?
   let content: (TimeInterval) -> Content
 
   public init(
+    frameRate: FrameRate? = nil,
     isNotifyingPaused: Bool = true,
-//    @ViewBuilder content: @escaping () -> Content,
     @ViewBuilder content: @escaping (TimeInterval) -> Content,
   ) {
     self.isNotifyingPaused = isNotifyingPaused
+    self.frameRateOverride = frameRate
     self.content = content
   }
 
@@ -29,19 +30,16 @@ public struct AnimationTimeline<Content: View>: View {
 
     TimelineView(
       .animation(
-        minimumInterval: frameRate.wrappedValue.rate,
-        paused: isPaused.wrappedValue
+        minimumInterval: frameRateOverride?.rate ?? frameRate.wrappedValue.rate,
+        paused: isPaused.wrappedValue,
       )
     ) { context in
-//      content
       content(context.date.timeIntervalSinceReferenceDate)
         .frame(maxWidth: .infinity, maxHeight: .infinity)
-//        .environment(\.animationClock, context.date.timeIntervalSinceReferenceDate)
         .debugText {
           if isNotifyingPaused && isPaused.wrappedValue {
             "Timeline is Paused"
           }
-          //          isEnabled: isNotifyingPaused && isPaused.wrappedValue
         }
     }
   }

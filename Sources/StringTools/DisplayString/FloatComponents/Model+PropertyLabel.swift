@@ -35,9 +35,8 @@ extension AbbreviableLabel: ExpressibleByStringLiteral {
 extension AbbreviableLabel {
 
   /// Returns the label text for the given display style, or `nil` for `.none`.
-  public func labelText(with style: Self.Style) -> String? {
+  public func labelText(with style: Self.Style) -> String {
     switch style {
-      case .none: nil
       case .standard: label
       // Fall back to the standard label if no abbreviated label was supplied.
       case .abbreviated: abbreviated ?? label

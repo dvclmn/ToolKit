@@ -11,7 +11,7 @@ import CoreTools
 extension EnvironmentValues {
 
   // MARK: Labels
-  @Entry public var labelColour: AnyShapeStyle? = nil
+  @Entry public var labelTitleColour: AnyShapeStyle? = nil
   @Entry public var labelWeight: Font.Weight? = nil
   @Entry public var labelFontStyle: Font.TextStyle? = nil
   @Entry public var labelFontSize: CGFloat? = nil
@@ -28,8 +28,8 @@ extension EnvironmentValues {
   @Entry public var labelDisplay: LabelDisplay? = nil
 
   // MARK: Icons
-//  @Entry public var iconColour: ForegroundStyle? = nil
-  @Entry public var iconColour: AnyShapeStyle? = nil
+  @Entry public var labelIconColour: AnyShapeStyle? = nil
+//  @Entry public var iconColour: AnyShapeStyle? = nil
   @Entry public var iconWeight: Font.Weight? = nil
   @Entry public var iconFontSize: CGFloat? = nil
   @Entry public var iconFontStyle: Font.TextStyle? = nil
@@ -43,6 +43,11 @@ extension EnvironmentValues {
 
 extension View {
   
+  public func labelColour<S>(for part: LabelPart = .title, _ colour: S) -> some View where S: ShapeStyle {
+    self.environment(part.isTitle ? \.labelTitleColour : \.labelIconColour, AnyShapeStyle(colour))
+  }
+  
+  
   /// Font weight
   /// Symbol rendering mode (e.g. hierarchy) / variant (e.g. fill)
   /// Foreground style
@@ -50,17 +55,17 @@ extension View {
     self.environment(\.iconWeight, weight)
   }
   
-  public func iconColour<S>(_ colour: S) -> some View where S: ShapeStyle {
-    self.environment(\.iconColour, AnyShapeStyle(colour))
-  }
+//  public func iconColour<S>(_ colour: S) -> some View where S: ShapeStyle {
+//    self.environment(\.iconColour, AnyShapeStyle(colour))
+//  }
   
   public func labelWeight(_ weight: Font.Weight) -> some View {
     self.environment(\.labelWeight, weight)
   }
   
-  public func labelColour<S>(_ colour: S) -> some View where S: ShapeStyle {
-    self.environment(\.labelColour, AnyShapeStyle(colour))
-  }
+//  public func labelTitleColour<S>(_ colour: S) -> some View where S: ShapeStyle {
+//    self.environment(\.labelTitleColour, AnyShapeStyle(colour))
+//  }
   
   public func labelFontSize(_ size: CGFloat) -> some View {
     self.environment(\.labelFontSize, size)

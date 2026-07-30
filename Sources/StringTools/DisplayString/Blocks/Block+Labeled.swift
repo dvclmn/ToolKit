@@ -22,7 +22,7 @@ public struct Labeled: Sendable {
 
   /// The label displayed before the value.
   public let key: AbbreviableLabel
-  
+
   /// The optional value displayed after the label.
   public let value: DisplayFragment?
 
@@ -76,7 +76,7 @@ extension Labeled {
 extension Labeled {
 
   /// Renders the label text only (no value or separator).
-  @_spi(Internal) public func labelPart() -> String? {
+  @_spi(Internal) public func labelPart() -> String {
     key.labelText(with: .standard)
   }
 
@@ -108,8 +108,9 @@ extension Labeled {
     let effectiveFormat = formatOverride ?? format
     let effectiveStyle = styleOverride ?? labelStyle
 
-    let label: String? = labelPart()
-    let sep: String? = label != nil ? separator.toString : nil
+    let label: String = labelPart()
+    let sep: String = separator.toString
+    //    let sep: String? = label != nil ? separator.toString : nil
     let value: String? = Self.valuePart(
       for: self,
       using: effectiveFormat,

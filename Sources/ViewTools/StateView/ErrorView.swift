@@ -36,7 +36,7 @@ public struct ErrorView<Actions: View>: View {
     ContentUnavailableView {
       QuickLabel(error.label)
         // Allows other views to respond appropriately to a stacked layout
-        .environment(\.isLabelStacked, true)
+//        .environment(\.isLabelStacked, true)
       
     } description: {
       CopyableText(error.message.toLocalisedStringResource)

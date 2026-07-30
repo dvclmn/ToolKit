@@ -13,7 +13,7 @@ public struct StateView<Actions: View>: View {
   @Environment(\.layoutAlignment) private var layoutAlignment
   @Environment(\.layoutPadding) private var layoutPadding
   @Environment(\.isCompactMode) private var isCompact
-  @Environment(\.iconFontSize) private var iconFontSize
+//  @Environment(\.iconFontSize) private var iconFontSize
   @Environment(\.controlSize) private var controlSize
 
   let label: LabelDescriptor
@@ -71,13 +71,17 @@ extension StateView {
   private var paddingLength: CGFloat {
     let hasIcon: Bool = label.icon != nil
     let isHstack: Bool = layoutType.isHstack
-    return hasIcon && !isHstack ? controlSize.scale(iconSize * 1.4) : .zero
+    
+    // Not sure what to do here, given an icon Font style
+    // is now preferred, rather than explicit font size
+    return .zero
+//    return hasIcon && !isHstack ? controlSize.scale(iconSize * 1.4) : .zero
   }
 
-  private var iconSize: CGFloat {
-    let baseIconSize: CGFloat = 46
-    return iconFontSize ?? baseIconSize
-  }
+//  private var iconSize: CGFloat {
+//    let baseIconSize: CGFloat = 46
+//    return iconFontSize ?? baseIconSize
+//  }
 
   @ViewBuilder
   private func MessageView() -> some View {

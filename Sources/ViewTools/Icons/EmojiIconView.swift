@@ -9,7 +9,7 @@ import SwiftUI
 
 struct EmojiIconView: View {
   @Environment(\.font) var font
-  @Environment(\.isLabelStacked) var isLabelStacked
+//  @Environment(\.isLabelStacked) var isLabelStacked
 
   let emoji: String
 
@@ -26,7 +26,8 @@ struct EmojiIconView: View {
 
 extension EmojiIconView {
   private var effectiveFont: Font? {
-    isLabelStacked ? .system(size: 44) : font
+    font
+//    isLabelStacked ? .system(size: 44) : font
   }
   //  private var scale: CGFloat { isLabelStacked ? 1.5 : 1 }
 }

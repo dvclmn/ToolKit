@@ -24,28 +24,41 @@ public struct StateView<Actions: View>: View {
 
     ContentUnavailableView {
       QuickLabel(label)
-
     } description: {
       if let message {
         if isMessageCopyable {
-          CopyableMessageLayout {
-            Text(message)
-              .multilineTextAlignment(.center)
+          MessageView(message)
+            // Text selection is enough for now
+            .textSelection(.enabled)
+          //            .contextMenu {
+          //              CopyTextButton("Copy Text", content: message)
+          //            }
+          //          CopyTextButton("Copy", content: message)
 
-            CopyTextButton("Copy", content: message)
-          }
+          //          CopyableMessageLayout {
+          //            MessageView(message)
+          //            CopyTextButton("Copy", content: message)
+          //          }
+          //          .border(Color.green.opacity(0.3))
 
         } else {
-          Text(message)
-            .multilineTextAlignment(.center)
+          MessageView(message)
         }
       }
     } actions: {
       actions
     }
+
   }
 }
 
+extension StateView {
+  @ViewBuilder
+  private func MessageView(_ message: String) -> some View {
+    Text(LocalizedStringKey(message))
+      .multilineTextAlignment(.center)
+  }
+}
 
 // MARK: - Initialisers
 extension StateView {

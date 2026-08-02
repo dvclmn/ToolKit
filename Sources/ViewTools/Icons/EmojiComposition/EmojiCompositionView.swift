@@ -32,7 +32,7 @@ public struct EmojiCompositionView: View {
               .rotationEffect(.degrees(emoji.rotation))
               .scaleEffect(emoji.scale)
           }
-        }
+        } // END composition layout
         //          .font(.system(size: 46))
 
         //          if isDebugMode {

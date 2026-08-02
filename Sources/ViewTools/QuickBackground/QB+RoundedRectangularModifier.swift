@@ -8,17 +8,17 @@
 import SwiftUI
 
 struct QuickRoundedRectangularBackgroundModifier<S: RoundedRectangularShapeCompatible>: ViewModifier {
-  @Environment(\.layoutPadding) private var layoutPadding
+//  @Environment(\.layoutPadding) private var layoutPadding
 
   let isEnabled: Bool
   let shape: S
   let glass: GlassTypeCompatible?
-  let padding: CGFloat
+//  let padding: CGFloat
   let tint: Color?
 
   func body(content: Content) -> some View {
     content
-      .weightedPadding(layoutPadding ?? padding)
+//      .weightedPadding(layoutPadding ?? padding)
       .containerShapeCompatible(shape)
       .glassEffectCompatible(glass, in: shape)
       .clipShape(shape)

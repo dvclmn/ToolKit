@@ -13,12 +13,12 @@ struct QuickBackgroundModifier<S: Shape>: ViewModifier {
   let isEnabled: Bool
   let shape: S
   let glass: GlassTypeCompatible?
-  let padding: CGFloat
+//  let padding: CGFloat
   let tint: Color?
 
   func body(content: Content) -> some View {
     content
-      .weightedPadding(layoutPadding ?? padding)
+//      .weightedPadding(layoutPadding ?? padding)
       .glassEffectCompatible(glass, in: shape)
       .clipShape(shape)
       .background {

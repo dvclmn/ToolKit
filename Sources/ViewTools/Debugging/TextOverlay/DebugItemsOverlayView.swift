@@ -11,18 +11,22 @@ struct DebugItemModifier: ViewModifier {
   @Environment(DebugItemStore.self) private var store: DebugItemStore?
 
   let text: String
+  let isEnabled: Bool
+  
   @State private var id = UUID()
 
   func body(content: Content) -> some View {
     content
       .onChange(of: text, initial: true) { _, newValue in
+        guard isEnabled else { return }
         store?.set(newValue, for: id)
       }
       .onDisappear {
+        guard isEnabled else { return }
         store?.remove(for: id)
       }
       .overlay {
-        if store == nil {
+        if store == nil, isEnabled {
           VStack {
             Text("`DebugItemStore` missing from environment")
             Text(

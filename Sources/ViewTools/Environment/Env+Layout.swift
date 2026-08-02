@@ -51,10 +51,17 @@ extension EnvironmentValues {
 }
 
 extension View {
-  public func textColumns(
+  public func textColumnCount(
     _ count: Int,
 //    fontStyle: Font.TextStyle = .body
   ) -> some View {
     environment(\.textColumnCount, count)
   }
+//  
+//  public func textColumns(
+//    _ count: Int,
+//    //    fontStyle: Font.TextStyle = .body
+//  ) -> some View {
+//    environment(\.textColumnCount, count)
+//  }
 }

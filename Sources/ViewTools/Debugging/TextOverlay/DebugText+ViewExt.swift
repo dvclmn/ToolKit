@@ -27,13 +27,13 @@ extension View {
     isEnabled: Bool = true,
     _ text: String
   ) -> some View {
-    modifier(DebugItemModifier(text: text))
+    modifier(DebugItemModifier(text: text, isEnabled: isEnabled))
   }
 
   public func debugText(
     isEnabled: Bool = true,
     @DisplayStringBuilder _ text: () -> [DisplayBlock]
   ) -> some View {
-    modifier(DebugItemModifier(text: text().output()))
+    modifier(DebugItemModifier(text: text().output(), isEnabled: isEnabled))
   }
 }

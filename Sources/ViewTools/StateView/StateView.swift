@@ -13,7 +13,6 @@ public struct StateView<Actions: View>: View {
   @Environment(\.layoutAlignment) private var layoutAlignment
   @Environment(\.layoutPadding) private var layoutPadding
   @Environment(\.isCompactMode) private var isCompact
-//  @Environment(\.iconFontSize) private var iconFontSize
   @Environment(\.controlSize) private var controlSize
 
   let label: LabelDescriptor
@@ -39,7 +38,7 @@ public struct StateView<Actions: View>: View {
           Text(message)
           if isMessageCopyable {
             Button {
-              
+              copyStringToClipboard(message)
             } label: {
               Label("Copy", systemImage: Icons.copy.icon)
             }

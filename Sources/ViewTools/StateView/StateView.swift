@@ -24,76 +24,28 @@ public struct StateView<Actions: View>: View {
 
     ContentUnavailableView {
       QuickLabel(label)
-//      TitleAndIconView(
-//        label: label,
-//        hasMessage: message != nil,
-//        iconSize: iconSize,
-//      )
-//      .environment(\.layoutType, .hstack())
 
     } description: {
       if let message {
-//        messageContent
-        HStack {
-          Text(message)
-          if isMessageCopyable {
-            Button {
-              copyStringToClipboard(message)
-            } label: {
-              Label("Copy", systemImage: Icons.copy.icon)
-            }
+        if isMessageCopyable {
+          CopyableMessageLayout {
+            Text(message)
+              .multilineTextAlignment(.center)
+
+            CopyTextButton("Copy", content: message)
           }
+
+        } else {
+          Text(message)
+            .multilineTextAlignment(.center)
         }
-          
       }
     } actions: {
       actions
     }
-    
-
-    //    VStack {
-    //      TitleAndIconView()
-    //        /// Padding to achieve nice vertical optical centring
-    //        .safeAreaPadding(.top, paddingLength)
-    //
-    //      MessageView()
-    //      actions
-    //    }
-    //    .monospacedDigit()
-    //    .frame(maxWidth: 380)
-    //    .padding(layoutPadding ?? Styles.sizeRegular)
   }
 }
 
-extension StateView {
-
-  private var paddingLength: CGFloat {
-    let hasIcon: Bool = label.icon != nil
-    let isHstack: Bool = layoutType.isHstack
-    
-    // Not sure what to do here, given an icon Font style
-    // is now preferred, rather than explicit font size
-    return .zero
-//    return hasIcon && !isHstack ? controlSize.scale(iconSize * 1.4) : .zero
-  }
-
-//  private var iconSize: CGFloat {
-//    let baseIconSize: CGFloat = 46
-//    return iconFontSize ?? baseIconSize
-//  }
-
-  @ViewBuilder
-  private func MessageView() -> some View {
-    if let message = message {
-      Text(message)
-//      Text(message.toMarkdownCompatible)
-        .multilineTextAlignment(.center)
-        .font(.system(controlSize.textStyle))
-        .foregroundStyle(.secondary.opacity(0.8))
-        .padding(.bottom, controlSize.scale(16))
-    }
-  }
-}
 
 // MARK: - Initialisers
 extension StateView {

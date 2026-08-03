@@ -7,7 +7,12 @@
 
 import SwiftUI
 import StringTools
+import CoreTools
 
 extension Alignment: StringRenderable {
-  public var toString: String { self.displayName.standard }
+  public var stringValue: String { self.displayName.standard }
+}
+
+extension IconLiteral: StringRenderable {
+  public var stringValue: String { stringRepresentation }
 }

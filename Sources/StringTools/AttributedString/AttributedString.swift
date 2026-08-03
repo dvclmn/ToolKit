@@ -19,12 +19,12 @@ extension AttributedString {
 
   /// Splits the attributed string's characters into line substrings.
   public func lines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [Substring] {
-    toString.lines(omissionStrategy: omissionStrategy)
+    stringValue.lines(omissionStrategy: omissionStrategy)
   }
 
   /// Splits the attributed string's characters into `String` lines.
   public func stringLines(omissionStrategy: OmissionStrategy = .doNotOmit) -> [String] {
-    toString.stringLines(omissionStrategy: omissionStrategy)
+    stringValue.stringLines(omissionStrategy: omissionStrategy)
   }
 
   /// Appends text, optionally followed by a line break.

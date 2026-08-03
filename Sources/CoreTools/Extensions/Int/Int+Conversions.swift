@@ -30,6 +30,3 @@ extension UInt32 {
   public var toInt: Int { Int(self) }
 }
 
-extension Int64 {
-  public func toString() -> String { String(self) }
-}

@@ -61,6 +61,6 @@ extension LabelDescriptor: ExpressibleByStringLiteral {
 
 extension LabelDescriptor: CustomStringConvertible {
   public var description: String {
-    return "LabelDescriptor[\"\(text)\", icon: \"\(icon?.toString ?? "")\"]"
+    return "LabelDescriptor[\"\(text)\", icon: \"\(icon?.stringRepresentation ?? "")\"]"
   }
 }

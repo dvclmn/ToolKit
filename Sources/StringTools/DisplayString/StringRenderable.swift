@@ -8,36 +8,42 @@
 import Foundation
 
 public protocol StringRenderable: Sendable {
-  var toString: String { get }
+  var stringValue: String { get }
 }
 
 // MARK: - String types
 extension String: StringRenderable {
-  public var toString: String { self }
+  public var stringValue: String { self }
 }
 
 extension AttributedString: StringRenderable {
-  public var toString: String { String(self.characters) }
+  public var stringValue: String { String(self.characters) }
 }
 
 extension Character: StringRenderable {
-  public var toString: String { String(self) }
+  public var stringValue: String { String(self) }
 }
 
 extension Substring: StringRenderable {
-  public var toString: String { String(self) }
+  public var stringValue: String { String(self) }
 }
 
 // MARK: - Primitives
 extension Int: StringRenderable {
-  public var toString: String { String(self) }
+  public var stringValue: String { String(self) }
+}
+extension Int64 {
+  public var stringValue: String { String(self) }
 }
 
 extension Bool: StringRenderable {
-  public var toString: String { self ? "true" : "false" }
+  public var stringValue: String {
+    displayAs(.standard)
+//    self ? "true" : "false"
+  }
 }
 
 // MARK: - Collections
 extension Array: StringRenderable where Element: StringRenderable {
-  public var toString: String { map(\.toString).joined(separator: ", ") }
+  public var stringValue: String { map(\.stringValue).joined(separator: ", ") }
 }

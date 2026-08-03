@@ -7,6 +7,7 @@
 
 import CoreTools
 import SwiftUI
+import StringTools
 
 public struct EmojiCompositionView: View {
   @Environment(\.isDebugMode) private var isDebugMode
@@ -24,7 +25,7 @@ public struct EmojiCompositionView: View {
       .overlay {
         EmojiCompositionLayout {
           ForEach(composition.emoji) { emoji in
-            Text(emoji.character.toString)
+            Text(emoji.character.stringValue)
               .layoutValue(
                 key: EmojiComposition.OffsetKey.self,
                 value: emoji.offset

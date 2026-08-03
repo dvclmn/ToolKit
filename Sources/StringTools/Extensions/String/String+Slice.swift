@@ -7,29 +7,39 @@
 
 import Foundation
 
+extension String {
+
+  /// Returns the substring between the first matching start and end markers.
+  public func slice(from: String, to: String) -> String? {
+    guard let rangeFrom = range(of: from)?.upperBound else { return nil }
+    guard let rangeTo = self[rangeFrom...].range(of: to)?.lowerBound else { return nil }
+    return String(self[rangeFrom..<rangeTo])
+  }
+}
+
 /// Provides safe integer-offset slicing for string-like collections.
 ///
 /// These methods interpret indices as zero-based integer offsets, clamp safely,
 /// and never trap.
 extension StringProtocol {
-  
+
   // MARK: - Full Ranges
   /// Returns a slice for the supplied integer range.
   func slice(_ range: Range<Int>) -> SubSequence {
     slice(start: range.lowerBound, length: range.count)
   }
-  
+
   /// Returns a slice for the supplied closed integer range.
   func slice(closedRange range: ClosedRange<Int>) -> SubSequence {
     slice(start: range.lowerBound, length: range.count)
   }
-  
+
   // MARK: - Partial Ranges
   /// Returns a slice from the start up to, but not including, `upper`.
   func slice(upTo upper: Int) -> SubSequence {
     slice(start: 0, length: upper)
   }
-  
+
   /// Returns a slice from the start through `upper`.
   func slice(through upper: Int) -> SubSequence {
     slice(start: 0, length: upper + 1)
@@ -42,7 +52,7 @@ extension StringProtocol {
   }
 
   // MARK: - Core Helper
-  
+
   private func slice(start: Int, length: Int) -> SubSequence {
     let start = Swift.max(0, start)
     let length = Swift.max(0, length)

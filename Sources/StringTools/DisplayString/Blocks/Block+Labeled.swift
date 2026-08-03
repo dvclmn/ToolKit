@@ -97,6 +97,7 @@ extension Labeled {
 
 extension Labeled {
 
+  // I THINK THIS SHOULD BE NAMED RENDER
   /// Renders `"<label><separator><value>"`, e.g. `"W 260"`.
   package func toString(
     using format: FloatDisplayFormat = .default,
@@ -106,7 +107,7 @@ extension Labeled {
     let effectiveStyle = styleOverride ?? labelStyle
 
     let label: String = labelPart(with: labelStyle)
-    let sep: String = separator.toString
+    let sep: String = separator.stringValue
     
     let value: String? = Self.valuePart(
       for: self,

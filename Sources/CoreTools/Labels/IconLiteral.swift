@@ -16,7 +16,7 @@ public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
 }
 
 extension IconLiteral: ExpressibleByStringLiteral {
-  
+
   /// Creates an SF Symbol icon reference from a string literal.
   public init(stringLiteral value: String) {
     self = .symbol(value)
@@ -26,7 +26,7 @@ extension IconLiteral: ExpressibleByStringLiteral {
 extension IconLiteral {
 
   /// A simple string representation suitable for debugging and fallback labels.
-  public var toString: String {
+  public var stringRepresentation: String {
     switch self {
       case .emoji(let string): string
       case .emojiComposition(let comp):

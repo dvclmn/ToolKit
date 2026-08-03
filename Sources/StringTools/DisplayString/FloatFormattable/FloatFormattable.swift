@@ -5,7 +5,6 @@
 //  Created by Dave Coleman on 4/7/2025.
 //
 
-
 import Foundation
 
 /// A floating-point value that can render itself using ``FloatDisplayFormat``.
@@ -19,7 +18,7 @@ public typealias NumberGrouping = FloatingPointFormatStyle<Double>.Configuration
 extension FloatFormattable {
   /// Renders the value using a display preset.
   public func displayString(_ preset: FloatDisplayPreset) -> String {
-    render(using: preset.format)
+    render(using: preset.format, with: preset.labelStyle, delimiter: "#?#")
   }
 
   /// Renders the value as a display fragment.

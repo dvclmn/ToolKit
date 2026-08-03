@@ -13,12 +13,14 @@ extension View {
     isEnabled: Bool = true,
     edge: VerticalEdge = .bottom,
     alignment: Alignment = .bottomLeading,
+    isMonospaced: Bool = false
   ) -> some View {
     modifier(
       DebugTextOverlayModifier(
         isEnabled: isEnabled,
         edge: edge,
         alignment: alignment,
+        isMonospaced: isMonospaced
       )
     )
   }

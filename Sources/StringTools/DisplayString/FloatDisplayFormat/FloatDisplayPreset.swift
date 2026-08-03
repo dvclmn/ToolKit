@@ -11,13 +11,13 @@ import Foundation
 public enum FloatDisplayPreset: String, CaseIterable, Sendable {
   /// Two decimal places with automatic grouping.
   case standard
-  
+
   /// No decimal places.
   case concise
-  
+
   /// No decimal places.
   case wholeNumber
-  
+
   /// Always reserve sign space, replacing visible plus signs with a space.
   case showSign
 
@@ -28,6 +28,13 @@ public enum FloatDisplayPreset: String, CaseIterable, Sendable {
       case .concise: .init(decimalPlaces: 0)
       case .wholeNumber: .init(decimalPlaces: 0)
       case .showSign: .init(sign: .always(renderPlusSign: false))
+    }
+  }
+
+  public var labelStyle: AbbreviableLabel.Style {
+    switch self {
+      case .concise: .abbreviated
+      default: .standard
     }
   }
 }

@@ -14,30 +14,29 @@ struct DebugTextOverlayModifier: ViewModifier {
   let isEnabled: Bool
   let edge: VerticalEdge
   var alignment: Alignment
+  var isMonospaced: Bool
 
   func body(content: Content) -> some View {
     content
       .environment(ownedStore)
-    // TODO: Perhaps shouldn't assume that `safeAreaBarCompatible` is
-    // always the right way to present the debug text
-//      .safeAreaBarCompatible(
-//        edge: edge,
-//        alignment: alignment.horizontal,
-//        spacing: nil,
-//      ) {
-      .overlay(alignment: .bottomLeading) {
+      // TODO: Perhaps shouldn't assume that `safeAreaBarCompatible` is
+      // always the right way to present the debug text
+      //      .safeAreaBarCompatible(
+      //        edge: edge,
+      //        alignment: alignment.horizontal,
+      //        spacing: nil,
+      //      ) {
+      .overlay(alignment: alignment) {
         if isEnabled, !ownedStore.items.isEmpty {
           DebugItemsOverlayView(
             store: ownedStore,
             alignment: alignment,
+            isMonospaced: isMonospaced,
           )
           .allowsHitTesting(false)
-
         }
       }
-      //      .overlay(alignment: alignment) {
 
-      //      }
       .overlay {
         if inheritedStore != nil {
           Text(
@@ -47,12 +46,5 @@ struct DebugTextOverlayModifier: ViewModifier {
 
         }
       }
-    //    }
   }
-}
-
-extension DebugTextOverlayModifier {
-  //  private var hasItems: Bool {
-  //    guard let items = ownedStore.items
-  //  }
 }

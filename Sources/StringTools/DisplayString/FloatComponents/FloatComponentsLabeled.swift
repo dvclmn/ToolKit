@@ -35,7 +35,7 @@ extension FloatComponentsLabeled {
   public func displayString(_ preset: FloatDisplayPreset) -> String {
     render(
       using: preset.format,
-      with: .standard,
+      with: preset.labelStyle,
     )
   }
 }

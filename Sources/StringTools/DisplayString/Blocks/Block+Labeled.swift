@@ -76,8 +76,8 @@ extension Labeled {
 extension Labeled {
 
   /// Renders the label text only (no value or separator).
-  @_spi(Internal) public func labelPart() -> String {
-    key.labelText(with: .standard)
+  @_spi(Internal) public func labelPart(with style: AbbreviableLabel.Style) -> String {
+    key.abbreviableLabelText(with: style)
   }
 
   /// Renders the value only.
@@ -93,14 +93,11 @@ extension Labeled {
       delimiter: delimiter,
     )
   }
-
 }
 
 extension Labeled {
 
   /// Renders `"<label><separator><value>"`, e.g. `"W 260"`.
-  /// Pass `.none` for `labelStyle` to suppress the label entirely.
-  /// Returns `nil` if all parts are absent.
   package func toString(
     using format: FloatDisplayFormat = .default,
     with labelStyle: AbbreviableLabel.Style = .standard,
@@ -108,9 +105,9 @@ extension Labeled {
     let effectiveFormat = formatOverride ?? format
     let effectiveStyle = styleOverride ?? labelStyle
 
-    let label: String = labelPart()
+    let label: String = labelPart(with: labelStyle)
     let sep: String = separator.toString
-    //    let sep: String? = label != nil ? separator.toString : nil
+    
     let value: String? = Self.valuePart(
       for: self,
       using: effectiveFormat,

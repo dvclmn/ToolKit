@@ -14,6 +14,8 @@ public struct Indented: Sendable {
   
   /// The blocks rendered inside the indented section.
   public let content: [DisplayBlock]
+  
+  let displayStyle: DisplayStyle
 }
 
 extension Indented {
@@ -55,7 +57,7 @@ extension Indented {
     indent: String = "  ",
     isLastElement: Bool = false,
   ) -> [String] {
-    var builder = IndentedLineBuilder(indent: indent)
+    var builder = LineRenderer(indent: indent)
     return builder.build(from: content)
   }
 }

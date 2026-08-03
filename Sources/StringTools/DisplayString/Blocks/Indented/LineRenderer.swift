@@ -7,20 +7,41 @@
 
 import Foundation
 
-package struct IndentedLineBuilder {
-  let indent: String
+extension Indented {
+  struct LineRenderer {
+    let indent: String
 
-  /// Controls which glyph set is used when drawing the tree structure.
-  /// Defaults to `.rounded` to match the previous behaviour.
-  let glyphStyle: IndentGlyphStyle = .rounded
+    /// Controls which glyph set is used when drawing the tree structure.
+    /// Defaults to `.rounded` to match the previous behaviour.
+    //    let glyphStyle: GlyphStyle
+    let displayStyle: DisplayStyle
 
-  /// Convenience accessor for the concrete glyphs of the selected style.
-  private var glyphs: IndentGlyphs { glyphStyle.glyphs }
+    init(
+      indent: String,
+      displayStyle: DisplayStyle,
+      //      glyphStyle: GlyphStyle,
+
+    ) {
+      self.indent = indent
+      self.displayStyle = displayStyle
+    }
+  }
+}
+
+extension Indented.LineRenderer {
+
+  /// The concrete glyphs of the selected style.
+  private var glyphs: Indented.IndentGlyphs? {
+    switch displayStyle {
+      case .plain: nil
+      case .treeGlyphs(let style): style.glyphs
+    }
+  }
 
   /// Builds a list of indented, tree-like lines from the provided element strings.
   /// - Parameter elements: Each element may span multiple lines. The first line
   ///   receives a branch prefix; subsequent lines receive a continuation prefix.
-  mutating func build(from elements: [String]) -> [String] {
+  func render(_ elements: [String]) -> [String] {
     var result: [String] = []
 
     for (index, element) in elements.enumerated() {
@@ -56,4 +77,5 @@ package struct IndentedLineBuilder {
     let lead = isLastItem ? " " : String(glyphs.vertical)
     return lead + indent
   }
+
 }

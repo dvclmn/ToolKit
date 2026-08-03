@@ -14,7 +14,10 @@ public struct ColumnString: Sendable, Equatable, Hashable {
   public let width: Width
   
   /// Creates a column string.
-  public init(content: String, width: Width = .default) {
+  public init(
+    content: String,
+    width: Width = .default
+  ) {
     self.content = content
     self.width = width
   }

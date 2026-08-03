@@ -41,5 +41,3 @@ extension Bool: StringRenderable {
 extension Array: StringRenderable where Element: StringRenderable {
   public var toString: String { map(\.toString).joined(separator: ", ") }
 }
-
-// MARK: - Other

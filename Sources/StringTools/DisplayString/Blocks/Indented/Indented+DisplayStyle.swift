@@ -6,7 +6,7 @@
 //
 
 extension Indented {
-  public enum DisplayStyle {
+  public enum DisplayStyle: Sendable {
     case plain  // No tree glyphs
     case treeGlyphs(GlyphStyle = .standard)
   }

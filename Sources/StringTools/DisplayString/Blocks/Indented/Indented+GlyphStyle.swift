@@ -9,7 +9,7 @@ import Foundation
 
 extension Indented {
   
-  public enum GlyphStyle {
+  public enum GlyphStyle: Sendable {
     case standard
     case rounded
     

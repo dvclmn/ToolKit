@@ -15,17 +15,22 @@ public struct Indented: Sendable {
   /// The blocks rendered inside the indented section.
   public let content: [DisplayBlock]
   
-  let displayStyle: DisplayStyle
+  public let displayStyle: DisplayStyle
+  public let indentation: Int
 }
 
 extension Indented {
   /// Creates an indented block from a result-builder body.
   public init(
     _ title: String? = nil,
+    displayStyle: DisplayStyle = .treeGlyphs(.standard),
+    indentation: Int = 2,
     @DisplayStringBuilder content: () -> [DisplayBlock],
   ) {
     self.title = title
     self.content = content()
+    self.displayStyle = displayStyle
+    self.indentation = indentation
   }
 
   public func render(
@@ -62,13 +67,13 @@ extension Indented {
   }
 }
 
-extension Indented {
-  /// for ``DisplayStringBuilder``
-  static func makeFromLines (_ indentedLines: IndentedLines) -> Self {
-    let blocks: [DisplayBlock] = indentedLines.lines.map {
-      DisplayBlock.text(DisplayFragment($0))
-    }
-    return Self.init(title: indentedLines.title, content: blocks)
-  }
-
-}
+//extension Indented {
+//  /// for ``DisplayStringBuilder``
+//  static func makeFromLines (_ indentedLines: IndentedLines) -> Self {
+//    let blocks: [DisplayBlock] = indentedLines.lines.map {
+//      DisplayBlock.text(DisplayFragment($0))
+//    }
+//    return Self.init(title: indentedLines.title, content: blocks)
+//  }
+//
+//}

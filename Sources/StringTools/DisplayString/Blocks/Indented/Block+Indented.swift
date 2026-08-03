@@ -59,11 +59,11 @@ extension Indented {
 
   private func indentedElements(
     content: [String],
-    indent: String = "  ",
-    isLastElement: Bool = false,
+//    indent: String = "  ",
+//    isLastElement: Bool = false,
   ) -> [String] {
-    var builder = LineRenderer(indent: indent)
-    return builder.build(from: content)
+    let builder = LineRenderer(displayStyle: displayStyle, indentation: indentation)
+    return builder.render(content)
   }
 }
 

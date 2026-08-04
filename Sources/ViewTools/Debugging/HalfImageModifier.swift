@@ -43,7 +43,7 @@ public struct HalfImageBackgroundModifier: ViewModifier {
                   .resizable()
                   .aspectRatio(contentMode: .fill)
               }
-//              .offset(offset)
+              //              .offset(offset)
             }
             .clipped()
         }
@@ -52,20 +52,23 @@ public struct HalfImageBackgroundModifier: ViewModifier {
 }
 extension View {
   public func halfImageDebugBackground(
-    _ url: URL? =
-      URL(
-        string:
-          "https://images.unsplash.com/photo-1770566258012-7d809f99c574?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-      ),
+    _ url: URL? = Self.exampleImage,
     balance: Double = 0.5,
-    offset: CGSize = .zero
+    offset: CGSize = .zero,
   ) -> some View {
     self.modifier(
       HalfImageBackgroundModifier(
         url: url,
         balanceFactor: balance,
-        offset: offset
+        offset: offset,
       )
+    )
+  }
+
+  public static var exampleImage: URL? {
+    URL(
+      string:
+        "https://images.unsplash.com/photo-1770566258012-7d809f99c574?q=80&w=1336&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     )
   }
 }

@@ -74,6 +74,15 @@ extension EnvironmentValues {
   /// so prefer use of native `controlSize` in those cases/
   @Entry public var isCompactMode: Bool = false
   @Entry public var isEditable: Bool = true
+  
+  
+  /// App-wide / project-wide mapping convention, for which
+  /// property on a type should be considered the identity vs transposed.
+  /// Aka whether width maps to horizontal, or rows to vertical, etc etc.
+  /// See ``AxisAddressable``
+  @Entry public var axisMapping: AxisMapping = .identity
+
+  @Entry public var contentMode: ContentMode?
 
 }
 
@@ -89,4 +98,9 @@ extension EnvironmentValues {
   
   @Entry public var isAnimationEnabled: Bool = false
 
+  // Previously `heightOverride`
+  @Entry public var frameHeight: CGFloat?
+  
+  // Previously `widthOverride`
+  @Entry public var frameWidth: CGFloat?
 }

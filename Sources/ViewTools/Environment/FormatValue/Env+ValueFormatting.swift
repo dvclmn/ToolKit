@@ -23,22 +23,11 @@ extension EnvironmentValues {
   /// As implied in the name, this won't impose an upper limit,
   /// only ensure there are at least 'x' integers
   @Entry public var minIntegerLength: Int?
-
-  /// App-wide / project-wide mapping convention, for which
-  /// property on a type should be considered the identity vs transposed.
-  /// Aka whether width maps to horizontal, or rows to vertical, etc etc.
-  /// See ``AxisAddressable``
-  @Entry public var axisMapping: AxisMapping = .identity
-
 }
 
 public protocol ValueFormattable {}
 
-// Removed `ValueFormattable` requirement, as it's hard (impossible)
-// to know the order of modifiers, e.g. for Quick slider with SliderStylable
-// TODO: Maybe I can look to CanvasKit's CanvasAddressable etc
 extension View {
-  //extension View where Self: ValueFormattable {
   public func formatValue(_ format: @escaping @Sendable (Double) -> String) -> some View {
     self.environment(\.formatValue, ValueFormatter(format))
   }

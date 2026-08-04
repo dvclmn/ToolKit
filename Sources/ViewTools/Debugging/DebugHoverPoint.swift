@@ -17,7 +17,7 @@ public struct DebugHoverPointModifier: ViewModifier {
     content
       .overlay {
         if let point {
-          DebugCircle(point)
+          DebugHoverCircle(point)
         }
       }
   }
@@ -36,14 +36,12 @@ extension DebugHoverPointModifier {
   }
 
   @ViewBuilder
-  func DebugCircle(_ point: CGPoint) -> some View {
+  func DebugHoverCircle(_ point: CGPoint) -> some View {
     Circle()
       .fill(.brown)
       .frame(width: circleRadius, height: circleRadius)
       .overlay {
-//        // TODO: This shouldn't need a String(describing), need to fix DisplayString stuff
-        Text(String(describing: point.debugDescription))
-//        Text(String(describing: point.displayString))
+        Text(point.displayString)
           .font(.caption.weight(.semibold))
           .monospaced()
           .foregroundStyle(.secondary)
@@ -59,10 +57,5 @@ extension DebugHoverPointModifier {
       }
       .position(point)
       .allowsHitTesting(false)
-  }
-}
-extension View {
-  public func debugHoverPoint(_ point: CGPoint?, containerSize: CGSize) -> some View {
-    self.modifier(DebugHoverPointModifier(point: point, containerSize: containerSize))
   }
 }

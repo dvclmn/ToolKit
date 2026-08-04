@@ -10,7 +10,8 @@ import SwiftUI
 public struct DebugCircleModifier: ViewModifier {
 
   let location: CGPoint?
-  let size: CGFloat
+  let diameter: CGFloat
+  
   public func body(content: Content) -> some View {
     content
       .overlay {
@@ -18,7 +19,7 @@ public struct DebugCircleModifier: ViewModifier {
           ZStack {
             Circle()
               .fill(.purple)
-              .frame(width: size, height: size)
+              .frame(width: diameter, height: diameter)
 
             Text(location.debugDescription)
 
@@ -26,23 +27,10 @@ public struct DebugCircleModifier: ViewModifier {
               .padding(4)
               .background(.thinMaterial)
               .clipShape(.rect(cornerRadius: 3))
-              .offset(y: -size * 2)
+              .offset(y: -diameter * 2)
           }  // END zstack
           .position(location)
         }
       }
-  }
-}
-extension View {
-  public func debugCircle(
-    _ location: CGPoint?,
-    size: CGFloat = 10,
-  ) -> some View {
-    self.modifier(
-      DebugCircleModifier(
-        location: location,
-        size: size,
-      )
-    )
   }
 }

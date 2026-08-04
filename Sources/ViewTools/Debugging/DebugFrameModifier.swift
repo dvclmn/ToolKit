@@ -31,34 +31,3 @@ public struct DebugFrameModifier: ViewModifier {
       }
   }
 }
-extension View {
-  // Will only show if Env value `isDebugMode` is true
-  public func debugFrame(
-    _ text: String,
-    colour: Color,
-    labelOpacity: CGFloat = 0.85,
-    isEnabled: Bool = true,
-  ) -> some View {
-    self.modifier(
-      DebugFrameModifier(
-        label: text,
-        labelOpacity: labelOpacity,
-        colour: colour,
-        isEnabled: isEnabled,
-      )
-    )
-  }
-  // Will only show if Env value `isDebugMode` is true
-  public func debugFrame(
-    _ colour: Color,
-    labelOpacity: CGFloat = 0.85,
-    isEnabled: Bool = true,
-  ) -> some View {
-    debugFrame(
-      "",
-      colour: colour,
-      labelOpacity: labelOpacity,
-      isEnabled: isEnabled
-    )
-  }
-}

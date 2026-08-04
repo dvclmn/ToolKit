@@ -12,7 +12,7 @@ struct DebugItemModifier: ViewModifier {
 
   let text: String
   let isEnabled: Bool
-  
+
   @State private var id = UUID()
 
   func body(content: Content) -> some View {

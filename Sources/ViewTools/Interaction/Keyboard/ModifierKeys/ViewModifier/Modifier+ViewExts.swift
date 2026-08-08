@@ -8,12 +8,13 @@
 import SwiftUI
 
 extension View {
+  // A convenience, to only add the modifiers to the Environment,
+  // without requiring caller to provide an action closure
   public func readModifierKeys(_ mask: EventModifiers = .all) -> some View {
     self.modifier(
       ModifierKeysModifier(
         keysToWatch: mask,
-        onModifiersChange: nil,
-        onEventModifiersChange: nil,
+        modifiersDidChange: nil,
       )
     )
   }
@@ -26,22 +27,21 @@ extension View {
     self.modifier(
       ModifierKeysModifier(
         keysToWatch: mask,
-        onModifiersChange: perform,
-        onEventModifiersChange: nil,
+        modifiersDidChange: perform,
       )
     )
   }
   
-  public func modifierKeys(
-    _ mask: EventModifiers = .all,
-    onChange perform: @escaping (EventModifiers) -> Void,
-  ) -> some View {
-    self.modifier(
-      ModifierKeysModifier(
-        keysToWatch: mask,
-        onModifiersChange: nil,
-        onEventModifiersChange: perform,
-      )
-    )
-  }
+//  public func modifierKeys(
+//    _ mask: EventModifiers = .all,
+//    onChange perform: @escaping (EventModifiers) -> Void,
+//  ) -> some View {
+//    self.modifier(
+//      ModifierKeysModifier(
+//        keysToWatch: mask,
+//        onModifiersChange: nil,
+//        onEventModifiersChange: perform,
+//      )
+//    )
+//  }
 }

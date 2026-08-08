@@ -19,7 +19,7 @@ import SwiftUI
 ///   var body: some Scene {
 ///     WindowGroup {
 ///       ContentView()
-///         .readModifierKeys() // <- E.g. here
+///         .readModifierKeys()
 ///     }
 ///   }
 /// }
@@ -27,11 +27,10 @@ import SwiftUI
 struct ModifierKeysModifier: ViewModifier {
 
   @State private var modifierKeys: Modifiers = []
-  @State private var previousNSEventKeys: NSEvent.ModifierFlags?
+  @State private var previousNSEventFlags: NSEvent.ModifierFlags?
 
   let keysToWatch: EventModifiers
-  let onModifiersChange: ((Modifiers) -> Void)?
-  let onEventModifiersChange: ((EventModifiers) -> Void)?
+  let modifiersDidChange: ((Modifiers) -> Void)?
 
   func body(content: Content) -> some View {
 
@@ -41,11 +40,9 @@ struct ModifierKeysModifier: ViewModifier {
           mask: keysToWatch,
           initial: true,
         ) { _, new in
-
+          
           let modifiers = Modifiers(from: new)
-          self.modifierKeys = modifiers
-          onModifiersChange?(modifiers)
-          onEventModifiersChange?(new)
+          handleKeyChange(modifiers)
         }
         .environment(\.modifierKeys, modifierKeys)
 
@@ -54,24 +51,21 @@ struct ModifierKeysModifier: ViewModifier {
       content
         .onAppear {
           NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-            
-            let currentFlags = event.modifierFlags.intersection(nsEventKeysToWatch)
-            
-            guard currentFlags != previousNSEventKeys else {
-              return event // An untracked flag changed.
-            }
-            
-            previousFlags = currentFlags
-            onChange(currentFlags)
-            return event
-            
-//            let modifiers = Modifiers(from: event.modifierFlags)
-//            let eventModifiers = EventModifiers(from: event.modifierFlags)
-            self.modifierKeys = modifiers
-            onModifiersChange?(modifiers)
-            onEventModifiersChange?(eventModifiers)
 
+            // The current modifier keys, filtered to only those requested
+            let currentNSEventFlags = event.modifierFlags.intersection(nsEventKeysToWatch)
+
+            guard currentNSEventFlags != previousNSEventFlags else {
+              return event  // An untracked flag changed
+            }
+
+            previousNSEventFlags = currentNSEventFlags
+            
+            let modifiers = Modifiers(from: currentNSEventFlags)
+            handleKeyChange(modifiers)
+            
             return event
+
           }
         }
         .environment(\.modifierKeys, modifierKeys)
@@ -86,6 +80,9 @@ extension ModifierKeysModifier {
   private var nsEventKeysToWatch: NSEvent.ModifierFlags {
     keysToWatch.nsEventModifierFlags
   }
+  
+  private func handleKeyChange(_ modifiers: Modifiers) {
+    self.modifierKeys = modifiers
+    modifiersDidChange?(modifiers)
+  }
 }
-
-

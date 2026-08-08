@@ -16,16 +16,15 @@ extension Modifiers {
   public var eventModifiers: EventModifiers {
     EventModifiers(from: self)
   }
-
 }
 
 extension EventModifiers {
-  
+
   public var displayName: String {
     let modifiers = Modifiers(from: self)
     return modifiers.displayString
   }
-  
+
   public init(from modifiers: Modifiers) {
     self = ModifierKeyBridge.eventModifiers { mapping in
       guard let modifier = mapping.modifiers else { return false }
@@ -37,7 +36,7 @@ extension EventModifiers {
   public init(from event: NSEvent) {
     self.init(from: event.modifierFlags)
   }
-  
+
   public init(from flags: NSEvent.ModifierFlags) {
     self = ModifierKeyBridge.eventModifiers { flags.contains($0.nsEventModifierFlags) }
   }

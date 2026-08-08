@@ -24,15 +24,16 @@ import SwiftUI
 ///   }
 /// }
 /// ```
-public struct ModifierKeysModifier: ViewModifier {
+struct ModifierKeysModifier: ViewModifier {
 
   @State private var modifierKeys: Modifiers = []
+  @State private var previousNSEventKeys: NSEvent.ModifierFlags?
 
   let keysToWatch: EventModifiers
   let onModifiersChange: ((Modifiers) -> Void)?
   let onEventModifiersChange: ((EventModifiers) -> Void)?
 
-  public func body(content: Content) -> some View {
+  func body(content: Content) -> some View {
 
     if #available(macOS 15, iOS 18, *) {
       content
@@ -53,8 +54,19 @@ public struct ModifierKeysModifier: ViewModifier {
       content
         .onAppear {
           NSEvent.addLocalMonitorForEvents(matching: [.flagsChanged]) { event in
-            let modifiers = Modifiers(from: event.modifierFlags)
-            let eventModifiers = EventModifiers(from: event.modifierFlags)
+            
+            let currentFlags = event.modifierFlags.intersection(nsEventKeysToWatch)
+            
+            guard currentFlags != previousNSEventKeys else {
+              return event // An untracked flag changed.
+            }
+            
+            previousFlags = currentFlags
+            onChange(currentFlags)
+            return event
+            
+//            let modifiers = Modifiers(from: event.modifierFlags)
+//            let eventModifiers = EventModifiers(from: event.modifierFlags)
             self.modifierKeys = modifiers
             onModifiersChange?(modifiers)
             onEventModifiersChange?(eventModifiers)
@@ -70,41 +82,10 @@ public struct ModifierKeysModifier: ViewModifier {
   }
 }
 
-extension View {
-  public func readModifierKeys(_ modifiersToWatch: EventModifiers = .all) -> some View {
-    self.modifier(
-      ModifierKeysModifier(
-        keysToWatch: modifiersToWatch,
-        onModifiersChange: nil,
-        onEventModifiersChange: nil,
-      )
-    )
-  }
-
-  /// Note: This modifier also adds modifier keys to the Environment
-  public func modifierKeys(
-    _ modifiersToWatch: EventModifiers = .all,
-    onChange perform: @escaping (Modifiers) -> Void,
-  ) -> some View {
-    self.modifier(
-      ModifierKeysModifier(
-        keysToWatch: modifiersToWatch,
-        onModifiersChange: perform,
-        onEventModifiersChange: nil,
-      )
-    )
-  }
-
-  public func modifierKeys(
-    _ modifiersToWatch: EventModifiers = .all,
-    onChange perform: @escaping (EventModifiers) -> Void,
-  ) -> some View {
-    self.modifier(
-      ModifierKeysModifier(
-        keysToWatch: modifiersToWatch,
-        onModifiersChange: nil,
-        onEventModifiersChange: perform,
-      )
-    )
+extension ModifierKeysModifier {
+  private var nsEventKeysToWatch: NSEvent.ModifierFlags {
+    keysToWatch.nsEventModifierFlags
   }
 }
+
+

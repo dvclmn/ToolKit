@@ -25,13 +25,41 @@ enum ModifierKeyBridge {
 
   #if canImport(AppKit)
   static let mappings: [ModifierKeyMapping] = [
-    .init(modifiers: .shift, eventModifiers: .shift, nsEventModifierFlags: .shift),
-    .init(modifiers: .option, eventModifiers: .option, nsEventModifierFlags: .option),
-    .init(modifiers: .command, eventModifiers: .command, nsEventModifierFlags: .command),
-    .init(modifiers: .control, eventModifiers: .control, nsEventModifierFlags: .control),
-    .init(modifiers: .capsLock, eventModifiers: .capsLock, nsEventModifierFlags: .capsLock),
-    .init(modifiers: .numericPad, eventModifiers: .numericPad, nsEventModifierFlags: .numericPad),
-    .init(modifiers: nil, eventModifiers: functionEventModifiers, nsEventModifierFlags: .function),
+    .init(
+      modifiers: .shift,
+      eventModifiers: .shift,
+      nsEventModifierFlags: .shift
+    ),
+    .init(
+      modifiers: .option,
+      eventModifiers: .option,
+      nsEventModifierFlags: .option
+    ),
+    .init(
+      modifiers: .command,
+      eventModifiers: .command,
+      nsEventModifierFlags: .command
+    ),
+    .init(
+      modifiers: .control,
+      eventModifiers: .control,
+      nsEventModifierFlags: .control
+    ),
+    .init(
+      modifiers: .capsLock,
+      eventModifiers: .capsLock,
+      nsEventModifierFlags: .capsLock
+    ),
+    .init(
+      modifiers: .numericPad,
+      eventModifiers: .numericPad,
+      nsEventModifierFlags: .numericPad
+    ),
+    .init(
+      modifiers: nil,
+      eventModifiers: functionEventModifiers,
+      nsEventModifierFlags: .function
+    ),
   ]
   #else
   private static let mappings: [ModifierKeyMapping] = [

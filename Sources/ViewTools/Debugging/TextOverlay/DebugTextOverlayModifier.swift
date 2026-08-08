@@ -26,16 +26,16 @@ struct DebugTextOverlayModifier: ViewModifier {
       //        alignment: alignment.horizontal,
       //        spacing: nil,
       //      ) {
-      .overlay(alignment: alignment) {
-        if isEnabled, !ownedStore.items.isEmpty {
-          DebugItemsOverlayView(
-            store: ownedStore,
-            alignment: alignment,
-            isMonospaced: isMonospaced,
-          )
-          .allowsHitTesting(false)
-        }
-      }
+//      .overlay(alignment: alignment) {
+//        if isEnabled, !ownedStore.items.isEmpty {
+//          DebugItemsOverlayView(
+//            store: ownedStore,
+//            alignment: alignment,
+//            isMonospaced: isMonospaced,
+//          )
+//          .allowsHitTesting(false)
+//        }
+//      }
 
       .overlay {
         if inheritedStore != nil {
@@ -43,7 +43,6 @@ struct DebugTextOverlayModifier: ViewModifier {
             "An instance of `DebugItemStore` already exists higher up in the view hierarchy. Ensure `debugTextOverlay(isEnabled:alignment:)` is used only once."
           )
           .background(Color.orange.tertiary)
-
         }
       }
   }

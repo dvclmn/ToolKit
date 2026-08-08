@@ -23,41 +23,24 @@ public enum GeometryAxis: String, Sendable, Codable, Equatable, Hashable, CaseIt
 
 }
 
-extension GeometryAxis: CustomStringConvertible {
-  public var description: String { name }
-}
-extension GeometryAxis {
-  public struct Set: OptionSet, Sendable, Hashable {
-    public init(rawValue: Int) {
-      self.rawValue = rawValue
-    }
-    public let rawValue: Int
-
-    public static let horizontal = Self(rawValue: 1 << 0)
-    public static let vertical = Self(rawValue: 1 << 1)
-    public static let all: Self = [.horizontal, .vertical]
-  }
-}
-
-extension GeometryAxis.Set {
-  public var name: String {
-    let nameH = "Horizontal"
-    let nameV = "Vertical"
-
-    if self.isEmpty { return "None" }
-    if self == .horizontal { return nameH }
-    if self == .vertical { return nameV }
-    if self == .all { return "\(nameH) & \(nameV)" }
-
-    var parts: [String] = []
-    if contains(.horizontal) { parts.append(nameH) }
-    if contains(.vertical) { parts.append(nameV) }
-    return parts.joined(separator: " & ")
-  }
-}
-
 extension GeometryAxis {
   public var id: String { rawValue }
+
+  public var displayName: String {
+    switch self {
+      case .horizontal: "Horizontal"
+      case .vertical: "Vertical"
+    }
+  }
+
+  public var icon: String {
+    switch self {
+      case .horizontal: "arrow.left.and.right.text.vertical"
+      case .vertical: "arrow.up.and.down.text.horizontal"
+    }
+  }
+
+  public var label: LabelDescriptor { .init(displayName, symbol: icon) }
 
   public var toSet: GeometryAxis.Set {
     switch self {
@@ -75,7 +58,6 @@ extension GeometryAxis {
       case .vertical: .horizontal
     }
   }
-
 
   public func axisOffset(
     frameInViewport frame: CGRect
@@ -111,36 +93,4 @@ extension GeometryAxis {
         return hasOverflow
     }
   }
-}
-
-// MARK: - Metadata
-extension GeometryAxis {
-
-  public var name: String {
-    switch self {
-      case .horizontal: "Horizontal"
-      case .vertical: "Vertical"
-    }
-  }
-
-  public var altName02: String {
-    switch self {
-      case .horizontal: "Width"
-      case .vertical: "Height"
-    }
-  }
-
-  public var altName: String {
-    switch self {
-      case .horizontal: "Columns"
-      case .vertical: "Rows"
-    }
-  }
-  public var icon: String {
-    switch self {
-      case .horizontal: "arrow.left.and.right.text.vertical"
-      case .vertical: "arrow.up.and.down.text.horizontal"
-    }
-  }
-
 }

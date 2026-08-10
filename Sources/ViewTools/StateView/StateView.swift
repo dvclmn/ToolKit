@@ -30,16 +30,6 @@ public struct StateView<Actions: View>: View {
           MessageView(message)
             // Text selection is enough for now
             .textSelection(.enabled)
-          //            .contextMenu {
-          //              CopyTextButton("Copy Text", content: message)
-          //            }
-          //          CopyTextButton("Copy", content: message)
-
-          //          CopyableMessageLayout {
-          //            MessageView(message)
-          //            CopyTextButton("Copy", content: message)
-          //          }
-          //          .border(Color.green.opacity(0.3))
 
         } else {
           MessageView(message)

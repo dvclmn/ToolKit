@@ -11,10 +11,21 @@ import StringTools
 public struct DropSessionCompatible: Identifiable {
   public let id: ID
   public let phase: Phase
+  
+  /// Provides additional information about a session
+  /// if it originated within the app.
+  ///
+  /// This property is set to `nil` if drag originated outside the app.
   public let localSession: LocalSession?
   public let itemsCount: Int?
+  
+  /// Operations suggested by the drag source.
   public let suggestedOperations: DropOperationSetCompatible?
+  
+  /// Size of the drop destination view.
   public let size: CGSize?
+  
+  /// Location of drop in the local coordinate space
   public let location: CGPoint
 
   public init(

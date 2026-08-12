@@ -28,17 +28,20 @@ where ModelBinding.Value == ViewBinding.Value, ModelBinding.Value: Equatable {
 
   let modelValue: ModelBinding
   let viewValue: ViewBinding?
+  let initialSynchronisation: InitialBindingSynchronisation
   let action: @MainActor (ModelBinding.Value) -> Void
 
   init(
     debounce: DebounceMode,
     modelValue: ModelBinding,
     viewValue: ViewBinding?,
+    initially initialSynchronisation: InitialBindingSynchronisation,
     action: @escaping @MainActor (ModelBinding.Value) -> Void,
   ) {
     self._debouncer = debounce.createDebouncer()
     self.modelValue = modelValue
     self.viewValue = viewValue
+    self.initialSynchronisation = initialSynchronisation
     self.action = action
   }
 
@@ -48,16 +51,7 @@ where ModelBinding.Value == ViewBinding.Value, ModelBinding.Value: Equatable {
         guard !self.hasAppeared else { return }
         self.hasAppeared = true
 
-        guard let viewValue else { return }
-        guard viewValue.wrappedValue != self.modelValue.wrappedValue else { return }
-
-        if let debouncer {
-          debouncer.execute { @MainActor in
-            viewValue.wrappedValue = self.modelValue.wrappedValue
-          }
-        } else {
-          viewValue.wrappedValue = self.modelValue.wrappedValue
-        }
+        synchroniseInitially()
       }
 
       .onChange(of: self.modelValue.wrappedValue) { _, newValue in
@@ -86,6 +80,43 @@ where ModelBinding.Value == ViewBinding.Value, ModelBinding.Value: Equatable {
 }
 
 extension Bind {
+  private func synchroniseInitially() {
+    switch initialSynchronisation {
+      case .modelToView:
+        if let debouncer {
+          debouncer.execute { @MainActor in
+            synchroniseModelToViewInitially()
+          }
+        } else {
+          synchroniseModelToViewInitially()
+        }
+
+      case .viewToModel:
+        if let debouncer {
+          debouncer.execute { @MainActor in
+            synchroniseViewToModelInitially()
+          }
+        } else {
+          synchroniseViewToModelInitially()
+        }
+
+      case .none:
+        return
+    }
+  }
+
+  private func synchroniseModelToViewInitially() {
+    guard let viewValue else { return }
+    guard viewValue.wrappedValue != modelValue.wrappedValue else { return }
+    viewValue.wrappedValue = modelValue.wrappedValue
+  }
+
+  private func synchroniseViewToModelInitially() {
+    guard let viewValue else { return }
+    guard modelValue.wrappedValue != viewValue.wrappedValue else { return }
+    modelValue.wrappedValue = viewValue.wrappedValue
+  }
+
   fileprivate func viewDidChange(_ newValue: ViewBinding.Value?) {
     guard let newValue else { return }
     guard self.modelValue.wrappedValue != newValue

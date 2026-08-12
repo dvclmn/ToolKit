@@ -20,24 +20,24 @@ public protocol _Bindable {
   var wrappedValue: Value { get nonmutating set }
 }
 
-struct Bind<HandlerBinding: _Bindable, ViewBinding: _Bindable>: ViewModifier
-where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable {
+struct Bind<ModelBinding: _Bindable, ViewBinding: _Bindable>: ViewModifier
+where ModelBinding.Value == ViewBinding.Value, ModelBinding.Value: Equatable {
 
   @State private var hasAppeared = false
   @State private var debouncer: AsyncDebouncer?
 
-  let handlerValue: HandlerBinding
+  let modelValue: ModelBinding
   let viewValue: ViewBinding?
-  let action: @MainActor (HandlerBinding.Value) -> Void
+  let action: @MainActor (ModelBinding.Value) -> Void
 
   init(
     debounce: DebounceMode,
-    handlerValue: HandlerBinding,
+    modelValue: ModelBinding,
     viewValue: ViewBinding?,
-    action: @escaping @MainActor (HandlerBinding.Value) -> Void,
+    action: @escaping @MainActor (ModelBinding.Value) -> Void,
   ) {
     self._debouncer = debounce.createDebouncer()
-    self.handlerValue = handlerValue
+    self.modelValue = modelValue
     self.viewValue = viewValue
     self.action = action
   }
@@ -49,25 +49,25 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
         self.hasAppeared = true
 
         guard let viewValue else { return }
-        guard viewValue.wrappedValue != self.handlerValue.wrappedValue else { return }
+        guard viewValue.wrappedValue != self.modelValue.wrappedValue else { return }
 
         if let debouncer {
           debouncer.execute { @MainActor in
-            viewValue.wrappedValue = self.handlerValue.wrappedValue
+            viewValue.wrappedValue = self.modelValue.wrappedValue
           }
         } else {
-          viewValue.wrappedValue = self.handlerValue.wrappedValue
+          viewValue.wrappedValue = self.modelValue.wrappedValue
         }
       }
 
-      .onChange(of: self.handlerValue.wrappedValue) { _, newValue in
+      .onChange(of: self.modelValue.wrappedValue) { _, newValue in
 
         if let debouncer {
           debouncer.execute { @MainActor in
-            handlerDidChange(newValue)
+            modelDidChange(newValue)
           }
         } else {
-          handlerDidChange(newValue)
+          modelDidChange(newValue)
         }
 
       }
@@ -88,13 +88,13 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
 extension Bind {
   fileprivate func viewDidChange(_ newValue: ViewBinding.Value?) {
     guard let newValue else { return }
-    guard self.handlerValue.wrappedValue != newValue
+    guard self.modelValue.wrappedValue != newValue
     else { return }
-    self.handlerValue.wrappedValue = newValue
+    self.modelValue.wrappedValue = newValue
     self.action(newValue)
   }
 
-  fileprivate func handlerDidChange(_ newValue: HandlerBinding.Value) {
+  fileprivate func modelDidChange(_ newValue: ModelBinding.Value) {
     guard let viewValue else { return }
     guard viewValue.wrappedValue != newValue
     else { return }

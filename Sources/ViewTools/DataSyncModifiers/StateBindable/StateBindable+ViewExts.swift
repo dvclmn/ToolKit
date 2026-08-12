@@ -7,19 +7,28 @@
 
 import SwiftUI
 
+//public func bindModel<ModelValue: _Bindable, ViewValue: _Bindable>(
+//  debounce: DebounceMode,
+//  _ modelValue: ModelValue,
+//  to viewValue: ViewValue?,
+//  initially: InitialBindingSynchronisation,
+//  perform action: @escaping @MainActor (ModelValue.Value) -> Void = { _ in },
+//) -> some View
+
 extension View {
 
-  public func bindModel<HandlerValue: _Bindable, ViewValue: _Bindable>(
+  public func bindModel<ModelValue: _Bindable, ViewValue: _Bindable>(
     debounce: DebounceMode,
-    _ handlerValue: HandlerValue,
+    _ modelValue: ModelValue,
     to viewValue: ViewValue?,
-    perform action: @escaping @MainActor (HandlerValue.Value) -> Void = { _ in },
+    initially: InitialBindingSynchronisation,
+    perform action: @escaping @MainActor (ModelValue.Value) -> Void = { _ in },
   ) -> some View
-  where HandlerValue.Value == ViewValue.Value, HandlerValue.Value: Equatable {
+  where ModelValue.Value == ViewValue.Value, ModelValue.Value: Equatable {
     self.modifier(
       Bind(
         debounce: debounce,
-        handlerValue: handlerValue,
+        modelValue: modelValue,
         viewValue: viewValue,
         action: action,
       )

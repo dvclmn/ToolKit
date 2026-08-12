@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 3/2/2025.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 // Note: This is directly taken from Point-Free's implementation in
 // https://github.com/pointfreeco/swift-composable-architecture
@@ -20,7 +20,7 @@ public protocol _Bindable {
   var wrappedValue: Value { get nonmutating set }
 }
 
-private struct Bind<HandlerBinding: _Bindable, ViewBinding: _Bindable>: ViewModifier
+struct Bind<HandlerBinding: _Bindable, ViewBinding: _Bindable>: ViewModifier
 where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable {
 
   @State private var hasAppeared = false
@@ -86,7 +86,7 @@ where HandlerBinding.Value == ViewBinding.Value, HandlerBinding.Value: Equatable
 }
 
 extension Bind {
-  private func viewDidChange(_ newValue: ViewBinding.Value?) {
+  fileprivate func viewDidChange(_ newValue: ViewBinding.Value?) {
     guard let newValue else { return }
     guard self.handlerValue.wrappedValue != newValue
     else { return }
@@ -94,32 +94,12 @@ extension Bind {
     self.action(newValue)
   }
 
-  private func handlerDidChange(_ newValue: HandlerBinding.Value) {
+  fileprivate func handlerDidChange(_ newValue: HandlerBinding.Value) {
     guard let viewValue else { return }
     guard viewValue.wrappedValue != newValue
     else { return }
     viewValue.wrappedValue = newValue
     self.action(newValue)
-  }
-}
-
-extension View {
-
-  public func bindModel<HandlerValue: _Bindable, ViewValue: _Bindable>(
-    debounce: DebounceMode,
-    _ handlerValue: HandlerValue,
-    to viewValue: ViewValue?,
-    perform action: @escaping @MainActor (HandlerValue.Value) -> Void = { _ in },
-  ) -> some View
-  where HandlerValue.Value == ViewValue.Value, HandlerValue.Value: Equatable {
-    self.modifier(
-      Bind(
-        debounce: debounce,
-        handlerValue: handlerValue,
-        viewValue: viewValue,
-        action: action,
-      )
-    )
   }
 }
 

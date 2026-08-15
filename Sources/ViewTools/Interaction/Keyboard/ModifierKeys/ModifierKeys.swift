@@ -46,3 +46,19 @@ extension Modifiers {
   public var isCapsLockOnly: Bool { self == [.capsLock] }
   public var isNumericPadOnly: Bool { self == [.numericPad] }
 }
+
+extension Optional where Wrapped == Modifiers {
+  public var isHoldingShift: Bool { self?.contains(.shift) ?? false }
+  public var isHoldingOption: Bool { self?.contains(.option) ?? false }
+  public var isHoldingCommand: Bool { self?.contains(.command) ?? false }
+  public var isHoldingControl: Bool { self?.contains(.control) ?? false }
+  public var isHoldingCapsLock: Bool { self?.contains(.capsLock) ?? false }
+  public var isHoldingNumericPad: Bool { self?.contains(.numericPad) ?? false }
+  
+  public var isShiftOnly: Bool { self == [.shift] }
+  public var isOptionOnly: Bool { self == [.option] }
+  public var isCommandOnly: Bool { self == [.command] }
+  public var isControlOnly: Bool { self == [.control] }
+  public var isCapsLockOnly: Bool { self == [.capsLock] }
+  public var isNumericPadOnly: Bool { self == [.numericPad] }
+}

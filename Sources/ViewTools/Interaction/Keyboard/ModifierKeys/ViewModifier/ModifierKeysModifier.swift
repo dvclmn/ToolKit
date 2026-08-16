@@ -1,5 +1,5 @@
 //
-//  Untitled.swift
+//  ModifierKeysModifier.swift
 //  ToolKit
 //
 //  Created by Dave Coleman on 10/5/2025.
@@ -30,7 +30,7 @@ import AppKit
 /// ```
 struct ModifierKeysModifier: ViewModifier {
 
-  @State private var modifierKeys: Modifiers?
+  @State private var modifierKeys: Modifiers = []
   @State private var eventMonitor: Any?
   @State private var previousNSEventFlags: NSEvent.ModifierFlags?
 
@@ -45,7 +45,7 @@ struct ModifierKeysModifier: ViewModifier {
           mask: keysToWatch,
           initial: true,
         ) { _, new in
-          
+
           let modifiers = Modifiers(from: new)
           handleKeyChange(modifiers)
         }
@@ -69,11 +69,11 @@ struct ModifierKeysModifier: ViewModifier {
 }
 
 extension ModifierKeysModifier {
-  
-  private var modifierKeyState: ModifierKeyState {
+
+  private var modifierKeyState: ModifierKeyState? {
     .init(pressed: modifierKeys, mask: keysToWatch)
   }
-  
+
   #if canImport(AppKit)
   private var nsEventKeysToWatch: NSEvent.ModifierFlags {
     keysToWatch.nsEventModifierFlags
@@ -116,10 +116,10 @@ extension ModifierKeysModifier {
     }
 
     previousNSEventFlags = nil
-    modifierKeys = nil
+    modifierKeys = []
   }
   #endif
-  
+
   private func handleKeyChange(_ modifiers: Modifiers) {
     self.modifierKeys = modifiers
     modifiersDidChange?(modifiers)

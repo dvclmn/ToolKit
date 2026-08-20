@@ -8,9 +8,9 @@
 public struct MessageDescriptor {
   let title: String
   let icon: IconLiteral?
-  let message: String
+  public let message: String
 
-  init(
+  public init(
     _ title: String,
     icon: IconLiteral?,
     message: String,
@@ -22,5 +22,5 @@ public struct MessageDescriptor {
 }
 
 extension MessageDescriptor {
-  var label: LabelDescriptor { .init(title, icon: icon) }
+  public var label: LabelDescriptor { .init(title, icon: icon) }
 }

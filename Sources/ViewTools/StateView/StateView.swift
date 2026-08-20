@@ -66,6 +66,17 @@ extension StateView {
   }
 
   public init(
+    message: MessageDescriptor,
+    isMessageCopyable: Bool = false,
+    @ViewBuilder actions: () -> Actions = { EmptyView() },
+  ) {
+    self.label = message.label
+    self.message = message.message
+    self.isMessageCopyable = isMessageCopyable
+    self.actions = actions()
+  }
+  
+  public init(
     _ title: String,
     icon: IconLiteral? = nil,
     message: String? = nil,

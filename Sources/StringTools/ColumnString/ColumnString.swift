@@ -8,10 +8,10 @@
 /// A string paired with a preferred column width.
 public struct ColumnString: Sendable, Equatable, Hashable {
   /// The string content displayed in the column.
-  public let content: String
+  private let content: String
   
   /// The width behaviour for the column.
-  public let width: Width
+  private let width: Width
   
   /// Creates a column string.
   public init(
@@ -21,6 +21,10 @@ public struct ColumnString: Sendable, Equatable, Hashable {
     self.content = content
     self.width = width
   }
+}
+
+extension ColumnString {
+  public var sourceContent
 }
 
 extension ColumnString: ExpressibleByStringLiteral {

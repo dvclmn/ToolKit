@@ -24,7 +24,10 @@ public struct ColumnString: Sendable, Equatable, Hashable {
 }
 
 extension ColumnString {
-  public var sourceContent
+  public var sourceContent: String { content }
+  
+  // TODO: Need to actually implement the column logic
+  public var resolvedContent: String { content }
 }
 
 extension ColumnString: ExpressibleByStringLiteral {

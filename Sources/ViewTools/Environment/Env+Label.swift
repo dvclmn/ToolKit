@@ -10,6 +10,7 @@ import SwiftUI
 
 extension EnvironmentValues {
 
+  
   // MARK: - Label (general)
 
   @Entry public var labelTextCase: Text.Case? = nil

@@ -11,7 +11,7 @@ import SwiftUI
 
 public struct EscapeKeyDoubleTapModifier: ViewModifier {
   var action: () -> Void
-  var bufferMilliseconds: Int
+  var buffer: Int
 
   @State private var lastEscapePressDate: Date?
 
@@ -33,7 +33,7 @@ public struct EscapeKeyDoubleTapModifier: ViewModifier {
     let now = Date()
 
     if let lastPress = lastEscapePressDate,
-      now.timeIntervalSince(lastPress) * 1000 < Double(bufferMilliseconds)
+      now.timeIntervalSince(lastPress) * 1000 < Double(buffer)
     {
       action()
       lastEscapePressDate = nil  // reset after action
@@ -44,10 +44,17 @@ public struct EscapeKeyDoubleTapModifier: ViewModifier {
 }
 
 extension View {
+  /// Buffer is in milliseconds
   public func onEscapeKeyDoubleTap(
-    bufferMilliseconds: Int = 300, perform action: @escaping () -> Void
+    buffer: Int = 300,
+    perform action: @escaping () -> Void
   ) -> some View {
-    self.modifier(EscapeKeyDoubleTapModifier(action: action, bufferMilliseconds: bufferMilliseconds))
+    self.modifier(
+      EscapeKeyDoubleTapModifier(
+        action: action,
+        buffer: buffer
+      )
+    )
   }
 }
 

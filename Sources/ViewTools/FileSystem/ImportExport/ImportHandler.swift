@@ -50,7 +50,7 @@ public struct ImportHandler {
     let data = try Data(contentsOf: url)
     do {
       let decoder = JSONDecoder()
-      print("Attempting to decode Data from URL \(url)")
+//      print("Attempting to decode Data from URL \(url)")
       return try decoder.decode(type, from: data)
     } catch {
       print("Failed to decode Data from URL \(url) with error \(error)")

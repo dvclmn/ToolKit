@@ -42,19 +42,6 @@ extension View {
       )
     )
   }
-  
-//  public func modifierKeys(
-//    _ mask: EventModifiers = .all,
-//    onChange perform: @escaping (EventModifiers) -> Void,
-//  ) -> some View {
-//    self.modifier(
-//      ModifierKeysModifier(
-//        keysToWatch: mask,
-//        onModifiersChange: nil,
-//        onEventModifiersChange: perform,
-//      )
-//    )
-//  }
 }
 
 private struct EnsureModifierKeysModifier: ViewModifier {

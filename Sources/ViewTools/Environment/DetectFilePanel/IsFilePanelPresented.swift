@@ -8,12 +8,16 @@
 import SwiftUI
 import AppKit
 
+// MARK: - Environment value
 extension EnvironmentValues {
   @Entry public var isFilePanelPresented: Bool = false
 }
 
+// MARK: - View modifier
 struct FilePanelDetectorModifier: ViewModifier {
   @State private var isPanelOpen = false
+  
+  let presentationDidChange: ((Bool) -> Void)?
   
   func body(content: Content) -> some View {
     content
@@ -37,12 +41,7 @@ struct FilePanelDetectorModifier: ViewModifier {
     
     if isPanelOpen != panelActive {
       isPanelOpen = panelActive
+      presentationDidChange?(panelActive)
     }
-  }
-}
-
-extension View {
-  public func detectFilePanels() -> some View {
-    self.modifier(FilePanelDetectorModifier())
   }
 }

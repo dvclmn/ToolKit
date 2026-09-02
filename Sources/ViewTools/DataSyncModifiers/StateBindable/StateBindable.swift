@@ -15,7 +15,7 @@ import SwiftUI
 // Full credit to Point-Free, I make no claim over the logic behind this solution.
 // I am made modifications to the original, but the guts is not mine.
 
-public protocol _Bindable {
+protocol _Bindable {
   associatedtype Value
   var wrappedValue: Value { get nonmutating set }
 }

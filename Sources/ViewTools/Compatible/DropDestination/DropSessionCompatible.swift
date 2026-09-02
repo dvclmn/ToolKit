@@ -61,10 +61,6 @@ extension DropSessionCompatible: CustomStringConvertible {
       Labeled("Location", value: location)
     }
     .text
-//    """
-//    DropSessionCompatible
-//    - Phase: \(phase), itemsCount: \(itemsCount?.description ?? "nil"))
-//    """
   }
 }
 

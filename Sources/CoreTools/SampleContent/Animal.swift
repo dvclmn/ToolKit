@@ -39,11 +39,13 @@ extension SampleContent.Animal {
     return mapWithIcons(iconSymbol, transform: { $0 }, fallback: fallback)
   }
 
-  public static func withCustomSymbols(
-    _ customSymbols: [CustomSymbol], fallback: IconLiteral = .customSymbol(.artboard)
-  ) -> [Self] {
-    return mapWithIcons(customSymbols, transform: { .customSymbol($0) }, fallback: fallback)
-  }
+//  public static func withCustomSymbols(
+//    _ customSymbols: [CustomSymbolID],
+//    fallback: IconLiteral = .customSymbol("")
+////    fallback: IconLiteral = .customSymbol(.artboard)
+//  ) -> [Self] {
+//    return mapWithIcons(customSymbols, transform: { .customSymbol($0) }, fallback: fallback)
+//  }
 
   public static let data = [
     Self(label: "Giraffe", state: true, category: Category.cute),

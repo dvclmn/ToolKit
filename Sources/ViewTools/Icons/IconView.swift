@@ -21,8 +21,12 @@ public struct IconView: View {
       case .emoji(let emojiString): EmojiIconView(emoji: emojiString)
       case .emojiComposition(let comp): EmojiCompositionView(comp)
       case .symbol(let symbolString): Image(systemName: symbolString)
-      case .customSymbol(let customSymbol):
-        Image(customSymbol.reference, bundle: .module)
+      case .customSymbol(let symbolID):
+        if let symbol = CustomSymbol(id: symbolID) {
+          Image(symbol.assetName, bundle: .module)
+        } else {
+          Image(systemName: "questionmark.square.dashed")
+        }
     }
   }
 }

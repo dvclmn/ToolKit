@@ -12,7 +12,7 @@ public enum IconLiteral: Sendable, Equatable, Codable, Hashable {
   case emoji(String)
   case emojiComposition(EmojiComposition)
   case symbol(String)  // Uses Image(systemName:)
-  case customSymbol(CustomSymbol)  // Uses Image(_:bundle:)
+  case customSymbol(CustomSymbolID)  // Uses Image(_:bundle:)
 }
 
 extension IconLiteral: ExpressibleByStringLiteral {
@@ -26,13 +26,15 @@ extension IconLiteral: ExpressibleByStringLiteral {
 extension IconLiteral {
 
   /// A simple string representation suitable for debugging and fallback labels.
+  /// Note that a CustomSymbol can only be resolved in ViewTools, so
+  /// this will display the raw CustomSymbolID
   public var stringRepresentation: String {
     switch self {
       case .emoji(let string): string
       case .emojiComposition(let comp):
         comp.emoji.map { String($0.character) }.joined(separator: "")
       case .symbol(let string): string
-      case .customSymbol(let symbol): symbol.reference
+      case .customSymbol(let symbolID): symbolID.rawValue
     }
   }
 

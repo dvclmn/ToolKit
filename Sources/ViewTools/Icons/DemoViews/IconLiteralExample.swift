@@ -42,11 +42,11 @@ extension IconLiteralExample {
       icon: .randomSymbol,
       reference: #".symbol("paintpalette")"#,
     ),
-    .init(
-      title: "Custom symbol",
-      icon: .customSymbol(.artboard),
-      reference: ".customSymbol(.artboard)",
-    ),
+//    .init(
+//      title: "Custom symbol",
+//      icon: .customSymbol(.artboard),
+//      reference: ".customSymbol(.artboard)",
+//    ),
   ]
 
 }

@@ -5,15 +5,16 @@
 //  Created by Dave Coleman on 8/7/2024.
 //
 
-// TODO: See if `labelsVisibility(_:)` could be useful here, to express this better?
-// https://developer.apple.com/documentation/swiftui/view/labelsvisibility(_:)
-// https://developer.apple.com/documentation/swiftui/environmentvalues/labelsvisibility
 /// The preferred visible parts of a label.
 public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendable {
+  public static let allCases: [LabelDisplay] = [ .iconOnly, .titleOnly, .titleAndIcon, .stacked ]
+  
   case iconOnly
   case titleOnly
   case titleAndIcon
   case stacked
+  
+  @available(*, deprecated, message: "Use SwiftUI's `labelsVisibility(_:)` instead")
   case hidden
 
   public var id: String { rawValue }
@@ -36,11 +37,5 @@ public enum LabelDisplay: String, CaseIterable, Identifiable, Equatable, Sendabl
       default: false
     }
   }
-  
-  public var isVisible: Bool {
-    switch self {
-      case .hidden: false
-      default: true
-    }
-  }
+
 }

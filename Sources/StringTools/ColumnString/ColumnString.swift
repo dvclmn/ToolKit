@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 10/3/2026.
 //
 
-/// A string that can be resolved to a character-column width.
+/// A string that can optionally be resolved to a character-column width.
 ///
 /// `ColumnString` counts extended grapheme clusters, matching `String.count`.
 /// It is intended for single-line, plain-text output such as tables, logs, and
@@ -48,7 +48,8 @@ extension ColumnString {
     width.resolvedColumnCount(for: content.count)
   }
 
-  /// The content padded or truncated to ``resolvedColumnCount`` characters.
+  /// The source content, or content padded or truncated to
+  /// ``resolvedColumnCount`` characters when a column width is requested.
   public var resolvedContent: String {
     let columnCount = resolvedColumnCount
     let fittedContent = content.truncated(
@@ -84,13 +85,16 @@ extension ColumnString: ExpressibleByStringLiteral {
 extension ColumnString {
   /// Character-width behaviour for a column string.
   public enum Width: Sendable, Equatable, Hashable {
+    /// Preserve the source content without imposing a character-column width.
+    case intrinsic
+
     /// Resolve to exactly the supplied number of character columns.
     case fixed(Int)
     
     /// Follow the content width within the supplied inclusive bounds.
     case flexible(min: Int = 2, max: Int = Int.max)
     
-    public static let `default`: Self = .fixed(3)
+    public static let `default`: Self = .intrinsic
 
     /// Resolves the number of character columns for a content length.
     ///
@@ -100,6 +104,9 @@ extension ColumnString {
       let contentLength = Swift.max(0, contentLength)
 
       switch self {
+        case .intrinsic:
+          return contentLength
+
         case .fixed(let count):
           return Swift.max(0, count)
 

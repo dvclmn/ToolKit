@@ -10,6 +10,15 @@ import Testing
 
 struct ColumnStringTests {
   @Test
+  func intrinsicWidthPreservesSourceContent() {
+    let content = ColumnString(content: "Select")
+
+    #expect(content.width == .intrinsic)
+    #expect(content.resolvedColumnCount == 6)
+    #expect(content.resolvedContent == "Select")
+  }
+
+  @Test
   func fixedWidthPadsUsingTheSelectedAlignment() {
     #expect(ColumnString(content: "7", width: .fixed(3)).resolvedContent == "  7")
     #expect(
@@ -100,6 +109,6 @@ struct ColumnStringTests {
     #expect(content.width == .default)
     #expect(content.alignment == .trailing)
     #expect(content.truncationStyle == .end)
-    #expect(content.resolvedContent == "  7")
+    #expect(content.resolvedContent == "7")
   }
 }

@@ -44,7 +44,7 @@ extension View {
   }
 
   public func debugFrame(
-    _ colour: Color,
+    colour: Color,
     labelOpacity: CGFloat = 0.85,
     isEnabled: Bool = true,
   ) -> some View {

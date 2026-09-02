@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreTools
 
 // MARK: - Icons
 // swift-format-ignore

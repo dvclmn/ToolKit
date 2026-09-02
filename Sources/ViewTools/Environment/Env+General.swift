@@ -5,6 +5,7 @@
 //  Created by Dave Coleman on 27/12/2024.
 //
 
+import CoreTools
 import SwiftUI
 
 /// System-provided Env values for reference:
@@ -74,8 +75,7 @@ extension EnvironmentValues {
   /// so prefer use of native `controlSize` in those cases/
   @Entry public var isCompactMode: Bool = false
   @Entry public var isEditable: Bool = true
-  
-  
+
   /// App-wide / project-wide mapping convention, for which
   /// property on a type should be considered the identity vs transposed.
   /// Aka whether width maps to horizontal, or rows to vertical, etc etc.
@@ -92,15 +92,17 @@ extension EnvironmentValues {
   /// initialise them somewhere in the app, to establish their source of truth
   @Entry public var isPaused: Binding<Bool> = .constant(true)
   @Entry public var frameRate: Binding<FrameRate> = .constant(.unlocked)
-  
-  @available(*, deprecated, message: "Retired due to issues updating an Environment value like this so frequently")
+
+  @available(
+    *, deprecated, message: "Retired due to issues updating an Environment value like this so frequently"
+  )
   @Entry public var animationClock: TimeInterval?
-  
+
   @Entry public var isAnimationEnabled: Bool = false
 
   // Previously `heightOverride`
   @Entry public var frameHeight: CGFloat?
-  
+
   // Previously `widthOverride`
   @Entry public var frameWidth: CGFloat?
 }

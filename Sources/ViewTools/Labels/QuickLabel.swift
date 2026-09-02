@@ -38,3 +38,12 @@ public struct QuickLabel: View {
     }
   }
 }
+
+extension LabelDescriptor {
+  public var localisedTextKey: LocalizedStringKey { .init(text) }
+  
+  public var localisedTextResource: LocalizedStringResource {
+    .init(stringLiteral: text)
+  }
+
+}

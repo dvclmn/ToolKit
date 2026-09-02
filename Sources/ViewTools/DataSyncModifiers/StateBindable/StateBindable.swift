@@ -9,13 +9,14 @@ import CoreTools
 import SwiftUI
 
 // Note: This is directly taken from Point-Free's implementation in
-// https://github.com/pointfreeco/swift-composable-architecture
-// https://github.com/pointfreeco/swift-composable-architecture/blob/20089ee985b04b1ae82e9742aa9d9c8f044700c5/Examples/CaseStudies/SwiftUICaseStudies/01-GettingStarted-FocusState.swift#L71
+// https://github.com/pointfreeco/swift-navigation
+// Under `Sources/SwiftNavigation/Bind.swift`
 //
 // Full credit to Point-Free, I make no claim over the logic behind this solution.
-// I am made modifications to the original, but the guts is not mine.
+// I have made modifications to the original to suit my needs,
+// but the underlying approach/concepts are not my own
 
-protocol _Bindable {
+public protocol _Bindable {
   associatedtype Value
   var wrappedValue: Value { get nonmutating set }
 }

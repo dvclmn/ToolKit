@@ -5,7 +5,7 @@
 //  Created by Dave Coleman on 26/5/2025.
 //
 
-import SwiftUI
+import Foundation
 
 /// A lightweight label model for non-SwiftUI code.
 public struct LabelDescriptor: Sendable, Codable, Equatable, Hashable {
@@ -17,21 +17,6 @@ public struct LabelDescriptor: Sendable, Codable, Equatable, Hashable {
 }
 
 extension LabelDescriptor {
-  
-  public var localisedTextKey: LocalizedStringKey {
-    .init(text)
-//  public var localisedText: AttributedString {
-//    try! .init(markdown: text)
-//    .init(localized: .init(stringLiteral: text))
-//  public var localisedText: LocalizedStringResource {
-//    let attr = AttributedString(text)
-//    return .init(stringLiteral: attr)
-//    .init(stringLiteral: text)
-  }
-  
-  public var localisedTextResource: LocalizedStringResource {
-    .init(stringLiteral: text)
-  }
 
   public init(
     _ text: String,

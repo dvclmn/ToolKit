@@ -8,7 +8,7 @@
 import Foundation
 
 /// Where an ellipsis should be inserted when truncating text.
-public enum TruncationStyle {
+public enum TruncationStyle: Sendable, Equatable, Hashable {
   /// Keep the end of the string and place the ellipsis at the start.
   case start
   

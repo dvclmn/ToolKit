@@ -26,6 +26,13 @@
         "identifier" : "ColourToolsTests",
         "name" : "Missing Target"
       }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "StringToolsTests",
+        "name" : "StringToolsTests"
+      }
     }
   ],
   "version" : 1

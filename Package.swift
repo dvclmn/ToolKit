@@ -28,5 +28,6 @@ let package = Package(
     ),
     .testTarget(name: "CoreToolsTests", dependencies: ["CoreTools"]),
     .testTarget(name: "ColourToolsTests", dependencies: ["ColourTools"]),
+    .testTarget(name: "StringToolsTests", dependencies: ["StringTools"]),
   ],
 )

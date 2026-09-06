@@ -17,6 +17,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CoreTools"
                BuildableName = "CoreTools"
+               BlueprintName = "CoreTools"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -30,6 +31,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "StringTools"
                BuildableName = "StringTools"
+               BlueprintName = "StringTools"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -43,6 +45,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ViewTools"
                BuildableName = "ViewTools"
+               BlueprintName = "ViewTools"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -56,6 +59,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ColourTools"
                BuildableName = "ColourTools"
+               BlueprintName = "ColourTools"
                ReferencedContainer = "container:">
             </BuildableReference>
          </BuildActionEntry>
@@ -74,6 +78,7 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "CoreToolsTests"
                BuildableName = "CoreToolsTests"
+               BlueprintName = "CoreToolsTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -83,6 +88,17 @@
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "ColourToolsTests"
                BuildableName = "ColourToolsTests"
+               BlueprintName = "ColourToolsTests"
+               ReferencedContainer = "container:">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "StringToolsTests"
+               BuildableName = "StringToolsTests"
+               BlueprintName = "StringToolsTests"
                ReferencedContainer = "container:">
             </BuildableReference>
          </TestableReference>
@@ -111,6 +127,7 @@
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "CoreTools"
             BuildableName = "CoreTools"
+            BlueprintName = "CoreTools"
             ReferencedContainer = "container:">
          </BuildableReference>
       </MacroExpansion>

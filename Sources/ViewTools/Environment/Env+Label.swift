@@ -8,10 +8,8 @@
 import CoreTools
 import SwiftUI
 
+// MARK: - Label
 extension EnvironmentValues {
-
-  
-  // MARK: - Label (general)
 
   @Entry public var labelTextCase: Text.Case? = nil
 
@@ -26,11 +24,11 @@ extension EnvironmentValues {
   /// will override the custom style. This works around that.
   @Entry public var labelDisplay: LabelDisplay? = nil
 
-  // MARK: - Label Title
+  // MARK: Label Title
   @Entry public var labelTitleWeight: Font.Weight? = nil
   @Entry public var labelTitleFontStyle: Font? = nil
 
-  // MARK: - Label Icon
+  // MARK: Label Icon
   @Entry public var labelIconColour: AnyShapeStyle? = nil
   @Entry public var labelIconWeight: Font.Weight? = nil
   @Entry public var labelIconFontStyle: Font? = nil

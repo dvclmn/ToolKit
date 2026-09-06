@@ -13,9 +13,21 @@ import Foundation
 }
 
 /// Prints a diagnostic message with the current debug timestamp appended.
-@_spi(Internal) public func printTimestamped(_ message: String) {
-  let value = message + " at \(Date.debug)"
-  print(value)
+@_spi(Internal) public func printTimestamped(
+  _ message: String,
+  timestampPosition: TimestampPosition = .trailing,
+) {
+  switch timestampPosition {
+    case .leading:
+      print("(\(Date.debug)) \(message)")
+    case .trailing:
+      print("\(message) at \(Date.debug)")
+  }
+}
+
+public enum TimestampPosition {
+  case leading
+  case trailing
 }
 
 /// Prints a standard expectation-failure diagnostic.
@@ -37,6 +49,6 @@ import Foundation
     print(adjustedMessage, separator: separator)
     return
   }
-  
+
   print("(\(Date.debug)) " + adjustedMessage, separator: separator)
 }

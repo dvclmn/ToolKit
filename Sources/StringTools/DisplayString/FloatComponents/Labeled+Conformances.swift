@@ -21,11 +21,11 @@ extension CGSize: FloatComponentsLabeled {
   public var components: [Labeled] {
     [
       .init(
-        key: AbbreviableLabel("Width", abbreviated: "W"),
+        label: AbbreviableLabel("Width", abbreviated: "W"),
         value: DisplayFragment(width),
       ),
       .init(
-        key: AbbreviableLabel("Height", abbreviated: "H"),
+        label: AbbreviableLabel("Height", abbreviated: "H"),
         value: DisplayFragment(height),
       ),
     ]

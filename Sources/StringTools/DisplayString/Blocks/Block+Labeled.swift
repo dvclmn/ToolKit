@@ -21,7 +21,11 @@ import AppKit
 public struct Labeled: Sendable {
 
   /// The label displayed before the value.
-  public let key: AbbreviableLabel
+  public let label: AbbreviableLabel
+
+  /// The label displayed before the value.
+  @available(*, deprecated, renamed: "label")
+  public var key: AbbreviableLabel { label }
 
   /// The optional value displayed after the label.
   public let value: DisplayFragment?
@@ -35,13 +39,28 @@ public struct Labeled: Sendable {
   public var styleOverride: AbbreviableLabel.Style?
 
   init(
+    label: AbbreviableLabel,
+    value: DisplayFragment?,
+    separator: String = ": ",
+    formatOverride: FloatDisplayFormat? = nil,
+    styleOverride: AbbreviableLabel.Style? = nil,
+  ) {
+    self.label = label
+    self.separator = separator
+    self.value = value
+    self.formatOverride = formatOverride
+    self.styleOverride = styleOverride
+  }
+
+  @available(*, deprecated, renamed: "init(label:value:separator:formatOverride:styleOverride:)")
+  init(
     key: AbbreviableLabel,
     value: DisplayFragment?,
     separator: String = ": ",
     formatOverride: FloatDisplayFormat? = nil,
     styleOverride: AbbreviableLabel.Style? = nil,
   ) {
-    self.key = key
+    self.label = key
     self.separator = separator
     self.value = value
     self.formatOverride = formatOverride
@@ -53,15 +72,15 @@ public struct Labeled: Sendable {
 
 extension Labeled {
 
-  /// Creates a labelled value from a key string and optional value.
+  /// Creates a labelled value from a label string and optional value.
   public init(
-    _ key: String,
+    _ label: String,
     value: Any?,
     separator: String = ": ",
     format: FloatDisplayFormat? = nil,
   ) {
     self.init(
-      key: AbbreviableLabel(key),
+      label: AbbreviableLabel(label),
       value: DisplayFragment.make(from: value),
       separator: separator,
       formatOverride: format,
@@ -77,7 +96,7 @@ extension Labeled {
 
   /// Renders the label text only (no value or separator).
   @_spi(Internal) public func labelPart(with style: AbbreviableLabel.Style) -> String {
-    key.abbreviableLabelText(with: style)
+    label.abbreviableLabelText(with: style)
   }
 
   /// Renders the value only.

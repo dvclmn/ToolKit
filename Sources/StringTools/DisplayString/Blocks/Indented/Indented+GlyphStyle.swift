@@ -8,11 +8,11 @@
 import Foundation
 
 extension Indented {
-  
+
   public enum GlyphStyle: Sendable {
     case standard
     case rounded
-    
+
     var glyphs: IndentGlyphs {
       switch self {
         case .standard:
@@ -39,5 +39,3 @@ extension Indented {
     let vertical: Character
   }
 }
-
-

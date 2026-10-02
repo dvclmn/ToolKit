@@ -33,10 +33,9 @@ public enum GlassTypeCompatible: Sendable {
       case .regular(let tint):
         guard let tint else { return .regular }
         return .regular.tint(tint)
-      case .clear:
-        return .clear
-      case .identity:
-        return .identity
+        
+      case .clear: return .clear
+      case .identity:return .identity
     }
   }
 }

@@ -11,18 +11,15 @@ import SwiftUI
 /// Fallback background style for QuickBackground when liquid glass is not used
 struct QuickBackgroundSurface<S: Shape>: View {
   @Environment(\.backgroundMaterial) private var backgroundMaterial
-  //  @Environment(\.colourOverride) private var colourOverride
   @Environment(\.strokeColour) private var strokeColour
   @Environment(\.strokeWeight) private var strokeWeight
   @Environment(\.colourIntensity) private var colourIntensity
 
   let isEnabled: Bool
   let shape: S
-  //  let glass: GlassTypeCompatible?
   let tint: Color?
 
   var body: some View {
-    //    if glass == nil {
     shape
       .fill(backgroundColour.opacity(colourIntensity ?? 0.3))
       .fill(material)
@@ -38,7 +35,6 @@ struct QuickBackgroundSurface<S: Shape>: View {
         strokeColour ?? AnyShapeStyle(Color.gray.opacity(0.08)),
         lineWidth: strokeWeight ?? 1,
       )
-    //    }
   }
 }
 

@@ -8,6 +8,7 @@
 import SwiftUI
 
 public protocol RoundedRectangularShapeCompatible: InsettableShape {
+  
   /// Resolved rounded-rectangle corners for the proposed size.
   ///
   /// Return `nil` when the shape cannot truthfully describe itself as a rounded

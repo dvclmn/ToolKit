@@ -44,7 +44,7 @@ extension View {
   /// This overload preserves rounded-rectangular container metadata for
   /// `ContainerRelativeShape` and, on macOS 26+, `ConcentricRectangle`.
   public func quickBackground<S: RoundedRectangularShapeCompatible>(
-    shape: S,
+    shape: S = .rect(cornerRadius: Styles.sizeSmall),
     style: QuickBackgroundStyle = .glass(.regular),
     isEnabled: Bool = true,
   ) -> some View {
@@ -80,7 +80,7 @@ extension View {
   /// This route intentionally skips rounded-rectangular container metadata,
   /// because arbitrary shapes cannot always describe truthful corner geometry.
   public func quickBackground<S: Shape>(
-    shape: S,
+    shape: S = .rect(cornerRadius: Styles.sizeSmall),
     style: QuickBackgroundStyle = .glass(.regular),
 //    glass: GlassTypeCompatible? = nil,
     isEnabled: Bool = true,

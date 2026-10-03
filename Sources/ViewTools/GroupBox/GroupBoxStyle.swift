@@ -15,7 +15,10 @@ public struct BaseGroupBoxStyle: GroupBoxStyle {
     VStack(alignment: .leading) {
       configuration.label
       configuration.content
-        .quick
+        .quickBackground(
+          shape: .rounded,
+          style: .standard(tint: isProminent ? .accentColor : nil)
+        )
 //        .quickBackground(tint: isProminent ? .accentColor : nil)
         .environment(\.colourIntensity, isProminent ? 0.2 : 0.1)
     }

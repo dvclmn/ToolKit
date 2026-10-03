@@ -27,7 +27,7 @@ struct DebugItemsOverlayView: View {
           }
         }
         .padding(Styles.sizeSmall)
-        .quickBackground(glass: .regular)
+        .quickBackground()
         .padding()
       }
       .scrollIndicators(.hidden)

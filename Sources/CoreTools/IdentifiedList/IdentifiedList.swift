@@ -10,8 +10,15 @@
 
 import Foundation
 
-/// A list of identifiable elements with O(1) lookup and mutation by id,
-/// backed by standard library `Array` and `Dictionary`.
+/// An ordered list with unique IDs, backed by `Array` and `Dictionary`.
+///
+/// ID lookup and replacement take expected O(1) time with unshared storage.
+/// Appending a new ID is amortised O(1); removal is O(n). Mutating shared
+/// storage can take O(n) because the underlying collections use copy-on-write.
+///
+/// Elements must keep a stable ID while stored in the list. In particular,
+/// externally mutating the ID of a reference-type element is unsupported.
+/// Copying a list copies its structure, not objects referenced by its elements.
 public struct IdentifiedList<Element: Identifiable> {
   // MARK: - Storage
   @usableFromInline
@@ -30,13 +37,14 @@ public struct IdentifiedList<Element: Identifiable> {
   }
 
   /// Creates an identified list from an array of elements.
-  /// If duplicate ids are encountered, the last occurrence wins.
+  /// If duplicate IDs are encountered, the last value wins, retaining the
+  /// position of the first occurrence. Decoding instead rejects duplicate IDs.
   @inlinable
   public init(_ elements: [Element]) {
     self.elements = []
     self.indexByID = [:]
     reserveCapacity(elements.count)
-    for element in elements { append(element) }
+    for element in elements { updateOrAppend(element) }
   }
 }
 
@@ -54,16 +62,28 @@ extension IdentifiedList {
 
   // MARK: - Basic operations
 
-  /// Appends an element. If an element with the same id already exists, it is replaced in-place.
+  /// Appends an element, replacing any existing value with the same ID in place.
+  /// Prefer `updateOrAppend(_:)` when replacement is intended, to make it explicit.
+  /// This spelling retains its original replacement behaviour for existing clients.
   @inlinable
   public mutating func append(_ element: Element) {
+    updateOrAppend(element)
+  }
+
+  /// Replaces an existing value in place, or appends a value with a new ID.
+  /// - Returns: The previous value, or `nil` if the element was newly appended.
+  @discardableResult
+  @inlinable
+  public mutating func updateOrAppend(_ element: Element) -> Element? {
     let id = element.id
-    if let idx = indexByID[id] {
-      elements[idx] = element
-    } else {
-      elements.append(element)
-      indexByID[id] = elements.endIndex - 1
+    if let index = indexByID[id] {
+      let previous = elements[index]
+      elements[index] = element
+      return previous
     }
+    elements.append(element)
+    indexByID[id] = elements.endIndex - 1
+    return nil
   }
 
   /// Removes the element at the given index.
@@ -96,6 +116,8 @@ extension IdentifiedList {
   /// - If setting a non-nil value:
   ///   - Replaces in-place if the id exists.
   ///   - Appends if the id does not exist.
+  /// - Precondition: A non-nil value must have the requested ID. To change
+  ///   identity, remove the old element and insert the replacement explicitly.
   @inlinable
   public subscript(id id: Element.ID) -> Element? {
     get {
@@ -103,20 +125,9 @@ extension IdentifiedList {
       return elements[idx]
     }
     set {
-      if let newValue = newValue {
-        let newID = newValue.id
-        if let idx = indexByID[id] {
-          // Replace at the existing index. If ids differ, update map.
-          elements[idx] = newValue
-          if newID != id {
-            indexByID.removeValue(forKey: id)
-            indexByID[newID] = idx
-          }
-        } else {
-          // Not present: append.
-          elements.append(newValue)
-          indexByID[newID] = elements.endIndex - 1
-        }
+      if let newValue {
+        precondition(newValue.id == id, "The element ID must match the subscript ID")
+        updateOrAppend(newValue)
       } else {
         // Set to nil: remove if present.
         _ = remove(id: id)
@@ -128,6 +139,5 @@ extension IdentifiedList {
 extension IdentifiedList: ExpressibleByArrayLiteral {
   public init(arrayLiteral elements: Element...) {
     self.init(elements)
-//    self.elements = elements
   }
 }

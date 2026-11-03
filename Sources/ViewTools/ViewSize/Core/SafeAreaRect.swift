@@ -23,17 +23,11 @@ extension SafeAreaRect {
     let y = globalFrame.origin.y + safeInsets.top
     let width = max(0, size.width - (safeInsets.leading + safeInsets.trailing))
     let height = max(0, size.height - (safeInsets.top + safeInsets.bottom))
-    let result = CGRect(x: x, y: y, width: width, height: height)
-
-    //    DebugString("Safe Area Rect") {
-    //      Indented {
-    //        Labeled("X", value: x)
-    //        Labeled("Y", value: y)
-    //        Labeled("Width", value: width)
-    //        Labeled("Height", value: height)
-    //      }
-    //    }
-
-    return result
+    return CGRect(
+      x: x,
+      y: y,
+      width: width,
+      height: height
+    )
   }
 }

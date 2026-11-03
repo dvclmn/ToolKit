@@ -35,13 +35,6 @@ extension GeometryCapture {
     .init(type: EdgeInsets.self) { $0.safeAreaInsets }
   }
 
-  /// Note: This does not account for safe area insets at all
-  public static var globalRect: GeometryCapture<CGRect> {
-    .init(type: CGRect.self) { proxy in
-      proxy.frame(in: .local)
-    }
-  }
-
   /// This captures three points of data, hoping to get proper
   /// sense of safe areas and view positoning
   public static var safeAreaRect: GeometryCapture<SafeAreaRect> {

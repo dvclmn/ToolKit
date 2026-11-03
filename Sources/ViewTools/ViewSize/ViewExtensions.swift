@@ -27,10 +27,8 @@ extension View {
     )
   }
 
-  /// This adds a `viewportSize` and `viewportRect`
-  /// to the environment. `viewportRect` expresses both
-  /// viewport size, and also safe area insets.
-  ///
+  /// This updates environment value `viewportRect`
+  /// `viewportRect` expresses both
   /// If a callback is needed, see ``viewSize(capture:mode:isEnabled:valueOutput:)``
   public func viewportCapture(mode debounceMode: DebounceMode) -> some View {
     self.modifier(

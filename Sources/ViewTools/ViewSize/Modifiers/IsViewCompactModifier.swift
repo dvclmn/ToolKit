@@ -5,8 +5,8 @@
 //  Created by Dave Coleman on 19/5/2025.
 //
 
-import SwiftUI
 import CoreTools
+import SwiftUI
 
 public typealias IsViewCompactHandler = (Bool) -> Void
 
@@ -52,16 +52,11 @@ extension IsViewCompactModifier {
 extension View {
   /// This modifier will also update the `isCompactMode`
   /// Environment Value
-  public func isViewCompact(
-    widthThreshold: CGFloat,
-    //    didUpdateCompactStatus: @escaping IsViewCompactHandler,
-    //    allowEnvironmentUpdate: Bool = true
-  ) -> some View {
+  public func isViewCompact(widthThreshold: CGFloat) -> some View {
     self.modifier(
       IsViewCompactModifier(
         widthThreshold: widthThreshold,
-        //        allowEnvironmentUpdate: allowEnvironmentUpdate,
-        didUpdateCompactStatus: { _ in }
+        didUpdateCompactStatus: { _ in },
       )
     )
   }
@@ -73,7 +68,7 @@ extension View {
     self.modifier(
       IsViewCompactModifier(
         widthThreshold: widthThreshold,
-        didUpdateCompactStatus: didUpdateCompactStatus
+        didUpdateCompactStatus: didUpdateCompactStatus,
       )
     )
   }

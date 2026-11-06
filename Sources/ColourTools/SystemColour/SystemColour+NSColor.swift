@@ -55,7 +55,7 @@ extension SystemColour {
         //        case .secondary: NSColor.labelColor.withAlphaComponent(0.8)
         case .tertiary: NSColor.tertiaryLabelColor
         case .quaternary: NSColor.quaternaryLabelColor
-        case .quinary: NSColor.quinaryLabel
+        case .quinary: NSColor.quinaryLabelColor
         case .accentColor: NSColor.controlAccentColor
         case .link: NSColor.linkColor
 

@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-//import CoreTools
 import StringTools
 
 public struct ViewportSizeIndicatorModifier: ViewModifier {
@@ -15,31 +14,24 @@ public struct ViewportSizeIndicatorModifier: ViewModifier {
   public func body(content: Content) -> some View {
     content
       .overlay {
-
-        
-        //        Canvas { context, size in
-        //          context.debugEnvironmentViewportRect(in: size)
-        //        }
-        //        .ignoresSafeArea()
-        //        .overlay {
-        Group {
-          if let viewportRect {
-            Text(overlayText(viewportRect))
-          } else {
-            Text("⚠️ No value for `viewportRect` in the Environment.")
-          }
-        }
+        OverlayView()
         .monospaced()
         .padding(6)
         .background(.black.secondary)
-        //          Text("Viewport Rect: \(viewportRect?.displayString(.concise), default: "None Found")")
-        //            .font(.title2)
-        //        }
         .allowsHitTesting(false)
       }
   }
 }
 extension ViewportSizeIndicatorModifier {
+
+  @ViewBuilder
+  private func OverlayView() -> some View {
+    if let viewportRect {
+      Text(overlayText(viewportRect))
+    } else {
+      Text("⚠️ No value for `viewportRect` in the Environment.")
+    }
+  }
   private func overlayText(_ rect: CGRect) -> String {
     DisplayString {
       Indented("Viewport Rect") {
@@ -49,41 +41,6 @@ extension ViewportSizeIndicatorModifier {
     }.text
   }
 }
-
-//extension GraphicsContext {
-//  public func debugEnvironmentViewportRect(in size: CGSize) {
-//
-//    guard let rect = environment.viewportRect else { return }
-//
-//    if size != rect.size {
-//      print(
-//        """
-//        ⚠️ This Canvas view does not match the size of the full viewport;
-//        result of this debug visual may be undefined.
-//        Canvas Size:    \(size.displayString)
-//        Viewport Size:  \(rect.size.displayString)
-//        Rect origin:    \(rect.origin.displayString)
-//
-//
-//        """
-//      )
-//    }
-//
-//    let fullBleedRect = CGRect(fromSize: size)
-//
-//    fillAndStroke(
-//      Path(fullBleedRect),
-//      fillColour: .brown.opacity(0.25),
-//      strokeColour: .orange,
-//    )
-//
-//    fillAndStroke(
-//      Path(rect),
-//      fillColour: .purple.opacity(0.25),
-//      strokeColour: .purple,
-//    )
-//  }
-//}
 
 extension View {
   public func viewportRectIndicator() -> some View {

@@ -28,7 +28,6 @@ extension View {
   }
 
   /// This updates environment value `viewportRect`
-  /// `viewportRect` expresses both
   /// If a callback is needed, see ``viewSize(capture:mode:isEnabled:valueOutput:)``
   public func viewportCapture(mode debounceMode: DebounceMode) -> some View {
     self.modifier(

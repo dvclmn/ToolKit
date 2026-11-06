@@ -21,7 +21,7 @@ extension View {
   }
 }
 
-public enum GlassTypeCompatible: Sendable {
+public enum GlassTypeCompatible: Sendable, Equatable {
   case regular(tint: Color? = nil)
   case clear
   case identity  // No glass effect at all
@@ -47,7 +47,7 @@ public enum GlassTypeCompatible: Sendable {
     }
   }
 
-  public struct NativeGlass: Sendable {
+  public struct NativeGlass: Sendable, Equatable {
     // Erase the type so the enum can also be stored on earlier OS versions.
     private let storage: any Sendable
 
@@ -60,6 +60,14 @@ public enum GlassTypeCompatible: Sendable {
     fileprivate var value: Glass {
       // The only initializer stores a Glass.
       storage as! Glass
+    }
+
+    public static func == (lhs: Self, rhs: Self) -> Bool {
+      if #available(anyAppleOS 26.0, *) {
+        return lhs.value == rhs.value
+      }
+      // NativeGlass can only be constructed on OS 26 or later.
+      return false
     }
   }
 }

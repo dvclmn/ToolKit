@@ -83,6 +83,8 @@ extension EnvironmentValues {
   @Entry public var axisMapping: AxisMapping = .identity
 
   @Entry public var contentMode: ContentMode?
+  @Entry public var isWindowTabBarVisible: Bool = false
+
 
 }
 
